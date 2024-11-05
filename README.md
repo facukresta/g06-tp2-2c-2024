@@ -4,12 +4,12 @@
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
-## Grupo {N}
+## Grupo {6}
 
-* **Lucas Nicolas Pagani 1** - [integrante1](https://github.com/lucasPagani2003)
-* **Facundo Kresta** - [integrante2](https://github.com/facukresta)
-* **Steven Guerrero** - [integrante3](https://github.com/STEVEN-GUERRERO)
-* **Ignacio Zanoni** - [integrante4](https://github.com/nachozzm)
+* **Lucas Nicolas Pagani ** - [lucasPagani2003](https://github.com/lucasPagani2003)
+* **Facundo Kresta** - [facukresta](https://github.com/facukresta)
+* **Steven Guerrero** - [STEVEN-GUERRERO](https://github.com/STEVEN-GUERRERO)
+* **Ignacio Zanoni** - [nachozzm](https://github.com/nachozzm)
 
 Correctores: 
 * **Diego Sanchez**
