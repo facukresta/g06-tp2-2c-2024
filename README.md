@@ -1,17 +1,19 @@
 ![tp2](https://github.com/fiuba/algo3_proyecto_base_tp2/actions/workflows/build.yml/badge.svg) [![codecov](https://codecov.io/gh/fiuba/algo3_proyecto_base_tp2/branch/master/graph/badge.svg)](https://codecov.io/gh/fiuba/algo3_proyecto_base_tp2)
 
-# TP2 Algoritmos 3: {nombre} 
+# TP2 Algoritmos 3: Balatro
 
 Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUBA
 
 ## Grupo {N}
 
-* **Integrante 1** - [integrante1](https://github.com/integrante1)
-* **Integrante 2** - [integrante2](https://github.com/integrante2)
-* **Integrante 3** - [integrante3](https://github.com/integrante3)
-* **Integrante 4** - [integrante4](https://github.com/integrante4)
+* **Lucas Nicolas Pagani 1** - [integrante1](https://github.com/lucasPagani2003)
+* **Facundo Kresta** - [integrante2](https://github.com/facukresta)
+* **Steven Guerrero** - [integrante3](https://github.com/STEVEN-GUERRERO)
+* **Ignacio Zanoni** - [integrante4](https://github.com/nachozzm)
 
-Corrector: **{Corrector}**
+Correctores: 
+* **Diego Sanchez**
+* **Mateo Castaño**
 
 ## Aplicación
 
