@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Mano {
     protected ArrayList<Carta> cartas;
     protected int maxCartas;
+    protected int maxCartasSeleccionadas;
     private ArrayList<Carta> cartasSeleccionadas;
     private Juego juego;
 
@@ -15,6 +16,7 @@ public class Mano {
         this.cartasSeleccionadas = new ArrayList<Carta>();
         this.cartas = new ArrayList<Carta>();
         this.maxCartas = cantidadDeCartas;
+        this.maxCartasSeleccionadas = 5;
     }
 
     public void elegirCarta(Carta carta) {
@@ -22,6 +24,9 @@ public class Mano {
         if (cartasSeleccionadas.contains(cartaAElegir)) {
             this.cartasSeleccionadas.remove(cartaAElegir);
         } else {
+            if (this.cartasSeleccionadas.size() == this.maxCartasSeleccionadas) {
+                throw new MaximoCartasSeleccionadasException();
+            }
             this.cartasSeleccionadas.add(cartaAElegir);
         }
         this.juego = Juego.chequearJuego(this.cartasSeleccionadas);
