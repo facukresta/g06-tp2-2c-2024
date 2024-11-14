@@ -14,14 +14,14 @@ public class MazoTest {
     public void test01UnMazoAlInstanciarseDebeTenerCicuentaYDosCartas(){
         //Arrange
         Mazo mazo = new Mazo();
-        int cantidadDeCartasEsperadas = 0;
         //Act
         Mano manoMock = mock(Mano.class);
         doNothing().when(manoMock).agregarCarta(any());
-        mazo.repartirCartas(52, manoMock);
-        int cantidadDeCartasObtenidas = mazo.obtenerCantidadCartasDisponibles();
+        manoMock.agregarCartas(mazo.repartirCartas(52));
         //Assert
-        assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
+        assertThrows(CartasInsuficientesException.class, () -> {
+            manoMock.agregarCartas(mazo.repartirCartas(1));
+        });
     }
     @Test
     public void test02UnMazoAlSacarleCuarentaYOchoCartasYPedirleCincoDebeLanzarError(){
@@ -30,36 +30,43 @@ public class MazoTest {
         //Act
         Mano manoMock = mock(Mano.class);
         doNothing().when(manoMock).agregarCarta(any());
-        mazo.repartirCartas(48, manoMock);
+        manoMock.agregarCartas(mazo.repartirCartas(48));
         //Act / Assert
         assertThrows(CartasInsuficientesException.class, () -> {
-            mazo.repartirCartas(5, new Mano(8));
+            mazo.repartirCartas(5);
         });
     }
     @Test
     public void test03UnMazoAlSacarleCuarentaLeQuedanDoceCartas(){
         //Arrange
         Mazo mazo = new Mazo();
-        int cantidadDeCartasEsperadas = 12;
         Mano manoMock = mock(Mano.class);
         doNothing().when(manoMock).agregarCarta(any());
-        mazo.repartirCartas(40, manoMock);
-        int cantidadDeCartasObtenidas = mazo.obtenerCantidadCartasDisponibles();
+        manoMock.agregarCartas(mazo.repartirCartas(40));
+        // Act
+        assertDoesNotThrow(() -> {
+            manoMock.agregarCartas(mazo.repartirCartas(12));
+        });
         //Assert
-        assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
+        assertThrows(CartasInsuficientesException.class, () -> {
+            mazo.repartirCartas(1);
+        });
     }
     @Test
     public void test04UnMazoAlSacarleTreitaYCuatroCartasYMezclarTieneCincuentaYDosCartasParaUsar(){
         //Arrange
         Mazo mazo = new Mazo();
-        int cantidadDeCartasEsperadas = 52;
         Mano manoMock = mock(Mano.class);
         doNothing().when(manoMock).agregarCarta(any());
-        mazo.repartirCartas(34, manoMock);
+        manoMock.agregarCartas(mazo.repartirCartas(34));
         mazo.mezclar();
-        //Act
-        int cantidadDeCartasObtenidas = mazo.obtenerCantidadCartasDisponibles();
+        // Act
+        assertDoesNotThrow(() -> {
+            manoMock.agregarCartas(mazo.repartirCartas(52));
+        });
         //Assert
-        assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
+        assertThrows(CartasInsuficientesException.class, () -> {
+            mazo.repartirCartas(1);
+        });
     }
 }

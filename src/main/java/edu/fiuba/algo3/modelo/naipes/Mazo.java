@@ -26,24 +26,22 @@ public class Mazo {
         }
     }
 
-    public void repartirCartas(int cantidad, Mano mano) {
+    public ArrayList<Carta> repartirCartas(int cantidad) {
         if (cantidad > this.cartas.size()) {
             throw new CartasInsuficientesException();
         }
+        ArrayList<Carta> cartasRepartidas = new ArrayList<>();
         for(int i = 1; i <= cantidad; i++) {
             int indiceAleatorio = (int) (Math.random() * this.cartas.size());
             Carta carta = this.cartas.remove(indiceAleatorio);
-            mano.agregarCarta(carta);
+            cartasRepartidas.add(carta);
             this.cartasDescartadas.add(carta);
         }
+        return cartasRepartidas;
     }
 
     public void mezclar() {
         this.cartas.addAll(this.cartasDescartadas);
         this.cartasDescartadas.clear();
-    }
-
-    public int obtenerCantidadCartasDisponibles() {
-        return this.cartas.size();
     }
 }

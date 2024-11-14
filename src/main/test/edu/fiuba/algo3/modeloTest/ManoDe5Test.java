@@ -1,20 +1,20 @@
 package edu.fiuba.algo3.modeloTest;
 
 import edu.fiuba.algo3.modelo.naipes.CartaNoEnManoException;
-import edu.fiuba.algo3.modelo.naipes.CartasSeleccionadas;
+import edu.fiuba.algo3.modelo.naipes.ManoDe5;
 import edu.fiuba.algo3.modelo.naipes.MaximoCartasSeleccionadasException;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+
 import static org.mockito.Mockito.*;
 
-public class CartasSeleccionadasTest {
+public class ManoDe5Test {
     @Test
-    public void test01AlCrearUnaCartasSeleccionadasEstaDebeEstarVacia(){
+    public void test01AlCrearUnaManoDe5EstaDebeEstarVacia(){
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
+        ManoDe5 mano = new ManoDe5();
         int cantidadDeCartasEsperadas = 0;
         // Act
         int cantidadDeCartasObtenidas = mano.obtenerCantidadDeCartas();
@@ -22,9 +22,9 @@ public class CartasSeleccionadasTest {
         assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
     }
     @Test
-    public void test02AlAgregarCincoCartasALaCartasSeleccionadasDeberiaTenerCincoCartas(){
+    public void test02AlAgregarCincoCartasALaManoDe5DeberiaTenerCincoCartas(){
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
+        ManoDe5 mano = new ManoDe5();
         int cantidadDeCartasEsperadas = 5;
         // Act
         for(int i = 1; i <= 5; i++) {
@@ -35,9 +35,9 @@ public class CartasSeleccionadasTest {
         assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
     }
     @Test
-    public void test03AlAgregarSeisCartasALaCartasSeleccionadasDeberiaLanzarError(){
+    public void test03AlAgregarSeisCartasALaManoDe5DeberiaLanzarError(){
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
+        ManoDe5 mano = new ManoDe5();
         for(int i = 1; i <= 5; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
         }
@@ -47,9 +47,9 @@ public class CartasSeleccionadasTest {
         });
     }
     @Test
-    public void test04AlAgregarCincoCartasALaCartasSeleccionadasYQuitarUnaDeberianHaberCuatro(){
+    public void test04AlAgregarCincoCartasALaManoDe5YQuitarUnaDeberianHaberCuatro(){
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
+        ManoDe5 mano = new ManoDe5();
         int cantidadDeCartasEsperadas = 4;
         for(int i = 1; i <= 4; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
@@ -63,21 +63,21 @@ public class CartasSeleccionadasTest {
         assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
     }
     @Test
-    public void test05LanzaErrorSiSeQuiereQuitarUnaCartaQueNoEstaEnLaCartasSeleccionadas(){
+    public void test05LanzaErrorSiSeQuiereQuitarUnaCartaQueNoEstaEnLaManoDe5(){
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
-        Carta cartaEnLaCartasSeleccionadas = new Carta(8, new Trebol());
-        Carta cartaNoEstaEnLaCartasSeleccionadas = new Carta(7, new Trebol());
-        mano.agregarCarta(cartaEnLaCartasSeleccionadas);
+        ManoDe5 mano = new ManoDe5();
+        Carta cartaEnLaManoDe5 = new Carta(8, new Trebol());
+        Carta cartaNoEstaEnLaManoDe5 = new Carta(7, new Trebol());
+        mano.agregarCarta(cartaEnLaManoDe5);
         // Act / Assert
         assertThrows(CartaNoEnManoException.class, () -> {
-            mano.quitarCarta(cartaNoEstaEnLaCartasSeleccionadas);
+            mano.quitarCarta(cartaNoEstaEnLaManoDe5);
         });
     }
     @Test
-    public void test06LanzaErrorSiSeQuiereQuitarUnaCartaEnUnaCartasSeleccionadasVacia(){
+    public void test06LanzaErrorSiSeQuiereQuitarUnaCartaEnUnaManoDe5Vacia(){
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
+        ManoDe5 mano = new ManoDe5();
         // Act / Assert
         assertThrows(CartaNoEnManoException.class, () -> {
             mano.quitarCarta(new Carta(8, new Trebol()));
@@ -86,26 +86,26 @@ public class CartasSeleccionadasTest {
     @Test
     public void test07LanzaErrorSiSeQuiereQuitarUnaCartaQueYaSeQuito(){
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
-        Carta cartaEnLaCartasSeleccionadasMock = mock(Carta.class);
-        when(cartaEnLaCartasSeleccionadasMock.sos(any())).thenReturn(true);
-        mano.agregarCarta(cartaEnLaCartasSeleccionadasMock);
-        mano.quitarCarta(cartaEnLaCartasSeleccionadasMock);
+        ManoDe5 mano = new ManoDe5();
+        Carta cartaEnLaManoDe5Mock = mock(Carta.class);
+        when(cartaEnLaManoDe5Mock.sos(any())).thenReturn(true);
+        mano.agregarCarta(cartaEnLaManoDe5Mock);
+        mano.quitarCarta(cartaEnLaManoDe5Mock);
         // Act / Assert
         assertThrows(CartaNoEnManoException.class, () -> {
-            mano.quitarCarta(cartaEnLaCartasSeleccionadasMock);
+            mano.quitarCarta(cartaEnLaManoDe5Mock);
         });
     }
     @Test
-    public void test08UnaCartasSeleccionadasPuedeQuitarUnaCartaSoloSabiendoSuNumeroYPalo() {
+    public void test08UnaManoDe5PuedeQuitarUnaCartaSoloSabiendoSuNumeroYPalo() {
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
+        ManoDe5 mano = new ManoDe5();
         int cantidadDeCartasEsperadas = 0;
-        Carta cartaEnLaCartasSeleccionadasMock = mock(Carta.class);
-        when(cartaEnLaCartasSeleccionadasMock.sos(any())).thenReturn(true);
-        mano.agregarCarta(cartaEnLaCartasSeleccionadasMock);
+        Carta cartaEnLaManoDe5Mock = mock(Carta.class);
+        when(cartaEnLaManoDe5Mock.sos(any())).thenReturn(true);
+        mano.agregarCarta(cartaEnLaManoDe5Mock);
         // Act
-        mano.quitarCarta(cartaEnLaCartasSeleccionadasMock);
+        mano.quitarCarta(cartaEnLaManoDe5Mock);
         int cantidadDeCartasObtenidas = mano.obtenerCantidadDeCartas();
         // Assert
         assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
@@ -113,11 +113,11 @@ public class CartasSeleccionadasTest {
     @Test
     public void test09AlJugarUnaManoConUnaCartaDevuelveElValorDelPuntajeDeLaCarta() {
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
+        ManoDe5 mano = new ManoDe5();
         int valorEsperado = 10;
-        Carta cartaEnLaCartasSeleccionadasMock = mock(Carta.class);
-        when(cartaEnLaCartasSeleccionadasMock.obtenerPuntaje()).thenReturn(new Puntaje(5, 1));
-        mano.agregarCarta(cartaEnLaCartasSeleccionadasMock);
+        Carta cartaEnLaManoDe5Mock = mock(Carta.class);
+        when(cartaEnLaManoDe5Mock.obtenerPuntaje()).thenReturn(new Puntaje(5, 1));
+        mano.agregarCarta(cartaEnLaManoDe5Mock);
         // Act
         int valorObtenido = mano.jugarMano();
         // Assert
@@ -126,7 +126,7 @@ public class CartasSeleccionadasTest {
     @Test
     public void test09AlJugarUnaManoConCincoCartasDevuelveElValorDelPuntajeDeLaMano() {
         // Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
+        ManoDe5 mano = new ManoDe5();
         int valorEsperado = 30;
         mano.agregarCarta(new Carta(5, new Trebol()));
         mano.agregarCarta(new Carta(7, new Diamante()));

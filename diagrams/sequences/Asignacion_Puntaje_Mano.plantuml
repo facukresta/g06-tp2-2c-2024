@@ -1,7 +1,7 @@
 @startuml
 
 actor Jugador
-Jugador -> "cartasSeleccionadas: CartasSeleccionadas" as CartasSeleccionadas : jugarMano()
+Jugador -> "cartasSeleccionadas: ManoDe5" as CartasSeleccionadas : jugarMano()
 CartasSeleccionadas -> ":Juego" as Juego :puntuarMano(List <Carta> cartas)
 Juego -> ":Tarot" as Tarot: obtenerPuntaje(Puntaje puntajeDelJuego)
 Juego <-- Tarot: Puntaje puntajeModificadoPorTarot

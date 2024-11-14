@@ -1,47 +1,41 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.naipes.CartasSeleccionadas;
+//import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.naipes.Mano;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
-import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
-import edu.fiuba.algo3.modelo.naipes.carta.Diamante;
-import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
+import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
-import edu.fiuba.algo3.modelo.tarot.CambiadorDeMultiplicador;
-import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
-import edu.fiuba.algo3.modelo.tarot.Tarot;
+import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class casosDeUsoEntrega1Test {
-    //Verificar que un jugador posea cartas suficientes para empezar el juego en su mazo.
+    //Verificar que un mano posea cartas suficientes para empezar el juego en su mazo.
     @Test
-    public void test01UnaManoTieneQueTenerCartasSuficientesParaArrancarElJuego() {
+    public void test01UnJugadorTieneQueTenerCartasSuficientesParaArrancarElJuego() {
         //Arrange
         Mazo mazo = new Mazo();
         Mano mano = new Mano(8);
-        mazo.repartirCartas(8, mano);
-
+        mano.agregarCartas(mazo.repartirCartas(8));
         //Act
-        boolean cantidaddeCartas = (mano.obtenerCantidadDeCartas() > 0);
-
+        boolean tieneCartas = (mano.obtenerCantidadDeCartas() > 0);
         //Assert
-        assertTrue(cantidaddeCartas);
+        assertTrue(tieneCartas);
     }
-    //Verificar que a un jugador se le reparten 8 cartas de su mazo.
+    //Verificar que a un mano se le reparten 8 cartas de su mazo.
     @Test
-    public void test02UnaManoSeLeRepartenOchoCartasDeSuMazo() {
+    public void test02AUnJugadorSeLeRepartenOchoCartasDeSuMazo() {
         //Arrange
         Mazo mazo = new Mazo();
         Mano mano = new Mano(8);
-        mazo.repartirCartas(8, mano);
+        mano.agregarCartas(mazo.repartirCartas(8));
         int cantidadDeCartasEsperadas = 8;
-
         //Act
         int cantidadDeCartasObtenidas = mano.obtenerCantidadDeCartas();
-
         //Assert
         assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
     }
@@ -49,8 +43,8 @@ public class casosDeUsoEntrega1Test {
     @Test
     public void test03SePuedeJugarUnaManoDeUnMazo(){
         //Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
-        for (int i = 1; i <= 5; i++) {
+        Mano mano = new Mano(8);
+        for (int i = 1; i <= 8; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
         }
         mano.elegirCarta(new Carta(5, new Trebol()));
@@ -62,11 +56,14 @@ public class casosDeUsoEntrega1Test {
     @Test
     public void test04AlJugarUnaManoSeLeAplicaSuValorCorrespondiente(){
         //Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
-        for (int i = 1; i <= 5; i++) {
+        Mano mano = new Mano(8);
+        for (int i = 1; i <= 8; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
         }
         int puntajeEsperado = 920;
+        for (int i = 1; i <= 5; i++) {
+            mano.elegirCarta(new Carta(i, new Trebol()));
+        }
         // Act
         int puntajeObtenido = mano.jugarMano();
         // Assert
@@ -76,10 +73,11 @@ public class casosDeUsoEntrega1Test {
     @Test
     public void test05AlJugarUnaManoTrioElValorDebeSerDistintoAPrimeroCalcularElValorDelTrioYLaSumaDeLasCartasYLuegoSumarAmbosValores(){
         //Arrange
-        CartasSeleccionadas mano = new CartasSeleccionadas();
-        mano.agregarCarta(new Carta(2, new Trebol()));
-        mano.agregarCarta(new Carta(2, new Corazon()));
-        mano.agregarCarta(new Carta(2, new Diamante()));
+        Mano mano = new Mano(8);
+        mano.agregarCartas(new ArrayList<>(List.of(new Carta(2, new Trebol()), new Carta(2, new Corazon()), new Carta(2, new Diamante()))));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
         int puntajeEsperado = 108;
         // Act
         Puntaje puntajeJuegoTrio = new Puntaje(30, 3);
@@ -93,13 +91,15 @@ public class casosDeUsoEntrega1Test {
     public void test06UnaCartaModificadaPorUnaCartaDeTarotDePuntosDeMas10ModificaComoPuntuaLaCarta(){
         // Arrange
         int valorEsperado = 132;
-        CartasSeleccionadas mano = new CartasSeleccionadas();
-        mano.agregarCarta(new Carta(2, new Diamante()));
-        mano.agregarCarta(new Carta(2, new Corazon()));
+        Mano mano = new Mano(8);
+        mano.agregarCartas(new ArrayList<>(List.of(new Carta(2, new Corazon()), new Carta(2, new Diamante()))));
         Carta cartaModificada = new Carta(2, new Trebol());
         Tarot tarot = new CambiadorDePuntos(10);
         cartaModificada.aplicarModificador(tarot);
         mano.agregarCarta(cartaModificada);
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
         // Act
         int valorObtenido = mano.jugarMano();
         // Assert
@@ -110,13 +110,15 @@ public class casosDeUsoEntrega1Test {
     public void test07UnaCartaModificadaPorUnaCartaDeTarotDeMultiplicadorDePor6ModificaComoPunutuaLaCarta() {
         // Arrange
         int valorEsperado = 324;
-        CartasSeleccionadas mano = new CartasSeleccionadas();
-        mano.agregarCarta(new Carta(2, new Diamante()));
-        mano.agregarCarta(new Carta(2, new Corazon()));
+        Mano mano = new Mano(8);
+        mano.agregarCartas(new ArrayList<>(List.of(new Carta(2, new Corazon()), new Carta(2, new Diamante()))));
         Carta cartaModificada = new Carta(2, new Trebol());
         Tarot tarot = new CambiadorDeMultiplicador(6);
         cartaModificada.aplicarModificador(tarot);
         mano.agregarCarta(cartaModificada);
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
         // Act
         int valorObtenido = mano.jugarMano();
         // Assert

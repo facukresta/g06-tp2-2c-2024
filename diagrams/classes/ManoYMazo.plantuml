@@ -1,34 +1,27 @@
 @startuml ManoYMazo
 skinparam classAttributeIconSize 0
-
 class Mazo {
 -cartas: List<Carta>
 -cartasDescartadas: List<Carta>
-+repartirCartas(int cantidad, Mano m)
++repartirCartas(int cantidad): List<Carta>
 +mezclar()
-+obtenerCantidadCartasDisponibles(): int
 }
-
 
 class Mano {
 -maxCartas: int
 -cartas: List<Carta>
+-cartasSelecionadas: List<Carta>
+-juego: Juego
 +Mano(int cantidadDeCartas)
 +agregarCarta(Carta c)
++agregarCartas(List<Carta> c)
 +quitarCarta(Carta c)
++quitarCartas(List<Carta> c)
 +elegirCarta(Carta c)
-+deseleccionarCarta(Carta c)
 +obtenerCantidadDeCartas(): int
 +obtenerCarta(Carta c): Carta
-}
-
-class CartasSeleccionadas {
--juego: Juego
-+agregarCarta(Carta c)
-+quitarCarta(Carta c)
 +jugarMano(): int
 }
 
-Mazo ..> Mano: "usa"
-CartasSeleccionadas -up-|> Mano
+Mano ..> Mazo: "usa"
 @enduml

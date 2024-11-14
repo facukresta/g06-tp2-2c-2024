@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.naipes;
+import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 
 import java.util.ArrayList;
@@ -6,10 +7,40 @@ import java.util.ArrayList;
 public class Mano {
     protected ArrayList<Carta> cartas;
     protected int maxCartas;
+    private ArrayList<Carta> cartasSeleccionadas;
+    private Juego juego;
 
     public Mano(int cantidadDeCartas) {
+        this.cartasSeleccionadas = new ArrayList<Carta>();
         this.cartas = new ArrayList<Carta>();
         this.maxCartas = cantidadDeCartas;
+    }
+
+    public void elegirCarta(Carta carta) {
+        Carta cartaAElegir = this.obtenerCarta(carta);
+        if (cartasSeleccionadas.contains(cartaAElegir)) {
+            this.cartasSeleccionadas.remove(cartaAElegir);
+        } else {
+            this.cartasSeleccionadas.add(cartaAElegir);
+        }
+        this.juego = Juego.chequearJuego(this.cartasSeleccionadas);
+    }
+
+    public void descartarMano() {
+        if (this.cartasSeleccionadas.isEmpty()) {
+            throw new SinCartasSeleccionadasException();
+        }
+        this.quitarCartas(cartasSeleccionadas);
+        this.cartasSeleccionadas.clear();
+    }
+
+    public int jugarMano(){
+        if (this.cartasSeleccionadas.isEmpty()) {
+            throw new SinCartasSeleccionadasException();
+        }
+        int puntaje = this.juego.puntuarMano(this.cartasSeleccionadas).calcularValor();
+        this.descartarMano();
+        return puntaje;
     }
 
     public void agregarCarta(Carta carta) {
@@ -19,9 +50,26 @@ public class Mano {
         this.cartas.add(carta);
     }
 
+    public void agregarCartas(ArrayList<Carta> cartas) {
+        if (this.maxCartas == this.cartas.size()) {
+            throw new ManoLlenaException();
+        }
+        for (Carta carta : cartas) {
+            this.cartas.add(carta);
+        }
+
+    }
+
     public void quitarCarta(Carta carta) {
         Carta cartaAQuitar = obtenerCarta(carta);
         this.cartas.remove(cartaAQuitar);
+    }
+
+    public void quitarCartas(ArrayList<Carta> cartas) {
+        for (Carta carta : cartas) {
+            Carta cartaAQuitar = obtenerCarta(carta);
+            this.cartas.remove(cartaAQuitar);
+        }
     }
 
     public int obtenerCantidadDeCartas() {
@@ -36,24 +84,5 @@ public class Mano {
         }
         throw new CartaNoEnManoException();
     }
-
-    public void elegirCarta(Carta carta) {
-        Carta cartaAElegir = this.obtenerCarta(carta);
-        this.agregarCarta(cartaAElegir);
-    }
-    //elegirCarta(Carta carta) tal vez haya que implementarla en interfaz gráfica, ya que la idea es que envíe cartas desde Mano a CartasSeleccionadas
-    /*public void elegirCarta(Carta carta) {
-        Carta cartaAElegir = this.mano.obtenerCarta(carta);
-        this.cartasSeleccionadas.agregarCarta(cartaAElegir);
-    } */
-
-    public void deseleccionarCarta(Carta carta) {
-        Carta cartaADeseleccionada = this.obtenerCarta(carta);
-        this.quitarCarta(cartaADeseleccionada);
-    }
-    //deseleccionarCarta(Carta carta) tal vez haya que implementarla en interfaz gráfica, ya que la idea es que envíe cartas desde Mano a CartasSeleccionadas
-    /*public void deseleccionarCarta(Carta carta) {
-       Carta cartaADeseleccionada = this.mano.obtenerCarta(carta);
-        this.cartasSeleccionadas.quitarCarta(cartaADeseleccionada);
-    }*/
 }
+

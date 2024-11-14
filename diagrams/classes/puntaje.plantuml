@@ -35,23 +35,21 @@ Carta *-- Tarot :tiene
 class Mano {
 -maxCartas: int
 -cartas: List<Carta>
+-cartasSelecionadas: List<Carta>
+-juego: Juego
 +Mano(int cantidadDeCartas)
 +agregarCarta(Carta c)
++agregarCartas(List<Carta> c)
 +quitarCarta(Carta c)
++quitarCartas(List<Carta> c)
++elegirCarta(Carta c)
 +obtenerCantidadDeCartas(): int
-obtenerCarta(Carta c): Carta
-}
-
-class CartasSeleccionadas {
--juego: Juego
-+agregarCarta(Carta c)
-+quitarCarta(Carta c)
++obtenerCarta(Carta c): Carta
 +jugarMano(): int
 }
 
-CartasSeleccionadas--|> Mano
 
-CartasSeleccionadas..> Puntaje: " usa"
+Mano .left.> Puntaje: " usa"
 Tarot .up.> Puntaje: "usa"
 Puntaje <.left. Carta: "usa"
 
