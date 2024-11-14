@@ -1,10 +1,5 @@
 @startuml
 
-
-package juego {
-        abstract class Juego
-}
-
 package puntaje {
         class Puntaje
 }
@@ -18,20 +13,17 @@ package naipes {
             class Carta
         }
         class Mano
-        class ManoDe5
+        class CartasSeleccionadas
         class Mazo
 }
 
 Tarot ..> Puntaje
-ManoDe5 --> Juego
-ManoDe5 ..> Puntaje
+CartasSeleccionadas --> Juego
+CartasSeleccionadas ..> Puntaje
 Juego --> Tarot
 Juego ..> Puntaje
 Juego ..> Carta
 Carta ..> Puntaje
 Carta -right-> Tarot
-Jugador -up-> Mano
-Jugador -up-> ManoDe5
-Jugador .up.> Carta
 
 @enduml

@@ -3,9 +3,9 @@ package edu.fiuba.algo3.modelo.naipes;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.juego.Juego;
 
-public class ManoDe5 extends Mano {
+public class CartasSeleccionadas extends Mano {
     private Juego juego;
-    public ManoDe5() {
+    public CartasSeleccionadas() {
         super(5);
     }
     @Override
@@ -26,10 +26,19 @@ public class ManoDe5 extends Mano {
         this.cartas.remove(cartaAQuitar);
         this.juego = Juego.chequearJuego(this.cartas);
     }
+
+    public void vaciarMano() {
+        for(Carta carta : cartas){
+            this.quitarCarta(carta);
+        }
+    }
+
     public int jugarMano(){
         if (this.cartas.isEmpty()) {
             throw new SinCartasSeleccionadasException();
         }
-        return this.juego.puntuarMano(this.cartas).calcularValor();
+        int valor = this.juego.puntuarMano(this.cartas).calcularValor();
+        this.vaciarMano();
+        return valor;
     }
 }

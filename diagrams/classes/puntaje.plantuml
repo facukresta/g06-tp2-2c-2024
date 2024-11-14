@@ -42,16 +42,16 @@ class Mano {
 obtenerCarta(Carta c): Carta
 }
 
-class ManoDe5 {
+class CartasSeleccionadas {
 -juego: Juego
 +agregarCarta(Carta c)
 +quitarCarta(Carta c)
 +jugarMano(): int
 }
 
-ManoDe5--|> Mano
+CartasSeleccionadas--|> Mano
 
-ManoDe5..> Puntaje: " usa"
+CartasSeleccionadas..> Puntaje: " usa"
 Tarot .up.> Puntaje: "usa"
 Puntaje <.left. Carta: "usa"
 

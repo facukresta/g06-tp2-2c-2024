@@ -1,12 +1,5 @@
-@startuml JugadorManoYMazo
+@startuml ManoYMazo
 skinparam classAttributeIconSize 0
-class Jugador {
-+establecerMano(Mano m)
-+jugarMano(): int
-+elegirCarta(Carta c)
-+deseleccionarCarta(Carta c)
-+obtenerCantidadDeCartas(): int
-}
 
 class Mazo {
 -cartas: List<Carta>
@@ -23,11 +16,13 @@ class Mano {
 +Mano(int cantidadDeCartas)
 +agregarCarta(Carta c)
 +quitarCarta(Carta c)
++elegirCarta(Carta c)
++deseleccionarCarta(Carta c)
 +obtenerCantidadDeCartas(): int
-obtenerCarta(Carta c): Carta
++obtenerCarta(Carta c): Carta
 }
 
-class ManoDe5 {
+class CartasSeleccionadas {
 -juego: Juego
 +agregarCarta(Carta c)
 +quitarCarta(Carta c)
@@ -35,7 +30,5 @@ class ManoDe5 {
 }
 
 Mazo ..> Mano: "usa"
-Jugador --> Mano: "tiene"
-Jugador -left-> ManoDe5: " tiene cartasSeleccionadas"
-ManoDe5 -up-|> Mano
+CartasSeleccionadas -up-|> Mano
 @enduml

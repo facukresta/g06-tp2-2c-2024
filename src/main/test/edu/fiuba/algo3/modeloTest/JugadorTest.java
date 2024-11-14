@@ -1,4 +1,6 @@
-package edu.fiuba.algo3.modeloTest;
+//Pruebas anteriores de Jugador. Falta trasladarlas a ManoTest.java
+
+/*package edu.fiuba.algo3.modeloTest;
 
 import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.naipes.CartaNoEnManoException;
@@ -171,3 +173,4 @@ public class JugadorTest {
     }
 
 }
+ */

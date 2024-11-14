@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.entrega_1;
 
-import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.naipes.CartasSeleccionadas;
 import edu.fiuba.algo3.modelo.naipes.Mano;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
@@ -18,32 +18,29 @@ import static org.junit.jupiter.api.Assertions.*;
 public class casosDeUsoEntrega1Test {
     //Verificar que un jugador posea cartas suficientes para empezar el juego en su mazo.
     @Test
-    public void test01UnJugadorTieneQueTenerCartasSuficientesParaArrancarElJuego() {
+    public void test01UnaManoTieneQueTenerCartasSuficientesParaArrancarElJuego() {
         //Arrange
-        Jugador jugador = new Jugador();
         Mazo mazo = new Mazo();
         Mano mano = new Mano(8);
         mazo.repartirCartas(8, mano);
-        jugador.establecerMano(mano);
+
         //Act
-        boolean tieneCartas = (jugador.obtenerCantidadDeCartas() > 0);
+        boolean cantidaddeCartas = (mano.obtenerCantidadDeCartas() > 0);
 
         //Assert
-        assertTrue(tieneCartas);
+        assertTrue(cantidaddeCartas);
     }
     //Verificar que a un jugador se le reparten 8 cartas de su mazo.
     @Test
-    public void test02AUnJugadorSeLeRepartenOchoCartasDeSuMazo() {
+    public void test02UnaManoSeLeRepartenOchoCartasDeSuMazo() {
         //Arrange
-        Jugador jugador = new Jugador();
         Mazo mazo = new Mazo();
         Mano mano = new Mano(8);
         mazo.repartirCartas(8, mano);
-        jugador.establecerMano(mano);
         int cantidadDeCartasEsperadas = 8;
 
         //Act
-        int cantidadDeCartasObtenidas = jugador.obtenerCantidadDeCartas();
+        int cantidadDeCartasObtenidas = mano.obtenerCantidadDeCartas();
 
         //Assert
         assertEquals(cantidadDeCartasEsperadas, cantidadDeCartasObtenidas);
@@ -52,35 +49,26 @@ public class casosDeUsoEntrega1Test {
     @Test
     public void test03SePuedeJugarUnaManoDeUnMazo(){
         //Arrange
-        Jugador jugador = new Jugador();
-        Mano mano = new Mano(8);
-        for (int i = 1; i <= 8; i++) {
+        CartasSeleccionadas mano = new CartasSeleccionadas();
+        for (int i = 1; i <= 5; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
         }
-        jugador.establecerMano(mano);
-        jugador.elegirCarta(new Carta(5, new Trebol()));
+        mano.elegirCarta(new Carta(5, new Trebol()));
 
         //Assert y Act
-        assertDoesNotThrow(() -> jugador.jugarMano());
+        assertDoesNotThrow(() -> mano.jugarMano());
     }
     //Verificar que al jugar una mano, se aplique el valor correspondiente.
     @Test
     public void test04AlJugarUnaManoSeLeAplicaSuValorCorrespondiente(){
         //Arrange
-        Jugador jugador = new Jugador();
-        Mano mano = new Mano(8);
-        for (int i = 1; i <= 8; i++) {
+        CartasSeleccionadas mano = new CartasSeleccionadas();
+        for (int i = 1; i <= 5; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
         }
-        jugador.establecerMano(mano);
         int puntajeEsperado = 920;
-        jugador.elegirCarta(new Carta(5, new Trebol()));
-        jugador.elegirCarta(new Carta(1, new Trebol()));
-        jugador.elegirCarta(new Carta(2, new Trebol()));
-        jugador.elegirCarta(new Carta(3, new Trebol()));
-        jugador.elegirCarta(new Carta(4, new Trebol()));
         // Act
-        int puntajeObtenido = jugador.jugarMano();
+        int puntajeObtenido = mano.jugarMano();
         // Assert
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -88,15 +76,10 @@ public class casosDeUsoEntrega1Test {
     @Test
     public void test05AlJugarUnaManoTrioElValorDebeSerDistintoAPrimeroCalcularElValorDelTrioYLaSumaDeLasCartasYLuegoSumarAmbosValores(){
         //Arrange
-        Jugador jugador = new Jugador();
-        Mano mano = new Mano(8);
+        CartasSeleccionadas mano = new CartasSeleccionadas();
         mano.agregarCarta(new Carta(2, new Trebol()));
         mano.agregarCarta(new Carta(2, new Corazon()));
         mano.agregarCarta(new Carta(2, new Diamante()));
-        jugador.establecerMano(mano);
-        jugador.elegirCarta(new Carta(2, new Trebol()));
-        jugador.elegirCarta(new Carta(2, new Corazon()));
-        jugador.elegirCarta(new Carta(2, new Diamante()));
         int puntajeEsperado = 108;
         // Act
         Puntaje puntajeJuegoTrio = new Puntaje(30, 3);
@@ -110,20 +93,15 @@ public class casosDeUsoEntrega1Test {
     public void test06UnaCartaModificadaPorUnaCartaDeTarotDePuntosDeMas10ModificaComoPuntuaLaCarta(){
         // Arrange
         int valorEsperado = 132;
-        Jugador jugador = new Jugador();
-        Mano mano = new Mano(8);
+        CartasSeleccionadas mano = new CartasSeleccionadas();
         mano.agregarCarta(new Carta(2, new Diamante()));
         mano.agregarCarta(new Carta(2, new Corazon()));
         Carta cartaModificada = new Carta(2, new Trebol());
         Tarot tarot = new CambiadorDePuntos(10);
         cartaModificada.aplicarModificador(tarot);
         mano.agregarCarta(cartaModificada);
-        jugador.establecerMano(mano);
-        jugador.elegirCarta(new Carta(2, new Trebol()));
-        jugador.elegirCarta(new Carta(2, new Corazon()));
-        jugador.elegirCarta(new Carta(2, new Diamante()));
         // Act
-        int valorObtenido = jugador.jugarMano();
+        int valorObtenido = mano.jugarMano();
         // Assert
         assertEquals(valorEsperado, valorObtenido);
     }
@@ -132,20 +110,15 @@ public class casosDeUsoEntrega1Test {
     public void test07UnaCartaModificadaPorUnaCartaDeTarotDeMultiplicadorDePor6ModificaComoPunutuaLaCarta() {
         // Arrange
         int valorEsperado = 324;
-        Jugador jugador = new Jugador();
-        Mano mano = new Mano(8);
+        CartasSeleccionadas mano = new CartasSeleccionadas();
         mano.agregarCarta(new Carta(2, new Diamante()));
         mano.agregarCarta(new Carta(2, new Corazon()));
         Carta cartaModificada = new Carta(2, new Trebol());
         Tarot tarot = new CambiadorDeMultiplicador(6);
         cartaModificada.aplicarModificador(tarot);
         mano.agregarCarta(cartaModificada);
-        jugador.establecerMano(mano);
-        jugador.elegirCarta(new Carta(2, new Trebol()));
-        jugador.elegirCarta(new Carta(2, new Corazon()));
-        jugador.elegirCarta(new Carta(2, new Diamante()));
         // Act
-        int valorObtenido = jugador.jugarMano();
+        int valorObtenido = mano.jugarMano();
         // Assert
         assertEquals(valorEsperado, valorObtenido);
     }
