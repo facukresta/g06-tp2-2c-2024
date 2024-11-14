@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modeloTest;
 
 import edu.fiuba.algo3.modelo.naipes.CartaNoEnManoException;
-import edu.fiuba.algo3.modelo.naipes.ManoDe5;
+import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
 import edu.fiuba.algo3.modelo.naipes.MaximoCartasSeleccionadasException;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.*;
 
-public class ManoDe5Test {
+public class SeleccionadasTest {
     @Test
     public void test01AlCrearUnaManoDe5EstaDebeEstarVacia(){
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         int cantidadDeCartasEsperadas = 0;
         // Act
         int cantidadDeCartasObtenidas = mano.obtenerCantidadDeCartas();
@@ -24,7 +24,7 @@ public class ManoDe5Test {
     @Test
     public void test02AlAgregarCincoCartasALaManoDe5DeberiaTenerCincoCartas(){
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         int cantidadDeCartasEsperadas = 5;
         // Act
         for(int i = 1; i <= 5; i++) {
@@ -37,7 +37,7 @@ public class ManoDe5Test {
     @Test
     public void test03AlAgregarSeisCartasALaManoDe5DeberiaLanzarError(){
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         for(int i = 1; i <= 5; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
         }
@@ -49,7 +49,7 @@ public class ManoDe5Test {
     @Test
     public void test04AlAgregarCincoCartasALaManoDe5YQuitarUnaDeberianHaberCuatro(){
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         int cantidadDeCartasEsperadas = 4;
         for(int i = 1; i <= 4; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
@@ -65,7 +65,7 @@ public class ManoDe5Test {
     @Test
     public void test05LanzaErrorSiSeQuiereQuitarUnaCartaQueNoEstaEnLaManoDe5(){
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         Carta cartaEnLaManoDe5 = new Carta(8, new Trebol());
         Carta cartaNoEstaEnLaManoDe5 = new Carta(7, new Trebol());
         mano.agregarCarta(cartaEnLaManoDe5);
@@ -77,7 +77,7 @@ public class ManoDe5Test {
     @Test
     public void test06LanzaErrorSiSeQuiereQuitarUnaCartaEnUnaManoDe5Vacia(){
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         // Act / Assert
         assertThrows(CartaNoEnManoException.class, () -> {
             mano.quitarCarta(new Carta(8, new Trebol()));
@@ -86,7 +86,7 @@ public class ManoDe5Test {
     @Test
     public void test07LanzaErrorSiSeQuiereQuitarUnaCartaQueYaSeQuito(){
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         Carta cartaEnLaManoDe5Mock = mock(Carta.class);
         when(cartaEnLaManoDe5Mock.sos(any())).thenReturn(true);
         mano.agregarCarta(cartaEnLaManoDe5Mock);
@@ -99,7 +99,7 @@ public class ManoDe5Test {
     @Test
     public void test08UnaManoDe5PuedeQuitarUnaCartaSoloSabiendoSuNumeroYPalo() {
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         int cantidadDeCartasEsperadas = 0;
         Carta cartaEnLaManoDe5Mock = mock(Carta.class);
         when(cartaEnLaManoDe5Mock.sos(any())).thenReturn(true);
@@ -113,7 +113,7 @@ public class ManoDe5Test {
     @Test
     public void test09AlJugarUnaManoConUnaCartaDevuelveElValorDelPuntajeDeLaCarta() {
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         int valorEsperado = 10;
         Carta cartaEnLaManoDe5Mock = mock(Carta.class);
         when(cartaEnLaManoDe5Mock.obtenerPuntaje()).thenReturn(new Puntaje(5, 1));
@@ -126,7 +126,7 @@ public class ManoDe5Test {
     @Test
     public void test09AlJugarUnaManoConCincoCartasDevuelveElValorDelPuntajeDeLaMano() {
         // Arrange
-        ManoDe5 mano = new ManoDe5();
+        Seleccionadas mano = new Seleccionadas();
         int valorEsperado = 30;
         mano.agregarCarta(new Carta(5, new Trebol()));
         mano.agregarCarta(new Carta(7, new Diamante()));

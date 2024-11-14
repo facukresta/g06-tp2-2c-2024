@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
 import edu.fiuba.algo3.modelo.naipes.carta.Pica;
 import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import java.util.ArrayList;
@@ -65,21 +66,21 @@ public class EscaleraTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Pica()),
                 new Carta(11, new Pica()), new Carta(12, new Pica()),
                 new Carta(13, new Pica()), new Carta(9, new Pica())));
-        int valorEsperado = 340;
+        Puntaje puntajeEsperado = new Puntaje(85, 4);
         // Act
-        int valorObtenido = juegoEscalera.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoEscalera.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test06UnaInstanciaDeEscaleraSiUnaListaDeCartasVaciaDevueleElValorBaseDeEscalera() {
         // Arrange
         Escalera juegoEscalera = new Escalera();
         ArrayList<Carta> cartas = new ArrayList<>();
-        int valorEsperado = 120;
+        Puntaje puntajeEsperado = new Puntaje(30, 4);
         // Act
-        int valorObtenido = juegoEscalera.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoEscalera.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

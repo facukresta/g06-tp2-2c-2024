@@ -16,12 +16,11 @@ public class CartaTest {
     public void test01UnaCartaCreadaConNumero10YPaloCorazonTienePuntaje10(){
         // Arrange
         Carta carta = new Carta(10, new Corazon());
-        int valorEsperado = 10;
+        Puntaje puntajeEsperado = new Puntaje(10,1);
         // Act
         Puntaje puntajeObtenido = carta.obtenerPuntaje();
-        int valorObtenido = puntajeObtenido.calcularValor();
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test02UnaCartaCreadaConNumero10YPaloBastoSabeReconocerOtraCartaDeSuMismoPalo(){
@@ -93,22 +92,22 @@ public class CartaTest {
     public void test09UnaInstanciaDeCartaAlCrearseTieneNoTieneModificacionDeTarot(){
         // Arrange
         Carta carta = new Carta(10, new Corazon());
-        int valorEsperado = 10;
+        Puntaje puntajeEsperado = new Puntaje(10,1);
         // Act
-        int valorObtenido = carta.obtenerPuntaje().calcularValor();
+        Puntaje puntajeObtenido = carta.obtenerPuntaje();
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test10UnaInstanciaDeCartaPuedeSerModificadaConUnTarot(){
         // Arrange
         Carta carta = new Carta(3, new Corazon());
-        int valorEsperado = 7;
+        Puntaje puntajeEsperado = new Puntaje(7,1);
         Tarot tarot = new CambiadorDePuntos(7);
         // Act
         carta.aplicarModificador(tarot);
-        int valorObtenido = carta.obtenerPuntaje().calcularValor();
+        Puntaje puntajeObtenido = carta.obtenerPuntaje();
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

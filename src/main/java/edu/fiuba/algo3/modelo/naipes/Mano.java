@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.naipes;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 import java.util.ArrayList;
 
@@ -34,11 +35,11 @@ public class Mano {
         this.cartasSeleccionadas.clear();
     }
 
-    public int jugarMano(){
+    public Puntaje jugarMano(){
         if (this.cartasSeleccionadas.isEmpty()) {
             throw new SinCartasSeleccionadasException();
         }
-        int puntaje = this.juego.puntuarMano(this.cartasSeleccionadas).calcularValor();
+        Puntaje puntaje = this.juego.puntuarMano(this.cartasSeleccionadas);
         this.descartarMano();
         return puntaje;
     }

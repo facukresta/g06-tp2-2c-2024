@@ -12,11 +12,11 @@ public class SinTarotTest {
     public void test01UnTarotSinTarotConUnPuntajeBaseDevuelveEsePuntaje() {
         // Arrange
         Tarot tarotSinTarot = new SinTarot();
-        int valorEsperado = 100;
+        Puntaje puntajeEsperado = new Puntaje(100,1);
         // Act
         Puntaje puntajeBase = new Puntaje(100, 1);
-        int valorObtenido = tarotSinTarot.obtenerPuntaje(puntajeBase).calcularValor();
+        Puntaje puntajeObtenido = tarotSinTarot.obtenerPuntaje(puntajeBase);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

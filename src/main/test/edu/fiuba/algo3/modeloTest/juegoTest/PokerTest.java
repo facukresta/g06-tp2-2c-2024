@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -100,11 +101,11 @@ public class PokerTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
                 new Carta(10, new Trebol()), new Carta(10, new Pica()),
                 new Carta(10, new Diamante())));
-        int valorEsperado = 700;
+        Puntaje puntajeEsperado = new Puntaje(100,7);
         // Act
-        int valorObtenido = juegoPoker.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoPoker.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test09UnaInstanciaDePokerDeUnaListaDeCartasConCincoCartasDevuelveElValorCorrecto() {
@@ -113,22 +114,22 @@ public class PokerTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(2, new Diamante()),
                 new Carta(2, new Pica()), new Carta(2, new Corazon()),
                 new Carta(2, new Trebol()), new Carta(5, new Corazon())));
-        int valorEsperado = 511;
+        Puntaje puntajeEsperado = new Puntaje(73,7);
         // Act
-        int valorObtenido = juegoPoker.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoPoker.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test10UnaInstanciaDePokerSiUnaListaDeCartasVaciaDevueleElValorBaseDePoker() {
         // Arrange
         Poker juegoPoker = new Poker();
         ArrayList<Carta> cartas = new ArrayList<>();
-        int valorEsperado = 420;
+        Puntaje puntajeEsperado = new Puntaje(60,7);
         // Act
-        int valorObtenido = juegoPoker.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoPoker.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test11UnaInstanciaDePokerDeUnaListaDeCartasMasDeCincoCartasDevuelveElValorCorrecto() {
@@ -138,10 +139,10 @@ public class PokerTest {
                 new Carta(2, new Corazon()), new Carta(5, new Trebol()),
                 new Carta(5, new Diamante()), new Carta(5, new Corazon()),
                 new Carta(5, new Pica()), new Carta(7, new Trebol())));
-        int valorEsperado = 630;
+        Puntaje puntajeEsperado = new Puntaje(90,7);
         // Act
-        int valorObtenido = juegoPoker.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoPoker.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

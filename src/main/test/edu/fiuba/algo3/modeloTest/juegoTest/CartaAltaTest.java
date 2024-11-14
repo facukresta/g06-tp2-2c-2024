@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import java.util.ArrayList;
@@ -59,11 +60,11 @@ public class CartaAltaTest {
         // Arrange
         CartaAlta juegoCartaAlta = new CartaAlta();
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon())));
-        int valorEsperado = 15;
+        Puntaje valorEsperado = new Puntaje(15, 1);
         // Act
-        int valorObtenido = juegoCartaAlta.puntuarMano(cartas).calcularValor();
+        Puntaje valorObtenido = juegoCartaAlta.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(valorObtenido.tenesMismoPuntaje(valorEsperado));
     }
     @Test
     public void test06UnaInstanciaDeCartaAltaDeUnaListaDeCartasConCincoCartasDevuelveElValorCorrecto() {
@@ -72,22 +73,22 @@ public class CartaAltaTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
                 new Carta(2, new Corazon()), new Carta(3, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon())));
-        int valorEsperado = 20;
+        Puntaje valorEsperado = new Puntaje(20, 1);
         // Act
-        int valorObtenido = juegoCartaAlta.puntuarMano(cartas).calcularValor();
+        Puntaje valorObtenido = juegoCartaAlta.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(valorObtenido.tenesMismoPuntaje(valorEsperado));
     }
     @Test
-    public void test07UnaInstanciaDeCartaAltaSiUnaListaDeCartasVaciaNDevueleElValorBaseDeCartaAlta() {
+    public void test07UnaInstanciaDeCartaAltaSiUnaListaDeCartasVaciaDevueleElValorBaseDeCartaAlta() {
         // Arrange
         CartaAlta juegoCartaAlta = new CartaAlta();
         ArrayList<Carta> cartas = new ArrayList<>();
-        int valorEsperado = 5;
+        Puntaje valorEsperado = new Puntaje(5, 1);
         // Act
-        int valorObtenido = juegoCartaAlta.puntuarMano(cartas).calcularValor();
+        Puntaje valorObtenido = juegoCartaAlta.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(valorObtenido.tenesMismoPuntaje(valorEsperado));
     }
     @Test
     public void test08UnaInstanciaDeCartaAltaDeUnaListaDeCartasMasDeCincoCartasDevuelveElValorCorrecto() {
@@ -97,10 +98,10 @@ public class CartaAltaTest {
                 new Carta(2, new Corazon()), new Carta(3, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon()),
                 new Carta(6, new Corazon()), new Carta(7, new Corazon())));
-        int valorEsperado = 33;
+        Puntaje valorEsperado = new Puntaje(33, 1);
         // Act
-        int valorObtenido = juegoCartaAlta.puntuarMano(cartas).calcularValor();
+        Puntaje valorObtenido = juegoCartaAlta.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(valorObtenido.tenesMismoPuntaje(valorEsperado));
     }
 }

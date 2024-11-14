@@ -1,11 +1,12 @@
 package edu.fiuba.algo3.modelo.naipes;
 
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.juego.Juego;
 
-public class ManoDe5 extends Mano {
+public class Seleccionadas extends Mano {
     private Juego juego;
-    public ManoDe5() {
+    public Seleccionadas() {
         super(5);
     }
     @Override
@@ -26,10 +27,10 @@ public class ManoDe5 extends Mano {
         this.cartas.remove(cartaAQuitar);
         this.juego = Juego.chequearJuego(this.cartas);
     }
-    public int jugarMano(){
+    public Puntaje jugarMano(){
         if (this.cartas.isEmpty()) {
             throw new SinCartasSeleccionadasException();
         }
-        return this.juego.puntuarMano(this.cartas).calcularValor();
+        return this.juego.puntuarMano(this.cartas);
     }
 }

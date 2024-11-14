@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -76,21 +77,21 @@ public class FullHouseTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
                 new Carta(10, new Trebol()), new Carta(10, new Pica()),
                 new Carta(4, new Trebol()), new Carta(4, new Pica())));
-        int valorEsperado = 312;
+        Puntaje puntajeEsperado = new Puntaje(78,4);
         // Act
-        int valorObtenido = juegoFullHouse.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoFullHouse.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test07UnaInstanciaDeFullHouseSiUnaListaDeCartasVaciaNDevueleElValorBaseDeFullHouse() {
         // Arrange
         FullHouse juegoFullHouse = new FullHouse();
         ArrayList<Carta> cartas = new ArrayList<>();
-        int valorEsperado = 160;
+        Puntaje puntajeEsperado = new Puntaje(40,4);
         // Act
-        int valorObtenido = juegoFullHouse.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoFullHouse.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

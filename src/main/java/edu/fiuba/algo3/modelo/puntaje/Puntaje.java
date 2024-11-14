@@ -23,8 +23,12 @@ public class Puntaje {
         return multiplicador;
     }
 
-    public int calcularValor() {
+    private int calcularPuntaje() {
         return puntos * multiplicador;
+    }
+
+    public boolean tenesMismoPuntaje(Puntaje puntaje) {
+        return (this.calcularPuntaje() == puntaje.calcularPuntaje());
     }
 
     public void sumar(Puntaje puntajeASumar) {
@@ -43,6 +47,6 @@ public class Puntaje {
     }
 
     public boolean esMayor(Puntaje puntaje) {
-        return this.calcularValor() > puntaje.calcularValor();
+        return this.calcularPuntaje() > puntaje.calcularPuntaje();
     }
 }

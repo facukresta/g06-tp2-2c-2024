@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
 import edu.fiuba.algo3.modelo.naipes.carta.Pica;
 import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import java.util.ArrayList;
@@ -65,22 +66,22 @@ public class EscaleraDeColorTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Pica()),
                 new Carta(11, new Pica()), new Carta(12, new Pica()),
                 new Carta(13, new Pica()), new Carta(9, new Pica())));
-        int valorEsperado = 1240;
+        Puntaje puntajeEsperado = new Puntaje(155,8);
         // Act
-        int valorObtenido = juegoEscaleraDeColor.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoEscaleraDeColor.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test06UnaInstanciaDeEscaleraDeColorSiUnaListaDeCartasVaciaDevueleElValorBaseDeEscaleraDeColor() {
         // Arrange
         EscaleraDeColor juegoEscaleraDeColor = new EscaleraDeColor();
         ArrayList<Carta> cartas = new ArrayList<>();
-        int valorEsperado = 800;
+        Puntaje puntajeEsperado = new Puntaje(100,8);
         // Act
-        int valorObtenido = juegoEscaleraDeColor.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoEscaleraDeColor.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test07UnaInstanciaDeEscaleraDeColorDeUnaListaDeCartasConCincoCartasDelMismoColorYNoEnEscaleraSabeReconocerQueNoEsEscaleraDeColor() {

@@ -13,34 +13,34 @@ public class CambiadorDePuntosTest {
     public void test01UnTarotCambiadorDePuntosDeOchoPuntosConUnPuntajeBaseDeDosPuntosDevuelveEsePuntajeModificado() {
         // Arrange
         Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8);
-        int valorEsperado = 8;
+        Puntaje puntajeEsperado = new Puntaje(8, 2);
         // Act
-        Puntaje puntajeBase = new Puntaje(2, 1);
-        int valorObtenido = tarotCambiadorDePuntos.obtenerPuntaje(puntajeBase).calcularValor();
+        Puntaje puntajeBase = new Puntaje(2, 2);
+        Puntaje puntajeObtenido = tarotCambiadorDePuntos.obtenerPuntaje(puntajeBase);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test02UnTarotCambiadorDePuntosDeTresPuntosConUnPuntajeBaseDeTresPuntosDevuelveEsePuntajeModificado() {
         // Arrange
         Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(3);
-        int valorEsperado = 3;
+        Puntaje puntajeEsperado = new Puntaje(3, 1);
         // Act
         Puntaje puntajeBase = new Puntaje(3, 1);
-        int valorObtenido = tarotCambiadorDePuntos.obtenerPuntaje(puntajeBase).calcularValor();
+        Puntaje puntajeObtenido = tarotCambiadorDePuntos.obtenerPuntaje(puntajeBase);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test03UnTarotCambiadorDePuntosDeSietePuntosConUnPuntajeBaseDeCuatroPuntosDevuelveEsePuntajeModificado() {
         // Arrange
         Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(4);
-        int valorEsperado = 4;
+        Puntaje puntajeEsperado = new Puntaje(4, 1);
         // Act
         Puntaje puntajeBase = new Puntaje(7, 1);
-        int valorObtenido = tarotCambiadorDePuntos.obtenerPuntaje(puntajeBase).calcularValor();
+        Puntaje puntajeObtenido = tarotCambiadorDePuntos.obtenerPuntaje(puntajeBase);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test04UnTarotCambiadorDePuntosNoPuedeSerInstanciadoConPuntosNegativos() {

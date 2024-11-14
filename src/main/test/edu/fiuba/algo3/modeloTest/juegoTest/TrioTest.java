@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -121,11 +122,11 @@ public class TrioTest {
         Trio juegoTrio = new Trio();
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
                 new Carta(10, new Trebol()), new Carta(10, new Pica())));
-        int valorEsperado = 180;
+        Puntaje puntajeEsperado = new Puntaje(60, 3);
         // Act
-        int valorObtenido = juegoTrio.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoTrio.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test11UnaInstanciaDeTrioDeUnaListaDeCartasConCincoCartasDevuelveElValorCorrecto() {
@@ -134,22 +135,22 @@ public class TrioTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(2, new Diamante()),
                 new Carta(2, new Pica()), new Carta(2, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon())));
-        int valorEsperado = 135;
+        Puntaje puntajeEsperado = new Puntaje(45, 3);
         // Act
-        int valorObtenido = juegoTrio.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoTrio.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test12UnaInstanciaDeTrioSiUnaListaDeCartasVaciaNDevueleElValorBaseDeTrio() {
         // Arrange
         Trio juegoTrio = new Trio();
         ArrayList<Carta> cartas = new ArrayList<>();
-        int valorEsperado = 90;
+        Puntaje puntajeEsperado = new Puntaje(30, 3);
         // Act
-        int valorObtenido = juegoTrio.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoTrio.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test13UnaInstanciaDeTrioDeUnaListaDeCartasMasDeCincoCartasDevuelveElValorCorrecto() {
@@ -159,10 +160,10 @@ public class TrioTest {
                 new Carta(2, new Corazon()), new Carta(5, new Trebol()),
                 new Carta(5, new Diamante()), new Carta(5, new Corazon()),
                 new Carta(7, new Diamante()), new Carta(7, new Trebol())));
-        int valorEsperado = 186;
+        Puntaje puntajeEsperado = new Puntaje(62, 3);
         // Act
-        int valorObtenido = juegoTrio.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoTrio.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

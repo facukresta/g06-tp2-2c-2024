@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -188,62 +189,62 @@ public class JuegoTest {
     @Test
     public void test16UnJuegoDeUnaListaConCuatroCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        int valorEsperado = 784;
+        Puntaje puntajeEsperado = new Puntaje(112,7);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(13, new Pica()),
                 new Carta(13, new Corazon()), new Carta(13, new Diamante()),
                 new Carta(13, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        int valorObtenido = juego.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);;
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test17UnJuegoDeUnaListaConCincoCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        int valorEsperado = 1176;
+        Puntaje puntajeEsperado = new Puntaje(147,8);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Pica()),
                 new Carta(11, new Pica()), new Carta(12, new Pica()),
                 new Carta(13, new Pica()), new Carta(10, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        int valorObtenido = juego.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test18UnJuegoDeUnaListaConTresCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        int valorEsperado = 207;
+        Puntaje puntajeEsperado = new Puntaje(69,3);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(13, new Pica()),
                 new Carta(13, new Corazon()), new Carta(13, new Diamante())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        int valorObtenido = juego.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);;
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test19UnJuegoDeUnaListaConDosCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        int valorEsperado = 72;
+        Puntaje puntajeEsperado = new Puntaje(36,2);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(13, new Pica()),
                 new Carta(13, new Corazon())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        int valorObtenido = juego.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);;
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test20UnJuegoDeUnaListaConUnaCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        int valorEsperado = 18;
+        Puntaje puntajeEsperado = new Puntaje(18,1);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(13, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        int valorObtenido = juego.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);;
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

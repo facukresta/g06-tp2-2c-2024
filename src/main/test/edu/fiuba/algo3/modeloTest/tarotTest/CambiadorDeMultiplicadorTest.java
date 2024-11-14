@@ -13,34 +13,34 @@ public class CambiadorDeMultiplicadorTest {
     public void test01UnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorConUnPuntajeBaseDeDosMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
         Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8);
-        int valorEsperado = 24;
+        Puntaje puntajeEsperado = new Puntaje(3,8);
         // Act
         Puntaje puntajeBase = new Puntaje(3, 2);
-        int valorObtenido = tarotCambiadorDeMultiplicador.obtenerPuntaje(puntajeBase).calcularValor();
+        Puntaje puntajeObtenido = tarotCambiadorDeMultiplicador.obtenerPuntaje(puntajeBase);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test02UnTarotCambiadorDeMultiplicadorDeTresMultiplicadorConUnPuntajeBaseDeTresMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
         Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(3);
-        int valorEsperado = 12;
+        Puntaje puntajeEsperado = new Puntaje(4,3);
         // Act
         Puntaje puntajeBase = new Puntaje(4, 3);
-        int valorObtenido = tarotCambiadorDeMultiplicador.obtenerPuntaje(puntajeBase).calcularValor();
+        Puntaje puntajeObtenido = tarotCambiadorDeMultiplicador.obtenerPuntaje(puntajeBase);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test03UnTarotCambiadorDeMultiplicadorDeSieteMultiplicadorConUnPuntajeBaseDeCuatroMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
         Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(4);
-        int valorEsperado = 8;
+        Puntaje puntajeEsperado = new Puntaje(2,4);
         // Act
         Puntaje puntajeBase = new Puntaje(2, 7);
-        int valorObtenido = tarotCambiadorDeMultiplicador.obtenerPuntaje(puntajeBase).calcularValor();
+        Puntaje puntajeObtenido = tarotCambiadorDeMultiplicador.obtenerPuntaje(puntajeBase);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test04UnTarotCambiadorDeMultiplicadorNoPuedeSerInstanciadoConMultiplicadorNegativos() {

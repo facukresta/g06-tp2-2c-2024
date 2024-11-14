@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -119,11 +120,11 @@ public class ParTest {
         Par juegoPar = new Par();
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
                 new Carta(10, new Trebol())));
-        int valorEsperado = 60;
+        Puntaje puntajeEsperado = new Puntaje(30,2);
         // Act
-        int valorObtenido = juegoPar.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoPar.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test11UnaInstanciaDeParDeUnaListaDeCartasConCincoCartasDevuelveElValorCorrecto() {
@@ -132,22 +133,22 @@ public class ParTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(2, new Diamante()),
                 new Carta(2, new Pica()), new Carta(3, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon())));
-        int valorEsperado = 52;
+        Puntaje puntajeEsperado = new Puntaje(26,2);
         // Act
-        int valorObtenido = juegoPar.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoPar.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test12UnaInstanciaDeParSiUnaListaDeCartasVaciaNDevueleElValorBaseDePar() {
         // Arrange
         Par juegoPar = new Par();
         ArrayList<Carta> cartas = new ArrayList<>();
-        int valorEsperado = 20;
+        Puntaje puntajeEsperado = new Puntaje(10,2);
         // Act
-        int valorObtenido = juegoPar.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoPar.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test13UnaInstanciaDeParDeUnaListaDeCartasMasDeCincoCartasDevuelveElValorCorrecto() {
@@ -157,10 +158,10 @@ public class ParTest {
                 new Carta(2, new Corazon()), new Carta(3, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon()),
                 new Carta(7, new Diamante()), new Carta(7, new Trebol())));
-        int valorEsperado = 78;
+        Puntaje puntajeEsperado = new Puntaje(39,2);
         // Act
-        int valorObtenido = juegoPar.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoPar.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

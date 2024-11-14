@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
+import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -134,11 +135,11 @@ public class DobleParTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
                 new Carta(10, new Trebol()), new Carta(10, new Pica()),
                 new Carta(10, new Diamante())));
-        int valorEsperado = 120;
+        Puntaje puntajeEsperado = new Puntaje(60, 2);
         // Act
-        int valorObtenido = juegoDoblePar.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoDoblePar.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test12UnaInstanciaDeDobleParDeUnaListaDeCartasConCincoCartasDevuelveElValorCorrecto() {
@@ -147,22 +148,22 @@ public class DobleParTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(2, new Diamante()),
                 new Carta(2, new Pica()), new Carta(3, new Corazon()),
                 new Carta(3, new Trebol()), new Carta(5, new Corazon())));
-        int valorEsperado = 70;
+        Puntaje puntajeEsperado = new Puntaje(35, 2);
         // Act
-        int valorObtenido = juegoDoblePar.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoDoblePar.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test13UnaInstanciaDeDobleParSiUnaListaDeCartasVaciaNDevueleElValorBaseDeDoblePar() {
         // Arrange
         DoblePar juegoDoblePar = new DoblePar();
         ArrayList<Carta> cartas = new ArrayList<>();
-        int valorEsperado = 40;
+        Puntaje puntajeEsperado = new Puntaje(20, 2);
         // Act
-        int valorObtenido = juegoDoblePar.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoDoblePar.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test14UnaInstanciaDeDobleParDeUnaListaDeCartasMasDeCincoCartasDevuelveElValorCorrecto() {
@@ -172,10 +173,10 @@ public class DobleParTest {
                 new Carta(1, new Diamante()), new Carta(1, new Pica()),
                 new Carta(7, new Pica()), new Carta(7, new Corazon()),
                 new Carta(7, new Diamante()), new Carta(7, new Trebol())));
-        int valorEsperado = 102;
+        Puntaje puntajeEsperado = new Puntaje(51, 2);
         // Act
-        int valorObtenido = juegoDoblePar.puntuarMano(cartas).calcularValor();
+        Puntaje puntajeObtenido = juegoDoblePar.puntuarMano(cartas);
         // Assert
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }
