@@ -160,7 +160,7 @@ public class TrioTest {
                 new Carta(2, new Corazon()), new Carta(5, new Trebol()),
                 new Carta(5, new Diamante()), new Carta(5, new Corazon()),
                 new Carta(7, new Diamante()), new Carta(7, new Trebol())));
-        Puntaje puntajeEsperado = new Puntaje(62, 3);
+        Puntaje puntajeEsperado = new Puntaje(71, 3);
         // Act
         Puntaje puntajeObtenido = juegoTrio.puntuarMano(cartas);
         // Assert

@@ -73,7 +73,7 @@ public class CartaAltaTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
                 new Carta(2, new Corazon()), new Carta(3, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon())));
-        Puntaje valorEsperado = new Puntaje(20, 1);
+        Puntaje valorEsperado = new Puntaje(29, 1);
         // Act
         Puntaje valorObtenido = juegoCartaAlta.puntuarMano(cartas);
         // Assert
@@ -98,7 +98,7 @@ public class CartaAltaTest {
                 new Carta(2, new Corazon()), new Carta(3, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon()),
                 new Carta(6, new Corazon()), new Carta(7, new Corazon())));
-        Puntaje valorEsperado = new Puntaje(33, 1);
+        Puntaje valorEsperado = new Puntaje(42, 1);
         // Act
         Puntaje valorObtenido = juegoCartaAlta.puntuarMano(cartas);
         // Assert

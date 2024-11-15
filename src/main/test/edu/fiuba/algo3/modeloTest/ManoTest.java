@@ -176,7 +176,7 @@ public class ManoTest {
     public void test13AlJugarUnaManoConCincoCartasDevuelveElValorDelPuntajeDeLaMano() {
         // Arrange
         Mano mano = new Mano(8);
-        Puntaje puntajeEsperado = new Puntaje(30,1);
+        Puntaje puntajeEsperado = new Puntaje(39,1);
         mano.agregarCarta(new Carta(5, new Trebol()));
         mano.agregarCarta(new Carta(7, new Diamante()));
         mano.agregarCarta(new Carta(3, new Corazon()));

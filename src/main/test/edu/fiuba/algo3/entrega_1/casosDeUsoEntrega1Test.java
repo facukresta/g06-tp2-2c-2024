@@ -60,7 +60,7 @@ public class casosDeUsoEntrega1Test {
         for (int i = 1; i <= 8; i++) {
             mano.agregarCarta(new Carta(i, new Trebol()));
         }
-        Puntaje puntajeEsperado = new Puntaje(115, 8);
+        Puntaje puntajeEsperado = new Puntaje(124, 8);
         for (int i = 1; i <= 5; i++) {
             mano.elegirCarta(new Carta(i, new Trebol()));
         }

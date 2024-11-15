@@ -189,7 +189,7 @@ public class JuegoTest {
     @Test
     public void test16UnJuegoDeUnaListaConCuatroCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        Puntaje puntajeEsperado = new Puntaje(112,7);
+        Puntaje puntajeEsperado = new Puntaje(100,7);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(13, new Pica()),
                 new Carta(13, new Corazon()), new Carta(13, new Diamante()),
                 new Carta(13, new Trebol())));
@@ -202,7 +202,7 @@ public class JuegoTest {
     @Test
     public void test17UnJuegoDeUnaListaConCincoCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        Puntaje puntajeEsperado = new Puntaje(147,8);
+        Puntaje puntajeEsperado = new Puntaje(150,8);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Pica()),
                 new Carta(11, new Pica()), new Carta(12, new Pica()),
                 new Carta(13, new Pica()), new Carta(10, new Pica())));
@@ -215,7 +215,7 @@ public class JuegoTest {
     @Test
     public void test18UnJuegoDeUnaListaConTresCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        Puntaje puntajeEsperado = new Puntaje(69,3);
+        Puntaje puntajeEsperado = new Puntaje(60,3);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(13, new Pica()),
                 new Carta(13, new Corazon()), new Carta(13, new Diamante())));
         // Act
@@ -227,7 +227,7 @@ public class JuegoTest {
     @Test
     public void test19UnJuegoDeUnaListaConDosCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        Puntaje puntajeEsperado = new Puntaje(36,2);
+        Puntaje puntajeEsperado = new Puntaje(30,2);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(13, new Pica()),
                 new Carta(13, new Corazon())));
         // Act
@@ -239,7 +239,7 @@ public class JuegoTest {
     @Test
     public void test20UnJuegoDeUnaListaConUnaCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
-        Puntaje puntajeEsperado = new Puntaje(18,1);
+        Puntaje puntajeEsperado = new Puntaje(15,1);
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(13, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);

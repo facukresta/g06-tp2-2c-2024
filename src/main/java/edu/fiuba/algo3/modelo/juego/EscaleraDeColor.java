@@ -26,10 +26,10 @@ public class EscaleraDeColor extends Juego{
                 return false;
             }
         }
-        Collections.sort(cartas, Comparator.comparingInt(Carta::obtenerValor));
+        Collections.sort(cartas, Comparator.comparingInt(Carta::obtenerNumero));
         for (int i = 1; i < cartas.size(); i++) {
-            int valorActual = cartas.get(i).obtenerValor();
-            int valorAnterior = cartas.get(i - 1).obtenerValor();
+            int valorActual = cartas.get(i).obtenerNumero();
+            int valorAnterior = cartas.get(i - 1).obtenerNumero();
             if (valorActual != valorAnterior + 1) {
                 return false;
             }

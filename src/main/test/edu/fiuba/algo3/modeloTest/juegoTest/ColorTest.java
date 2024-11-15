@@ -66,7 +66,7 @@ public class ColorTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Pica()),
                 new Carta(11, new Pica()), new Carta(12, new Pica()),
                 new Carta(13, new Pica()), new Carta(1, new Pica())));
-        Puntaje puntajeEsperado = new Puntaje(82,4);
+        Puntaje puntajeEsperado = new Puntaje(85,4);
         // Act
         Puntaje puntajeObtenido = juegoColor.puntuarMano(cartas);
         // Assert

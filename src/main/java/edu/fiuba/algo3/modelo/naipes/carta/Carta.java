@@ -47,7 +47,7 @@ public class Carta {
         return this.palo.esDeEstePalo(carta.obtenerPalo());
     }
 
-    private int obtenerNumero() {
+    public int obtenerNumero() {
         return this.numero;
     }
 

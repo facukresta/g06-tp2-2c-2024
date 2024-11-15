@@ -26,10 +26,10 @@ public class EscaleraReal extends Juego{
                 return false;
             }
         }
-        Collections.sort(cartas, Comparator.comparingInt(Carta::obtenerValor));
+        Collections.sort(cartas, Comparator.comparingInt(Carta::obtenerNumero));
         int[] secuenciaEsperada = {1, 10, 11, 12, 13};
         for (int i = 0; i < cartas.size(); i++) {
-            if (cartas.get(i).obtenerValor() != secuenciaEsperada[i]) {
+            if (cartas.get(i).obtenerNumero() != secuenciaEsperada[i]) {
                 return false;
             }
         }

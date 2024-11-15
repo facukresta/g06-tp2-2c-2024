@@ -22,7 +22,7 @@ public class Trio extends Juego {
         }
         Map<Integer, Integer> frecuenciaValores = new HashMap<>();
         for (Carta carta : cartas) {
-            int valor = carta.obtenerValor();
+            int valor = carta.obtenerNumero();
             frecuenciaValores.put(valor, frecuenciaValores.getOrDefault(valor, 0) + 1);
         }
         for (int frecuencia : frecuenciaValores.values()) {

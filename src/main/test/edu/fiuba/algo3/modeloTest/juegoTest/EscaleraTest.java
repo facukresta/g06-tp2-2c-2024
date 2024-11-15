@@ -66,7 +66,7 @@ public class EscaleraTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Pica()),
                 new Carta(11, new Pica()), new Carta(12, new Pica()),
                 new Carta(13, new Pica()), new Carta(9, new Pica())));
-        Puntaje puntajeEsperado = new Puntaje(85, 4);
+        Puntaje puntajeEsperado = new Puntaje(79, 4);
         // Act
         Puntaje puntajeObtenido = juegoEscalera.puntuarMano(cartas);
         // Assert

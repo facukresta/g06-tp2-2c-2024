@@ -139,7 +139,7 @@ public class PokerTest {
                 new Carta(2, new Corazon()), new Carta(5, new Trebol()),
                 new Carta(5, new Diamante()), new Carta(5, new Corazon()),
                 new Carta(5, new Pica()), new Carta(7, new Trebol())));
-        Puntaje puntajeEsperado = new Puntaje(90,7);
+        Puntaje puntajeEsperado = new Puntaje(99,7);
         // Act
         Puntaje puntajeObtenido = juegoPoker.puntuarMano(cartas);
         // Assert

@@ -66,7 +66,7 @@ public class EscaleraDeColorTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Pica()),
                 new Carta(11, new Pica()), new Carta(12, new Pica()),
                 new Carta(13, new Pica()), new Carta(9, new Pica())));
-        Puntaje puntajeEsperado = new Puntaje(155,8);
+        Puntaje puntajeEsperado = new Puntaje(149,8);
         // Act
         Puntaje puntajeObtenido = juegoEscaleraDeColor.puntuarMano(cartas);
         // Assert

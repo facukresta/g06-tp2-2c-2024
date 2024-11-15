@@ -173,7 +173,7 @@ public class DobleParTest {
                 new Carta(1, new Diamante()), new Carta(1, new Pica()),
                 new Carta(7, new Pica()), new Carta(7, new Corazon()),
                 new Carta(7, new Diamante()), new Carta(7, new Trebol())));
-        Puntaje puntajeEsperado = new Puntaje(51, 2);
+        Puntaje puntajeEsperado = new Puntaje(78, 2);
         // Act
         Puntaje puntajeObtenido = juegoDoblePar.puntuarMano(cartas);
         // Assert

@@ -158,7 +158,7 @@ public class ParTest {
                 new Carta(2, new Corazon()), new Carta(3, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon()),
                 new Carta(7, new Diamante()), new Carta(7, new Trebol())));
-        Puntaje puntajeEsperado = new Puntaje(39,2);
+        Puntaje puntajeEsperado = new Puntaje(48,2);
         // Act
         Puntaje puntajeObtenido = juegoPar.puntuarMano(cartas);
         // Assert
