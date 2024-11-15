@@ -1,0 +1,15 @@
+@startuml Inicializacion8CartasTrebol.puml
+
+TestCase -> "m:Mano" as mano **: new Mano(8)
+
+TestCase -> "cartas:ArrayList" as cartas **: new ArrayList<Carta>
+
+loop para i<=8
+TestCase -> "c:Carta" as carta **: new Carta(i, new Trebol())
+carta --> TestCase : c
+TestCase -> cartas : add(c)
+end
+
+TestCase -> mano : agregarCartas(cartas)
+
+@enduml

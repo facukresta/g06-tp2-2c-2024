@@ -78,13 +78,11 @@ public class casosDeUsoEntrega1Test {
         mano.elegirCarta(new Carta(2, new Trebol()));
         mano.elegirCarta(new Carta(2, new Corazon()));
         mano.elegirCarta(new Carta(2, new Diamante()));
-        Puntaje puntajeEsperado = new Puntaje(36, 3);
+        Puntaje puntajeMaximo = mano.jugarMano();
         // Act
-        Puntaje puntajeJuegoTrio = new Puntaje(30, 3);
-        Puntaje puntajeCartasSuma = new Puntaje(6,2);
-        puntajeJuegoTrio.sumarPuntos(puntajeCartasSuma);
+        ArrayList<Puntaje> puntajesSeparados = new ArrayList<>(List.of(new Puntaje(30, 3), new Puntaje(6,2)));
         // Assert
-        assertFalse(puntajeJuegoTrio.tenesMismoPuntaje(puntajeEsperado));
+        assertFalse(puntajeMaximo.esMenorAPuntajes(puntajesSeparados));
     }
     //Verificar que al modificar una carta al utilizar un tarot que cambia sus puntos por 10, se aplique el puntaje correcto en el mazo.
     @Test
@@ -92,11 +90,9 @@ public class casosDeUsoEntrega1Test {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(44, 3);
         Mano mano = new Mano(8);
-        mano.agregarCartas(new ArrayList<>(List.of(new Carta(2, new Corazon()), new Carta(2, new Diamante()))));
-        Carta cartaModificada = new Carta(2, new Trebol());
+        mano.agregarCartas(new ArrayList<>(List.of(new Carta(2, new Corazon()), new Carta(2, new Diamante()),  new Carta(2, new Trebol()))));
         Tarot tarot = new CambiadorDePuntos(10);
-        cartaModificada.aplicarModificador(tarot);
-        mano.agregarCarta(cartaModificada);
+        mano.modificarCarta(new Carta(2, new Trebol()), tarot);
         mano.elegirCarta(new Carta(2, new Trebol()));
         mano.elegirCarta(new Carta(2, new Corazon()));
         mano.elegirCarta(new Carta(2, new Diamante()));
@@ -111,11 +107,9 @@ public class casosDeUsoEntrega1Test {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(36, 9);
         Mano mano = new Mano(8);
-        mano.agregarCartas(new ArrayList<>(List.of(new Carta(2, new Corazon()), new Carta(2, new Diamante()))));
-        Carta cartaModificada = new Carta(2, new Trebol());
+        mano.agregarCartas(new ArrayList<>(List.of(new Carta(2, new Corazon()), new Carta(2, new Diamante()), new Carta(2, new Trebol()))));
         Tarot tarot = new CambiadorDeMultiplicador(6);
-        cartaModificada.aplicarModificador(tarot);
-        mano.agregarCarta(cartaModificada);
+        mano.modificarCarta(new Carta(2, new Trebol()), tarot);
         mano.elegirCarta(new Carta(2, new Trebol()));
         mano.elegirCarta(new Carta(2, new Corazon()));
         mano.elegirCarta(new Carta(2, new Diamante()));

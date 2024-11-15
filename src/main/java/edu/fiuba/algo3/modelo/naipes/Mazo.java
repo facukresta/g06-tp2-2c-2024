@@ -26,6 +26,12 @@ public class Mazo {
         }
     }
 
+    public void agregarCarta(Carta carta) {
+        this.cartas.add(carta);
+    }
+
+
+
     public ArrayList<Carta> repartirCartas(int cantidad) {
         if (cantidad > this.cartas.size()) {
             throw new CartasInsuficientesException();

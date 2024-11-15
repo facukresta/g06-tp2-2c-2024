@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.naipes;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
+import edu.fiuba.algo3.modelo.tarot.Tarot;
 
 import java.util.ArrayList;
 
@@ -89,6 +90,11 @@ public class Mano {
             }
         }
         throw new CartaNoEnManoException();
+    }
+
+    public void modificarCarta(Carta carta, Tarot tarot){
+        Carta cartaAModificar = obtenerCarta(carta);
+        cartaAModificar.aplicarModificador(tarot);
     }
 }
 
