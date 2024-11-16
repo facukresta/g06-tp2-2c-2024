@@ -1,12 +1,11 @@
 package edu.fiuba.algo3.modeloTest;
 
+import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -189,6 +188,100 @@ public class ManoTest {
         mano.elegirCarta(new Carta(9, new Trebol()));
         // Act
         Puntaje puntajeObtenido = mano.jugarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test14AlJugarUnaManoConDosCartasYUnComodinDeSumaMultiplicadorDevuelveElValorDelPuntajeDeLaManoMasEseMultiplicador() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin = new SumaMultiplicador(4);
+        mano.agregarComodin(comodin);
+        Puntaje puntajeEsperado = new Puntaje(17,4);
+        mano.agregarCarta(new Carta(5, new Trebol()));
+        mano.agregarCarta(new Carta(7, new Diamante()));
+        mano.elegirCarta(new Carta(5, new Trebol()));
+        mano.elegirCarta(new Carta(7, new Diamante()));
+        // Act
+        Puntaje puntajeObtenido = mano.jugarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test15AlJugarUnaManoConTresCartasYDosComodinDeSumaMultiplicadorDevuelveElValorDelPuntajeDeLaManoMasEsosMultiplicador() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin1 = new SumaMultiplicador(4);
+        Comodin comodin2 = new SumaMultiplicador(12);
+        mano.agregarComodin(comodin1);
+        Puntaje puntajeEsperado = new Puntaje(36,19);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.agregarComodin(comodin2);
+        // Act
+        Puntaje puntajeObtenido = mano.jugarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test16AlJugarUnaManoConTresCartasYUnComodinDeSumaMultiplicadorYOtroDeSumaMultiplicadorJuegoDevuelveElValorDelPuntajeDeLaManoMasEsosMultiplicador() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin1 = new SumaMultiplicador(4);
+        Comodin comodin2 = new SumaMultiplicadorJuego(12, new Trio());
+        mano.agregarComodin(comodin1);
+        Puntaje puntajeEsperado = new Puntaje(36,19);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.agregarComodin(comodin2);
+        // Act
+        Puntaje puntajeObtenido = mano.jugarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test17AlDescartaUnaManoConTresCartasYUnComodinDeSumaPuntosDescarteDevuelveElValorDelPuntajeDelMultiplicador() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin = new SumaPuntosDescarte(4);
+        mano.agregarComodin(comodin);
+        Puntaje puntajeEsperado = new Puntaje(4,1);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        // Act
+        Puntaje puntajeObtenido = mano.descartarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test18AlJugarUnaManoConCuatroCartasYDosComodinesDeSumaPuntosDescarteDevuelveElValorDelPuntajeDeEseMultiplicador() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin1 = new SumaPuntosDescarte(4);
+        Comodin comodin2 = new SumaPuntosDescarte(12);
+        mano.agregarComodin(comodin1);
+        Puntaje puntajeEsperado = new Puntaje(16,1);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.agregarComodin(comodin2);
+        // Act
+        Puntaje puntajeObtenido = mano.descartarMano();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }

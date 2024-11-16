@@ -34,18 +34,20 @@ public class Puntaje {
     }
 
     public void sumar(Puntaje puntajeASumar) {
-        this.puntos += puntajeASumar.obtenerPuntos();
-        if (puntajeASumar.obtenerMultiplicador() != 1) {
-            this.multiplicador += puntajeASumar.obtenerMultiplicador();
-        }
+        this.sumarPuntos(puntajeASumar);
+        this.sumarMultiplicador(puntajeASumar);
     }
 
-    public void sumarPuntos(Puntaje puntaje) {
+    private void sumarPuntos(Puntaje puntaje) {
         this.puntos += puntaje.obtenerPuntos();
     }
 
-    public void sumarMultiplicador(Puntaje puntaje) {
-        this.multiplicador += puntaje.obtenerMultiplicador();
+    private void sumarMultiplicador(Puntaje puntaje) {
+        if (puntaje.obtenerMultiplicador() != 1 && this.multiplicador != 1) {
+            this.multiplicador += puntaje.obtenerMultiplicador();
+        } else if (puntaje.obtenerMultiplicador() != 1 || this.multiplicador != 1) {
+            this.multiplicador += puntaje.obtenerMultiplicador()-1;
+        }
     }
 
     public boolean esMayor(Puntaje puntaje) {

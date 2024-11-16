@@ -32,10 +32,10 @@ public class PuntajeTest {
     public void test03AUnaInstaciaDePuntajeSeLePuedeSumarPuntosOtraInstaciaDePuntaje() {
         // Arrange
         Puntaje puntajeBase = new Puntaje(100, 1);
-        Puntaje puntajeASumar = new Puntaje(50, 2);
+        Puntaje puntajeASumar = new Puntaje(50, 1);
         Puntaje puntajeEsperado = new Puntaje(150, 1);
         //Act
-        puntajeBase.sumarPuntos(puntajeASumar);
+        puntajeBase.sumar(puntajeASumar);
         //Assert
         assertTrue(puntajeBase.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -43,28 +43,28 @@ public class PuntajeTest {
     public void test04UnPuntajeNoPuedeTenerPuntosNegativosAlInstanciarse() {
         //Arrange /Act / Assert
         assertThrows(PuntosInvalidosException.class, () -> {
-            Puntaje puntaje = new Puntaje(-1, 1);
+            new Puntaje(-1, 1);
         });
     }
     @Test
     public void test05UnPuntajePuedeTenerPuntosIgualA0AlInstanciarse() {
         //Arrange /Act / Assert
         assertDoesNotThrow(() -> {
-            Puntaje puntaje = new Puntaje(0, 1);
+            new Puntaje(0, 1);
         });
     }
     @Test
     public void test06UnPuntajeNoPuedeTenerMultiplicadorNegativosAlInstanciarse() {
         //Arrange /Act / Assert
         assertThrows(MultiplicadorInvalidosException.class, () -> {
-            Puntaje puntaje = new Puntaje(1, -1);
+           new Puntaje(1, -1);
         });
     }
     @Test
     public void test07UnPuntajeNoPuedeTenerMultiplicadorIgualA0AlInstanciarse() {
         //Arrange /Act / Assert
         assertThrows(MultiplicadorInvalidosException.class, () -> {
-            Puntaje puntaje = new Puntaje(1, 0);
+            new Puntaje(1, 0);
         });
     }
     @Test
@@ -72,9 +72,9 @@ public class PuntajeTest {
         // Arrange
         Puntaje puntajeBase = new Puntaje(1, 20);
         Puntaje puntajeASumar = new Puntaje(1, 30);
-        Puntaje puntajeEsperado = new Puntaje(1, 50);
+        Puntaje puntajeEsperado = new Puntaje(2, 50);
         //Act
-        puntajeBase.sumarMultiplicador(puntajeASumar);
+        puntajeBase.sumar(puntajeASumar);
         //Assert
         assertTrue(puntajeBase.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -84,7 +84,7 @@ public class PuntajeTest {
         // Arrange
         Puntaje puntajeBase = new Puntaje(5, 1);
         Puntaje puntajeASumar = new Puntaje(3, 2);
-        Puntaje puntajeEsperado = new Puntaje(8, 3);
+        Puntaje puntajeEsperado = new Puntaje(8, 2);
         //Act
         puntajeBase.sumar(puntajeASumar);
         //Assert

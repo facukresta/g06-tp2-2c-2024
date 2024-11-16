@@ -11,10 +11,10 @@ public abstract class Juego {
     protected Tarot modificador = new SinTarot();
 
     public static Juego chequearJuego(ArrayList<Carta> cartas) {
-        ArrayList<Juego> juegos = new ArrayList<>(List.of(new Par(), new DoblePar(),
+        ArrayList<Juego> juegos = new ArrayList<>(List.of(new CartaAlta(), new Par(), new DoblePar(),
                 new Trio(), new Escalera(), new Color(), new FullHouse(),
                 new Poker(), new EscaleraDeColor(), new EscaleraReal()));
-        Juego juegoSeleccionado = new CartaAlta();
+        Juego juegoSeleccionado = new SinJuego();
         for (Juego juegoActual : juegos) {
             if (juegoActual.sosJuego(cartas)) {
                 Puntaje puntajeJuegoActual = juegoActual.puntuarMano(cartas);

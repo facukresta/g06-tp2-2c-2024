@@ -17,12 +17,11 @@ public class Carta {
             throw new NumeroInvalidoException();
         }
         this.numero = numero;
-        HashMap<Integer, Integer> valores = new HashMap<>();
-        valores.put(1, 10);
-        valores.put(11, 10);
-        valores.put(12, 10);
-        valores.put(13, 10);
-        this.valor = valores.getOrDefault(numero, numero);
+        if (numero == 1 || numero >= 10) {
+            this.valor = 10;
+        } else {
+            this.valor = numero;
+        }
         this.palo = palo;
         this.modificador = new SinTarot();
     }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class EscaleraDeColor extends Juego{
+public class EscaleraDeColor extends Juego {
     public Puntaje puntuarMano(ArrayList<Carta> cartas) {
         Puntaje puntaje = this.modificador.obtenerPuntaje(new Puntaje(100, 8));
         for (Carta carta : cartas) {

@@ -3,6 +3,7 @@ import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
+import edu.fiuba.algo3.modelo.comodin.Comodin;
 
 import java.util.ArrayList;
 
@@ -12,12 +13,18 @@ public class Mano {
     protected int maxCartasSeleccionadas;
     private ArrayList<Carta> cartasSeleccionadas;
     private Juego juego;
+    private ArrayList<Comodin> comodines;
 
     public Mano(int cantidadDeCartas) {
         this.cartasSeleccionadas = new ArrayList<Carta>();
         this.cartas = new ArrayList<Carta>();
+        this.comodines = new ArrayList<Comodin>();
         this.maxCartas = cantidadDeCartas;
         this.maxCartasSeleccionadas = 5;
+    }
+
+    public void agregarComodin(Comodin comodin) {
+        comodines.add(comodin);
     }
 
     public void elegirCarta(Carta carta) {
@@ -33,12 +40,20 @@ public class Mano {
         this.juego = Juego.chequearJuego(this.cartasSeleccionadas);
     }
 
-    public void descartarMano() {
+    public Puntaje descartarMano() {
         if (this.cartasSeleccionadas.isEmpty()) {
             throw new SinCartasSeleccionadasException();
         }
-        this.quitarCartas(cartasSeleccionadas);
-        this.cartasSeleccionadas.clear();
+        for (int i = this.cartasSeleccionadas.size() - 1; i >= 0; i--) {
+            Carta carta = this.cartasSeleccionadas.get(i);
+            this.elegirCarta(carta);
+            this.quitarCarta(carta);
+        }
+        Puntaje puntaje = this.juego.puntuarMano(this.cartasSeleccionadas);
+        for (Comodin comodin : comodines) {
+            comodin.aplicarModificador(puntaje, this.juego);
+        }
+        return puntaje;
     }
 
     public Puntaje jugarMano(){
@@ -46,6 +61,9 @@ public class Mano {
             throw new SinCartasSeleccionadasException();
         }
         Puntaje puntaje = this.juego.puntuarMano(this.cartasSeleccionadas);
+        for (Comodin comodin : comodines) {
+            comodin.aplicarModificador(puntaje, this.juego);
+        }
         this.descartarMano();
         return puntaje;
     }
@@ -64,7 +82,6 @@ public class Mano {
         for (Carta carta : cartas) {
             this.cartas.add(carta);
         }
-
     }
 
     public void quitarCarta(Carta carta) {
