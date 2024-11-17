@@ -9,8 +9,8 @@ public class Mazo {
     private ArrayList<Carta> cartasDescartadas;
 
     public Mazo() {
-        this.cartas = new ArrayList<Carta>();
-        this.cartasDescartadas = new ArrayList<Carta>();
+        this.cartas = new ArrayList<>();
+        this.cartasDescartadas = new ArrayList<>();
         for(int i = 1; i <= 13; i++) {
             this.cartas.add(new Carta(i, new Corazon()));
         }

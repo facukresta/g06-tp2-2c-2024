@@ -10,9 +10,12 @@ import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.lang.Long;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -127,67 +130,69 @@ public class casosDeUsoEntrega2Test {
         assertTrue(puntajeEsperado2.tenesMismoPuntaje(puntajeObtenido2));
     }
     // Verificar la lectura y posterior conversión a unidades del modelo de dominio del JSON
-//    @Test
-//    public void test06(){
-//        HashMap<String, Palo> mapaDePalos = new HashMap<String, Palo>();
-//        mapaDePalos.put("Trebol", new Trebol());
-//        mapaDePalos.put("Diamante", new Diamante());
-//        mapaDePalos.put("Pica", new Pica());
-//        mapaDePalos.put("Corazon", new Corazon());
-//
-//        HashMap<String, Integer> mapaDeNumeros = new HashMap<String, Integer>();
-//        mapaDeNumeros.put("As", 1);
-//        mapaDeNumeros.put("Rey", 13);
-//        mapaDeNumeros.put("Reina", 12);
-//        mapaDeNumeros.put("Jota", 11);
-//        mapaDeNumeros.put("2", 2);
-//        mapaDeNumeros.put("3", 3);
-//        mapaDeNumeros.put("4", 4);
-//        mapaDeNumeros.put("5", 5);
-//        mapaDeNumeros.put("6", 6);
-//        mapaDeNumeros.put("7", 7);
-//        mapaDeNumeros.put("8", 8);
-//        mapaDeNumeros.put("9", 9);
-//
-//        Mazo mazo1 = new Mazo();
-//
-//        try {
-//            // Leer el archivo JSON
-////            ClassLoader classLoader = casosDeUsoEntrega2Test.class.getClassLoader();
-////            InputStreamReader reader = new InputStreamReader(
-////                    classLoader.getResourceAsStream("mazo.json")
-//            InputStream inputStream = classLoader.getResourceAsStream("edu/fiuba/algo3/modelo/naipes/mazo.json");
-//            JSONObject jsonObject = (JSONObject) parser.parse(new InputStreamReader(inputStream));
-//
-//            JSONParser parser = new JSONParser();
-//            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("edu/fiuba/algo3/modelo/naipes/mazo.json"));
-//
-////            );
-////            JSONParser parser = new JSONParser();
-////            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("mazo.json"));
-//
-//            // Extraer el arreglo de cartas
-//            JSONArray mazo = (JSONArray) jsonObject.get("mazo");
-//            List<Carta> cartas = new ArrayList<>();
-//
-//            for (Object obj : mazo) {
-//                JSONObject cartaJson = (JSONObject) obj;
-//
-//                String nombre = (String) cartaJson.get("nombre");
-//                Palo palo = mapaDePalos.get((String) cartaJson.get("palo"));
-//                int numero = mapaDeNumeros.get((String) cartaJson.get("numero"));
-//                int puntos = ((Long) cartaJson.get("puntos")).intValue();
-//                int multiplicador = Integer.parseInt((String) cartaJson.get("multiplicador"));
-//
-//                mazo1.agregarCarta(new Carta(numero, palo));
-//            }
-//
-//            // Imprimir las cartas
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    @Test
+    public void test06() {
+        // Arrange
+        // Mapas para traducir palos y números desde el JSON
+        HashMap<String, Palo> mapaDePalos = new HashMap<>();
+        mapaDePalos.put("Trebol", new Trebol());
+        mapaDePalos.put("Diamantes", new Diamante());
+        mapaDePalos.put("Picas", new Pica());
+        mapaDePalos.put("Corazones", new Corazon());
+
+        HashMap<String, Integer> mapaDeNumeros = new HashMap<>();
+        mapaDeNumeros.put("As", 1);
+        mapaDeNumeros.put("Rey", 13);
+        mapaDeNumeros.put("Reina", 12);
+        mapaDeNumeros.put("Jota", 11);
+        mapaDeNumeros.put("2", 2);
+        mapaDeNumeros.put("3", 3);
+        mapaDeNumeros.put("4", 4);
+        mapaDeNumeros.put("5", 5);
+        mapaDeNumeros.put("6", 6);
+        mapaDeNumeros.put("7", 7);
+        mapaDeNumeros.put("8", 8);
+        mapaDeNumeros.put("9", 9);
+        mapaDeNumeros.put("10", 10);
+
+        Mazo mazo1 = new Mazo();
+        // Act
+        try {
+            // Leer el archivo JSON desde la carpeta resources
+            ClassLoader classLoader = this.getClass().getClassLoader();
+            InputStream inputStream = classLoader.getResourceAsStream("json/mazo.json");
+
+            if (inputStream == null) {
+                throw new FileNotFoundException("Archivo mazo.json no encontrado en src/test/resources/json");
+            }
+
+            // Parsear el JSON
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(new InputStreamReader(inputStream));
+            
+            // Extraer el arreglo de cartas
+            JSONArray mazo = (JSONArray) jsonObject.get("mazo");
+
+            for (Object obj : mazo) {
+                JSONObject cartaJson = (JSONObject) obj;
+
+                cartaJson.get("nombre");
+                String palo = (String) cartaJson.get("palo");
+                String numero = (String) cartaJson.get("numero");
+                cartaJson.get("puntos");
+                cartaJson.get("multiplicador");
+
+                // Crear y agregar la carta al mazo
+                mazo1.agregarCarta(new Carta(mapaDeNumeros.get(numero), mapaDePalos.get(palo)));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Assert
+    }
+
 //    // Planteo inicial de interfaz gráfica (mockups/dibujos), pantalla donde se muestra una ronda
 //    @Test
 //    public void test07() {
