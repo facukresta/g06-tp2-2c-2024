@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modeloTest.comodinTest;
 
+import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
@@ -13,7 +14,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test01AlAplicarUnComodinDeSumaMultiplciadorConJuegoCartaAltaEsteSumaElMultplicadorSiElJuegoEsCartaAlta(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(CartaAlta.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(CartaAlta.class));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -24,7 +25,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test02AlAplicarUnComodinDeSumaMultiplciadorConJuegoParEsteSumaElMultplicadorSiElJuegoEsPar(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(Par.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(Par.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -35,7 +36,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test03AlAplicarUnComodinDeSumaMultiplciadorConJuegoDobleParEsteSumaElMultplicadorSiElJuegoEsDoblePar(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(DoblePar.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(DoblePar.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -46,7 +47,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test04AlAplicarUnComodinDeSumaMultiplciadorConJuegoTrioEsteSumaElMultplicadorSiElJuegoEsTrio(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(Trio.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(Trio.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -57,7 +58,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test05AlAplicarUnComodinDeSumaMultiplciadorConJuegoEscaleraEsteSumaElMultplicadorSiElJuegoEsEscalera(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(Escalera.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(Escalera.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -69,7 +70,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test06AlAplicarUnComodinDeSumaMultiplciadorConJuegoColorEsteSumaElMultplicadorSiElJuegoEsColor(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(Color.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(Color.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -80,7 +81,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test07AlAplicarUnComodinDeSumaMultiplciadorConJuegoEscaleraDeColorEsteSumaElMultplicadorSiElJuegoEsEscaleraDeColor(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(EscaleraDeColor.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(EscaleraDeColor.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -91,7 +92,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test08AlAplicarUnComodinDeSumaMultiplciadorConJuegoEscaleraRealEsteSumaElMultplicadorSiElJuegoEsEscaleraReal(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(EscaleraReal.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(EscaleraReal.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -102,7 +103,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test09AlAplicarUnComodinDeSumaMultiplciadorConJuegoFullHouseEsteSumaElMultplicadorSiElJuegoEsFullHouse(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(FullHouse.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(FullHouse.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -113,7 +114,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test10AlAplicarUnComodinDeSumaMultiplciadorConJuegoPokerEsteSumaElMultplicadorSiElJuegoEsPoker(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(5, mock(Poker.class));
+        Comodin comodin = new SumaMultiplicador(5, mock(Poker.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -122,10 +123,10 @@ public class SumaMultiplicadorJuegoTest {
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
-    public void test11AlAplicarDosComodinesDeSumaMultiplicadorJuegoDeDistintosJuegosSeSumanCorrectamente(){
+    public void test11AlAplicarDosComodinesDeSumaMultiplicadorDeDistintosJuegosSeSumanCorrectamente(){
         // Arrange
-        Comodin comodin1 = new SumaMultiplicadorJuego(5, mock(CartaAlta.class));
-        Comodin comodin2 = new SumaMultiplicadorJuego(6, mock(DoblePar.class));
+        Comodin comodin1 = new SumaMultiplicador(5, mock(CartaAlta.class), new Aleatorio(1));
+        Comodin comodin2 = new SumaMultiplicador(6, mock(DoblePar.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 13);
         // Act
@@ -137,7 +138,7 @@ public class SumaMultiplicadorJuegoTest {
     @Test
     public void test11AlAplicarUnComodinDeUnJuegoQueNoEsElDelComodinElPuntajeNoSeVeMofificado(){
         // Arrange
-        Comodin comodin = new SumaMultiplicadorJuego(32130, mock(CartaAlta.class));
+        Comodin comodin = new SumaMultiplicador(32130, mock(CartaAlta.class), new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(220, 232);
         Puntaje puntajeEsperado = new Puntaje(220, 232);
         // Act

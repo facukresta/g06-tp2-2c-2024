@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modeloTest;
 
+import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.*;
@@ -195,7 +196,7 @@ public class ManoTest {
     public void test14AlJugarUnaManoConDosCartasYUnComodinDeSumaMultiplicadorDevuelveElValorDelPuntajeDeLaManoMasEseMultiplicador() {
         // Arrange
         Mano mano = new Mano(8);
-        Comodin comodin = new SumaMultiplicador(4);
+        Comodin comodin = new SumaMultiplicador(4, new Aleatorio(1));
         mano.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(17,4);
         mano.agregarCarta(new Carta(5, new Trebol()));
@@ -211,8 +212,8 @@ public class ManoTest {
     public void test15AlJugarUnaManoConTresCartasYDosComodinDeSumaMultiplicadorDevuelveElValorDelPuntajeDeLaManoMasEsosMultiplicador() {
         // Arrange
         Mano mano = new Mano(8);
-        Comodin comodin1 = new SumaMultiplicador(4);
-        Comodin comodin2 = new SumaMultiplicador(12);
+        Comodin comodin1 = new SumaMultiplicador(4, new Aleatorio(1));
+        Comodin comodin2 = new SumaMultiplicador(12, new Aleatorio(1));
         mano.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(36,19);
         mano.agregarCarta(new Carta(2, new Trebol()));
@@ -231,8 +232,8 @@ public class ManoTest {
     public void test16AlJugarUnaManoConTresCartasYUnComodinDeSumaMultiplicadorYOtroDeSumaMultiplicadorJuegoDevuelveElValorDelPuntajeDeLaManoMasEsosMultiplicador() {
         // Arrange
         Mano mano = new Mano(8);
-        Comodin comodin1 = new SumaMultiplicador(4);
-        Comodin comodin2 = new SumaMultiplicadorJuego(12, new Trio());
+        Comodin comodin1 = new SumaMultiplicador(4, new Aleatorio(1));
+        Comodin comodin2 = new SumaMultiplicador(12, new Trio(), new Aleatorio(1));
         mano.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(36,19);
         mano.agregarCarta(new Carta(2, new Trebol()));
@@ -251,7 +252,7 @@ public class ManoTest {
     public void test17AlDescartaUnaManoConTresCartasYUnComodinDeSumaPuntosDescarteDevuelveElValorDelPuntajeDelMultiplicador() {
         // Arrange
         Mano mano = new Mano(8);
-        Comodin comodin = new SumaPuntosDescarte(4);
+        Comodin comodin = new SumaPuntosDescarte(4, new Aleatorio(1));
         mano.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(4,1);
         mano.agregarCarta(new Carta(2, new Trebol()));
@@ -269,8 +270,8 @@ public class ManoTest {
     public void test18AlJugarUnaManoConCuatroCartasYDosComodinesDeSumaPuntosDescarteDevuelveElValorDelPuntajeDeEseMultiplicador() {
         // Arrange
         Mano mano = new Mano(8);
-        Comodin comodin1 = new SumaPuntosDescarte(4);
-        Comodin comodin2 = new SumaPuntosDescarte(12);
+        Comodin comodin1 = new SumaPuntosDescarte(4, new Aleatorio(1));
+        Comodin comodin2 = new SumaPuntosDescarte(12, new Aleatorio(1));
         mano.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(16,1);
         mano.agregarCarta(new Carta(2, new Trebol()));

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modeloTest.comodinTest;
 
+import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.comodin.Comodin;
 import edu.fiuba.algo3.modelo.comodin.SumaPuntosDescarte;
 import edu.fiuba.algo3.modelo.juego.Juego;
@@ -14,7 +15,7 @@ public class SumaPuntosDescarteTest {
     @Test
     public void test01AlAplicarUnComodinDeSumaPuntosDescarteEsteSumaLosPuntos(){
         // Arrange
-        Comodin comodin = new SumaPuntosDescarte(5);
+        Comodin comodin = new SumaPuntosDescarte(5, new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(5, 4);
         Puntaje puntajeEsperado = new Puntaje(10, 4);
         // Act
@@ -25,8 +26,8 @@ public class SumaPuntosDescarteTest {
     @Test
     public void test02AlAplicarDosComodinesDeSumaPuntosDescarteSeSumanCorrectamente(){
         // Arrange
-        Comodin comodin1 = new SumaPuntosDescarte(5);
-        Comodin comodin2 = new SumaPuntosDescarte(6);
+        Comodin comodin1 = new SumaPuntosDescarte(5, new Aleatorio(1));
+        Comodin comodin2 = new SumaPuntosDescarte(6, new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(4, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Mano {
     protected ArrayList<Carta> cartas;
-    protected int maxCartas;
-    protected int maxCartasSeleccionadas;
+    protected final int maxCartas;
+    protected final int maxCartasSeleccionadas;
     private ArrayList<Carta> cartasSeleccionadas;
     private Juego juego;
     private ArrayList<Comodin> comodines;

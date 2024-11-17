@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modeloTest.comodinTest;
 
+import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
@@ -12,7 +13,7 @@ public class SumaMultiplicadorTest {
     @Test
     public void test01AlAplicarUnComodinDeSumaMultiplciadorEsteSumaElMultplicador(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5);
+        Comodin comodin = new SumaMultiplicador(5, new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -23,8 +24,8 @@ public class SumaMultiplicadorTest {
     @Test
     public void test02AlAplicarDosComodinesDeSumaMultiplicadorSeSumanCorrectamente(){
         // Arrange
-        Comodin comodin1 = new SumaMultiplicador(5);
-        Comodin comodin2 = new SumaMultiplicador(6);
+        Comodin comodin1 = new SumaMultiplicador(5, new Aleatorio(1));
+        Comodin comodin2 = new SumaMultiplicador(6, new Aleatorio(1));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 13);
         // Act
