@@ -6,19 +6,19 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.juego.Juego;
 
 public class SumaMultiplicador extends Comodin {
-    public SumaMultiplicador(int cantidad, Juego juego, Aleatorio probabilidad) {
+    public SumaMultiplicador(double cantidad, Juego juego, Aleatorio probabilidad) {
         super(cantidad, probabilidad, juego);
     }
 
-    public SumaMultiplicador(int cantidad, Aleatorio probabilidad) {
+    public SumaMultiplicador(double cantidad, Aleatorio probabilidad) {
         super(cantidad, probabilidad, new SinJuego());
     }
 
-    public SumaMultiplicador(int cantidad, Juego juego) {
+    public SumaMultiplicador(double cantidad, Juego juego) {
         super(cantidad, new Aleatorio(1), juego);
     }
 
-    public SumaMultiplicador(int cantidad) {
+    public SumaMultiplicador(double cantidad) {
         super(cantidad, new Aleatorio(1), new SinJuego());
     }
 

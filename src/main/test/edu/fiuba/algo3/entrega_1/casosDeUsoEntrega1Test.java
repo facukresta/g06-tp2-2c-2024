@@ -18,9 +18,8 @@ public class casosDeUsoEntrega1Test {
     @Test
     public void test01UnJugadorTieneQueTenerCartasSuficientesParaArrancarElJuego() {
         //Arrange
-        Mazo mazo = new Mazo();
         Mano mano = new Mano(8);
-        mano.agregarCartas(mazo.repartirCartas(8));
+        mano.agregarCarta(new Carta(2, new Corazon()));
         //Act
         boolean tieneCartas = (mano.obtenerCantidadDeCartas() > 0);
         //Assert
@@ -30,9 +29,10 @@ public class casosDeUsoEntrega1Test {
     @Test
     public void test02AUnJugadorSeLeRepartenOchoCartasDeSuMazo() {
         //Arrange
-        Mazo mazo = new Mazo();
         Mano mano = new Mano(8);
-        mano.agregarCartas(mazo.repartirCartas(8));
+        mano.agregarCartas(new ArrayList<Carta>(List.of(new Carta(2, new Corazon()), new Carta(3, new Corazon()),
+                new Carta(4, new Corazon()),  new Carta(5, new Corazon()),  new Carta(6, new Corazon()),
+                new Carta(7, new Corazon()),  new Carta(8, new Corazon()),  new Carta(9, new Corazon()))));
         int cantidadDeCartasEsperadas = 8;
         //Act
         int cantidadDeCartasObtenidas = mano.obtenerCantidadDeCartas();

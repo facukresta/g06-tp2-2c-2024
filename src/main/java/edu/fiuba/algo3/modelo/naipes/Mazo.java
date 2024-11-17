@@ -11,26 +11,15 @@ public class Mazo {
     public Mazo() {
         this.cartas = new ArrayList<>();
         this.cartasDescartadas = new ArrayList<>();
-        for(int i = 1; i <= 13; i++) {
-            this.cartas.add(new Carta(i, new Corazon()));
-        }
-        for(int i = 1; i <= 13; i++) {
-            this.cartas.add(new Carta(i, new Pica()));
-        }
-        for(int i = 1; i <= 13; i++) {
-            this.cartas.add(new Carta(i, new Diamante()));
-        }
-
-        for(int i = 1; i <= 13; i++) {
-            this.cartas.add(new Carta(i, new Trebol()));
-        }
     }
 
     public void agregarCarta(Carta carta) {
         this.cartas.add(carta);
     }
 
-
+    public void agregarCartas(ArrayList<Carta> cartas) {
+        this.cartas.addAll(cartas);
+    }
 
     public ArrayList<Carta> repartirCartas(int cantidad) {
         if (cantidad > this.cartas.size()) {

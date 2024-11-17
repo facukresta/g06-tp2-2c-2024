@@ -4,11 +4,11 @@ import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
-public abstract class Comodin {
-    protected final int cantidad;
+public abstract class Comodin  implements Modificador {
+    protected final double cantidad;
     private final Aleatorio probabilidad;
     protected final Juego juego;
-    public Comodin(int cantidad, Aleatorio probabilidad, Juego juego) {
+    public Comodin(double cantidad, Aleatorio probabilidad, Juego juego) {
         if (cantidad <= 0) {
             throw new CantidadComodinInvalida();
         }
@@ -17,7 +17,7 @@ public abstract class Comodin {
         this.cantidad = cantidad;
     }
 
-    public boolean puedeAplicarse() {
+    protected boolean puedeAplicarse() {
         return probabilidad.sucede();
     }
 

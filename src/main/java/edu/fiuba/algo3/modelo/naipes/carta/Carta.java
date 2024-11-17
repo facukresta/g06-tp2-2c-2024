@@ -4,8 +4,6 @@ import edu.fiuba.algo3.modelo.tarot.SinTarot;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
-import java.util.HashMap;
-
 public class Carta {
     private int numero;
     private int valor;

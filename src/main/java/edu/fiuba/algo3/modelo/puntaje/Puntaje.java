@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Puntaje {
     private int puntos;
-    private int multiplicador;
+    private double multiplicador;
 
-    public Puntaje(int puntos, int multiplicador) {
+    public Puntaje(int puntos, double multiplicador) {
         if (puntos < 0) {
             throw new PuntosInvalidosException();
         }
@@ -21,11 +21,11 @@ public class Puntaje {
         return puntos;
     }
 
-    public int obtenerMultiplicador() {
+    public double obtenerMultiplicador() {
         return multiplicador;
     }
 
-    private int calcularPuntaje() {
+    private double calcularPuntaje() {
         return puntos * multiplicador;
     }
 
@@ -55,7 +55,7 @@ public class Puntaje {
     }
 
     public boolean esMenorAPuntajes(ArrayList<Puntaje> puntajes) {
-            int valor = 0;
+            double valor = 0;
             for (Puntaje puntaje : puntajes) {
                 valor += puntaje.calcularPuntaje();
             }

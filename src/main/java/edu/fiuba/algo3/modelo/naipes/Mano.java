@@ -1,10 +1,12 @@
 package edu.fiuba.algo3.modelo.naipes;
+import edu.fiuba.algo3.modelo.comodin.Modificador;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.comodin.Comodin;
 
+import java.lang.module.ModuleFinder;
 import java.util.ArrayList;
 
 public class Mano {
@@ -13,17 +15,17 @@ public class Mano {
     protected final int maxCartasSeleccionadas;
     private ArrayList<Carta> cartasSeleccionadas;
     private Juego juego;
-    private ArrayList<Comodin> comodines;
+    private ArrayList<Modificador> comodines;
 
     public Mano(int cantidadDeCartas) {
-        this.cartasSeleccionadas = new ArrayList<Carta>();
-        this.cartas = new ArrayList<Carta>();
-        this.comodines = new ArrayList<Comodin>();
+        this.cartasSeleccionadas = new ArrayList<>();
+        this.cartas = new ArrayList<>();
+        this.comodines = new ArrayList<>();
         this.maxCartas = cantidadDeCartas;
         this.maxCartasSeleccionadas = 5;
     }
 
-    public void agregarComodin(Comodin comodin) {
+    public void agregarComodin(Modificador comodin) {
         comodines.add(comodin);
     }
 
@@ -50,7 +52,7 @@ public class Mano {
             this.quitarCarta(carta);
         }
         Puntaje puntaje = this.juego.puntuarMano(this.cartasSeleccionadas);
-        for (Comodin comodin : comodines) {
+        for (Modificador comodin : comodines) {
             comodin.aplicarModificador(puntaje, this.juego);
         }
         return puntaje;
@@ -61,7 +63,7 @@ public class Mano {
             throw new SinCartasSeleccionadasException();
         }
         Puntaje puntaje = this.juego.puntuarMano(this.cartasSeleccionadas);
-        for (Comodin comodin : comodines) {
+        for (Modificador comodin : comodines) {
             comodin.aplicarModificador(puntaje, this.juego);
         }
         this.descartarMano();
@@ -110,8 +112,17 @@ public class Mano {
     }
 
     public void modificarCarta(Carta carta, Tarot tarot){
-        Carta cartaAModificar = obtenerCarta(carta);
+        Carta cartaAModificar = this.obtenerCarta(carta);
         cartaAModificar.aplicarModificador(tarot);
     }
+
+    public void modificarJuego(Tarot tarot){
+        Juego.aplicarTarot(tarot);
+    }
+
+//    public void modificarJuego(Tarot tarot, Juego juego){
+//        tarot.establecerJuego(juego);
+//        this.modificarJuego(tarot);
+//    }
 }
 

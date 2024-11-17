@@ -1,12 +1,16 @@
 package edu.fiuba.algo3.modeloTest.tarotTest;
 
+import edu.fiuba.algo3.modelo.juego.CartaAlta;
+import edu.fiuba.algo3.modelo.juego.Escalera;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
+import edu.fiuba.algo3.modelo.tarot.CambiadorDeMultiplicador;
 import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
 import edu.fiuba.algo3.modelo.tarot.PuntosNegativosTarotException;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 public class CambiadorDePuntosTest {
     @Test
@@ -52,4 +56,38 @@ public class CambiadorDePuntosTest {
         // Arrange / Act / Assert
         assertDoesNotThrow(() -> new CambiadorDePuntos(0));
     }
+
+
+    @Test
+    public void test06UnTarotCambiadorDePuntosSabeReconocerSiEsParaUnJuegoEspecifico() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, mock(CartaAlta.class));
+        // Act
+        boolean resultadoComparacion = tarotCambiadorDePuntos.sosParaEsteJuego(mock(CartaAlta.class));
+        // Assert
+        assertTrue(resultadoComparacion);
+    }
+
+    @Test
+    public void test07UnTarotCambiadorDePuntosSabeReconocerSiNoEsParaUnJuegoEspecifico() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, mock(Escalera.class));
+        // Act
+        boolean resultadoComparacion = tarotCambiadorDePuntos.sosParaEsteJuego(mock(CartaAlta.class));
+        // Assert
+        assertFalse(resultadoComparacion);
+    }
+
+    @Test
+    public void test08UnTarotCambiadorDePuntosParaUnJuegoDeOchoMultiplicadorConUnPuntajeBaseDeDosMultiplicadorDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new CartaAlta());
+        Puntaje puntajeEsperado = new Puntaje(8,2);
+        // Act
+        Puntaje puntajeBase = new Puntaje(3, 2);
+        Puntaje puntajeObtenido = tarotCambiadorDePuntos.obtenerPuntaje(puntajeBase);
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
 }
