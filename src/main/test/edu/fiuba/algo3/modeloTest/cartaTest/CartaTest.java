@@ -56,13 +56,13 @@ public class CartaTest {
         });
     }
     @Test
-    public void test06UnaInstaciaDeCartaDebePoderReconocerSiEsLaMismaCartaQueOtraCartaSiTieneElMismoNumeroYPalo(){
+    public void test06UnaInstaciaDeCartaDebePoderReconocerSiEsLaMismaCartaQueOtraCartaSiEsLaMismaInstancia(){
         // Arrange
         Palo paloMock = mock(Palo.class);
         when(paloMock.esDeEstePalo(any())).thenReturn(true);
         Carta carta = new Carta(10, paloMock);
         // Act
-        boolean resultadoComparacion = carta.sos(new Carta(10, new Corazon()));
+        boolean resultadoComparacion = carta.sos(carta);
         // Assert
         assertTrue(resultadoComparacion);
     }

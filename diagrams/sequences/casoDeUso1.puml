@@ -1,6 +1,7 @@
 @startuml casoDeUso1
-
+activate TestCase
 TestCase -> "c:Comodin" as comodin **: new SumaMultiplicador(8)
+
 activate comodin
 
 comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(1)
@@ -52,5 +53,6 @@ esperado <-- aModificar : true
 deactivate aModificar
 TestCase <-- esperado :true
 deactivate esperado
+deactivate TestCase
 
 @enduml

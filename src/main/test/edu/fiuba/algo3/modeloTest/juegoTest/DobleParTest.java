@@ -3,8 +3,10 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
+import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
 
+import javax.net.ssl.ExtendedSSLSession;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -179,4 +181,101 @@ public class DobleParTest {
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
+
+    @Test
+    public void test07AUnJuegoDobleParSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new DoblePar());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(48,8);
+        // Act
+        Juego DoblePar = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4,
+                new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        Puntaje puntajeObtenido = DoblePar.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new DoblePar());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test08AUnJuegoDobleParSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(48,2);
+        // Act
+        Juego DoblePar = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        Puntaje puntajeObtenido = DoblePar.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new Escalera());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test09AUnJuegoDobleParSeLeAplicaUnTarotCambiadorDePuntosDeDobleParDeOchoPuntosDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new DoblePar());
+        Juego.aplicarTarot(tarotCambiadorDePuntos);
+        Puntaje puntajeEsperado = new Puntaje(40,2);
+        // Act
+        Juego DoblePar = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()),
+                new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        Puntaje puntajeObtenido = DoblePar.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new DoblePar());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test10AUnJuegoDobleParSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par());
+        Juego.aplicarTarot(tarotCambiadorDePuntos);
+        Puntaje puntajeEsperado = new Puntaje(48,2);
+        // Act
+        Juego DoblePar = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        Puntaje puntajeObtenido = DoblePar.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new Par());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test11AUnJuegoDobleParSeLeAplicaUnTarotSumadorDeDobleParDeOchoPuntosDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotSumador = new Sumador(8,2, new DoblePar());
+        Juego.aplicarTarot(tarotSumador);
+        Puntaje puntajeEsperado = new Puntaje(56,4);
+        // Act
+        Juego DoblePar = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        Puntaje puntajeObtenido = DoblePar.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new DoblePar());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test12AUnJuegoDobleParSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotSumador = new Sumador(8,2, new Escalera());
+        Juego.aplicarTarot(tarotSumador);
+        Puntaje puntajeEsperado = new Puntaje(48,2);
+        // Act
+        Juego DoblePar = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        Puntaje puntajeObtenido = DoblePar.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new Escalera());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+
 }

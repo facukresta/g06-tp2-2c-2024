@@ -25,7 +25,7 @@ public class SumaMultiplicador extends Comodin {
     @Override
     public void aplicarModificador(Puntaje puntaje, Juego juego) {
         if ((this.juego.getClass() == SinJuego.class ^ this.juego.getClass().equals(juego.getClass())) && this.puedeAplicarse())
-            puntaje.sumar(new Puntaje(0, cantidad));
+            puntaje.sumar(new Puntaje(0, valor));
     }
 }
 

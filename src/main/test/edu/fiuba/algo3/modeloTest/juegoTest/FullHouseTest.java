@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
+import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -92,6 +93,108 @@ public class FullHouseTest {
         // Act
         Puntaje puntajeObtenido = juegoFullHouse.puntuarMano(cartas);
         // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+
+    @Test
+    public void test07AUnJuegoFullHouseSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new FullHouse());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(78,8);
+        // Act
+        Juego FullHouse = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4,
+                new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        Puntaje puntajeObtenido = FullHouse.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new FullHouse());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test08AUnJuegoFullHouseSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(78,4);
+        // Act
+        Juego FullHouse = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        Puntaje puntajeObtenido = FullHouse.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new Escalera());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test09AUnJuegoFullHouseSeLeAplicaUnTarotCambiadorDePuntosDeFullHouseDeOchoPuntosDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(100, new FullHouse());
+        Juego.aplicarTarot(tarotCambiadorDePuntos);
+        Puntaje puntajeEsperado = new Puntaje(138,4);
+        // Act
+        Juego FullHouse = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()),
+                new Carta(12, new Pica()), new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        Puntaje puntajeObtenido = FullHouse.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new FullHouse());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test10AUnJuegoFullHouseSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par());
+        Juego.aplicarTarot(tarotCambiadorDePuntos);
+        Puntaje puntajeEsperado = new Puntaje(78,4);
+        // Act
+        Juego FullHouse = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
+                new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        Puntaje puntajeObtenido = FullHouse.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
+                new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new Par());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test11AUnJuegoFullHouseSeLeAplicaUnTarotSumadorDeFullHouseDeOchoPuntosDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotSumador = new Sumador(8,2, new FullHouse());
+        Juego.aplicarTarot(tarotSumador);
+        Puntaje puntajeEsperado = new Puntaje(86,6);
+        // Act
+        Juego FullHouse = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
+                new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        Puntaje puntajeObtenido = FullHouse.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
+                new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new FullHouse());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test12AUnJuegoFullHouseSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotSumador = new Sumador(8,2, new Escalera());
+        Juego.aplicarTarot(tarotSumador);
+        Puntaje puntajeEsperado = new Puntaje(78,4);
+        // Act
+        Juego FullHouse = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
+                new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        Puntaje puntajeObtenido = FullHouse.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
+                new Carta(12, new Diamante()), new Carta(12, new Corazon()))));
+        // Assert
+        Tarot tarot2 = new SinTarot(new Escalera());
+        Juego.aplicarTarot(tarot2);
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 }

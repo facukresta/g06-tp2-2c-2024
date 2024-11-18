@@ -25,6 +25,6 @@ public class SumaPuntos extends Comodin {
     @Override
     public void aplicarModificador(Puntaje puntaje, Juego juego) {
         if ((this.juego.getClass() == SinJuego.class ^ this.juego.getClass().equals(juego.getClass())) && this.puedeAplicarse())
-            puntaje.sumar(new Puntaje((int)cantidad, 1));
+            puntaje.sumar(new Puntaje((int)valor, 1));
     }
 }

@@ -32,10 +32,6 @@ public class Carta {
         return modificador.obtenerPuntaje(new Puntaje(this.valor, 1));
     }
 
-    public int obtenerValor() {
-        return this.valor;
-    }
-
     private Palo obtenerPalo() {
         return this.palo;
     }
@@ -44,11 +40,16 @@ public class Carta {
         return this.palo.esDeEstePalo(carta.obtenerPalo());
     }
 
+    public boolean esDelMismoNumero(Carta carta) {
+        return this.numero == carta.obtenerNumero();
+    }
+
     public int obtenerNumero() {
         return this.numero;
     }
 
     public boolean sos(Carta carta) {
-        return (this.esDelMismoPalo(carta) && this.numero == carta.obtenerNumero());
+        return (this == carta);
     }
 }
+//this.esDelMismoPalo(carta) && this.numero == carta.obtenerNumero()
