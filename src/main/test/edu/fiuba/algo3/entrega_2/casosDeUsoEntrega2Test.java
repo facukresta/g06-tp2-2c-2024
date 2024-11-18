@@ -35,11 +35,11 @@ public class casosDeUsoEntrega2Test {
         //Arrange
         Comodin comodin = new SumaMultiplicador(8);
         Puntaje puntajeEsperado = new Puntaje(10,8);
-        Puntaje puntajeObtenido = new Puntaje(10,1);
+        Puntaje puntajeAModificar = new Puntaje(10,1);
         //Act
-        comodin.aplicarModificador(puntajeObtenido, new CartaAlta());
+        comodin.aplicarModificador(puntajeAModificar, new CartaAlta());
         //Assert
-        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+        assertTrue(puntajeEsperado.tenesMismoPuntaje(puntajeAModificar));
     }
 
     // Verificar que el jugador recibe un aumento correspondiente si tiene el comodín que aumenta el multiplicador por 3 si juega una escalera

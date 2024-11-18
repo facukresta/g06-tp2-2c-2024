@@ -1,0 +1,56 @@
+@startuml casoDeUso1
+
+TestCase -> "c:Comodin" as comodin **: new SumaMultiplicador(8)
+activate comodin
+
+comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(1)
+activate aleatorio
+comodin <-- aleatorio
+deactivate aleatorio
+comodin -> "sinJuego:SinJuego" as sinJuego ** : new SinJuego()
+activate sinJuego
+comodin <-- sinJuego
+deactivate sinJuego
+TestCase <-- comodin : c
+deactivate comodin
+TestCase -> "cartaAlta:CartaAlta" as cartaAlta ** :new CartaAlta()
+activate cartaAlta
+TestCase <-- cartaAlta :cartaAlta
+deactivate cartaAlta
+
+
+
+TestCase -> "esperado:Puntaje" as esperado **: new Puntaje(10,8)
+activate esperado
+TestCase <-- esperado :esperado
+deactivate esperado
+TestCase -> "aModificar:Puntaje" as aModificar **: new Puntaje(10,1)
+activate aModificar
+TestCase <-- aModificar :aModificar
+deactivate aModificar
+
+TestCase -> comodin : aplicarModificador(aModificar, cartaAlta)
+activate comodin
+comodin -> comodin : puedeAplicarse()
+activate comodin
+comodin -> aleatorio : sucede()
+activate aleatorio
+comodin <-- aleatorio : true
+deactivate aleatorio
+
+comodin --> comodin : true
+deactivate comodin
+comodin -> aModificar : sumar(new Puntaje(0,8))
+deactivate comodin
+
+
+TestCase -> esperado: tenesMismoPuntaje(aModificar)
+activate esperado
+esperado -> aModificar: tenesMismoPuntaje()
+activate aModificar
+esperado <-- aModificar : true
+deactivate aModificar
+TestCase <-- esperado :true
+deactivate esperado
+
+@enduml
