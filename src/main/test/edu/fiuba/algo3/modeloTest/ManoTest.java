@@ -6,7 +6,12 @@ import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
+import edu.fiuba.algo3.modelo.tarot.SinTarot;
+import edu.fiuba.algo3.modelo.tarot.Sumador;
+import edu.fiuba.algo3.modelo.tarot.Tarot;
 import org.junit.jupiter.api.Test;
+
+import java.time.chrono.ChronoZonedDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -286,4 +291,119 @@ public class ManoTest {
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
+    @Test
+    public void test19AlJugarUnaManoConCuatroCartasYUnComodinDeSumaPuntosNoSumaPuntosCuandoSeDescarta() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin = new SumaPuntos(4);
+        mano.agregarComodin(comodin);
+        Puntaje puntajeEsperado = new Puntaje(0,1);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        // Act
+        Puntaje puntajeObtenido = mano.descartarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test20AlJugarUnaManoConCuatroCartasYUnComodinDeSumaPuntosDescarteNoSumaCuandoSeJuegaLaMano() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin = new SumaPuntosDescarte(100);
+        mano.agregarComodin(comodin);
+        Puntaje puntajeEsperado = new Puntaje(36,3);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        // Act
+        Puntaje puntajeObtenido = mano.jugarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test21AlModificarUnJuegoConTarotSumadorEsteDevulveElValorCorrepondiente() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Tarot tarot = new Sumador(40, 15,new Par());
+        Puntaje puntajeEsperado = new Puntaje(54,17);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.modificarJuego(tarot);
+        // Act
+        Puntaje puntajeObtenido = mano.jugarMano();
+        // Assert
+        Tarot tarot1 = new SinTarot(new Par());
+        Juego.aplicarTarot(tarot1);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test21AlModificarUnJuegoConTarotSumadorYNoJugarEsteJuegoEsteNoDevulveElValorModificado() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Tarot tarot = new Sumador(40, 15,new Par());
+        Puntaje puntajeEsperado = new Puntaje(36,3);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.modificarJuego(tarot);
+        // Act
+        Puntaje puntajeObtenido = mano.jugarMano();
+        // Assert
+        Tarot tarot1 = new SinTarot(new Par());
+        Juego.aplicarTarot(tarot1);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test22AlModificarUnJuegoConTarotSumadorDeDescarteYOtroDeNoDescarteAlJugarLaManoSoloDevuleveELPuntajeModificadoPorNoDescarte() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin1 = new SumaPuntos(40);
+        Comodin comodin2 = new SumaPuntosDescarte(50);
+        Puntaje puntajeEsperado = new Puntaje(76,3);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.agregarComodin(comodin1);
+        mano.agregarComodin(comodin2);
+        // Act
+        Puntaje puntajeObtenido = mano.jugarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test23AlModificarUnJuegoConTarotSumadorDeDescarteYOtroDeNoDescarteAlDescartarLaManoSoloDevuleveELPuntajeModificadoPorDescarte() {
+        // Arrange
+        Mano mano = new Mano(8);
+        Comodin comodin1 = new SumaPuntos(40);
+        Comodin comodin2 = new SumaPuntosDescarte(50);
+        Puntaje puntajeEsperado = new Puntaje(50,1);
+        mano.agregarCarta(new Carta(2, new Trebol()));
+        mano.agregarCarta(new Carta(2, new Corazon()));
+        mano.agregarCarta(new Carta(2, new Diamante()));
+        mano.elegirCarta(new Carta(2, new Trebol()));
+        mano.elegirCarta(new Carta(2, new Corazon()));
+        mano.elegirCarta(new Carta(2, new Diamante()));
+        mano.agregarComodin(comodin1);
+        mano.agregarComodin(comodin2);
+        // Act
+        Puntaje puntajeObtenido = mano.descartarMano();
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
 }

@@ -11,9 +11,9 @@ public abstract class Juego {
 
     protected Tarot modificador = new SinTarot();
 
-    private static final ArrayList<Juego> juegos = new ArrayList<>(List.of(new CartaAlta(), new Par(), new DoblePar(),
-            new Trio(), new Escalera(), new Color(), new FullHouse(),
-            new Poker(), new EscaleraDeColor(), new EscaleraReal()));
+    private static final ArrayList<Juego> juegos = new ArrayList<>(List.of(new CartaAlta(),
+            new Par(), new DoblePar(), new Trio(), new Escalera(), new Color(),
+            new FullHouse(), new Poker(), new EscaleraDeColor(), new EscaleraReal()));
 
     public static Juego chequearJuego(ArrayList<Carta> cartas) {
         Juego juegoSeleccionado = new SinJuego();

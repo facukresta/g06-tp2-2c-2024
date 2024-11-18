@@ -10,9 +10,9 @@ import java.lang.module.ModuleFinder;
 import java.util.ArrayList;
 
 public class Mano {
-    protected ArrayList<Carta> cartas;
-    protected final int maxCartas;
-    protected final int maxCartasSeleccionadas;
+    private ArrayList<Carta> cartas;
+    private final int maxCartas;
+    private final int maxCartasSeleccionadas;
     private ArrayList<Carta> cartasSeleccionadas;
     private Juego juego;
     private ArrayList<Modificador> comodines;
@@ -23,6 +23,34 @@ public class Mano {
         this.comodines = new ArrayList<>();
         this.maxCartas = cantidadDeCartas;
         this.maxCartasSeleccionadas = 5;
+    }
+
+    public void agregarCarta(Carta carta) {
+        if (this.maxCartas == this.cartas.size()) {
+            throw new ManoLlenaException();
+        }
+        this.cartas.add(carta);
+    }
+
+    public void agregarCartas(ArrayList<Carta> cartas) {
+        if (this.maxCartas == this.cartas.size()) {
+            throw new ManoLlenaException();
+        }
+        for (Carta carta : cartas) {
+            this.cartas.add(carta);
+        }
+    }
+
+    public void quitarCarta(Carta carta) {
+        Carta cartaAQuitar = obtenerCarta(carta);
+        this.cartas.remove(cartaAQuitar);
+    }
+
+    public void quitarCartas(ArrayList<Carta> cartas) {
+        for (Carta carta : cartas) {
+            Carta cartaAQuitar = obtenerCarta(carta);
+            this.cartas.remove(cartaAQuitar);
+        }
     }
 
     public void agregarComodin(Modificador comodin) {
@@ -68,34 +96,6 @@ public class Mano {
         }
         this.descartarMano();
         return puntaje;
-    }
-
-    public void agregarCarta(Carta carta) {
-        if (this.maxCartas == this.cartas.size()) {
-            throw new ManoLlenaException();
-        }
-        this.cartas.add(carta);
-    }
-
-    public void agregarCartas(ArrayList<Carta> cartas) {
-        if (this.maxCartas == this.cartas.size()) {
-            throw new ManoLlenaException();
-        }
-        for (Carta carta : cartas) {
-            this.cartas.add(carta);
-        }
-    }
-
-    public void quitarCarta(Carta carta) {
-        Carta cartaAQuitar = obtenerCarta(carta);
-        this.cartas.remove(cartaAQuitar);
-    }
-
-    public void quitarCartas(ArrayList<Carta> cartas) {
-        for (Carta carta : cartas) {
-            Carta cartaAQuitar = obtenerCarta(carta);
-            this.cartas.remove(cartaAQuitar);
-        }
     }
 
     public int obtenerCantidadDeCartas() {

@@ -30,8 +30,8 @@ public class SumaMultiplicadorTest {
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 13);
         // Act
-        comodin1.aplicarModificador(puntajeAModificar, new SinJuego());
-        comodin2.aplicarModificador(puntajeAModificar, new SinJuego());
+        comodin1.aplicarModificador(puntajeAModificar, new CartaAlta());
+        comodin2.aplicarModificador(puntajeAModificar, new CartaAlta());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }

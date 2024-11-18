@@ -16,7 +16,7 @@ public class SumaMultiplicadorDescarte extends Comodin {
 
     @Override
     public void aplicarModificador(Puntaje puntaje, Juego juego) {
-        if (this.juego.getClass().equals(juego.getClass()) && this.puedeAplicarse() )
+        if (this.juego.getClass().equals(juego.getClass()) && this.puedeAplicarse())
             puntaje.sumar(new Puntaje(0, cantidad));
     }
 }

@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.naipes;
+import edu.fiuba.algo3.LectorDeCartas;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 
 import java.util.ArrayList;

@@ -24,7 +24,7 @@ public class CartaComodinTest {
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        cartaComodin.aplicarModificador(puntajeAModificar, new SinJuego());
+        cartaComodin.aplicarModificador(puntajeAModificar, new CartaAlta());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -36,7 +36,7 @@ public class CartaComodinTest {
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 7);
         // Act
-        cartaComodin.aplicarModificador(puntajeAModificar, new SinJuego());
+        cartaComodin.aplicarModificador(puntajeAModificar, new CartaAlta());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -48,7 +48,7 @@ public class CartaComodinTest {
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
         // Act
-        cartaComodin.aplicarModificador(puntajeAModificar, new SinJuego());
+        cartaComodin.aplicarModificador(puntajeAModificar, new CartaAlta());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
