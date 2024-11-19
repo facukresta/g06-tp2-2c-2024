@@ -40,6 +40,10 @@ public class Carta {
         return this.palo.esDeEstePalo(carta.obtenerPalo());
     }
 
+//    public boolean esDelMismoPalo(Carta carta) {
+//        return this.palo.esDeEstePalo(carta.obtenerPalo());
+//    }
+
     public int obtenerNumero() {
         return this.numero;
     }

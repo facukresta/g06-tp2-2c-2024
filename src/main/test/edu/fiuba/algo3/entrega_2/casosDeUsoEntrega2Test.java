@@ -14,7 +14,6 @@ import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
-import edu.fiuba.algo3.modeloTest.comodinTest.CartaComodinTest;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -443,7 +442,7 @@ public class casosDeUsoEntrega2Test {
                         }
                     }
                 }
-                listaDeComodines.add(new CartaComodin(comodinesPequenios));
+                listaDeComodines.add(new ComodinCombinacion(comodinesPequenios));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -459,11 +458,11 @@ public class casosDeUsoEntrega2Test {
                 new SumaPuntosDescarte(75), new SumaMultiplicadorDescarte(20), new SumaPuntosDescarte(100), new SumaMultiplicadorDescarte(25),
                 new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(1000, new Aleatorio(1000)), new SumaPuntos(500, new Aleatorio(20)), new SumaMultiplicador(10, new Aleatorio(50)),
                 new SumaPuntos(2000, new Aleatorio(500)), new SumaMultiplicador(30, new Aleatorio(100)), new SumaPuntos(1500, new Aleatorio(250)), new SumaMultiplicador(50, new Aleatorio(500)),
-                new CartaComodin(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(100, new Trio())))),
-                new CartaComodin(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(1000, new Aleatorio(1000))))),
-                new CartaComodin(new ArrayList<>(List.of(new SumaPuntos(500, new Color()), new SumaMultiplicador(10, new Aleatorio(50))))),
-                new CartaComodin(new ArrayList<>(List.of(new SumaPuntos(2000, new Aleatorio(500)), new SumaPuntosDescarte(30)))),
-                new CartaComodin(new ArrayList<>(List.of(new SumaPuntos(300, new Poker()), new SumaMultiplicador(20, new Aleatorio(500))))
+                new ComodinCombinacion(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(100, new Trio())))),
+                new ComodinCombinacion(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(1000, new Aleatorio(1000))))),
+                new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(500, new Color()), new SumaMultiplicador(10, new Aleatorio(50))))),
+                new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(2000, new Aleatorio(500)), new SumaPuntosDescarte(30)))),
+                new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(300, new Poker()), new SumaMultiplicador(20, new Aleatorio(500))))
                 )));
 
         if(listaDeComodines.size() != modificadoresQueDeberianEstar.size()){
@@ -499,11 +498,11 @@ public class casosDeUsoEntrega2Test {
 //            new SumaPuntosDescarte(75), new SumaMultiplicadorDescarte(20), new SumaPuntosDescarte(100), new SumaMultiplicadorDescarte(25),
 //            new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(1000, new Aleatorio(1000)), new SumaPuntos(500, new Aleatorio(20)), new SumaMultiplicador(10, new Aleatorio(50)),
 //            new SumaPuntos(2000, new Aleatorio(500)), new SumaMultiplicador(30, new Aleatorio(100)), new SumaPuntos(1500, new Aleatorio(250)), new SumaMultiplicador(50, new Aleatorio(500)),
-//            new CartaComodin(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(100, new Trio())))),
-//            new CartaComodin(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(1000, new Aleatorio(1000))))),
-//            new CartaComodin(new ArrayList<>(List.of(new SumaPuntos(500, new Color()), new SumaMultiplicador(10, new Aleatorio(50))))),
-//            new CartaComodin(new ArrayList<>(List.of(new SumaPuntos(2000, new Aleatorio(500)), new SumaPuntosDescarte(30)))),
-//            new CartaComodin(new ArrayList<>(List.of(new SumaPuntos(300, new Poker()), new SumaMultiplicador(20, new Aleatorio(500))))
+//            new ComodinCombinacion(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(100, new Trio())))),
+//            new ComodinCombinacion(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(1000, new Aleatorio(1000))))),
+//            new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(500, new Color()), new SumaMultiplicador(10, new Aleatorio(50))))),
+//            new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(2000, new Aleatorio(500)), new SumaPuntosDescarte(30)))),
+//            new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(300, new Poker()), new SumaMultiplicador(20, new Aleatorio(500))))
 //        )));
 //
 //        if(modificadores.size() != modificadoresQueDeberianEstar.size()){

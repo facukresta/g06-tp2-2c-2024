@@ -7,11 +7,7 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 public class Color extends Juego{
     public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        Puntaje puntaje = this.modificador.obtenerPuntaje(new Puntaje(35, 4));
-        for (Carta carta : cartas) {
-            puntaje.sumar(carta.obtenerPuntaje());
-        }
-        return puntaje;
+        return puntuarCartas(cartas, new Puntaje(35, 4));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {

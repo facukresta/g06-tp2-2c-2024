@@ -6,31 +6,16 @@ participant "TestCase" as TestCase
 
 activate TestCase
 
-TestCase -> "mano:Mano" as mano **: new Mano(8)
-activate mano
-TestCase -[hidden]-> "aleatorioMock:Aleatorio" as aleatorio **:
-TestCase <-- mano : mano
-deactivate mano
+TestCase -> "c:Comodin" as comodin **: new SumaPuntos(13, new Par(), new Aleatorio(5))
 
-TestCase -> "esperado1:Puntaje" as esperado1 **: new Puntaje(24,2)
-activate esperado1
-TestCase <-- esperado1 : esperado1
-deactivate esperado1
-
-TestCase -> "esperado2:Puntaje" as esperado2 **: new Puntaje(37,2)
-activate esperado2
-TestCase <-- esperado2 : esperado2
-deactivate esperado2
-
-TestCase -> "c:Comodin" as comodin **: new SumaPuntos(13, new Par(), aleatorioMock)
 activate comodin
-
-comodin -> "__:Pan__" as par ** : new Par()
-activate par 
-comodin <-- par 
-deactivate par 
 TestCase <-- comodin : c
 deactivate comodin
+
+TestCase -> "mano:Mano" as mano **: new Mano(8)
+activate mano
+TestCase <-- mano : mano
+deactivate mano
 
 carta1 -[hidden]-> "__:Carta__" as instanciaCarta **: blank
 & TestCase -> "carta1:Carta" as carta1 **: new Carta(7, new Trebol())
@@ -59,10 +44,6 @@ deactivate sinTarot
 TestCase <-- carta2 : carta2
 deactivate carta2
 
-TestCase -> mano : agregarComodin(c)
-activate mano
-deactivate mano
-
 TestCase -> mano : agregarCarta(carta1)
 activate mano
 deactivate mano
@@ -71,32 +52,31 @@ TestCase -> mano : agregarCarta(carta2)
 activate mano
 deactivate mano
 
+
 loop por carta1 y carta2
 TestCase -> mano : elegirCarta(carta)
 activate mano
 mano -> mano : obtenerCarta(carta)
 activate mano
 loop por cada carta en mano hasta encontrar la carta buscada
-mano -> instanciaCarta : sos(carta)
+mano -> "__:Carta__" as instanciaCarta : sos(carta)
 activate instanciaCarta
 instanciaCarta --> mano : true
+deactivate instanciaCarta
 end
 mano <-- mano : carta
 deactivate mano
 mano -> "__:Juego__" as juego **: chequearJuego(cartasSeleccionadas)
 activate juego
 loop por cada juego de cartas posible dentro de Balastro
-juego -> juego : sosJuego(cartasSeleccionadas)
-activate juego
-juego --> juego : true
-deactivate juego
-juego -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-deactivate juego
-juego -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-deactivate juego
+juego -> "juegos:List<Juego>" as juegos : sosJuego(cartasSeleccionadas)
+activate juegos
+juegos --> juego : true
+juego -> juegos : puntuarMano(cartasSeleccionadas)
+juego <-- juegos : puntajeJuegoSeleccionado
+deactivate juegos
 juego -> juego : esMayor(puntajeJuegoSeleccionado)
+
 activate juego
 deactivate juego
 end
@@ -106,114 +86,47 @@ deactivate juego
 deactivate mano
 end
 
-TestCase -> "obtenido1:Puntaje" as obtenido1 **: <<crear>>
-activate obtenido1
+TestCase -> mano : agregarComodin(c)
+activate mano
+deactivate mano
+
+TestCase -> "esperado:Puntaje" as esperado **: new Puntaje(37, 2)
+activate esperado
+TestCase <-- esperado : esperado
+deactivate esperado
+
+TestCase -> "obtenido:Puntaje" as obtenido **: <<crear>>
 
 TestCase -> mano : jugarMano()
-activate mano 
+activate mano
 mano -> juego : puntuarMano(cartasSeleccionadas)
 activate juego
-mano <-- juego : puntaje
+loop para cada carta
+juego -> instanciaCarta : obtenerPuntaje()
+juego <--instanciaCarta : puntajeDeLaCarta
+end
+mano <-- juego : puntajeTotal
 deactivate juego
 mano -> comodin : aplicarModificador(puntaje, juego)
-activate comodin 
-deactivate comodin 
+activate comodin
+comodin --> mano : puntajeModificado
+deactivate comodin
 mano -> mano : descartarMano()
-activate mano
-mano --> mano : puntaje
-deactivate mano
-obtenido1 <-- mano : puntaje
-deactivate obtenido1
+obtenido <-- mano : puntaje
+activate obtenido
+deactivate obtenido
 deactivate mano
 
-TestCase -> aleatorio : sucede()
-activate aleatorio
-TestCase <-- aleatorio : true
-deactivate aleatorio
 
-
-TestCase -> mano : agregarCarta(carta1)
-activate mano
-deactivate mano
-
-TestCase -> mano : agregarCarta(carta2)
-activate mano
-deactivate mano
-
-loop por carta1 y carta2
-TestCase -> mano : elegirCarta(carta)
-activate mano
-mano -> mano : obtenerCarta(carta)
-activate mano
-loop por cada carta en mano hasta encontrar la carta buscada
-mano -> instanciaCarta : sos(carta)
-activate instanciaCarta
-instanciaCarta --> mano : true
-end
-mano <-- mano : carta
-deactivate mano
-mano -> juego : chequearJuego(cartasSeleccionadas)
-activate juego
-loop por cada juego de cartas posible dentro de Balastro
-juego -> juego : sosJuego(cartasSeleccionadas)
-activate juego
-juego --> juego : true
-deactivate juego
-juego -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-deactivate juego
-juego -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-deactivate juego
-juego -> juego : esMayor(puntajeJuegoSeleccionado)
-activate juego
-deactivate juego
-end
-mano <-- juego : juegoSelecconado
-deactivate instanciaCarta
-deactivate juego
-deactivate mano
-end
-
-TestCase -> "obtenido2:Puntaje" as obtenido2 **: <<crear>>
-activate obtenido2
-
-TestCase -> mano : jugarMano()
-activate mano 
-mano -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-mano <-- juego : puntaje
-deactivate juego
-mano -> comodin : aplicarModificador(puntaje, juego)
-activate comodin 
-deactivate comodin 
-mano -> mano : descartarMano()
-activate mano
-mano --> mano : puntaje
-deactivate mano
-obtenido2 <-- mano : puntaje
-deactivate obtenido2
-deactivate mano 
-
-obtenido1 <- TestCase : tenesMismoPuntaje(esperado1)
-activate obtenido1
-obtenido1 -> obtenido1 : calcularPuntaje()
- & obtenido1 -> esperado1 : calcularPuntaje()
-activate esperado1
-esperado1 --> obtenido1 : puntos * multiplicador
-deactivate esperado1
-obtenido1 --> TestCase: true
-deactivate obtenido1
-
-obtenido2 <- TestCase : tenesMismoPuntaje(esperado2)
-activate obtenido2
-obtenido2 -> obtenido2 : calcularPuntaje()
- & obtenido2 -> esperado2 : calcularPuntaje()
-activate esperado2
-esperado2 --> obtenido2 : puntos * multiplicador
-deactivate esperado2
-obtenido2 --> TestCase: true
-deactivate obtenido2
+obtenido <- TestCase : tenesMismoPuntaje(esperado)
+activate obtenido
+obtenido -> obtenido : calcularPuntaje()
+ & obtenido -> esperado : calcularPuntaje()
+activate esperado
+esperado --> obtenido : puntos * multiplicador
+deactivate esperado
+obtenido --> TestCase: true
+deactivate obtenido
 
 deactivate TestCase
 

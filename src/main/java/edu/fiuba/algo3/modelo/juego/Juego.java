@@ -40,6 +40,14 @@ public abstract class Juego {
         }
     }
 
+    protected Puntaje puntuarCartas(ArrayList<Carta> cartas, Puntaje puntajeBase) {
+        Puntaje puntaje = this.modificador.obtenerPuntaje(puntajeBase);
+        for (Carta carta : cartas) {
+            puntaje.sumar(carta.obtenerPuntaje());
+        }
+        return puntaje;
+    }
+
     abstract public boolean sosJuego(ArrayList<Carta> cartas);
 
     abstract public Puntaje puntuarMano(ArrayList<Carta> cartas);

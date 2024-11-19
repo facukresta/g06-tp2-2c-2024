@@ -19,8 +19,8 @@ class Comodin{
 #{method} puedeAplicarse() : bool
 }
 
-class CartaComodin{
-+{method}CartaComodin(List<Comodin> comodines)
+class ComodinCombinacion{
++{method}ComodinCombinacion(List<Comodin> comodines)
 +{method} aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
@@ -56,8 +56,8 @@ class SumaPuntosDescarte{
 
 Comodin *-- Aleatorio
 Comodin .down.|> Modificador
-CartaComodin "1" -up-> "*" Comodin 
-CartaComodin .right.|> Modificador
+ComodinCombinacion "1" -up-> "*" Comodin
+ComodinCombinacion .right.|> Modificador
 SumaMultiplicador -left-|> Comodin
 SumaMultiplicadorDescarte -down-|> Comodin
 SumaPuntos -right-|> Comodin

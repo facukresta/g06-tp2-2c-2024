@@ -5,9 +5,9 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 import java.util.ArrayList;
 
-public class CartaComodin implements Modificador {
+public class ComodinCombinacion implements Modificador {
     private final ArrayList<Comodin> comodines;
-    public CartaComodin(ArrayList<Comodin> comodines) {
+    public ComodinCombinacion(ArrayList<Comodin> comodines) {
         this.comodines = comodines;
     }
 

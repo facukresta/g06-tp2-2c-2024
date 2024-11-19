@@ -66,7 +66,7 @@ public class LectorComodines {
                 for (Modificador modificador : comodinesPequenios) {
                     comodines.add((Comodin) modificador);
                 }
-                listaDeComodines.add(new CartaComodin(comodines));
+                listaDeComodines.add(new ComodinCombinacion(comodines));
             }
         } catch (Exception e) {
             e.printStackTrace();

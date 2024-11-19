@@ -6,7 +6,7 @@ participant "TestCase" as TestCase
 
 activate TestCase
 
-TestCase -> "esperado:Puntaje" as esperado **: new Puntaje(10,8)
+TestCase -> "esperado:Puntaje" as esperado **: new Puntaje(54,7)
 activate esperado
 TestCase <-- esperado : esperado
 deactivate esperado
@@ -30,8 +30,8 @@ activate mano
 TestCase <-- mano : mano
 deactivate mano
 
-carta1 -[hidden]-> "__:Carta__" as instanciaCarta **: blank
-& TestCase -> "carta1:Carta" as carta1 **: new Carta(1, new Trebol())
+loop para 4 cartas
+TestCase -> "carta[i]:Carta" as carta1 **: new Carta([i], new Trebol())
 activate carta1
 carta1 -> "__:Trebol__" as trebol **: new Trebol()
 activate trebol
@@ -41,54 +41,16 @@ carta1 -> "__:SinTarot__" as sinTarot **: new SinTarot()
 activate sinTarot
 carta1 <-- sinTarot : SinTarot
 deactivate sinTarot
-TestCase <-- carta1 : carta1
+TestCase <-- carta1 : carta[i]
 deactivate carta1
+end
 
-TestCase -> "carta2:Carta" as carta2 **: new Carta(2, new Trebol())
-activate carta2
-carta2 -> trebol : new Trebol()
-activate trebol
-carta2 <-- trebol : Trebol
-deactivate trebol
-carta2 -> sinTarot : new SinTarot()
-activate sinTarot
-carta2 <-- sinTarot : SinTarot
-deactivate sinTarot
-TestCase <-- carta2 : carta2
-deactivate carta2
-
-TestCase -> "carta3:Carta" as carta3 **: new Carta(3, new Pica())
-activate carta3
-carta3 -> "__:Pica__" as pica **: new Pica()
-activate pica
-carta3 <-- pica: Pica
-deactivate pica
-carta3 -> sinTarot : new SinTarot()
-activate sinTarot
-carta3 <-- sinTarot : SinTarot
-deactivate sinTarot
-TestCase <-- carta3 : carta3
-deactivate carta3
-
-TestCase -> "carta4:Carta" as carta4 **: new Carta(4, new Corazon())
-activate carta4
-carta4 -> "__:Corazon__" as corazon **: new Coranzon()
-activate corazon
-carta4 <-- corazon: Corazon
-deactivate corazon
-carta4 -> sinTarot : new SinTarot()
-activate sinTarot
-carta4 <-- sinTarot : SinTarot
-deactivate sinTarot
-TestCase <-- carta4 : carta4
-deactivate carta4
-
-TestCase -> "carta5:Carta" as carta5 **: new Carta(5, new Trebol())
+TestCase -> "carta5:Carta" as carta5 **: new Carta(5, new Corazon())
 activate carta5
-carta5 -> trebol : new Trebol()
-activate trebol
-carta5 <-- trebol : Trebol
-deactivate trebol
+carta5 -> "__:Corazon__" as corazon **: new Corazon()
+activate corazon
+carta5 <-- corazon : Corazon
+deactivate corazon
 carta5 -> sinTarot : new SinTarot()
 activate sinTarot
 carta5 <-- sinTarot : SinTarot
@@ -106,26 +68,24 @@ activate mano
 mano -> mano : obtenerCarta(carta)
 activate mano
 loop por cada carta en mano hasta encontrar la carta buscada
-mano -> instanciaCarta : sos(carta)
+mano -> "__:Carta__" as instanciaCarta : sos(carta)
 activate instanciaCarta
 instanciaCarta --> mano : true
+deactivate instanciaCarta
 end
 mano <-- mano : carta
 deactivate mano
 mano -> "__:Juego__" as juego **: chequearJuego(cartasSeleccionadas)
 activate juego
 loop por cada juego de cartas posible dentro de Balastro
-juego -> juego : sosJuego(cartasSeleccionadas)
-activate juego
-juego --> juego : true
-deactivate juego
-juego -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-deactivate juego
-juego -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-deactivate juego
+juego -> "juegos:List<Juego>" as juegos : sosJuego(cartasSeleccionadas)
+activate juegos
+juegos --> juego : true
+juego -> juegos : puntuarMano(cartasSeleccionadas)
+juego <-- juegos : puntajeJuegoSeleccionado
+deactivate juegos
 juego -> juego : esMayor(puntajeJuegoSeleccionado)
+
 activate juego
 deactivate juego
 end
@@ -142,26 +102,30 @@ deactivate mano
 
 TestCase -> "obtenido:Puntaje" as obtenido **: <<crear>>
 activate obtenido
+deactivate obtenido
 
 TestCase -> mano : jugarMano()
 activate mano 
 mano -> juego : puntuarMano(cartasSeleccionadas)
 activate juego
-mano <-- juego : puntaje
+loop para cada carta
+juego -> instanciaCarta : obtenerPuntaje()
+juego <--instanciaCarta : puntajeDeLaCarta
+end
+mano <-- juego : puntajeTotal
 deactivate juego
 mano -> comodin : aplicarModificador(puntaje, juego)
-activate comodin 
+activate comodin
+comodin --> mano : puntajeModificado
 deactivate comodin 
 mano -> mano : descartarMano()
-activate mano
-mano --> mano : puntaje
-deactivate mano
 obtenido <-- mano : puntaje
+activate obtenido
 deactivate obtenido
 deactivate mano 
 
 obtenido <- TestCase : tenesMismoPuntaje(esperado)
-activate obtenido 
+activate obtenido
 obtenido -> obtenido : calcularPuntaje()
  & obtenido -> esperado : calcularPuntaje()
 activate esperado

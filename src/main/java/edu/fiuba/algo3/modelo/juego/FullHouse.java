@@ -9,11 +9,7 @@ import java.util.HashMap;
 
 public class FullHouse extends Juego{
     public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        Puntaje puntaje = this.modificador.obtenerPuntaje(new Puntaje(40, 4));
-        for (Carta carta : cartas) {
-            puntaje.sumar(carta.obtenerPuntaje());
-        }
-        return puntaje;
+        return puntuarCartas(cartas, new Puntaje(40, 4));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {

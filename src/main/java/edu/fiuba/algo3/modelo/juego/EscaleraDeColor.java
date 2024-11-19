@@ -9,11 +9,7 @@ import java.util.Comparator;
 
 public class EscaleraDeColor extends Juego {
     public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        Puntaje puntaje = this.modificador.obtenerPuntaje(new Puntaje(100, 8));
-        for (Carta carta : cartas) {
-            puntaje.sumar(carta.obtenerPuntaje());
-        }
-        return puntaje;
+        return puntuarCartas(cartas, new Puntaje(100, 8));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {
