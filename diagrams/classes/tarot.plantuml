@@ -8,6 +8,8 @@ abstract class Tarot{
 }
 
 class Sumador {
+-puntos: int
+-multiplicador: int
 +Sumador(int puntos, double multiplicador, Juego juego)
 +Sumador(int puntos, double multiplicador)
 +obtenerPuntaje(Puntaje p): Puntaje

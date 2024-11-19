@@ -29,11 +29,11 @@ public class Ronda {
         this.mano.agregarCartas(this.mazo.repartirCartas(8));
     }
 
-    public boolean pasoLaRonda(){
+    private boolean pasoLaRonda(){
         return (puntajeASuperar.esMenorAPuntajes(puntajesObtenidos));
     }
 
-    public boolean puedeSeguirJugando(){
+    private boolean puedeSeguirJugando(){
         return (!pasoLaRonda() && manos > 0);
     }
 

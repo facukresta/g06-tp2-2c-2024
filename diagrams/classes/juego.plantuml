@@ -3,8 +3,9 @@ skinparam classAttributeIconSize 0
 
 abstract Juego {
 #modificador: Tarot
-+{static}ChequearJuego(CartasSeleccionadas): Juego
-+{abstract}puntuarMano(): Puntaje
+-{static}juegos: List<Juego>
++{static}ChequearJuego(List<Carta>): Juego
++{abstract}puntuarMano(List<Carta>): Puntaje
 +{abstract}sosJuego(List<Carta>): bool
 -aplicarTarotALaIntancia(Tarot t)
 +aplicarTarot(Tarot t)
@@ -12,56 +13,55 @@ abstract Juego {
 
 
 class CartaAlta {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Par {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class DoblePar {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Trio {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Escalera {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Color {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class FullHouse {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Poker {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class EscaleraDeColor {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class EscaleraReal  {
-+puntuarMano(): Puntaje
++puntuarMano(List<Carta>): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
-Juego "1" --> "10" Juego :tiene
 CartaAlta -up-|> Juego
 Par -up-|> Juego
 DoblePar -up-|> Juego

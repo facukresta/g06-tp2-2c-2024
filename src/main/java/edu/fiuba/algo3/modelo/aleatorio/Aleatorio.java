@@ -1,14 +1,14 @@
 package edu.fiuba.algo3.modelo.aleatorio;
 
 public class Aleatorio {
-    private int numero;
+    private int probabilidad;
     public Aleatorio(int probabilidad) {
         if (probabilidad <= 0) {
             throw new ProbabilidadInvalidaException();
         }
-        this.numero = probabilidad;
+        this.probabilidad = probabilidad;
     }
     public boolean sucede() {
-        return (((int) (Math.random() * numero) == 0));
+        return (((int) (Math.random() * probabilidad) == 0));
     }
 }

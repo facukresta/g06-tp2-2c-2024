@@ -231,7 +231,7 @@ public class casosDeUsoEntrega2Test {
         for (int i = 0; i < cartas.size(); i++) {
             Carta carta1 = cartas.get(i);
             Carta carta2 = cartasQueDeberianEstar.get(i);
-            if (!carta1.esDelMismoNumero(carta2) || !carta1.esDelMismoPalo(carta2)) {
+            if (carta1.obtenerNumero() != carta2.obtenerNumero() || !carta1.esDelMismoPalo(carta2)) {
                 resultadoComparacion = false;
             }
         }

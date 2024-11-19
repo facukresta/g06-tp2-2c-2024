@@ -1,11 +1,10 @@
 @startuml Carta
 skinparam classAttributeIconSize 0
 class Carta {
--id: int
+-valor: int
 -numero: int
 +Carta(int numero, Palo palo)
 +aplicarModificador(Tarot t)
-+esDelMismoNumero(Carta carta) : bool
 +esDelMismoPalo(Carta carta) : bool
 +obtenerNumero() : int
 -obtenerPalo() : Palo

@@ -13,21 +13,33 @@ class Puntaje {
 +sumar(Puntaje puntajeASumar):
 -sumarPuntos(Puntaje puntaje):
 -sumarMultiplicador(Puntaje puntaje):
--tenesMismoPuntaje(Puntaje puntaje) : bool
++tenesMismoPuntaje(Puntaje puntaje) : bool
 }
 
 class Carta {
--id: int
+-valor: int
 -numero: int
--palo : Palo
 +Carta(int numero, Palo palo)
 +aplicarModificador(Tarot t)
-+esDelMismoNumero(Carta carta) : bool
 +esDelMismoPalo(Carta carta) : bool
 +obtenerNumero() : int
 -obtenerPalo() : Palo
 +obtenerPuntaje(): Puntaje
 +sos(Carta c): boolean
+}
+
+abstract Juego {
+#modificador: Tarot
+-{static}juegos: List<Juego>
++{static}ChequearJuego(List<Carta>): Juego
++{abstract}puntuarMano(List<Carta>): Puntaje
++{abstract}sosJuego(List<Carta>): bool
+-aplicarTarotALaIntancia(Tarot t)
++aplicarTarot(Tarot t)
+}
+
+interface Modificador{
++{abstract} aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
 abstract class Tarot{
@@ -38,31 +50,10 @@ abstract class Tarot{
 
 Carta *-- Tarot :tiene
 
-class Mano {
--maxCartas: int
--maxCartasSeleccionadas: int
--cartas: List<Carta>
--cartasSelecionadas: List<Carta>
--juego: Juego
--comodines: List<Modificador>
-+Mano(int cantidadDeCartas)
-+agregarCarta(Carta c)
-+agregarCartas(List<Carta> c)
-+agregarComodin(Modificador comodin)
-+descartarMano() : Puntaje
-+elegirCarta(Carta c)
-+jugarMano() : Puntaje
-+modificarCarta(Cartca c, Tarot t)
-+modificarJuego(Tarot t)
-+obtenerCantidadDeCartas(): int
-+obtenerCarta(Carta c): Carta
-+quitarCarta(Carta c)
-+quitarCartas(List<Carta> c)
-}
 
-
-Mano .left.> Puntaje: "crea"
 Tarot .up.> Puntaje: "usa"
+Modificador .down.> Puntaje: "usa"
+Juego .up.> Puntaje: "usa"
 Puntaje <.left. Carta: "crea"
 
 @enduml

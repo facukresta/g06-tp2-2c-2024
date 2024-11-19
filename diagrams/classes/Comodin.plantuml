@@ -1,4 +1,4 @@
-@startuml Comodín
+@startuml Comodin
 skinparam classAttributeIconSize 0
 
 interface Modificador{
@@ -6,7 +6,7 @@ interface Modificador{
 }
 
 class Aleatorio{
-- numero : int
+- probabilidad : int
 +{method} Aleatorio(int probabilidad)
 +{method} sucede() : bool
 }
@@ -20,14 +20,12 @@ class Comodin{
 }
 
 class CartaComodin{
--comodines : List<Comodin>
-#juego : Juego
-+{method} Comodin(double cantidad, Aleatorio probabilidad, Juego juego)
++{method}CartaComodin(List<Comodin> comodines)
 +{method} aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
 class SumaMultiplicador{
-+SumaMultiplicador(double canidad, Juego juego, Aleatorio probabilidad)
++SumaMultiplicador(double cantidad, Juego juego, Aleatorio probabilidad)
 +SumaMultiplicador(double cantidad, Aleatorio probabilidad)
 +SumaMultiplicador(double cantidad, Juego juego)
 +SumaMultiplicador(double cantidad)
@@ -43,7 +41,7 @@ class SumaMultiplicadorDescarte{
 
 
 class SumaPuntos{
-+SumaPuntos(double canidad, Juego juego, Aleatorio probabilidad)
++SumaPuntos(double cantidad, Juego juego, Aleatorio probabilidad)
 +SumaPuntos(double cantidad, Aleatorio probabilidad)
 +SumaPuntos(double cantidad, Juego juego)
 +SumaPuntos(double cantidad)
@@ -56,7 +54,7 @@ class SumaPuntosDescarte{
 +aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
-Comodin --> Aleatorio
+Comodin *-- Aleatorio
 Comodin .down.|> Modificador
 CartaComodin "1" -up-> "*" Comodin 
 CartaComodin .right.|> Modificador
@@ -64,5 +62,4 @@ SumaMultiplicador -left-|> Comodin
 SumaMultiplicadorDescarte -down-|> Comodin
 SumaPuntos -right-|> Comodin
 SumaPuntosDescarte -down-|> Comodin
-
 @enduml

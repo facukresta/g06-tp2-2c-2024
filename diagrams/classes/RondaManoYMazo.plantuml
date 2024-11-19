@@ -2,8 +2,8 @@
 skinparam classAttributeIconSize 0
 
 class Ronda{
--puntajesObtenidos : Puntaje
--puntajeASuperar : List<Puntaje>
+-puntajeASuperar : Puntaje
+-puntajesObtenidos : List<Puntaje>
 -descartes : int
 - manos : int
 +Ronda(Puntaje puntajeASuperar, int manos, int descartes, Mazo mazo)
@@ -13,8 +13,8 @@ class Ronda{
 +jugarMano()
 +modificarCarta(Carta c, Tarot t)
 +modificarJuego(Tarot t)
-+pasoLaRonda() : bool
-+puedeSeguirJugando() : bool
+-pasoLaRonda() : bool
+-puedeSeguirJugando() : bool
 }
 
 class Mazo {
@@ -40,7 +40,7 @@ class Mano {
 +descartarMano() : Puntaje
 +elegirCarta(Carta c)
 +jugarMano() : Puntaje
-+modificarCarta(Cartca c, Tarot t)
++modificarCarta(Carta c, Tarot t)
 +modificarJuego(Tarot t)
 +obtenerCantidadDeCartas(): int
 +obtenerCarta(Carta c): Carta
@@ -48,7 +48,6 @@ class Mano {
 +quitarCartas(List<Carta> c)
 }
 
-Ronda --> Mano : tiene
+Ronda o-- Mano : tiene
 Ronda --> Mazo : tiene
-Mazo .right.> Mano : modifica
 @enduml
