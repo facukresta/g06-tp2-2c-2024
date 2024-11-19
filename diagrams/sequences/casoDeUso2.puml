@@ -1,0 +1,175 @@
+@startuml casoDeUso2
+title "test02 El Jugador Recibe Un Aumento Si Tiene El Comodin Que Aumenta El Multiplicador Por 3 Por Si Juego Una Escalera"
+!pragma teoz true
+
+participant "TestCase" as TestCase
+
+activate TestCase
+
+TestCase -> "esperado:Puntaje" as esperado **: new Puntaje(10,8)
+activate esperado
+TestCase <-- esperado : esperado
+deactivate esperado
+
+TestCase -> "c:Comodin" as comodin **: new SumaMultiplicador(3, new Escalera())
+
+activate comodin
+comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(1)
+activate aleatorio
+comodin <-- aleatorio
+deactivate aleatorio
+comodin -> "escalera:Escalera" as escalera ** : new Escalera()
+activate escalera
+comodin <-- escalera
+deactivate escalera
+TestCase <-- comodin : c
+deactivate comodin
+
+TestCase -> "mano:Mano" as mano **: new Mano(8)
+activate mano
+TestCase <-- mano : mano
+deactivate mano
+
+carta1 -[hidden]-> "__:Carta__" as instanciaCarta **: blank
+& TestCase -> "carta1:Carta" as carta1 **: new Carta(1, new Trebol())
+activate carta1
+carta1 -> "__:Trebol__" as trebol **: new Trebol()
+activate trebol
+carta1 <-- trebol : Trebol
+deactivate trebol
+carta1 -> "__:SinTarot__" as sinTarot **: new SinTarot()
+activate sinTarot
+carta1 <-- sinTarot : SinTarot
+deactivate sinTarot
+TestCase <-- carta1 : carta1
+deactivate carta1
+
+TestCase -> "carta2:Carta" as carta2 **: new Carta(2, new Trebol())
+activate carta2
+carta2 -> trebol : new Trebol()
+activate trebol
+carta2 <-- trebol : Trebol
+deactivate trebol
+carta2 -> sinTarot : new SinTarot()
+activate sinTarot
+carta2 <-- sinTarot : SinTarot
+deactivate sinTarot
+TestCase <-- carta2 : carta2
+deactivate carta2
+
+TestCase -> "carta3:Carta" as carta3 **: new Carta(3, new Pica())
+activate carta3
+carta3 -> "__:Pica__" as pica **: new Pica()
+activate pica
+carta3 <-- pica: Pica
+deactivate pica
+carta3 -> sinTarot : new SinTarot()
+activate sinTarot
+carta3 <-- sinTarot : SinTarot
+deactivate sinTarot
+TestCase <-- carta3 : carta3
+deactivate carta3
+
+TestCase -> "carta4:Carta" as carta4 **: new Carta(4, new Corazon())
+activate carta4
+carta4 -> "__:Corazon__" as corazon **: new Coranzon()
+activate corazon
+carta4 <-- corazon: Corazon
+deactivate corazon
+carta4 -> sinTarot : new SinTarot()
+activate sinTarot
+carta4 <-- sinTarot : SinTarot
+deactivate sinTarot
+TestCase <-- carta4 : carta4
+deactivate carta4
+
+TestCase -> "carta5:Carta" as carta5 **: new Carta(5, new Trebol())
+activate carta5
+carta5 -> trebol : new Trebol()
+activate trebol
+carta5 <-- trebol : Trebol
+deactivate trebol
+carta5 -> sinTarot : new SinTarot()
+activate sinTarot
+carta5 <-- sinTarot : SinTarot
+deactivate sinTarot
+TestCase <-- carta5 : carta5
+deactivate carta5
+
+TestCase -> mano : agregarCartas(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5))
+activate mano
+deactivate mano
+
+loop por cada carta agregada a mano
+TestCase -> mano : elegirCarta(carta)
+activate mano
+mano -> mano : obtenerCarta(carta)
+activate mano
+loop por cada carta en mano hasta encontrar la carta buscada
+mano -> instanciaCarta : sos(carta)
+activate instanciaCarta
+instanciaCarta --> mano : true
+end
+mano <-- mano : carta
+deactivate mano
+mano -> "__:Juego__" as juego **: chequearJuego(cartasSeleccionadas)
+activate juego
+loop por cada juego de cartas posible dentro de Balastro
+juego -> juego : sosJuego(cartasSeleccionadas)
+activate juego
+juego --> juego : true
+deactivate juego
+juego -> juego : puntuarMano(cartasSeleccionadas)
+activate juego
+deactivate juego
+juego -> juego : puntuarMano(cartasSeleccionadas)
+activate juego
+deactivate juego
+juego -> juego : esMayor(puntajeJuegoSeleccionado)
+activate juego
+deactivate juego
+end
+mano <-- juego : juegoSelecconado
+deactivate instanciaCarta
+deactivate juego
+deactivate mano
+end
+
+TestCase -> mano : agregarComodin(c)
+activate mano
+deactivate mano
+
+
+TestCase -> "obtenido:Puntaje" as obtenido **: <<crear>>
+activate obtenido
+
+TestCase -> mano : jugarMano()
+activate mano 
+mano -> juego : puntuarMano(cartasSeleccionadas)
+activate juego
+mano <-- juego : puntaje
+deactivate juego
+mano -> comodin : aplicarModificador(puntaje, juego)
+activate comodin 
+deactivate comodin 
+mano -> mano : descartarMano()
+activate mano
+mano --> mano : puntaje
+deactivate mano
+obtenido <-- mano : puntaje
+deactivate obtenido
+deactivate mano 
+
+obtenido <- TestCase : tenesMismoPuntaje(esperado)
+activate obtenido 
+obtenido -> obtenido : calcularPuntaje()
+ & obtenido -> esperado : calcularPuntaje()
+activate esperado
+esperado --> obtenido : puntos * multiplicador
+deactivate esperado
+obtenido --> TestCase: true
+deactivate obtenido
+
+deactivate TestCase
+
+@enduml
