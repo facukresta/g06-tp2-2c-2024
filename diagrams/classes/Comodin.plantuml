@@ -53,13 +53,13 @@ class SumaPuntosDescarte{
 +SumaPuntosDescarte(int cantidad)
 +aplicarModificador(Puntaje puntaje, Juego juego)
 }
-
-Comodin *-- Aleatorio
-Comodin .down.|> Modificador
-ComodinCombinacion "1" -up-> "*" Comodin
-ComodinCombinacion .right.|> Modificador
-SumaMultiplicador -left-|> Comodin
-SumaMultiplicadorDescarte -down-|> Comodin
 SumaPuntos -right-|> Comodin
+Comodin *-up- Aleatorio
+
+Comodin .right.|> Modificador
+ComodinCombinacion "1" -left-> "*" Comodin
+ComodinCombinacion .up.|> Modificador
+Comodin <|-up- SumaMultiplicador
+SumaMultiplicadorDescarte -up-|> Comodin
 SumaPuntosDescarte -down-|> Comodin
 @enduml
