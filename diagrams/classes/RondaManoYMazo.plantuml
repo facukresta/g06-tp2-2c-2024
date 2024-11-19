@@ -1,0 +1,54 @@
+@startuml RondaManoYMazo
+skinparam classAttributeIconSize 0
+
+class Ronda{
+-puntajesObtenidos : Puntaje
+-puntajeASuperar : List<Puntaje>
+-descartes : int
+- manos : int
++Ronda(Puntaje puntajeASuperar, int manos, int descartes, Mazo mazo)
++agregarComodin(Modificador comodin)
++descartarMano()
++elegirCarta(Carta c)
++jugarMano()
++modificarCarta(Carta c, Tarot t)
++modificarJuego(Tarot t)
++pasoLaRonda() : bool
++puedeSeguirJugando() : bool
+}
+
+class Mazo {
+-cartas: List<Carta>
+-cartasDescartadas: List<Carta>
++agregarCarta(Carta C)
++agregarCartas(List<Carta> c)
++repartirCartas(int cantidad): List<Carta>
++mezclar()
+}
+
+class Mano {
+-maxCartas: int
+-maxCartasSeleccionadas: int
+-cartas: List<Carta>
+-cartasSelecionadas: List<Carta>
+-juego: Juego
+-comodines: List<Modificador>
++Mano(int cantidadDeCartas)
++agregarCarta(Carta c)
++agregarCartas(List<Carta> c)
++agregarComodin(Modificador comodin)
++descartarMano() : Puntaje
++elegirCarta(Carta c)
++jugarMano() : Puntaje
++modificarCarta(Cartca c, Tarot t)
++modificarJuego(Tarot t)
++obtenerCantidadDeCartas(): int
++obtenerCarta(Carta c): Carta
++quitarCarta(Carta c)
++quitarCartas(List<Carta> c)
+}
+
+Ronda --> Mano : tiene
+Ronda --> Mazo : tiene
+Mazo .right.> Mano : modifica
+@enduml

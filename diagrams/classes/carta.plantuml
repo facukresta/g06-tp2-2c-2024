@@ -3,16 +3,20 @@ skinparam classAttributeIconSize 0
 class Carta {
 -id: int
 -numero: int
-+obtenerPuntaje(): Puntaje
-+cambiarPalo(Palo p)
-+cambiarNumero(int numero)
-+obtenerValor(): int
-+esDelMismoPalo(Carta c): boolean
-+sos(Carta c): boolean
++Carta(int numero, Palo palo)
 +aplicarModificador(Tarot t)
++esDelMismoNumero(Carta carta) : bool
++esDelMismoPalo(Carta carta) : bool
++obtenerNumero() : int
+-obtenerPalo() : Palo
++obtenerPuntaje(): Puntaje
++sos(Carta c): boolean
 }
-interface Tarot {
+
+abstract class Tarot{
+#juego: Juego
 +{abstract}obtenerPuntaje(Puntaje p): Puntaje
++sosParaEsteJuego(Juego juego): bool
 }
 
 Carta *-- Tarot :tiene

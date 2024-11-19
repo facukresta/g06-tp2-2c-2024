@@ -1,10 +1,12 @@
 @startuml Juego
 skinparam classAttributeIconSize 0
+
 abstract Juego {
--modificador: Tarot
+#modificador: Tarot
 +{static}ChequearJuego(CartasSeleccionadas): Juego
 +{abstract}puntuarMano(): Puntaje
 +{abstract}sosJuego(List<Carta>): bool
+-aplicarTarotALaIntancia(Tarot t)
 +aplicarTarot(Tarot t)
 }
 
@@ -59,11 +61,12 @@ class EscaleraReal  {
 +sosJuego(List<Carta>): bool
 }
 
+Juego "1" --> "10" Juego :tiene
 CartaAlta -up-|> Juego
 Par -up-|> Juego
 DoblePar -up-|> Juego
 Trio -up-|> Juego
-Escalera -left-|> Juego
+Escalera -left-|> Juego::aplicarTarot
 Color -right-|> Juego
 FullHouse -down-|> Juego
 Poker -down-|> Juego

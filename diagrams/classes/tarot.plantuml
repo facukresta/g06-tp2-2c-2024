@@ -1,28 +1,41 @@
 @startuml Tarot
 skinparam classAttributeIconSize 0
-interface Tarot {
+
+abstract class Tarot{
+#juego: Juego
 +{abstract}obtenerPuntaje(Puntaje p): Puntaje
++sosParaEsteJuego(Juego juego): bool
+}
+
+class Sumador {
++Sumador(int puntos, double multiplicador, Juego juego)
++Sumador(int puntos, double multiplicador)
++obtenerPuntaje(Puntaje p): Puntaje
 }
 
 class SinTarot {
++SinTarot(Juego juego)
 +obtenerPuntaje(Puntaje p): Puntaje
 }
 
 class CambiadorDePuntos {
 -puntos: int
 +CambiadorDePuntos(int puntos)
++CambiadorDePuntos(int puntos, Juego juego)
 +obtenerPuntaje(Puntaje p): Puntaje
 }
 
 class CambiadorDeMultiplicador {
 -multplicador: int
 +CambiadorDeMultiplicador(int multplicador)
++CambiadorDeMultiplicador(int multplicador, Juego juego)
 +obtenerPuntaje(Puntaje p): Puntaje
 }
 
-SinTarot .left.|> Tarot
-CambiadorDePuntos .up.|> Tarot
-CambiadorDeMultiplicador ..|> Tarot
+Sumador -right-|> Tarot
+SinTarot -left-|> Tarot
+CambiadorDePuntos -up-|> Tarot
+CambiadorDeMultiplicador --|> Tarot
 
 
 @enduml

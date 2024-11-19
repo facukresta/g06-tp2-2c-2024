@@ -15,8 +15,8 @@ public class Ronda {
     private Mazo mazo;
     private Puntaje puntajeASuperar;
     private ArrayList<Puntaje> puntajesObtenidos;
-    int descartes;
-    int manos;
+    private int descartes;
+    private int manos;
 
     public Ronda(Puntaje puntajeASuperar, int manos, int descartes, Mazo mazo) {
         this.puntajeASuperar = puntajeASuperar;
@@ -49,7 +49,7 @@ public class Ronda {
     }
     public void descartarMano() {
         puntajesObtenidos.add(mano.descartarMano());
-        descartes--;
+        this.descartes = descartes--;
         if (pasoLaRonda()) {
             throw new PasoLaRondaException();
         }

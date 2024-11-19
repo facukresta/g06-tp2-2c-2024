@@ -1,0 +1,68 @@
+@startuml Comodín
+skinparam classAttributeIconSize 0
+
+interface Modificador{
++{abstract} aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+class Aleatorio{
+- numero : int
++{method} Aleatorio(int probabilidad)
++{method} sucede() : bool
+}
+
+class Comodin{
+#cantidad : double
+#juego : Juego
++{method} Comodin(double cantidad, Aleatorio probabilidad, Juego juego)
++{abstract} {method} aplicarModificador(Puntaje puntaje, Juego juego)
+#{method} puedeAplicarse() : bool
+}
+
+class CartaComodin{
+-comodines : List<Comodin>
+#juego : Juego
++{method} Comodin(double cantidad, Aleatorio probabilidad, Juego juego)
++{method} aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+class SumaMultiplicador{
++SumaMultiplicador(double canidad, Juego juego, Aleatorio probabilidad)
++SumaMultiplicador(double cantidad, Aleatorio probabilidad)
++SumaMultiplicador(double cantidad, Juego juego)
++SumaMultiplicador(double cantidad)
++aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+
+class SumaMultiplicadorDescarte{
++SumaMultiplicadorDescarte(double cantidad, Aleatorio probabilidad)
++SumaMultiplicadorDescarte(double cantidad)
++aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+
+class SumaPuntos{
++SumaPuntos(double canidad, Juego juego, Aleatorio probabilidad)
++SumaPuntos(double cantidad, Aleatorio probabilidad)
++SumaPuntos(double cantidad, Juego juego)
++SumaPuntos(double cantidad)
++aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+class SumaPuntosDescarte{
++SumaPuntosDescarte(int cantidad, Aleatorio probabilidad)
++SumaPuntosDescarte(int cantidad)
++aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+Comodin --> Aleatorio
+Comodin .down.|> Modificador
+CartaComodin "1" -up-> "*" Comodin 
+CartaComodin .right.|> Modificador
+SumaMultiplicador -left-|> Comodin
+SumaMultiplicadorDescarte -down-|> Comodin
+SumaPuntos -right-|> Comodin
+SumaPuntosDescarte -down-|> Comodin
+
+@enduml

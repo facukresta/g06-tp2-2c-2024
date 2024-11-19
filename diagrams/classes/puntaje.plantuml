@@ -1,56 +1,68 @@
 @startuml Puntaje
 skinparam classAttributeIconSize 0
+
 class Puntaje {
 -puntos: int
--multiplicador: int
-+Puntaje(int puntos, multiplicador)
-+sumar(p Puntaje):
-+sumarPuntos():
-+sumarMultiplicador():
-+calcularValor(): int
+-multiplicador: double
++Puntaje(int puntos, double multiplicador)
+-calcularPuntaje(): double
++esMayor(Puntaje p): bool
++esMenorAPuntajes(List<Puntaje> puntajes) : bool
 +obtenerPuntos(): int
-+obtenerMultiplicador(): int
-+esMayor(Puntaje p): boolean
++obtenerMultiplicador(): double
++sumar(Puntaje puntajeASumar):
+-sumarPuntos(Puntaje puntaje):
+-sumarMultiplicador(Puntaje puntaje):
+-tenesMismoPuntaje(Puntaje puntaje) : bool
 }
 
 class Carta {
 -id: int
 -numero: int
--palo: Palo
-+obtenerPuntaje(): Puntaje
-+cambiarPalo(Palo p)
-+cambiarNumero(int numero)
-+obtenerValor(): int
-+esDelMismoPalo(Carta c): boolean
-+sos(Carta c): boolean
+-palo : Palo
++Carta(int numero, Palo palo)
 +aplicarModificador(Tarot t)
++esDelMismoNumero(Carta carta) : bool
++esDelMismoPalo(Carta carta) : bool
++obtenerNumero() : int
+-obtenerPalo() : Palo
++obtenerPuntaje(): Puntaje
++sos(Carta c): boolean
 }
 
-interface Tarot {
+abstract class Tarot{
+#juego: Juego
 +{abstract}obtenerPuntaje(Puntaje p): Puntaje
++sosParaEsteJuego(Juego juego): bool
 }
 
 Carta *-- Tarot :tiene
 
 class Mano {
 -maxCartas: int
+-maxCartasSeleccionadas: int
 -cartas: List<Carta>
 -cartasSelecionadas: List<Carta>
 -juego: Juego
+-comodines: List<Modificador>
 +Mano(int cantidadDeCartas)
 +agregarCarta(Carta c)
 +agregarCartas(List<Carta> c)
-+quitarCarta(Carta c)
-+quitarCartas(List<Carta> c)
++agregarComodin(Modificador comodin)
++descartarMano() : Puntaje
 +elegirCarta(Carta c)
++jugarMano() : Puntaje
++modificarCarta(Cartca c, Tarot t)
++modificarJuego(Tarot t)
 +obtenerCantidadDeCartas(): int
 +obtenerCarta(Carta c): Carta
-+jugarMano(): int
++quitarCarta(Carta c)
++quitarCartas(List<Carta> c)
 }
 
 
-Mano .left.> Puntaje: " usa"
+Mano .left.> Puntaje: "crea"
 Tarot .up.> Puntaje: "usa"
-Puntaje <.left. Carta: "usa"
+Puntaje <.left. Carta: "crea"
 
 @enduml
