@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modeloTest.comodinTest;
 
 import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
+import edu.fiuba.algo3.modelo.aleatorio.Ejecucion;
 import edu.fiuba.algo3.modelo.comodin.Comodin;
 import edu.fiuba.algo3.modelo.comodin.SumaPuntosDescarte;
 import edu.fiuba.algo3.modelo.juego.Juego;
@@ -40,8 +41,12 @@ public class SumaPuntosDescarteTest {
     @Test
     public void test03AlAplicarUnComodinDeSumaPuntosDescarteConUnaProbabilidadQueSeDaraEsteSumaLosPuntos(){
         // Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(true);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            accion.run();
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Comodin comodin = new SumaPuntosDescarte(5, aleatorioMock);
         Puntaje puntajeAModificar = new Puntaje(5, 4);
         Puntaje puntajeEsperado = new Puntaje(10, 4);
@@ -53,8 +58,11 @@ public class SumaPuntosDescarteTest {
     @Test
     public void test04AlAplicarUnComodinDeSumaPuntosDescarteConUnaProbabilidadQueNoSeDaraEsteNoSumaLosPuntos(){
         // Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(false);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Comodin comodin = new SumaPuntosDescarte(5, aleatorioMock);
         Puntaje puntajeAModificar = new Puntaje(5, 4);
         Puntaje puntajeEsperado = new Puntaje(5, 4);
@@ -66,11 +74,18 @@ public class SumaPuntosDescarteTest {
     @Test
     public void test05AlAplicarUnComodinDeSumaPuntosDescarteConUnaProbabilidadQueSeDaraYOtroQueNoEsteSumaLosPuntosDelPrimero(){
         // Arrange
-        Aleatorio aleatorioMock1 = mock(Aleatorio.class);
-        when(aleatorioMock1.sucede()).thenReturn(true);
+        Ejecucion aleatorioMock1 = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            accion.run();
+            return null;
+        }).when(aleatorioMock1).ejecuta(any(Runnable.class));
         Comodin comodin1 = new SumaPuntosDescarte(5, aleatorioMock1);
-        Aleatorio aleatorioMock2 = mock(Aleatorio.class);
-        when(aleatorioMock2.sucede()).thenReturn(false);
+        Ejecucion aleatorioMock2 = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            return null;
+        }).when(aleatorioMock2).ejecuta(any(Runnable.class));
         Comodin comodin2 = new SumaPuntosDescarte(2000, aleatorioMock2);
         Puntaje puntajeAModificar = new Puntaje(5, 4);
         Puntaje puntajeEsperado = new Puntaje(10, 4);

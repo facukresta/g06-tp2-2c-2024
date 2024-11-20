@@ -5,6 +5,7 @@ import edu.fiuba.algo3.LectorComodines;
 import edu.fiuba.algo3.LectorDeCartas;
 import edu.fiuba.algo3.LectorDeTarots;
 import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
+import edu.fiuba.algo3.modelo.aleatorio.Ejecucion;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.Mano;
@@ -90,9 +91,6 @@ public class casosDeUsoEntrega2Test {
     @Test
     public void test04ElJugadorConUnComodinConChancesDeAplicarUnModificadorDe1Sobre1000ConEfectoDeSumaDeMultiplicadorAplicaEseEfectoCuandoLasProbabilidadesEstanDadas(){
         //Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(false);
-        Comodin comodin = new SumaMultiplicador(13, aleatorioMock);
         Mano mano = new Mano();
         Carta carta1 = new Carta(7, new Trebol());
         Carta carta2 = new Carta(7, new Corazon());
@@ -100,6 +98,12 @@ public class casosDeUsoEntrega2Test {
         ArrayList<Carta> cartas1 = new ArrayList<>(List.of(carta1));
         ArrayList<Carta> cartas2 = new ArrayList<>(List.of(carta2));
         mano.agregarCartas(cartas);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
+
+        Comodin comodin = new SumaMultiplicador(13, aleatorioMock);
         mano.agregarComodin(comodin);
         Puntaje puntajeEsperado1 = new Puntaje(12,1);
         Puntaje puntajeEsperado2 = new Puntaje(12,13);
@@ -107,7 +111,14 @@ public class casosDeUsoEntrega2Test {
         Juego juego2 = Juego.chequearJuego(cartas2);
         // Act
         Puntaje puntajeObtenido1 = mano.jugarMano(cartas1, juego1);
-        when(aleatorioMock.sucede()).thenReturn(true);
+        aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            accion.run();
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
+        comodin = new SumaMultiplicador(13, aleatorioMock);
+        mano.agregarComodin(comodin);
         Puntaje puntajeObtenido2 = mano.jugarMano(cartas2, juego2);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));
@@ -118,8 +129,12 @@ public class casosDeUsoEntrega2Test {
     public void test05UnComodinConCombinacionDeEfectosBonus(){
         //Arrange
         Mano mano = new Mano();
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(false);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            accion.run();
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Puntaje puntajeEsperado1 = new Puntaje(24,2);
         Puntaje puntajeEsperado2 = new Puntaje(37,2);
         Comodin comodin = new SumaPuntos(13, new Par(), aleatorioMock);
@@ -127,12 +142,11 @@ public class casosDeUsoEntrega2Test {
         Carta carta2 = new Carta(7, new Corazon());
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
         Juego juego = Juego.chequearJuego(cartas);
-        mano.agregarComodin(comodin);
         mano.agregarCartas(cartas);
         // Act
         Puntaje puntajeObtenido1 = mano.jugarMano(cartas, juego);
-        when(aleatorioMock.sucede()).thenReturn(true);
         mano.agregarCartas(cartas);
+        mano.agregarComodin(comodin);
         Puntaje puntajeObtenido2 = mano.jugarMano(cartas, juego);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));

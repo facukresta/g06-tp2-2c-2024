@@ -90,21 +90,22 @@ public class ColorTest {
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 
-//    @Test
-//    public void test07AUnJuegoColorSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Color());
-//        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
-//        Puntaje puntajeEsperado = new Puntaje(72,8);
-//        // Act
-//        Juego Color = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica()))));
-//        Puntaje puntajeObtenido = Color.puntuarMano(new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica()))));
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Color());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//
+    @Test
+    public void test07AUnJuegoColorSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Color());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(72,8);
+        // Act
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica())));
+        Juego juego = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = juego.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Color());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
 //    @Test
 //    public void test08AUnJuegoColorSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
 //        // Arrange

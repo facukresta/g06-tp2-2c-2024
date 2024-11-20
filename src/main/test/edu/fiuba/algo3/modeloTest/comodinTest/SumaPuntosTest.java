@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modeloTest.comodinTest;
 
 import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
+import edu.fiuba.algo3.modelo.aleatorio.Ejecucion;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.CartaAlta;
 import edu.fiuba.algo3.modelo.juego.*;
@@ -60,8 +61,12 @@ public class SumaPuntosTest {
     @Test
     public void test05AlAplicarUnComodinDeSumaPuntosConProbablidadEsteSumaLosPuntosYaQueSeDaLaProbabilidad(){
         // Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(true);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            accion.run();
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Comodin comodin = new SumaPuntos(5, aleatorioMock);
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
@@ -74,8 +79,11 @@ public class SumaPuntosTest {
     @Test
     public void test06AlAplicarUnComodinDeSumaPuntosConProbablidadEsteNoSumaLosPuntosYaQueNoSeDaLaProbabilidad(){
         // Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(false);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Comodin comodin = new SumaPuntos(5, aleatorioMock);
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
@@ -88,8 +96,12 @@ public class SumaPuntosTest {
     @Test
     public void test07AlAplicarUnComodinDeSumaPuntosConUnaProbabilidadQueSeDaYUnJuegoEspecificoQueTambienSeDaSeAplicaCorrectamente(){
         // Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(true);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            accion.run();
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Comodin comodin = new SumaPuntos(6, new Par(), aleatorioMock);
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(16, 2);
@@ -102,8 +114,12 @@ public class SumaPuntosTest {
     @Test
     public void test08AlAplicarUnComodinDeSumaPuntosConUnaProbabilidadQueSeDaYUnJuegoEspecificoQueNoSeDaNoSeAplicaCorrectamente(){
         // Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(true);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            accion.run();
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Comodin comodin = new SumaPuntos(6, new CartaAlta(), aleatorioMock);
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
@@ -116,8 +132,11 @@ public class SumaPuntosTest {
     @Test
     public void test09AlAplicarUnComodinDeSumaPuntosConUnaProbabilidadQueNoSeDaYUnJuegoEspecificoQueSeDaNoSeAplicaCorrectamente(){
         // Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(false);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Comodin comodin = new SumaPuntos(6, new Par(), aleatorioMock);
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
@@ -130,8 +149,11 @@ public class SumaPuntosTest {
     @Test
     public void test10AlAplicarUnComodinDeSumaPuntosConUnaProbabilidadQueNoSeDaYUnJuegoEspecificoQueTampocoSeDaNoSeAplicaCorrectamente(){
         // Arrange
-        Aleatorio aleatorioMock = mock(Aleatorio.class);
-        when(aleatorioMock.sucede()).thenReturn(false);
+        Ejecucion aleatorioMock = mock(Aleatorio.class);
+        doAnswer(invocation -> {
+            Runnable accion = invocation.getArgument(0);
+            return null;
+        }).when(aleatorioMock).ejecuta(any(Runnable.class));
         Comodin comodin = new SumaPuntos(6, new CartaAlta(), aleatorioMock);
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);

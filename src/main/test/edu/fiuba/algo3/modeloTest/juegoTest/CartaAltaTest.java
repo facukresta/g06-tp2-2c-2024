@@ -102,7 +102,6 @@ public class CartaAltaTest {
     @Test
     public void test08UnaInstanciaDeCartaAltaDeUnaListaDeCartasMasDeCincoCartasDevuelveElValorCorrecto() {
         // Arrange
-        CartaAlta juegoCartaAlta = new CartaAlta();
         ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
                 new Carta(2, new Corazon()), new Carta(3, new Corazon()),
                 new Carta(4, new Corazon()), new Carta(5, new Corazon()),
@@ -110,101 +109,101 @@ public class CartaAltaTest {
         Puntaje EsperadoSiFueseCartaAlta = new Puntaje(42, 1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje Obtenido = juegoCartaAlta.puntuarMano();
+        Puntaje Obtenido = juego.puntuarMano();
         // Assert
-        assertFalse(Obtenido.tenesMismoPuntaje(EsperadoSiFueseCartaAlta));
+        assertTrue(Obtenido.tenesMismoPuntaje(EsperadoSiFueseCartaAlta));
     }
-//    @Test
-//    public void test09AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new CartaAlta());
-//        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
-//        Puntaje puntajeEsperado = new Puntaje(10,8);
-//        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
-//        // Act
-//        Juego cartaAlta = Juego.chequearJuego(cartas);
-//        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new CartaAlta());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//    @Test
-//    public void test10AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
-//        // Arrange
-//        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Par());
-//        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
-//        Puntaje puntajeEsperado = new Puntaje(10,1);
-//        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
-//        // Act
-//        Juego cartaAlta = Juego.chequearJuego(cartas);
-//        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Par());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//    @Test
-//    public void test11AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDePuntosDeCartaAltaDeOchoPuntosDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new CartaAlta());
-//        Juego.aplicarTarot(tarotCambiadorDePuntos);
-//        Puntaje puntajeEsperado = new Puntaje(13,1);
-//        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
-//        // Act
-//        Juego cartaAlta = Juego.chequearJuego(cartas);
-//        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new CartaAlta());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//
-//    @Test
-//    public void test12AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par());
-//        Juego.aplicarTarot(tarotCambiadorDePuntos);
-//        Puntaje puntajeEsperado = new Puntaje(10,1);
-//        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
-//        // Act
-//        Juego cartaAlta = Juego.chequearJuego(cartas);
-//        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Par());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//
-//    @Test
-//    public void test13AUnJuegoCartaAltaSeLeAplicaUnTarotSumadorDeCartaAltaDeOchoPuntosDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotSumador = new Sumador(8,2, new CartaAlta());
-//        Juego.aplicarTarot(tarotSumador);
-//        Puntaje puntajeEsperado = new Puntaje(18,2);
-//        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
-//        // Act
-//        Juego cartaAlta = Juego.chequearJuego(cartas);
-//        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new CartaAlta());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//
-//    @Test
-//    public void test14AUnJuegoCartaAltaSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotSumador = new Sumador(8,2, new Par());
-//        Juego.aplicarTarot(tarotSumador);
-//        Puntaje puntajeEsperado = new Puntaje(10,1);
-//        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
-//        // Act
-//        Juego cartaAlta = Juego.chequearJuego(cartas);
-//        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Par());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
+    @Test
+    public void test09AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new CartaAlta());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(10,8);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
+        // Act
+        Juego cartaAlta = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new CartaAlta());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test10AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Par());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(10,1);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
+        // Act
+        Juego cartaAlta = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Par());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test11AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDePuntosDeCartaAltaDeOchoPuntosDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new CartaAlta());
+        Juego.aplicarTarot(tarotCambiadorDePuntos);
+        Puntaje puntajeEsperado = new Puntaje(13,1);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
+        // Act
+        Juego cartaAlta = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new CartaAlta());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test12AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par());
+        Juego.aplicarTarot(tarotCambiadorDePuntos);
+        Puntaje puntajeEsperado = new Puntaje(10,1);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
+        // Act
+        Juego cartaAlta = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Par());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test13AUnJuegoCartaAltaSeLeAplicaUnTarotSumadorDeCartaAltaDeOchoPuntosDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotSumador = new Sumador(8,2, new CartaAlta());
+        Juego.aplicarTarot(tarotSumador);
+        Puntaje puntajeEsperado = new Puntaje(18,2);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
+        // Act
+        Juego cartaAlta = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new CartaAlta());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test14AUnJuegoCartaAltaSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotSumador = new Sumador(8,2, new Par());
+        Juego.aplicarTarot(tarotSumador);
+        Puntaje puntajeEsperado = new Puntaje(10,1);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(5, new Corazon())));
+        // Act
+        Juego cartaAlta = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Par());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
 }
