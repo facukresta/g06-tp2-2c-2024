@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class EscaleraDeColor extends Juego {
-    public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        return puntuarCartas(cartas, new Puntaje(100, 8));
+    public Puntaje puntuarMano() {
+        return this.puntuarJuego(new Puntaje(100, 8));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {

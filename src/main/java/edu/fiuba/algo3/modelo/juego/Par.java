@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class Par extends Juego {
 
-    public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        return puntuarCartas(cartas, new Puntaje(10, 2));
+    public Puntaje puntuarMano() {
+        return this.puntuarJuego(new Puntaje(10, 2));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {

@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
 
-
-import com.sun.jdi.request.ModificationWatchpointRequest;
 import edu.fiuba.algo3.LectorComodines;
 import edu.fiuba.algo3.LectorDeCartas;
 import edu.fiuba.algo3.LectorDeTarots;
@@ -52,21 +50,18 @@ public class casosDeUsoEntrega2Test {
         //Arrange
         Puntaje puntajeEsperado = new Puntaje(54,7);
         Comodin comodin = new SumaMultiplicador(3, new Escalera());
-        Mano mano = new Mano(8);
+        Mano mano = new Mano();
         Carta carta1 = new Carta(1, new Trebol());
         Carta carta2 = new Carta(2, new Trebol());
         Carta carta3 = new Carta(3, new Pica());
         Carta carta4 = new Carta(4, new Corazon());
         Carta carta5 = new Carta(5, new Trebol());
-        mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
-        mano.elegirCarta(carta1);
-        mano.elegirCarta(carta2);
-        mano.elegirCarta(carta3);
-        mano.elegirCarta(carta4);
-        mano.elegirCarta(carta5);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
+        Juego juego = Juego.chequearJuego(cartas);
+        mano.agregarCartas(cartas);
         mano.agregarComodin(comodin);
         //Act
-        Puntaje puntajeObtenido = mano.jugarMano();
+        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego);
         //Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -76,18 +71,18 @@ public class casosDeUsoEntrega2Test {
         //Arrange
         Puntaje puntajeEsperado = new Puntaje(10,1);
         Comodin comodin = new SumaPuntosDescarte(10);
-        Mano mano = new Mano(8);
+        Mano mano = new Mano();
         Carta carta1 = new Carta(1, new Trebol());
         Carta carta2 = new Carta(2, new Trebol());
         Carta carta3 = new Carta(3, new Pica());
         Carta carta4 = new Carta(4, new Corazon());
         Carta carta5 = new Carta(5, new Trebol());
-        mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
-        mano.elegirCarta(carta1);
-        mano.elegirCarta(carta2);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
+        Juego juego = Juego.chequearJuego(cartas);
+        mano.agregarCartas(cartas);
         mano.agregarComodin(comodin);
         // Act
-        Puntaje puntajeObtenido = mano.descartarMano();
+        Puntaje puntajeObtenido = mano.descartarMano(cartas, juego);
         //Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -98,20 +93,22 @@ public class casosDeUsoEntrega2Test {
         Aleatorio aleatorioMock = mock(Aleatorio.class);
         when(aleatorioMock.sucede()).thenReturn(false);
         Comodin comodin = new SumaMultiplicador(13, aleatorioMock);
-        Mano mano = new Mano(8);
+        Mano mano = new Mano();
         Carta carta1 = new Carta(7, new Trebol());
         Carta carta2 = new Carta(7, new Corazon());
-        mano.agregarCarta(carta1);
-        mano.agregarCarta(carta2);
-        mano.elegirCarta(carta1);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
+        ArrayList<Carta> cartas1 = new ArrayList<>(List.of(carta1));
+        ArrayList<Carta> cartas2 = new ArrayList<>(List.of(carta2));
+        mano.agregarCartas(cartas);
         mano.agregarComodin(comodin);
         Puntaje puntajeEsperado1 = new Puntaje(12,1);
         Puntaje puntajeEsperado2 = new Puntaje(12,13);
+        Juego juego1 = Juego.chequearJuego(cartas1);
+        Juego juego2 = Juego.chequearJuego(cartas2);
         // Act
-        Puntaje puntajeObtenido1 = mano.jugarMano();
+        Puntaje puntajeObtenido1 = mano.jugarMano(cartas1, juego1);
         when(aleatorioMock.sucede()).thenReturn(true);
-        mano.elegirCarta(carta2);
-        Puntaje puntajeObtenido2 = mano.jugarMano();
+        Puntaje puntajeObtenido2 = mano.jugarMano(cartas2, juego2);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));
         assertTrue(puntajeEsperado2.tenesMismoPuntaje(puntajeObtenido2));
@@ -120,7 +117,7 @@ public class casosDeUsoEntrega2Test {
     @Test
     public void test05UnComodinConCombinacionDeEfectosBonus(){
         //Arrange
-        Mano mano = new Mano(8);
+        Mano mano = new Mano();
         Aleatorio aleatorioMock = mock(Aleatorio.class);
         when(aleatorioMock.sucede()).thenReturn(false);
         Puntaje puntajeEsperado1 = new Puntaje(24,2);
@@ -128,19 +125,15 @@ public class casosDeUsoEntrega2Test {
         Comodin comodin = new SumaPuntos(13, new Par(), aleatorioMock);
         Carta carta1 = new Carta(7, new Trebol());
         Carta carta2 = new Carta(7, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
+        Juego juego = Juego.chequearJuego(cartas);
         mano.agregarComodin(comodin);
-        mano.agregarCarta(carta1);
-        mano.agregarCarta(carta2);
-        mano.elegirCarta(carta1);
-        mano.elegirCarta(carta2);
+        mano.agregarCartas(cartas);
         // Act
-        Puntaje puntajeObtenido1 = mano.jugarMano();
+        Puntaje puntajeObtenido1 = mano.jugarMano(cartas, juego);
         when(aleatorioMock.sucede()).thenReturn(true);
-        mano.agregarCarta(carta1);
-        mano.agregarCarta(carta2);
-        mano.elegirCarta(carta1);
-        mano.elegirCarta(carta2);
-        Puntaje puntajeObtenido2 = mano.jugarMano();
+        mano.agregarCartas(cartas);
+        Puntaje puntajeObtenido2 = mano.jugarMano(cartas, juego);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));
         assertTrue(puntajeEsperado2.tenesMismoPuntaje(puntajeObtenido2));

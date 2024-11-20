@@ -1,8 +1,11 @@
 package edu.fiuba.algo3.modeloTest.juegoTest;
 
+import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.SinJuego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
+import edu.fiuba.algo3.modelo.naipes.carta.Pica;
+import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 
@@ -16,43 +19,34 @@ public class SinJuegoTest {
     @Test
     public void test01UnaInstanciaDeSinJuegoSiUnaListaDeCartasConNingunaCartaEsSinJuego() {
         // Arrange
-        SinJuego juegoSinJuego = new SinJuego();
         ArrayList<Carta> cartas = new ArrayList<>(List.of());
+        Juego juego = Juego.chequearJuego(cartas);
+        Puntaje esperado = new Puntaje(0, 1);
         // Act
-        boolean resulatado = juegoSinJuego.sosJuego(cartas);
+        Puntaje obtenido = juego.puntuarMano();
         // Assert
-        assertTrue(resulatado);
+        assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
     @Test
     public void test02UnaInstanciaDeSinJuegoSiUnaListaDeCartasConUnaCartaNoEsSinJuego() {
         // Arrange
-        SinJuego juegoSinJuego = new SinJuego();
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon())));
+        Juego juego = Juego.chequearJuego(cartas);
+        Puntaje esperado = new Puntaje(15, 1);
         // Act
-        boolean resulatado = juegoSinJuego.sosJuego(cartas);
+        Puntaje obtenido = juego.puntuarMano();
         // Assert
-        assertFalse(resulatado);
+        assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
     @Test
     public void test03UnaInstanciaDeSinJuegoDeUnaListaDeCartasVaciaDevuelveElValorCorrecto() {
         // Arrange
-        SinJuego juegoSinJuego = new SinJuego();
         ArrayList<Carta> cartas = new ArrayList<>(List.of());
-        Puntaje valorEsperado = new Puntaje(0, 1);
+        Juego juego = Juego.chequearJuego(cartas);
+        Puntaje esperado = new Puntaje(0, 1);
         // Act
-        Puntaje valorObtenido = juegoSinJuego.puntuarMano(cartas);
+        Puntaje obtenido = juego.puntuarMano();
         // Assert
-        assertTrue(valorObtenido.tenesMismoPuntaje(valorEsperado));
-    }
-    @Test
-    public void test04UnaInstanciaDeSinJuegoSiUnaListaDeCartasVaciaDevueleElValorBaseDeSinJuego() {
-        // Arrange
-        SinJuego juegoSinJuego = new SinJuego();
-        ArrayList<Carta> cartas = new ArrayList<>();
-        Puntaje valorEsperado = new Puntaje(0, 1);
-        // Act
-        Puntaje valorObtenido = juegoSinJuego.puntuarMano(cartas);
-        // Assert
-        assertTrue(valorObtenido.tenesMismoPuntaje(valorEsperado));
+        assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
 }

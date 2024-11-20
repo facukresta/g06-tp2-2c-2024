@@ -6,8 +6,8 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import java.util.ArrayList;
 
 public class SinJuego extends Juego{
-    public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        return new Puntaje(0,1);
+    public Puntaje puntuarMano() {
+        return this.puntuarJuego(new Puntaje(0, 1));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {

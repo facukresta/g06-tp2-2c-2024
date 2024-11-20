@@ -9,8 +9,8 @@ import java.util.Comparator;
 
 public class Escalera extends Juego {
 
-    public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        return puntuarCartas(cartas, new Puntaje(30, 4));
+    public Puntaje puntuarMano() {
+        return this.puntuarJuego(new Puntaje(30, 4));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {

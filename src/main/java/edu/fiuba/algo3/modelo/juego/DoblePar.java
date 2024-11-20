@@ -9,9 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DoblePar extends Juego {
-
-    public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        return puntuarCartas(cartas, new Puntaje(20, 2));
+    public Puntaje puntuarMano() {
+        return this.puntuarJuego(new Puntaje(20, 2));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {

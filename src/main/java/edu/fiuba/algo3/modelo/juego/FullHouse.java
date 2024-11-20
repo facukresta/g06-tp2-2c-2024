@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class FullHouse extends Juego{
-    public Puntaje puntuarMano(ArrayList<Carta> cartas) {
-        return puntuarCartas(cartas, new Puntaje(40, 4));
+    public Puntaje puntuarMano() {
+        return this.puntuarJuego(new Puntaje(40, 4));
     }
 
     public boolean sosJuego(ArrayList<Carta> cartas) {

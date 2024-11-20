@@ -8,23 +8,24 @@ import edu.fiuba.algo3.modelo.tarot.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 public abstract class Juego {
-
-    protected Tarot modificador = new SinTarot();
-
-    private static final ArrayList<Juego> juegos = new ArrayList<>(List.of(new CartaAlta(),
+    private static ArrayList<Juego> juegos = new ArrayList<>(List.of(new CartaAlta(),
             new Par(), new DoblePar(), new Trio(), new Escalera(), new Color(),
             new FullHouse(), new Poker(), new EscaleraDeColor(), new EscaleraReal()));
+    protected ArrayList<Carta> cartas = new ArrayList<>();
+    protected Tarot modificador = new SinTarot();
+
+    private void aplicarTarotALaIntancia(Tarot tarot) {
+        if (tarot.sosParaEsteJuego(this)) {
+            this.modificador = tarot;
+        }
+    }
 
     public static Juego chequearJuego(ArrayList<Carta> cartas) {
         Juego juegoSeleccionado = new SinJuego();
+
         for (Juego juegoActual : juegos) {
-            if (juegoActual.sosJuego(cartas)) {
-                Puntaje puntajeJuegoActual = juegoActual.puntuarMano(cartas);
-                Puntaje puntajeJuegoSeleccionado = juegoSeleccionado.puntuarMano(cartas);
-                if (puntajeJuegoActual.esMayor(puntajeJuegoSeleccionado)) {
-                    juegoSeleccionado = juegoActual;
-                }
-            }
+            juegoActual.colocarCartas(cartas);
+            juegoSeleccionado = juegoActual.obtenerMayor(juegoSeleccionado);
         }
         return juegoSeleccionado;
     }
@@ -34,21 +35,34 @@ public abstract class Juego {
             juegoActual.aplicarTarotALaIntancia(tarot);
         }
     }
-    private void aplicarTarotALaIntancia(Tarot tarot) {
-        if (tarot.sosParaEsteJuego(this)) {
-            this.modificador = tarot;
-        }
+
+    protected void colocarCartas(ArrayList<Carta> cartas){
+        this.cartas = cartas;
     }
 
-    protected Puntaje puntuarCartas(ArrayList<Carta> cartas, Puntaje puntajeBase) {
-        Puntaje puntaje = this.modificador.obtenerPuntaje(puntajeBase);
-        for (Carta carta : cartas) {
-            puntaje.sumar(carta.obtenerPuntaje());
+    protected Juego obtenerMayor(Juego juegoSeleccionado) {
+        if (this.puntuarMano().esMayor(juegoSeleccionado.puntuarMano())) {
+            return this;
         }
-        return puntaje;
+        return juegoSeleccionado;
     }
 
-    abstract public boolean sosJuego(ArrayList<Carta> cartas);
+    protected Puntaje puntuarCartas(Puntaje puntajeBase) {
+        for (Carta carta : this.cartas) {
+            puntajeBase.sumar(carta.obtenerPuntaje());
+        }
+        return puntajeBase;
+    }
 
-    abstract public Puntaje puntuarMano(ArrayList<Carta> cartas);
+    protected Puntaje puntuarJuego(Puntaje puntajeBase) {
+        if (this.sosJuego(this.cartas)) {
+            return puntuarCartas(this.modificador.obtenerPuntaje(puntajeBase));
+        }
+        return new Puntaje(0, 1);
+    }
+
+    abstract public Puntaje puntuarMano();
+
+    abstract protected boolean sosJuego(ArrayList<Carta> cartas);
 }
+

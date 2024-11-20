@@ -212,7 +212,7 @@ public class JuegoTest {
                 new Carta(13, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
+        Puntaje puntajeObtenido = juego.puntuarMano();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -226,7 +226,7 @@ public class JuegoTest {
                 new Carta(13, new Pica()), new Carta(10, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
+        Puntaje puntajeObtenido = juego.puntuarMano();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -239,7 +239,7 @@ public class JuegoTest {
                 new Carta(13, new Corazon()), new Carta(13, new Diamante())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
+        Puntaje puntajeObtenido = juego.puntuarMano();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -252,7 +252,7 @@ public class JuegoTest {
                 new Carta(13, new Corazon())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
+        Puntaje puntajeObtenido = juego.puntuarMano();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -264,7 +264,7 @@ public class JuegoTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(13, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano(cartas);
+        Puntaje puntajeObtenido = juego.puntuarMano();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }

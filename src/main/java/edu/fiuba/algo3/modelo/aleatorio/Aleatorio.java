@@ -11,4 +11,8 @@ public class Aleatorio {
     public boolean sucede() {
         return (((int) (Math.random() * probabilidad) == 0));
     }
+//    public void ejecuta(Runnable accion) {
+//        if (((int) (Math.random() * probabilidad) == 0))
+//            accion.run();
+//    }
 }
