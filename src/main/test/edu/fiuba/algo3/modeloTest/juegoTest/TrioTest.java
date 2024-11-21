@@ -114,98 +114,101 @@ public class TrioTest {
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
 
-//    @Test
-//    public void test07AUnJuegoTrioSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Trio());
-//        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
-//        Puntaje puntajeEsperado = new Puntaje(42,8);
-//        // Act
-//        Juego Trio = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4,
-//                new Corazon()), new Carta(4, new Trebol()))));
-//        Puntaje puntajeObtenido = Trio.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
-//                new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Trio());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//
-//    @Test
-//    public void test08AUnJuegoTrioSeLeAplicaUnTarotCambiadorDeMultiplicadorTrioaTrioNoLoModifica() {
-//        // Arrange
-//        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
-//        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
-//        Puntaje puntajeEsperado = new Puntaje(42,3);
-//        // Act
-//        Juego Trio = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()),
-//                new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        Puntaje puntajeObtenido = Trio.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
-//                new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Escalera());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//    @Test
-//    public void test09AUnJuegoTrioSeLeAplicaUnTarotCambiadorDePuntosDeTrioDeOchoPuntosDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new Trio());
-//        Juego.aplicarTarot(tarotCambiadorDePuntos);
-//        Puntaje puntajeEsperado = new Puntaje(24,3);
-//        // Act
-//        Juego Trio = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()),
-//                new Carta(12, new Pica()), new Carta(4, new Trebol()))));
-//        Puntaje puntajeObtenido = Trio.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()),
-//                new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Trio());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//
-//    @Test
-//    public void test10AUnJuegoTrioSeLeAplicaUnTarotCambiadorDePuntosDeDobleTrioDeOchoPuntosNoDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new DoblePar());
-//        Juego.aplicarTarot(tarotCambiadorDePuntos);
-//        Puntaje puntajeEsperado = new Puntaje(42,3);
-//        // Act
-//        Juego Trio = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        Puntaje puntajeObtenido = Trio.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new DoblePar());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//
-//    @Test
-//    public void test11AUnJuegoTrioSeLeAplicaUnTarotSumadorDeTrioDeOchoPuntosDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotSumador = new Sumador(2,2, new Trio());
-//        Juego.aplicarTarot(tarotSumador);
-//        Puntaje puntajeEsperado = new Puntaje(44,5);
-//        // Act
-//        Juego Trio = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        Puntaje puntajeObtenido = Trio.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Trio());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
-//
-//    @Test
-//    public void test12AUnJuegoTrioSeLeAplicaUnTarotSumadorDeTrioDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
-//        // Arrange
-//        Tarot tarotSumador = new Sumador(8,2, new Escalera());
-//        Juego.aplicarTarot(tarotSumador);
-//        Puntaje puntajeEsperado = new Puntaje(42,3);
-//        // Act
-//        Juego Trio = Juego.chequearJuego(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        Puntaje puntajeObtenido = Trio.puntuarMano(new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol()))));
-//        // Assert
-//        Tarot tarot2 = new SinTarot(new Escalera());
-//        Juego.aplicarTarot(tarot2);
-//        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
-//    }
+    @Test
+    public void test07AUnJuegoTrioSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Trio());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(42,8);
+        // Act
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4,
+                new Corazon()), new Carta(4, new Trebol())));
+        Juego Trio = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = Trio.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Trio());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test08AUnJuegoTrioSeLeAplicaUnTarotCambiadorDeMultiplicadorTrioaTrioNoLoModifica() {
+        // Arrange
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
+        Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
+        Puntaje puntajeEsperado = new Puntaje(42,3);
+        // Act
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()),
+                new Carta(4, new Corazon()), new Carta(4, new Trebol())));
+        Juego Trio = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = Trio.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Escalera());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+    @Test
+    public void test09AUnJuegoTrioSeLeAplicaUnTarotCambiadorDePuntosDeTrioDeOchoPuntosDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new Trio());
+        Juego.aplicarTarot(tarotCambiadorDePuntos);
+        Puntaje puntajeEsperado = new Puntaje(24,3);
+        // Act
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()),
+                new Carta(4, new Trebol())));
+        Juego Trio = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = Trio.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Trio());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test10AUnJuegoTrioSeLeAplicaUnTarotCambiadorDePuntosDeDobleTrioDeOchoPuntosNoDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new DoblePar());
+        Juego.aplicarTarot(tarotCambiadorDePuntos);
+        Puntaje puntajeEsperado = new Puntaje(42,3);
+        // Act
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol())));
+        Juego Trio = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = Trio.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new DoblePar());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test11AUnJuegoTrioSeLeAplicaUnTarotSumadorDeTrioDeOchoPuntosDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotSumador = new Sumador(2,2, new Trio());
+        Juego.aplicarTarot(tarotSumador);
+        Puntaje puntajeEsperado = new Puntaje(44,5);
+        // Act
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol())));
+        Juego Trio = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = Trio.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Trio());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
+
+    @Test
+    public void test12AUnJuegoTrioSeLeAplicaUnTarotSumadorDeTrioDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
+        // Arrange
+        Tarot tarotSumador = new Sumador(8,2, new Escalera());
+        Juego.aplicarTarot(tarotSumador);
+        Puntaje puntajeEsperado = new Puntaje(42,3);
+        // Act
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol())));
+        Juego Trio = Juego.chequearJuego(cartas);
+        Puntaje puntajeObtenido = Trio.puntuarMano();
+        // Assert
+        Tarot tarot2 = new SinTarot(new Escalera());
+        Juego.aplicarTarot(tarot2);
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
+    }
 }
