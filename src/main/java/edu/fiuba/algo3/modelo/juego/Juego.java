@@ -63,6 +63,10 @@ public abstract class Juego {
 
     abstract public Puntaje puntuarMano();
 
+    public boolean sosElMismoJuego(Juego juego) {
+        return this.getClass().equals(juego.getClass());
+    }
+
     abstract protected boolean sosJuego(ArrayList<Carta> cartas);
 }
 

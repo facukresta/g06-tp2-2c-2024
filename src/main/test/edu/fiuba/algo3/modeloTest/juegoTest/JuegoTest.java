@@ -15,7 +15,7 @@ public class JuegoTest {
     @Test
     public void test01UnJuegoDeUnaListaConUnaCartaSeraCartaAlta() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == CartaAlta.class;
@@ -26,9 +26,9 @@ public class JuegoTest {
     @Test
     public void test02UnJuegoDeUnaListaConCincoCartasSinOtroJuegoPosibleSeraCartaAlta() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(9, new Pica()), new Carta(3, new Diamante()),
-                new Carta(11, new Corazon()), new Carta(2, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(9, new Pica()), new CartaInglesa(3, new Diamante()),
+                new CartaInglesa(11, new Corazon()), new CartaInglesa(2, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == CartaAlta.class;
@@ -39,8 +39,8 @@ public class JuegoTest {
     @Test
     public void test03UnJuegoDeUnaListaConDosCartasDelMismoValorSeraPar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == Par.class;
@@ -51,9 +51,9 @@ public class JuegoTest {
     @Test
     public void test04UnJuegoDeUnaListaConCincoCartasYUnParSinOtroJuegoPosibleSeraPar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Pica()), new Carta(3, new Diamante()),
-                new Carta(11, new Corazon()), new Carta(2, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Pica()), new CartaInglesa(3, new Diamante()),
+                new CartaInglesa(11, new Corazon()), new CartaInglesa(2, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == Par.class;
@@ -64,8 +64,8 @@ public class JuegoTest {
     @Test
     public void test05UnJuegoDeUnaListaConTresCartasYTrioSinOtroJuegoPosibleSeraTrio() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Pica()), new Carta(10, new Diamante())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Pica()), new CartaInglesa(10, new Diamante())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == Trio.class;
@@ -76,9 +76,9 @@ public class JuegoTest {
     @Test
     public void test06UnJuegoDeUnaListaConCincoCartasYUnTrioSinOtroJuegoPosibleSeraTrio() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Pica()), new Carta(10, new Diamante()),
-                new Carta(11, new Corazon()), new Carta(2, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Pica()), new CartaInglesa(10, new Diamante()),
+                new CartaInglesa(11, new Corazon()), new CartaInglesa(2, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == Trio.class;
@@ -89,9 +89,9 @@ public class JuegoTest {
     @Test
     public void test07UnJuegoDeUnaListaConCuatroCartasYDosParesSinOtroJuegoPosibleSeraDoblePar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Pica()), new Carta(11, new Corazon()),
-                new Carta(11, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Pica()), new CartaInglesa(11, new Corazon()),
+                new CartaInglesa(11, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == DoblePar.class;
@@ -102,9 +102,9 @@ public class JuegoTest {
     @Test
     public void test08UnJuegoDeUnaListaConCincoCartasYDosParesSinOtroJuegoPosibleSeraDoblePar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Pica()), new Carta(11, new Corazon()),
-                new Carta(11, new Trebol()), new Carta(2, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Pica()), new CartaInglesa(11, new Corazon()),
+                new CartaInglesa(11, new Trebol()), new CartaInglesa(2, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == DoblePar.class;
@@ -115,9 +115,9 @@ public class JuegoTest {
     @Test
     public void test09UnJuegoDeUnaListaConCuatroCartasYPokerSinOtroJuegoPosibleSeraPoker() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Pica()), new Carta(10, new Diamante()),
-                new Carta(10, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Pica()), new CartaInglesa(10, new Diamante()),
+                new CartaInglesa(10, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == Poker.class;
@@ -128,9 +128,9 @@ public class JuegoTest {
     @Test
     public void test10UnJuegoDeUnaListaConCincoCartasYPokerSinOtroJuegoPosibleSeraPoker() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Pica()), new Carta(10, new Diamante()),
-                new Carta(10, new Trebol()), new Carta(2, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Pica()), new CartaInglesa(10, new Diamante()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(2, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == Poker.class;
@@ -141,9 +141,9 @@ public class JuegoTest {
     @Test
     public void test11UnJuegoDeUnaListaConCincoCartasYColorSinOtroJuegoPosibleSeraColor() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(4, new Corazon()), new Carta(5, new Corazon()),
-                new Carta(6, new Corazon()), new Carta(2, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(5, new Corazon()),
+                new CartaInglesa(6, new Corazon()), new CartaInglesa(2, new Corazon())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == Color.class;
@@ -154,9 +154,9 @@ public class JuegoTest {
     @Test
     public void test12UnJuegoDeUnaListaConCincoCartasYFullHouseSinOtroJuegoPosibleSeraFullHouse() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(2, new Corazon()), new Carta(10, new Pica()),
-                new Carta(2, new Pica()), new Carta(2, new Diamante())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(2, new Corazon()), new CartaInglesa(10, new Pica()),
+                new CartaInglesa(2, new Pica()), new CartaInglesa(2, new Diamante())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == FullHouse.class;
@@ -167,9 +167,9 @@ public class JuegoTest {
     @Test
     public void test13UnJuegoDeUnaListaConCincoCartasYEscaleraSinOtroJuegoPosibleSeraEscalera() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Corazon()),
-                new Carta(2, new Corazon()), new Carta(3, new Pica()),
-                new Carta(4, new Pica()), new Carta(5, new Diamante())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(2, new Corazon()), new CartaInglesa(3, new Pica()),
+                new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Diamante())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == Escalera.class;
@@ -180,9 +180,9 @@ public class JuegoTest {
     @Test
     public void test14UnJuegoDeUnaListaConCincoCartasYEscaleraDeColorSinOtroJuegoPosibleSeraEscaleraDeColor() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()),
-                new Carta(2, new Pica()), new Carta(3, new Pica()),
-                new Carta(4, new Pica()), new Carta(5, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()),
+                new CartaInglesa(2, new Pica()), new CartaInglesa(3, new Pica()),
+                new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == EscaleraDeColor.class;
@@ -193,9 +193,9 @@ public class JuegoTest {
     @Test
     public void test15UnJuegoDeUnaListaConCincoCartasYEscaleraRealSinOtroJuegoPosibleSeraEscaleraReal() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()),
-                new Carta(11, new Pica()), new Carta(12, new Pica()),
-                new Carta(13, new Pica()), new Carta(10, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()),
+                new CartaInglesa(11, new Pica()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(13, new Pica()), new CartaInglesa(10, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         boolean resulatado = juego.getClass() == EscaleraReal.class;
@@ -207,9 +207,9 @@ public class JuegoTest {
     public void test16UnJuegoDeUnaListaConCuatroCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(100, 7);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(13, new Pica()),
-                new Carta(13, new Corazon()), new Carta(13, new Diamante()),
-                new Carta(13, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(13, new Pica()),
+                new CartaInglesa(13, new Corazon()), new CartaInglesa(13, new Diamante()),
+                new CartaInglesa(13, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = juego.puntuarMano();
@@ -221,9 +221,9 @@ public class JuegoTest {
     public void test17UnJuegoDeUnaListaConCincoCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(150, 8);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()),
-                new Carta(11, new Pica()), new Carta(12, new Pica()),
-                new Carta(13, new Pica()), new Carta(10, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()),
+                new CartaInglesa(11, new Pica()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(13, new Pica()), new CartaInglesa(10, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = juego.puntuarMano();
@@ -235,8 +235,8 @@ public class JuegoTest {
     public void test18UnJuegoDeUnaListaConTresCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(60, 3);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(13, new Pica()),
-                new Carta(13, new Corazon()), new Carta(13, new Diamante())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(13, new Pica()),
+                new CartaInglesa(13, new Corazon()), new CartaInglesa(13, new Diamante())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = juego.puntuarMano();
@@ -248,8 +248,8 @@ public class JuegoTest {
     public void test19UnJuegoDeUnaListaConDosCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(30, 2);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(13, new Pica()),
-                new Carta(13, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(13, new Pica()),
+                new CartaInglesa(13, new Corazon())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = juego.puntuarMano();
@@ -261,7 +261,7 @@ public class JuegoTest {
     public void test20UnJuegoDeUnaListaConUnaCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(15, 1);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(13, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(13, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = juego.puntuarMano();

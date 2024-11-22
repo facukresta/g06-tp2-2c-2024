@@ -15,8 +15,8 @@ public class TrioTest {
     @Test
     public void test01UnaInstanciaDeTrioSiUnaListaDeCartasConTresCartasEsTrio() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
-                new Carta(10, new Trebol()), new Carta(10, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(10, new Pica())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(60, 3);
         // Act
@@ -27,9 +27,9 @@ public class TrioTest {
     @Test
     public void test02UnaInstanciaDeTrioSiUnaListaDeCartasConCincoCartasEsTrio() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
-                new Carta(1, new Pica()), new Carta(1, new Diamante()),
-                new Carta(4, new Corazon()), new Carta(5, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(1, new Pica()), new CartaInglesa(1, new Diamante()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(5, new Corazon())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(69, 3);
         // Act
@@ -51,10 +51,10 @@ public class TrioTest {
     @Test
     public void test04UnaInstanciaDeTrioSiUnaListaDeCartasConMasDeCincoCartasEsTrio() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
-                new Carta(10, new Diamante()), new Carta(12, new Pica()),
-                new Carta(12, new Corazon()), new Carta(12, new Trebol()),
-                new Carta(6, new Corazon()), new Carta(7, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Diamante()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(12, new Corazon()), new CartaInglesa(12, new Trebol()),
+                new CartaInglesa(6, new Corazon()), new CartaInglesa(7, new Corazon())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(93, 3);
         // Act
@@ -66,8 +66,8 @@ public class TrioTest {
     @Test
     public void test05UnaInstanciaDeTrioDeUnaListaDeCartasConTresCartaDevuelveElValorCorrecto() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
-                new Carta(10, new Trebol()), new Carta(10, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(10, new Pica())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(60, 3);
         // Act
@@ -78,9 +78,9 @@ public class TrioTest {
     @Test
     public void test06UnaInstanciaDeTrioDeUnaListaDeCartasConCincoCartasDevuelveElValorCorrecto() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(2, new Diamante()),
-                new Carta(2, new Pica()), new Carta(2, new Corazon()),
-                new Carta(4, new Corazon()), new Carta(5, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(2, new Diamante()),
+                new CartaInglesa(2, new Pica()), new CartaInglesa(2, new Corazon()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(5, new Corazon())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(45, 3);
         // Act
@@ -102,10 +102,10 @@ public class TrioTest {
     @Test
     public void test08UnaInstanciaDeTrioDeUnaListaDeCartasMasDeCincoCartasDevuelveElValorCorrecto() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
-                new Carta(2, new Corazon()), new Carta(5, new Trebol()),
-                new Carta(5, new Diamante()), new Carta(5, new Corazon()),
-                new Carta(7, new Diamante()), new Carta(7, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(2, new Corazon()), new CartaInglesa(5, new Trebol()),
+                new CartaInglesa(5, new Diamante()), new CartaInglesa(5, new Corazon()),
+                new CartaInglesa(7, new Diamante()), new CartaInglesa(7, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(71, 3);
         // Act
@@ -121,8 +121,8 @@ public class TrioTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(42,8);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4,
-                new Corazon()), new Carta(4, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4,
+                new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Trio.puntuarMano();
         // Assert
@@ -138,8 +138,8 @@ public class TrioTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(42,3);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()),
-                new Carta(4, new Corazon()), new Carta(4, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Trio.puntuarMano();
         // Assert
@@ -154,8 +154,8 @@ public class TrioTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(24,3);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()),
-                new Carta(4, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()),
+                new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Trio.puntuarMano();
         // Assert
@@ -171,7 +171,7 @@ public class TrioTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(42,3);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Trio.puntuarMano();
         // Assert
@@ -187,7 +187,7 @@ public class TrioTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(44,5);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Trio.puntuarMano();
         // Assert
@@ -203,7 +203,7 @@ public class TrioTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(42,3);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(4, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Trio.puntuarMano();
         // Assert

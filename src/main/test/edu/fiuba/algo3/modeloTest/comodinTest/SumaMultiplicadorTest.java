@@ -169,55 +169,55 @@ public class SumaMultiplicadorTest {
     @Test
     public void test11AlAplicarUnComodinDeSumaMultiplciadorConJuegoCartaAltaEsteSumaElMultplicadorSiElJuegoEsCartaAlta(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(CartaAlta.class));
+        Comodin comodin = new SumaMultiplicador(5, new CartaAlta());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(CartaAlta.class));
+        comodin.aplicarModificador(puntajeAModificar, new CartaAlta());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test12AlAplicarUnComodinDeSumaMultiplciadorConJuegoParEsteSumaElMultplicadorSiElJuegoEsPar(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(Par.class));
+        Comodin comodin = new SumaMultiplicador(5, new Par());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(Par.class));
+        comodin.aplicarModificador(puntajeAModificar, new Par());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test13AlAplicarUnComodinDeSumaMultiplciadorConJuegoDobleParEsteSumaElMultplicadorSiElJuegoEsDoblePar(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(DoblePar.class));
+        Comodin comodin = new SumaMultiplicador(5, new DoblePar());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(DoblePar.class));
+        comodin.aplicarModificador(puntajeAModificar, new DoblePar());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test14AlAplicarUnComodinDeSumaMultiplciadorConJuegoTrioEsteSumaElMultplicadorSiElJuegoEsTrio(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(Trio.class));
+        Comodin comodin = new SumaMultiplicador(5, new Trio());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(Trio.class));
+        comodin.aplicarModificador(puntajeAModificar, new Trio());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test15AlAplicarUnComodinDeSumaMultiplciadorConJuegoEscaleraEsteSumaElMultplicadorSiElJuegoEsEscalera(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(Escalera.class));
+        Comodin comodin = new SumaMultiplicador(5, new Escalera());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(Escalera.class));
+        comodin.aplicarModificador(puntajeAModificar, new Escalera());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -225,79 +225,79 @@ public class SumaMultiplicadorTest {
     @Test
     public void test16AlAplicarUnComodinDeSumaMultiplciadorConJuegoColorEsteSumaElMultplicadorSiElJuegoEsColor(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(Color.class));
+        Comodin comodin = new SumaMultiplicador(5, new Color());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(Color.class));
+        comodin.aplicarModificador(puntajeAModificar, new Color());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test17AlAplicarUnComodinDeSumaMultiplciadorConJuegoEscaleraDeColorEsteSumaElMultplicadorSiElJuegoEsEscaleraDeColor(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(EscaleraDeColor.class));
+        Comodin comodin = new SumaMultiplicador(5, new EscaleraDeColor());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(EscaleraDeColor.class));
+        comodin.aplicarModificador(puntajeAModificar, new EscaleraDeColor());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test18AlAplicarUnComodinDeSumaMultiplciadorConJuegoEscaleraRealEsteSumaElMultplicadorSiElJuegoEsEscaleraReal(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(EscaleraReal.class));
+        Comodin comodin = new SumaMultiplicador(5, new EscaleraReal());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(EscaleraReal.class));
+        comodin.aplicarModificador(puntajeAModificar, new EscaleraReal());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test19AlAplicarUnComodinDeSumaMultiplciadorConJuegoFullHouseEsteSumaElMultplicadorSiElJuegoEsFullHouse(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(FullHouse.class));
+        Comodin comodin = new SumaMultiplicador(5, new FullHouse());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(FullHouse.class));
+        comodin.aplicarModificador(puntajeAModificar, new FullHouse());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test20AlAplicarUnComodinDeSumaMultiplciadorConJuegoPokerEsteSumaElMultplicadorSiElJuegoEsPoker(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(5, mock(Poker.class));
+        Comodin comodin = new SumaMultiplicador(5, new Poker());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(Poker.class));
+        comodin.aplicarModificador(puntajeAModificar, new Poker());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test21AlAplicarDosComodinesDeSumaMultiplicadorDeDistintosJuegosSeSumanCorrectamente(){
         // Arrange
-        Comodin comodin1 = new SumaMultiplicador(5, mock(CartaAlta.class));
-        Comodin comodin2 = new SumaMultiplicador(6, mock(DoblePar.class));
+        Comodin comodin1 = new SumaMultiplicador(5, new CartaAlta());
+        Comodin comodin2 = new SumaMultiplicador(6, new DoblePar());
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 13);
         // Act
-        comodin1.aplicarModificador(puntajeAModificar, mock(CartaAlta.class));
-        comodin2.aplicarModificador(puntajeAModificar, mock(DoblePar.class));
+        comodin1.aplicarModificador(puntajeAModificar, new CartaAlta());
+        comodin2.aplicarModificador(puntajeAModificar, new DoblePar());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
     @Test
     public void test22AlAplicarUnComodinDeUnJuegoQueNoEsElDelComodinElPuntajeNoSeVeMofificado(){
         // Arrange
-        Comodin comodin = new SumaMultiplicador(32130, mock(CartaAlta.class));
+        Comodin comodin = new SumaMultiplicador(32130, new CartaAlta());
         Puntaje puntajeAModificar = new Puntaje(220, 232);
         Puntaje puntajeEsperado = new Puntaje(220, 232);
         // Act
-        comodin.aplicarModificador(puntajeAModificar, mock(DoblePar.class));
+        comodin.aplicarModificador(puntajeAModificar, new DoblePar());
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }

@@ -14,9 +14,9 @@ public class FullHouseTest {
     @Test
     public void test01UnaInstanciaDeFullHouseSiUnaListaDeCartasConCincoCartasEsFullHouse() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Trebol()), new Carta(10, new Pica()),
-                new Carta(8, new Trebol()), new Carta(8, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(10, new Pica()),
+                new CartaInglesa(8, new Trebol()), new CartaInglesa(8, new Pica())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(86, 4);
         // Act
@@ -28,9 +28,9 @@ public class FullHouseTest {
     @Test
     public void test02UnaInstanciaDeFullHouseReconoceQueEsFullHouseSiHay5Cartas() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Corazon()),
-                new Carta(1, new Pica()), new Carta(1, new Diamante()),
-                new Carta(3, new Diamante()), new Carta(3, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(1, new Pica()), new CartaInglesa(1, new Diamante()),
+                new CartaInglesa(3, new Diamante()), new CartaInglesa(3, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(76, 4);
         // Act
@@ -54,9 +54,9 @@ public class FullHouseTest {
     @Test
     public void test04UnaInstanciaDeFullHouseSiUnaListaDeCartasConCuatroCartaNoEsFullHouse() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Corazon()),
-                new Carta(4, new Trebol()), new Carta(7, new Corazon()),
-                new Carta(7, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Corazon()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(7, new Corazon()),
+                new CartaInglesa(7, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraFullHouse = new Puntaje(62, 4);
         // Act
@@ -68,9 +68,9 @@ public class FullHouseTest {
     @Test
     public void test05UnaInstanciaDeFullHouseDeUnaListaConCincoCartasDeDiferenteValorNoEsFullHouse() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Corazon()),
-                new Carta(2, new Pica()), new Carta(3, new Corazon()),
-                new Carta(4, new Diamante()), new Carta(5, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(2, new Pica()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Diamante()), new CartaInglesa(5, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraFullHouse = new Puntaje(64, 4);
         // Act
@@ -82,9 +82,9 @@ public class FullHouseTest {
     @Test
     public void test06UnaInstanciaDeFullHouseDeUnaListaDeCartasConCincoCartasQueFormanFullHouseDevuelveElValorCorrecto() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Corazon()),
-                new Carta(10, new Trebol()), new Carta(10, new Pica()),
-                new Carta(4, new Trebol()), new Carta(4, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(10, new Pica()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(4, new Pica())));
         Puntaje puntajeEsperado = new Puntaje(78, 4);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
@@ -113,8 +113,8 @@ public class FullHouseTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(78, 8);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4,
-                        new Corazon()), new Carta(12, new Pica()), new Carta(12, new Diamante()), new Carta(12, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4,
+                        new Corazon()), new CartaInglesa(12, new Pica()), new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = FullHouse.puntuarMano();
         // Assert
@@ -130,9 +130,9 @@ public class FullHouseTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(78, 4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()),
-                new Carta(4, new Corazon()), new Carta(12, new Pica()),
-                new Carta(12, new Diamante()), new Carta(12, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = FullHouse.puntuarMano();
         // Assert
@@ -148,9 +148,9 @@ public class FullHouseTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(138, 4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()),
-                new Carta(4, new Corazon()), new Carta(12, new Pica()),
-                new Carta(12, new Diamante()), new Carta(12, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = FullHouse.puntuarMano();
         // Assert
@@ -166,8 +166,8 @@ public class FullHouseTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(78, 4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
-                new Carta(12, new Diamante()), new Carta(12, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = FullHouse.puntuarMano();
         // Assert
@@ -183,8 +183,8 @@ public class FullHouseTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(86, 6);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
-                new Carta(12, new Diamante()), new Carta(12, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = FullHouse.puntuarMano();
         // Assert
@@ -200,8 +200,8 @@ public class FullHouseTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(78, 4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon()), new Carta(12, new Pica()),
-                new Carta(12, new Diamante()), new Carta(12, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = FullHouse.puntuarMano();
         // Assert

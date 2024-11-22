@@ -5,14 +5,16 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 import java.util.ArrayList;
 
-public class ComodinCombinacion implements Modificador {
-    private final ArrayList<Comodin> comodines;
-    public ComodinCombinacion(ArrayList<Comodin> comodines) {
-        this.comodines = comodines;
+public class MultiComodin implements Modificador {
+    private final ArrayList<Modificador> comodines = new ArrayList<>();
+
+    public void componerComodin(Modificador comodin) {
+        comodines.add(comodin);
     }
 
+    @Override
     public void aplicarModificador(Puntaje puntaje, Juego juego) {
-        for (Comodin comodin : comodines) {
+        for (Modificador comodin : comodines) {
             comodin.aplicarModificador(puntaje, juego);
         }
     }

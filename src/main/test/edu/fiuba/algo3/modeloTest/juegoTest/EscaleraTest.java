@@ -1,13 +1,11 @@
 package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
-import edu.fiuba.algo3.modelo.naipes.carta.Pica;
-import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
+import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,9 +14,9 @@ public class EscaleraTest {
     @Test
     public void test01UnaInstanciaDeEscaleraSiUnaListaDeCartasConCincoCartasEsEscalera() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Trebol()),
-                new Carta(4, new Trebol()), new Carta(5, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Pica())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(54, 4);
         // Act
@@ -29,10 +27,10 @@ public class EscaleraTest {
     @Test
     public void test02UnaInstanciaDeEscaleraSiUnaListaDeCartasConSeisCartasNoEsEscalera() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Trebol()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol()),
-                new Carta(6, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol()),
+                new CartaInglesa(6, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscalera = new Puntaje(60, 4);
         // Act
@@ -43,9 +41,9 @@ public class EscaleraTest {
     @Test
     public void test03UnaInstanciaDeEscaleraReconoceQueNoEsEscalera() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
-                new Carta(2, new Corazon()), new Carta(3, new Corazon()),
-                new Carta(4, new Corazon()), new Carta(6, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(2, new Corazon()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(6, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscalera = new Puntaje(55, 4);
         // Act
@@ -56,9 +54,9 @@ public class EscaleraTest {
     @Test
     public void test04UnaEscaleraDeUnaListaDeCartasConCincoCartasEnEscaleraNoEsEscaleraYaQueEsReal() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Pica()),
-                new Carta(11, new Pica()), new Carta(12, new Pica()),
-                new Carta(13, new Pica()), new Carta(9, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(10, new Pica()),
+                new CartaInglesa(11, new Pica()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(13, new Pica()), new CartaInglesa(9, new Pica())));
         Puntaje esperadoSiFueraEscaleraNoraml = new Puntaje(79, 4);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
@@ -74,9 +72,9 @@ public class EscaleraTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(54,9);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Corazon()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol()) ));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol()) ));
         Juego Escalera = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Escalera.puntuarMano();
         // Assert
@@ -92,9 +90,9 @@ public class EscaleraTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(54,4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Corazon()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol()) ));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol()) ));
         Juego Escalera = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Escalera.puntuarMano();
         // Assert
@@ -109,9 +107,9 @@ public class EscaleraTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(30,4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Corazon()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol())));
         Juego Escalera = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Escalera.puntuarMano();
         // Assert
@@ -127,9 +125,9 @@ public class EscaleraTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(54,4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Corazon()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol())));
         Juego Escalera = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Escalera.puntuarMano();
         // Assert
@@ -145,9 +143,9 @@ public class EscaleraTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(62,6);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Corazon()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol())));
         Juego Escalera = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Escalera.puntuarMano();
         // Assert
@@ -163,9 +161,9 @@ public class EscaleraTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(54,4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Corazon()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol())));
         Juego Escalera = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Escalera.puntuarMano();
         // Assert

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestJson {
 
-    public static final String JSON_MESSAGES_JSON = "json/messages.json";
+    public static final String JSON_MESSAGES_JSON = "messages.json";
 
     @Test
     public void loadMessages() throws URISyntaxException {

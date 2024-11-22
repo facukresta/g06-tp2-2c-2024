@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.aleatorio.Ejecucion;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.Mano;
+import edu.fiuba.algo3.modelo.naipes.ManoDe8;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
@@ -51,18 +52,19 @@ public class casosDeUsoEntrega2Test {
         //Arrange
         Puntaje puntajeEsperado = new Puntaje(54,7);
         Comodin comodin = new SumaMultiplicador(3, new Escalera());
-        Mano mano = new Mano();
-        Carta carta1 = new Carta(1, new Trebol());
-        Carta carta2 = new Carta(2, new Trebol());
-        Carta carta3 = new Carta(3, new Pica());
-        Carta carta4 = new Carta(4, new Corazon());
-        Carta carta5 = new Carta(5, new Trebol());
+        Mano mano = new ManoDe8();
+        Carta carta1 = new CartaInglesa(1, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Trebol());
+        Carta carta3 = new CartaInglesa(3, new Pica());
+        Carta carta4 = new CartaInglesa(4, new Corazon());
+        Carta carta5 = new CartaInglesa(5, new Trebol());
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Juego juego = Juego.chequearJuego(cartas);
         mano.agregarCartas(cartas);
-        mano.agregarComodin(comodin);
+        Comodinera comodinera = new Comodinera();
+        comodinera.agregarComodin(comodin);
         //Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego);
+        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, comodinera);
         //Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -72,18 +74,19 @@ public class casosDeUsoEntrega2Test {
         //Arrange
         Puntaje puntajeEsperado = new Puntaje(10,1);
         Comodin comodin = new SumaPuntosDescarte(10);
-        Mano mano = new Mano();
-        Carta carta1 = new Carta(1, new Trebol());
-        Carta carta2 = new Carta(2, new Trebol());
-        Carta carta3 = new Carta(3, new Pica());
-        Carta carta4 = new Carta(4, new Corazon());
-        Carta carta5 = new Carta(5, new Trebol());
+        Mano mano = new ManoDe8();
+        Carta carta1 = new CartaInglesa(1, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Trebol());
+        Carta carta3 = new CartaInglesa(3, new Pica());
+        Carta carta4 = new CartaInglesa(4, new Corazon());
+        Carta carta5 = new CartaInglesa(5, new Trebol());
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         Juego juego = Juego.chequearJuego(cartas);
         mano.agregarCartas(cartas);
-        mano.agregarComodin(comodin);
-        // Act
-        Puntaje puntajeObtenido = mano.descartarMano(cartas, juego);
+        Comodinera comodinera = new Comodinera();
+        comodinera.agregarComodin(comodin);
+        //Act
+        Puntaje puntajeObtenido = mano.descartarMano(cartas, juego, comodinera);
         //Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -91,9 +94,9 @@ public class casosDeUsoEntrega2Test {
     @Test
     public void test04ElJugadorConUnComodinConChancesDeAplicarUnModificadorDe1Sobre1000ConEfectoDeSumaDeMultiplicadorAplicaEseEfectoCuandoLasProbabilidadesEstanDadas(){
         //Arrange
-        Mano mano = new Mano();
-        Carta carta1 = new Carta(7, new Trebol());
-        Carta carta2 = new Carta(7, new Corazon());
+        Mano mano = new ManoDe8();
+        Carta carta1 = new CartaInglesa(7, new Trebol());
+        Carta carta2 = new CartaInglesa(7, new Corazon());
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
         ArrayList<Carta> cartas1 = new ArrayList<>(List.of(carta1));
         ArrayList<Carta> cartas2 = new ArrayList<>(List.of(carta2));
@@ -102,15 +105,16 @@ public class casosDeUsoEntrega2Test {
         doAnswer(invocation -> {
             return null;
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
-
         Comodin comodin = new SumaMultiplicador(13, aleatorioMock);
-        mano.agregarComodin(comodin);
+        Comodinera comodinera = new Comodinera();
+        comodinera.agregarComodin(comodin);
+        //Act
         Puntaje puntajeEsperado1 = new Puntaje(12,1);
         Puntaje puntajeEsperado2 = new Puntaje(12,13);
         Juego juego1 = Juego.chequearJuego(cartas1);
         Juego juego2 = Juego.chequearJuego(cartas2);
         // Act
-        Puntaje puntajeObtenido1 = mano.jugarMano(cartas1, juego1);
+        Puntaje puntajeObtenido1 = mano.jugarMano(cartas1, juego1, comodinera);
         aleatorioMock = mock(Aleatorio.class);
         doAnswer(invocation -> {
             Runnable accion = invocation.getArgument(0);
@@ -118,8 +122,8 @@ public class casosDeUsoEntrega2Test {
             return null;
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
         comodin = new SumaMultiplicador(13, aleatorioMock);
-        mano.agregarComodin(comodin);
-        Puntaje puntajeObtenido2 = mano.jugarMano(cartas2, juego2);
+        comodinera.agregarComodin(comodin);
+        Puntaje puntajeObtenido2 = mano.jugarMano(cartas2, juego2, comodinera);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));
         assertTrue(puntajeEsperado2.tenesMismoPuntaje(puntajeObtenido2));
@@ -128,7 +132,7 @@ public class casosDeUsoEntrega2Test {
     @Test
     public void test05UnComodinConCombinacionDeEfectosBonus(){
         //Arrange
-        Mano mano = new Mano();
+        Mano mano = new ManoDe8();
         Ejecucion aleatorioMock = mock(Aleatorio.class);
         doAnswer(invocation -> {
             Runnable accion = invocation.getArgument(0);
@@ -138,16 +142,17 @@ public class casosDeUsoEntrega2Test {
         Puntaje puntajeEsperado1 = new Puntaje(24,2);
         Puntaje puntajeEsperado2 = new Puntaje(37,2);
         Comodin comodin = new SumaPuntos(13, new Par(), aleatorioMock);
-        Carta carta1 = new Carta(7, new Trebol());
-        Carta carta2 = new Carta(7, new Corazon());
+        Carta carta1 = new CartaInglesa(7, new Trebol());
+        Carta carta2 = new CartaInglesa(7, new Corazon());
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
         Juego juego = Juego.chequearJuego(cartas);
         mano.agregarCartas(cartas);
-        // Act
-        Puntaje puntajeObtenido1 = mano.jugarMano(cartas, juego);
+        Comodinera comodinera = new Comodinera();
+        //Act
+        Puntaje puntajeObtenido1 = mano.jugarMano(cartas, juego, comodinera);
         mano.agregarCartas(cartas);
-        mano.agregarComodin(comodin);
-        Puntaje puntajeObtenido2 = mano.jugarMano(cartas, juego);
+        comodinera.agregarComodin(comodin);
+        Puntaje puntajeObtenido2 = mano.jugarMano(cartas, juego, comodinera);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));
         assertTrue(puntajeEsperado2.tenesMismoPuntaje(puntajeObtenido2));
@@ -178,7 +183,7 @@ public class casosDeUsoEntrega2Test {
         Mazo mazo1 = new Mazo();
         try {
             ClassLoader classLoader = this.getClass().getClassLoader();
-            InputStream inputStream = classLoader.getResourceAsStream("json/mazo.json");
+            InputStream inputStream = classLoader.getResourceAsStream("mazo.json");
             if (inputStream == null) {
                 throw new FileNotFoundException("Archivo mazo.json no encontrado en src/test/resources/json");
             }
@@ -192,7 +197,7 @@ public class casosDeUsoEntrega2Test {
                 String numero = (String) cartaJson.get("numero");
                 cartaJson.get("puntos");
                 cartaJson.get("multiplicador");
-                mazo1.agregarCarta(new Carta(mapaDeNumeros.get(numero), mapaDePalos.get(palo)));
+                mazo1.agregarCarta(new CartaInglesa(mapaDeNumeros.get(numero), mapaDePalos.get(palo)));
             }
 
         } catch (Exception e) {
@@ -209,26 +214,26 @@ public class casosDeUsoEntrega2Test {
         //mazo.agregarCartas(cartas);
 
         ArrayList<Carta> cartasQueDeberianEstar = new ArrayList<>(List.of(
-                new Carta(1, new Trebol()), new Carta(2, new Trebol()), new Carta(3, new Trebol()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol()), new Carta(6, new Trebol()),
-                new Carta(7, new Trebol()), new Carta(8, new Trebol()), new Carta(9, new Trebol()),
-                new Carta(10, new Trebol()), new Carta(11, new Trebol()), new Carta(12, new Trebol()),
-                new Carta(13, new Trebol()),
-                new Carta(1, new Corazon()), new Carta(2, new Corazon()), new Carta(3, new Corazon()),
-                new Carta(4, new Corazon()), new Carta(5, new Corazon()), new Carta(6, new Corazon()),
-                new Carta(7, new Corazon()), new Carta(8, new Corazon()), new Carta(9, new Corazon()),
-                new Carta(10, new Corazon()), new Carta(11, new Corazon()), new Carta(12, new Corazon()),
-                new Carta(13, new Corazon()),
-                new Carta(1, new Pica()), new Carta(2, new Pica()), new Carta(3, new Pica()),
-                new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(6, new Pica()),
-                new Carta(7, new Pica()), new Carta(8, new Pica()), new Carta(9, new Pica()),
-                new Carta(10, new Pica()), new Carta(11, new Pica()), new Carta(12, new Pica()),
-                new Carta(13, new Pica()),
-                new Carta(1, new Diamante()), new Carta(2, new Diamante()), new Carta(3, new Diamante()),
-                new Carta(4, new Diamante()), new Carta(5, new Diamante()), new Carta(6, new Diamante()),
-                new Carta(7, new Diamante()), new Carta(8, new Diamante()), new Carta(9, new Diamante()),
-                new Carta(10, new Diamante()), new Carta(11, new Diamante()), new Carta(12, new Diamante()),
-                new Carta(13, new Diamante())
+                new CartaInglesa(1, new Trebol()), new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol()), new CartaInglesa(6, new Trebol()),
+                new CartaInglesa(7, new Trebol()), new CartaInglesa(8, new Trebol()), new CartaInglesa(9, new Trebol()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()), new CartaInglesa(12, new Trebol()),
+                new CartaInglesa(13, new Trebol()),
+                new CartaInglesa(1, new Corazon()), new CartaInglesa(2, new Corazon()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(5, new Corazon()), new CartaInglesa(6, new Corazon()),
+                new CartaInglesa(7, new Corazon()), new CartaInglesa(8, new Corazon()), new CartaInglesa(9, new Corazon()),
+                new CartaInglesa(10, new Corazon()), new CartaInglesa(11, new Corazon()), new CartaInglesa(12, new Corazon()),
+                new CartaInglesa(13, new Corazon()),
+                new CartaInglesa(1, new Pica()), new CartaInglesa(2, new Pica()), new CartaInglesa(3, new Pica()),
+                new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(6, new Pica()),
+                new CartaInglesa(7, new Pica()), new CartaInglesa(8, new Pica()), new CartaInglesa(9, new Pica()),
+                new CartaInglesa(10, new Pica()), new CartaInglesa(11, new Pica()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(13, new Pica()),
+                new CartaInglesa(1, new Diamante()), new CartaInglesa(2, new Diamante()), new CartaInglesa(3, new Diamante()),
+                new CartaInglesa(4, new Diamante()), new CartaInglesa(5, new Diamante()), new CartaInglesa(6, new Diamante()),
+                new CartaInglesa(7, new Diamante()), new CartaInglesa(8, new Diamante()), new CartaInglesa(9, new Diamante()),
+                new CartaInglesa(10, new Diamante()), new CartaInglesa(11, new Diamante()), new CartaInglesa(12, new Diamante()),
+                new CartaInglesa(13, new Diamante())
         ));
 
         if(cartas.size() != cartasQueDeberianEstar.size()){
@@ -260,7 +265,7 @@ public class casosDeUsoEntrega2Test {
         ArrayList<Tarot> listaDeTarots = new ArrayList<>();
         try {
             ClassLoader classLoader = this.getClass().getClassLoader();
-            InputStream inputStream = classLoader.getResourceAsStream("json/tarots.json");
+            InputStream inputStream = classLoader.getResourceAsStream("tarots.json");
             if (inputStream == null) {
                 throw new FileNotFoundException("Archivo tarots.json no encontrado en src/test/resources/json");
             }
@@ -336,7 +341,7 @@ public class casosDeUsoEntrega2Test {
         // Act
         try {
             ClassLoader classLoader = this.getClass().getClassLoader();
-            InputStream inputStream = classLoader.getResourceAsStream("json/comodines.json");
+            InputStream inputStream = classLoader.getResourceAsStream("comodines.json");
             if (inputStream == null) {
                 throw new FileNotFoundException("Archivo comodines.json no encontrado en src/test/resources/json");
             }
@@ -406,7 +411,7 @@ public class casosDeUsoEntrega2Test {
             for (Object obj : comodinesCombinacion) {
                 JSONObject comodin = (JSONObject) obj;
                 JSONArray comodinesDentro = (JSONArray) comodin.get("comodines");
-                ArrayList<Comodin> comodinesPequenios = new ArrayList<>();
+                MultiComodin multiComodin = new MultiComodin();
                 for (Object obj2 : comodinesDentro) {
                     JSONObject comodinDentro = (JSONObject) obj2;
 
@@ -425,37 +430,53 @@ public class casosDeUsoEntrega2Test {
 
                     if (activador.equals("Descarte")) {
                         if (puntos == 1) {
-                            comodinesPequenios.add(new SumaMultiplicadorDescarte(multiplicador));
+                            multiComodin.componerComodin(new SumaMultiplicadorDescarte(multiplicador));
                         } else {
-                            comodinesPequenios.add(new SumaPuntosDescarte(puntos));
+                            multiComodin.componerComodin(new SumaPuntosDescarte(puntos));
                         }
                     }
                     if (activador.equals("1 en")) {
                         JSONObject activacion = (JSONObject) comodinDentro.get("activacion");
                         int probabilidad = ((Long) activacion.get("1 en")).intValue();
                         if (puntos == 1) {
-                            comodinesPequenios.add(new SumaMultiplicador(multiplicador, new Aleatorio(probabilidad)));
+                            multiComodin.componerComodin(new SumaMultiplicador(multiplicador, new Aleatorio(probabilidad) ));
                         } else {
-                            comodinesPequenios.add(new SumaPuntos(puntos, new Aleatorio(probabilidad)));
+                            multiComodin.componerComodin(new SumaPuntos(puntos, new Aleatorio(probabilidad) ));
                         }
                     }
                     if (activador.equals("Mano Jugada")) {
                         JSONObject activacion = (JSONObject) comodinDentro.get("activacion");
                         String juego = (String) activacion.get("Mano Jugada");
                         if (puntos == 1) {
-                            comodinesPequenios.add(new SumaMultiplicador(multiplicador, mapaDeManos.get(juego)));
+                            multiComodin.componerComodin(new SumaMultiplicador(multiplicador, mapaDeManos.get(juego)));
                         } else {
-                            comodinesPequenios.add(new SumaPuntos(puntos, mapaDeManos.get(juego)));
+                            multiComodin.componerComodin(new SumaPuntos(puntos, mapaDeManos.get(juego)));
                         }
                     }
                 }
-                listaDeComodines.add(new ComodinCombinacion(comodinesPequenios));
+                listaDeComodines.add(multiComodin);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         boolean resultadoComparacion = true;
+
+        MultiComodin multiComodin1 = new MultiComodin();
+        multiComodin1.componerComodin(new SumaMultiplicador(15, new Aleatorio(6)));
+        multiComodin1.componerComodin(new SumaPuntos(100, new Trio()));
+        MultiComodin multiComodin2 = new MultiComodin();
+        multiComodin2.componerComodin(new SumaMultiplicador(15, new Aleatorio(6)));
+        multiComodin2.componerComodin(new SumaPuntos(1000, new Aleatorio(1000)));
+        MultiComodin multiComodin3 = new MultiComodin();
+        multiComodin3.componerComodin(new SumaPuntos(500, new Color()));
+        multiComodin3.componerComodin(new SumaMultiplicador(10, new Aleatorio(50)));
+        MultiComodin multiComodin4 = new MultiComodin();
+        multiComodin4.componerComodin(new SumaPuntos(2000, new Aleatorio(500)));
+        multiComodin4.componerComodin(new SumaPuntosDescarte(30));
+        MultiComodin multiComodin5 = new MultiComodin();
+        multiComodin5.componerComodin(new SumaPuntos(300, new Poker()));
+        multiComodin5.componerComodin(new SumaMultiplicador(20, new Aleatorio(500)));
 
         ArrayList<Modificador> modificadoresQueDeberianEstar = new ArrayList<>(List.of(
                 new SumaMultiplicador(4), new SumaPuntos(100), new SumaPuntos(50, new Par()), new SumaPuntos(100, new Trio()),
@@ -465,12 +486,9 @@ public class casosDeUsoEntrega2Test {
                 new SumaPuntosDescarte(75), new SumaMultiplicadorDescarte(20), new SumaPuntosDescarte(100), new SumaMultiplicadorDescarte(25),
                 new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(1000, new Aleatorio(1000)), new SumaPuntos(500, new Aleatorio(20)), new SumaMultiplicador(10, new Aleatorio(50)),
                 new SumaPuntos(2000, new Aleatorio(500)), new SumaMultiplicador(30, new Aleatorio(100)), new SumaPuntos(1500, new Aleatorio(250)), new SumaMultiplicador(50, new Aleatorio(500)),
-                new ComodinCombinacion(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(100, new Trio())))),
-                new ComodinCombinacion(new ArrayList<>(List.of(new SumaMultiplicador(15, new Aleatorio(6)), new SumaPuntos(1000, new Aleatorio(1000))))),
-                new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(500, new Color()), new SumaMultiplicador(10, new Aleatorio(50))))),
-                new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(2000, new Aleatorio(500)), new SumaPuntosDescarte(30)))),
-                new ComodinCombinacion(new ArrayList<>(List.of(new SumaPuntos(300, new Poker()), new SumaMultiplicador(20, new Aleatorio(500))))
-                )));
+                multiComodin1, multiComodin2, multiComodin3, multiComodin4, multiComodin5
+        ));
+
 
         if(listaDeComodines.size() != modificadoresQueDeberianEstar.size()){
             resultadoComparacion = false;

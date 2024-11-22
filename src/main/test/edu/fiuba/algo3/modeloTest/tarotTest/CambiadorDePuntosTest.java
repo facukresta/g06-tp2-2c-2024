@@ -61,9 +61,9 @@ public class CambiadorDePuntosTest {
     @Test
     public void test06UnTarotCambiadorDePuntosSabeReconocerSiEsParaUnJuegoEspecifico() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, mock(CartaAlta.class));
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new CartaAlta());
         // Act
-        boolean resultadoComparacion = tarotCambiadorDePuntos.sosParaEsteJuego(mock(CartaAlta.class));
+        boolean resultadoComparacion = tarotCambiadorDePuntos.sosParaEsteJuego(new CartaAlta());
         // Assert
         assertTrue(resultadoComparacion);
     }
@@ -71,9 +71,9 @@ public class CambiadorDePuntosTest {
     @Test
     public void test07UnTarotCambiadorDePuntosSabeReconocerSiNoEsParaUnJuegoEspecifico() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, mock(Escalera.class));
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Escalera());
         // Act
-        boolean resultadoComparacion = tarotCambiadorDePuntos.sosParaEsteJuego(mock(CartaAlta.class));
+        boolean resultadoComparacion = tarotCambiadorDePuntos.sosParaEsteJuego(new CartaAlta());
         // Assert
         assertFalse(resultadoComparacion);
     }

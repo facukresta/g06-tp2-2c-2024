@@ -62,11 +62,11 @@ public class LectorComodines {
                 JSONObject comodin = (JSONObject) obj;
                 JSONArray comodinesDentro = (JSONArray) comodin.get("comodines");
                 ArrayList<Modificador> comodinesPequenios = leerComodin(comodinesDentro);
-                ArrayList<Comodin> comodines = new ArrayList<>();
+                MultiComodin multiComodin = new MultiComodin();
                 for (Modificador modificador : comodinesPequenios) {
-                    comodines.add((Comodin) modificador);
+                    multiComodin.componerComodin((Comodin) modificador);
                 }
-                listaDeComodines.add(new ComodinCombinacion(comodines));
+                listaDeComodines.add(multiComodin);
             }
         } catch (Exception e) {
             e.printStackTrace();

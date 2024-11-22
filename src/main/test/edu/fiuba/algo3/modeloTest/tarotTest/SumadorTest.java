@@ -43,9 +43,9 @@ public class SumadorTest {
     @Test
     public void test05UnTarotSumadorSabeReconocerSiEsParaUnJuegoEspecifico() {
         // Arrange
-        Tarot tarotSumador = new Sumador(10, 1,mock(CartaAlta.class));
+        Tarot tarotSumador = new Sumador(10, 1,new CartaAlta());
         // Act
-        boolean resultadoComparacion = tarotSumador.sosParaEsteJuego(mock(CartaAlta.class));
+        boolean resultadoComparacion = tarotSumador.sosParaEsteJuego(new CartaAlta());
         // Assert
         assertTrue(resultadoComparacion);
     }
@@ -53,9 +53,9 @@ public class SumadorTest {
     @Test
     public void test06UnTarotSumadorSabeReconocerSiNoEsParaUnJuegoEspecifico() {
         // Arrange
-        Tarot tarotSumador = new Sumador(10, 1,mock(Escalera.class));
+        Tarot tarotSumador = new Sumador(10, 1,new Escalera());
         // Act
-        boolean resultadoComparacion = tarotSumador.sosParaEsteJuego(mock(CartaAlta.class));
+        boolean resultadoComparacion = tarotSumador.sosParaEsteJuego(new CartaAlta());
         // Assert
         assertFalse(resultadoComparacion);
     }

@@ -21,7 +21,7 @@ public class LectorDeCartas {
                 JSONObject cartaJson = (JSONObject) obj;
                 String palo = (String) cartaJson.get("palo");
                 String numero = (String) cartaJson.get("numero");
-                cartas.add(new Carta(conversorNumero.convertirNumero(numero), conversorPalo.convertirPalo(palo)));
+                cartas.add(new CartaInglesa(conversorNumero.convertirNumero(numero), conversorPalo.convertirPalo(palo)));
             }
         } catch (Exception e) {
             e.printStackTrace();

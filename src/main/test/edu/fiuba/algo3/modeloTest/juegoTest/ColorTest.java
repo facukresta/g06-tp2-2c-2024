@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
-import edu.fiuba.algo3.modelo.naipes.carta.Pica;
-import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
+import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -18,9 +15,9 @@ public class ColorTest {
     @Test
     public void test01UnaInstanciaDeColorSiUnaListaDeCartasConCincoCartasEsColor() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Trebol()),
-                new Carta(4, new Trebol()), new Carta(6, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(6, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(60, 4);
         // Act
@@ -32,10 +29,10 @@ public class ColorTest {
     @Test
     public void test02UnaInstanciaDeColorSiUnaListaDeCartasConSeisCartasNoEsColor() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(2, new Trebol()), new Carta(3, new Trebol()),
-                new Carta(4, new Trebol()), new Carta(5, new Trebol()),
-                new Carta(6, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
+                new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol()),
+                new CartaInglesa(6, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseColor = new Puntaje(65, 4);
         // Act
@@ -47,9 +44,9 @@ public class ColorTest {
     @Test
     public void test03UnaInstanciaDeColorReconoceQueNoEsColor() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Corazon()),
-                new Carta(2, new Corazon()), new Carta(3, new Corazon()),
-                new Carta(4, new Corazon()), new Carta(5, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(2, new Corazon()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(5, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseColor = new Puntaje(59, 4);
         // Act
@@ -74,9 +71,9 @@ public class ColorTest {
     public void test05UnaInstanciaDeColorDeUnaListaDeCartasConCincoCartasDelMismoColorDevuelveElValorCorrecto() {
         // Arrange
 
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(10, new Pica()),
-                new Carta(11, new Pica()), new Carta(12, new Pica()),
-                new Carta(13, new Pica()), new Carta(4, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(10, new Pica()),
+                new CartaInglesa(11, new Pica()), new CartaInglesa(12, new Pica()),
+                new CartaInglesa(13, new Pica()), new CartaInglesa(4, new Pica())));
         Puntaje puntajeEsperado = new Puntaje(79, 4);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
@@ -104,7 +101,7 @@ public class ColorTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(72, 8);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = juego.puntuarMano();
         // Assert
@@ -120,7 +117,7 @@ public class ColorTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(72, 4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Color.puntuarMano();
         // Assert
@@ -136,7 +133,7 @@ public class ColorTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(45, 4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Color.puntuarMano();
         // Assert
@@ -152,7 +149,7 @@ public class ColorTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(72, 4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Color.puntuarMano();
         // Assert
@@ -168,7 +165,7 @@ public class ColorTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(80, 6);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Color.puntuarMano();
         // Assert
@@ -184,7 +181,7 @@ public class ColorTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(72, 4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Pica()), new Carta(4, new Pica()), new Carta(5, new Pica()), new Carta(12, new Pica()), new Carta(8, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Color.puntuarMano();
         // Assert

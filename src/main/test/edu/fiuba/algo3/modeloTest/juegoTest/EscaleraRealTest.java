@@ -1,13 +1,11 @@
 package edu.fiuba.algo3.modeloTest.juegoTest;
 
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
-import edu.fiuba.algo3.modelo.naipes.carta.Pica;
-import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
+import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,9 +14,9 @@ public class EscaleraRealTest {
     @Test
     public void test01UnaInstanciaDeEscaleraRealSiUnaListaDeCartasConCincoCartasEsEscaleraReal() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Trebol()),
-                new Carta(10, new Trebol()), new Carta(11, new Trebol()),
-                new Carta(12, new Trebol()), new Carta(13, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
+                new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(150, 8);
@@ -30,10 +28,10 @@ public class EscaleraRealTest {
     @Test
     public void test02UnaInstanciaDeEscaleraRealSiUnaListaDeCartasConSeisCartasNoEsEscaleraReal() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Trebol()),
-                new Carta(9, new Trebol()), new Carta(10, new Trebol()),
-                new Carta(11, new Trebol()), new Carta(12, new Trebol()),
-                new Carta(13, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(9, new Trebol()), new CartaInglesa(10, new Trebol()),
+                new CartaInglesa(11, new Trebol()), new CartaInglesa(12, new Trebol()),
+                new CartaInglesa(13, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraReal = new Puntaje(159, 8);
@@ -45,9 +43,9 @@ public class EscaleraRealTest {
     @Test
     public void test03UnaInstanciaDeEscaleraRealReconoceQueNoEsEscaleraReal() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
-                new Carta(10, new Corazon()), new Carta(11, new Corazon()),
-                new Carta(12, new Corazon()), new Carta(13, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(10, new Corazon()), new CartaInglesa(11, new Corazon()),
+                new CartaInglesa(12, new Corazon()), new CartaInglesa(13, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraReal = new Puntaje(150, 8);
@@ -59,9 +57,9 @@ public class EscaleraRealTest {
     @Test
     public void test04UnaInstanciaDeEscaleraRealDeUnaListaDeCartasConCincoCartasDelMismoColorYEnEscaleraDevuelveElValorCorrecto() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Pica()),
-                new Carta(13, new Pica()), new Carta(11, new Pica()),
-                new Carta(12, new Pica()), new Carta(1, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(10, new Pica()),
+                new CartaInglesa(13, new Pica()), new CartaInglesa(11, new Pica()),
+                new CartaInglesa(12, new Pica()), new CartaInglesa(1, new Pica())));
         Puntaje puntajeEsperado = new Puntaje(150,8);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
@@ -83,9 +81,9 @@ public class EscaleraRealTest {
     @Test
     public void test06UnaInstanciaDeEscaleraRealDeUnaListaDeCartasConCincoYNoEnEscaleraRealSabeReconocerQueNoEsEscaleraReal() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Pica()),
-                new Carta(11, new Pica()), new Carta(12, new Trebol()),
-                new Carta(13, new Pica()), new Carta(9, new Pica())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(10, new Pica()),
+                new CartaInglesa(11, new Pica()), new CartaInglesa(12, new Trebol()),
+                new CartaInglesa(13, new Pica()), new CartaInglesa(9, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraReal = new Puntaje(149, 8);
@@ -102,9 +100,9 @@ public class EscaleraRealTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(150,9);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Trebol()),
-                new Carta(10, new Trebol()), new Carta(11, new Trebol()),
-                new Carta(12, new Trebol()), new Carta(13, new Trebol()) ));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
+                new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol()) ));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
         // Assert
@@ -120,9 +118,9 @@ public class EscaleraRealTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(150,8);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Trebol()),
-                new Carta(10, new Trebol()), new Carta(11, new Trebol()),
-                new Carta(12, new Trebol()), new Carta(13, new Trebol()) ));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
+                new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol()) ));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
         // Assert
@@ -137,9 +135,9 @@ public class EscaleraRealTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(160,8);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(10, new Trebol()), new Carta(11, new Trebol()),
-                new Carta(12, new Trebol()), new Carta(13, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
+                new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
         // Assert
@@ -155,9 +153,9 @@ public class EscaleraRealTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(150,8);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(10, new Trebol()), new Carta(11, new Trebol()),
-                new Carta(12, new Trebol()), new Carta(13, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
+                new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
         // Assert
@@ -173,9 +171,9 @@ public class EscaleraRealTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(158,10);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(10, new Trebol()), new Carta(11, new Trebol()),
-                new Carta(12, new Trebol()), new Carta(13, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
+                new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
         // Assert
@@ -191,9 +189,9 @@ public class EscaleraRealTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(150,8);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(1, new Trebol()),
-                new Carta(10, new Trebol()), new Carta(11, new Trebol()),
-                new Carta(12, new Trebol()), new Carta(13, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
+                new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
         // Assert

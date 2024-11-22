@@ -14,8 +14,8 @@ public class ParTest {
     @Test
     public void test01UnaInstanciaDeParSiUnaListaDeCartasConDosCartasEsPar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
-                new Carta(10, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(30, 2);
         // Act
@@ -26,9 +26,9 @@ public class ParTest {
     @Test
     public void test02UnaInstanciaDeParSiUnaListaDeCartasConCincoCartasEsPar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
-                new Carta(1, new Pica()), new Carta(3, new Corazon()),
-                new Carta(4, new Corazon()), new Carta(5, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(1, new Pica()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(5, new Corazon())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(42, 2);
         // Act
@@ -39,9 +39,9 @@ public class ParTest {
     @Test
     public void test03SiUnaListaDeCartasConCincoCartasEsTrioAunqueHayaParPuntuaraTrio() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
-                new Carta(1, new Pica()), new Carta(1, new Diamante()),
-                new Carta(4, new Corazon()), new Carta(5, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(1, new Pica()), new CartaInglesa(1, new Diamante()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(5, new Corazon())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPar = new Puntaje(49, 2);
         // Act
@@ -53,9 +53,9 @@ public class ParTest {
     @Test
     public void test04SiUnaListaDeCartasConCincoCartasEsDobleParAunqueHayaParPuntuaraDoblePar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
-                new Carta(1, new Pica()), new Carta(3, new Corazon()),
-                new Carta(3, new Diamante()), new Carta(6, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(1, new Pica()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(3, new Diamante()), new CartaInglesa(6, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPar = new Puntaje(42, 2);
         // Act
@@ -78,10 +78,10 @@ public class ParTest {
     @Test
     public void test06UnaInstanciaDeParSiUnaListaDeCartasConMasDeCincoCartasEsPar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(10, new Corazon()),
-                new Carta(10, new Diamante()), new Carta(3, new Corazon()),
-                new Carta(4, new Corazon()), new Carta(5, new Corazon()),
-                new Carta(6, new Corazon()), new Carta(7, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(10, new Corazon()),
+                new CartaInglesa(10, new Diamante()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Corazon()), new CartaInglesa(5, new Corazon()),
+                new CartaInglesa(6, new Corazon()), new CartaInglesa(7, new Corazon())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(55, 2);
         // Act
@@ -92,9 +92,9 @@ public class ParTest {
     @Test
     public void test07UnaInstanciaDeParDeUnaListaConCincoCartasDeDiferenteValorNoEsPar() {
         // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of( new Carta(1, new Corazon()),
-                new Carta(2, new Pica()), new Carta(3, new Corazon()),
-                new Carta(4, new Diamante()), new Carta(5, new Trebol())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Corazon()),
+                new CartaInglesa(2, new Pica()), new CartaInglesa(3, new Corazon()),
+                new CartaInglesa(4, new Diamante()), new CartaInglesa(5, new Trebol())));
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPar = new Puntaje(34, 2);
         // Act
@@ -121,7 +121,7 @@ public class ParTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(18,8);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4,
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4,
                 new Corazon())));
         Juego Par = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Par.puntuarMano();
@@ -138,8 +138,8 @@ public class ParTest {
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(18,2);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()),
-                new Carta(4, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()),
+                new CartaInglesa(4, new Corazon())));
         Juego Par = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Par.puntuarMano();
         // Assert
@@ -154,7 +154,7 @@ public class ParTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(20,2);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon())));
         Juego Par = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Par.puntuarMano();
         // Assert
@@ -170,7 +170,7 @@ public class ParTest {
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(18,2);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon())));
         Juego Par = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Par.puntuarMano();
         // Assert
@@ -186,7 +186,7 @@ public class ParTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(20,4);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon())));
         Juego Par = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Par.puntuarMano();
         // Assert
@@ -202,7 +202,7 @@ public class ParTest {
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(18,2);
         // Act
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new Carta(4, new Pica()), new Carta(4, new Corazon())));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon())));
         Juego Par = Juego.chequearJuego(cartas);
         Puntaje puntajeObtenido = Par.puntuarMano();
         // Assert

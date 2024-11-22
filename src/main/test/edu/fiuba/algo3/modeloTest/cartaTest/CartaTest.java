@@ -15,7 +15,7 @@ public class CartaTest {
     @Test
     public void test01UnaCartaCreadaConNumero10YPaloCorazonTienePuntaje10(){
         // Arrange
-        Carta carta = new Carta(10, new Corazon());
+        Carta carta = new CartaInglesa(10, new Corazon());
         Puntaje puntajeEsperado = new Puntaje(10,1);
         // Act
         Puntaje puntajeObtenido = carta.obtenerPuntaje();
@@ -27,8 +27,8 @@ public class CartaTest {
         // Arrange
         Palo paloMock = mock(Palo.class);
         when(paloMock.esDeEstePalo(any())).thenReturn(true);
-        Carta cartaBase = new Carta(2, paloMock);
-        Carta cartaAComparar = new Carta(12, new Corazon());
+        Carta cartaBase = new CartaInglesa(2, paloMock);
+        Carta cartaAComparar = new CartaInglesa(12, new Corazon());
         // Act
         boolean resultadoComparacion = cartaBase.esDelMismoPalo(cartaAComparar);
         // Assert
@@ -38,21 +38,21 @@ public class CartaTest {
     public void test03UnaCartaNoPuedeInstanciadaConNumeroNegativo(){
         // Arrange / Act / Assert
         assertThrows(NumeroInvalidoException.class, () -> {
-            new Carta(-1, new Trebol());
+            new CartaInglesa(-1, new Trebol());
         });
     }
     @Test
     public void test04UnaCartaNoPuedeInstanciadaConNumeroIgualA0(){
         // Arrange / Act / Assert
         assertThrows(NumeroInvalidoException.class, () -> {
-            new Carta(0, new Trebol());
+            new CartaInglesa(0, new Trebol());
         });
     }
     @Test
     public void test05UnaCartaNoPuedeSerInstanciadaConNumeroMayorA13(){
         // Arrange / Act / Assert
         assertThrows(NumeroInvalidoException.class, () -> {
-            new Carta(14, new Trebol());
+            new CartaInglesa(14, new Trebol());
         });
     }
     @Test
@@ -60,7 +60,7 @@ public class CartaTest {
         // Arrange
         Palo paloMock = mock(Palo.class);
         when(paloMock.esDeEstePalo(any())).thenReturn(true);
-        Carta carta = new Carta(10, paloMock);
+        Carta carta = new CartaInglesa(10, paloMock);
         // Act
         boolean resultadoComparacion = carta.sos(carta);
         // Assert
@@ -71,9 +71,9 @@ public class CartaTest {
         // Arrange
         Palo paloMock = mock(Palo.class);
         when(paloMock.esDeEstePalo(any())).thenReturn(true);
-        Carta carta = new Carta(10, paloMock);
+        Carta carta = new CartaInglesa(10, paloMock);
         // Act
-        boolean resultadoComparacion = carta.sos(new Carta(9, new Corazon()));
+        boolean resultadoComparacion = carta.sos(new CartaInglesa(9, new Corazon()));
         // Assert
         assertFalse(resultadoComparacion);
     }
@@ -82,16 +82,16 @@ public class CartaTest {
         // Arrange
         Palo paloMock = mock(Palo.class);
         when(paloMock.esDeEstePalo(any())).thenReturn(false);
-        Carta carta = new Carta(10, paloMock);
+        Carta carta = new CartaInglesa(10, paloMock);
         // Act
-        boolean resultadoComparacion = carta.sos(new Carta(10, new Trebol()));
+        boolean resultadoComparacion = carta.sos(new CartaInglesa(10, new Trebol()));
         // Assert
         assertFalse(resultadoComparacion);
     }
     @Test
     public void test09UnaInstanciaDeCartaAlCrearseTieneNoTieneModificacionDeTarot(){
         // Arrange
-        Carta carta = new Carta(10, new Corazon());
+        Carta carta = new CartaInglesa(10, new Corazon());
         Puntaje puntajeEsperado = new Puntaje(10,1);
         // Act
         Puntaje puntajeObtenido = carta.obtenerPuntaje();
@@ -101,7 +101,7 @@ public class CartaTest {
     @Test
     public void test10UnaInstanciaDeCartaPuedeSerModificadaConUnTarot(){
         // Arrange
-        Carta carta = new Carta(3, new Corazon());
+        Carta carta = new CartaInglesa(3, new Corazon());
         Puntaje puntajeEsperado = new Puntaje(7,1);
         Tarot tarot = new CambiadorDePuntos(7);
         // Act

@@ -13,9 +13,9 @@ import java.io.InputStreamReader;
 public class AbridorDeJson {
     public JSONObject abrirJson(String archivo) throws IOException, ParseException {
         ClassLoader classLoader = this.getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("json/"+ archivo +".json");
+        InputStream inputStream = classLoader.getResourceAsStream(archivo+".json");
         if (inputStream == null) {
-            throw new FileNotFoundException("Archivo" + archivo +".json no encontrado en src/test/resources/json");
+            throw new FileNotFoundException("Archivo " + archivo +".json no encontrado en src/main/resources/json");
         }
         JSONParser parser = new JSONParser();
         return (JSONObject) parser.parse(new InputStreamReader(inputStream));
