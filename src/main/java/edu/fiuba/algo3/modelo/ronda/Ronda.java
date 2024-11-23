@@ -58,15 +58,17 @@ public class Ronda {
         mano.agregarCartas(mazo.repartirCartas(8-mano.obtenerCantidadDeCartas()));
     }
     public void descartarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera) {
-        puntajesObtenidos.add(mano.descartarMano(cartasSeleccionadas, juego, comodinera));
-        this.descartes--;
-        if (pasoLaRonda()) {
-            throw new PasoLaRondaException();
+        if (this.descartes != 0) {
+            puntajesObtenidos.add(mano.descartarMano(cartasSeleccionadas, juego, comodinera));
+            this.descartes--;
+            if (pasoLaRonda()) {
+                throw new PasoLaRondaException();
+            }
+            mano.agregarCartas(mazo.repartirCartas(8-mano.obtenerCantidadDeCartas()));
         }
-        mano.agregarCartas(mazo.repartirCartas(8-mano.obtenerCantidadDeCartas()));
     }
 
-    public void comprar (Comodin comodin) {
+    public void comprar (Modificador comodin) {
         tienda.comprar(comodin);
     }
 

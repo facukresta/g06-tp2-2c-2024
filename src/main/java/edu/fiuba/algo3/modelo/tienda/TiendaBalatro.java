@@ -38,4 +38,30 @@ public class TiendaBalatro implements Tienda {
         }
         this.cartas.clear();
     }
+
+//    public void comprar (Comprable comprable) {
+//        try {
+//            this.comprar((Tarot) comprable);
+//        } catch () {
+//
+//        }
+//
+//        try {
+//
+//        } catch () {
+//
+//        }
+//
+//        try {
+//
+//        } catch () {
+//
+//        }
+//
+//        try {
+//
+//        } catch () {
+//
+//        }
+//    }
 }
