@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modeloTest;
 
-import edu.fiuba.algo3.modelo.comodin.Comodin;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
 import edu.fiuba.algo3.modelo.juego.Juego;
@@ -11,18 +10,14 @@ import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
 import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.ronda.*;
-import edu.fiuba.algo3.modelo.tarot.Sumador;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.tienda.Tienda;
-import edu.fiuba.algo3.modelo.tienda.TiendaBalatro;
 import org.junit.jupiter.api.Test;
 
-import java.lang.management.MonitorInfo;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyCollectionOf;
 import static org.mockito.Mockito.*;
 
 public class RondaTest {
@@ -164,7 +159,7 @@ public class RondaTest {
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         Tienda tiendaMock = mock(Tienda.class);
-        doNothing().when(tiendaMock).comprar((Carta) any());
+        doNothing().when(tiendaMock).comprar(any());
         // Act
         Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock);
         // Act / Assert
@@ -179,7 +174,7 @@ public class RondaTest {
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         Tienda tiendaMock = mock(Tienda.class);
-        doNothing().when(tiendaMock).comprar((Modificador) any());
+        doNothing().when(tiendaMock).comprar(any());
         // Act
         Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock);
         // Act / Assert
@@ -194,7 +189,7 @@ public class RondaTest {
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         Tienda tiendaMock = mock(Tienda.class);
-        doNothing().when(tiendaMock).comprar((Tarot) any());
+        doNothing().when(tiendaMock).comprar(any());
         // Act
         Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock);
         // Act / Assert

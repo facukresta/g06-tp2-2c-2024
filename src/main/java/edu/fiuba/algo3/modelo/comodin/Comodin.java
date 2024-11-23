@@ -18,4 +18,8 @@ public abstract class Comodin  implements Modificador {
     }
 
     public abstract void aplicarModificador(Puntaje puntaje, Juego juego);
+
+    public void comprar() {
+        // Recibe Monto y le manda a otra clase ese monto total y el precio de la carta
+    }
 }

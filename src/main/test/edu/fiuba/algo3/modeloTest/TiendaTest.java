@@ -19,7 +19,7 @@ public class TiendaTest {
     @Test
     public void test01UnaTiendaSinNingunObjetoNoSeLePuedeComprarNada() {
         // Arrange
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        Tienda tienda = new TiendaBalatro(new ArrayList<>());
         // Act / Assert
         assertThrows(ProductoNoEnTiendaException.class, () -> {
             tienda.comprar(mock(Carta.class));
@@ -29,7 +29,7 @@ public class TiendaTest {
     public void test02UnaTiendaConUnComodinAgregadoPuedeComprarseEseComodin(){
         // Arrange
         Modificador modificadorMock = mock(Modificador.class);
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(), new ArrayList<>(List.of(modificadorMock)), new ArrayList<>());
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(modificadorMock)));
         // Act / Assert
         assertDoesNotThrow(() -> { tienda.comprar(modificadorMock);});
     }
@@ -37,7 +37,7 @@ public class TiendaTest {
     public void test03UnaTiendaConUnTarotAgregadoPuedeComprarseEseTarot(){
         // Arrange
         Tarot tarotMock = mock(Tarot.class);
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(List.of(tarotMock)));
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(tarotMock)));
         // Act / Assert
         assertDoesNotThrow(() -> { tienda.comprar(tarotMock);});
     }
@@ -45,7 +45,7 @@ public class TiendaTest {
     public void test04UnaTiendaConUnCartaAgregadoPuedeComprarseEseCarta(){
         // Arrange
         Carta cartaMock = mock(Carta.class);
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock)), new ArrayList<>(), new ArrayList<>());
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock)));
         // Act / Assert
         assertDoesNotThrow(() -> { tienda.comprar(cartaMock);});
     }
@@ -54,7 +54,7 @@ public class TiendaTest {
         // Arrange
         Modificador modificadorMock1 = mock(Modificador.class);
         Modificador modificadorMock2 = mock(Modificador.class);
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(), new ArrayList<>(List.of(modificadorMock1, modificadorMock2)), new ArrayList<>());
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(modificadorMock1, modificadorMock2)));
         // Act / Assert
         assertDoesNotThrow(() -> { tienda.comprar(modificadorMock1);});
         assertThrows(ProductoNoEnTiendaException.class, () -> {
@@ -66,7 +66,7 @@ public class TiendaTest {
         // Arrange
         Carta cartaMock1 = mock(Carta.class);
         Carta cartaMock2 = mock(Carta.class);
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock1, cartaMock2)), new ArrayList<>(), new ArrayList<>());
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock1, cartaMock2)));
         // Act / Assert
         assertDoesNotThrow(() -> { tienda.comprar(cartaMock2);});
         assertThrows(ProductoNoEnTiendaException.class, () -> {
@@ -78,7 +78,7 @@ public class TiendaTest {
         // Arrange
         Tarot tarotMock1 = mock(Tarot.class);
         Tarot tarotMock2 = mock(Tarot.class);
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(List.of(tarotMock2, tarotMock1)));
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(tarotMock2, tarotMock1)));
         // Act / Assert
         assertDoesNotThrow(() -> { tienda.comprar(tarotMock1);});
         assertThrows(ProductoNoEnTiendaException.class, () -> {
@@ -86,48 +86,52 @@ public class TiendaTest {
         });
     }
     @Test
-    public void test08UnaTiendaUnaCartaUnaComodinYUnTarotPuedeComprarLosTres(){
+    public void test08UnaTiendaUnaCartaUnaComodinYUnTarotPuedeComprarUnSoloTarot(){
         // Arrange
         Tarot tarotMock = mock(Tarot.class);
         Modificador modificadorMock = mock(Modificador.class);
         Carta cartaMock = mock(Carta.class);
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock)), new ArrayList<>(List.of(modificadorMock)), new ArrayList<>(List.of(tarotMock)));
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock, modificadorMock, tarotMock)));
         // Act / Assert
         assertDoesNotThrow(() -> { tienda.comprar(tarotMock);});
         assertThrows(ProductoNoEnTiendaException.class, () -> {
-            tienda.comprar(tarotMock);
-        });
-        assertDoesNotThrow(() -> { tienda.comprar(cartaMock);});
-        assertThrows(ProductoNoEnTiendaException.class, () -> {
             tienda.comprar(cartaMock);
         });
-        assertDoesNotThrow(() -> { tienda.comprar(modificadorMock);});
         assertThrows(ProductoNoEnTiendaException.class, () -> {
             tienda.comprar(modificadorMock);
         });
     }
     @Test
-    public void test09UnaTiendaDosCartaDosaComodinYDosTarotSoloPuedeComprarSoloUnoDeCadaUno(){
+    public void test08UnaTiendaUnaCartaUnaComodinYUnTarotPuedeComprarUnoSoloModificador(){
         // Arrange
-        Tarot tarotMock1 = mock(Tarot.class);
-        Modificador modificadorMock1 = mock(Modificador.class);
-        Carta cartaMock1 = mock(Carta.class);
-        Tarot tarotMock2 = mock(Tarot.class);
-        Modificador modificadorMock2 = mock(Modificador.class);
-        Carta cartaMock2 = mock(Carta.class);
-        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock1, cartaMock2)), new ArrayList<>(List.of(modificadorMock1, modificadorMock2)), new ArrayList<>(List.of(tarotMock1, tarotMock2)));
-        // Act
-        assertDoesNotThrow(() -> { tienda.comprar(tarotMock1);});
-        assertDoesNotThrow(() -> { tienda.comprar(cartaMock1);});
-        assertDoesNotThrow(() -> { tienda.comprar(modificadorMock1);});
+        Tarot tarotMock = mock(Tarot.class);
+        Modificador modificadorMock = mock(Modificador.class);
+        Carta cartaMock = mock(Carta.class);
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock, modificadorMock, tarotMock)));
+        // Act / Assert
+        assertDoesNotThrow(() -> { tienda.comprar(modificadorMock);});
         assertThrows(ProductoNoEnTiendaException.class, () -> {
-            tienda.comprar(tarotMock2);
+            tienda.comprar(cartaMock);
         });
         assertThrows(ProductoNoEnTiendaException.class, () -> {
-            tienda.comprar(cartaMock2);
-        });
-        assertThrows(ProductoNoEnTiendaException.class, () -> {
-            tienda.comprar(modificadorMock2);
+            tienda.comprar(tarotMock);
         });
     }
+    @Test
+    public void test08UnaTiendaUnaCartaUnaComodinYUnTarotPuedeComprarUnaSolaCarta(){
+        // Arrange
+        Tarot tarotMock = mock(Tarot.class);
+        Modificador modificadorMock = mock(Modificador.class);
+        Carta cartaMock = mock(Carta.class);
+        Tienda tienda = new TiendaBalatro(new ArrayList<>(List.of(cartaMock, modificadorMock, tarotMock)));
+        // Act / Assert
+        assertDoesNotThrow(() -> { tienda.comprar(cartaMock);});
+        assertThrows(ProductoNoEnTiendaException.class, () -> {
+            tienda.comprar(tarotMock);
+        });
+        assertThrows(ProductoNoEnTiendaException.class, () -> {
+            tienda.comprar(modificadorMock);
+        });
+    }
+
 }

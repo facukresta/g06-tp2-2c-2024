@@ -48,4 +48,8 @@ public class CartaInglesa implements Carta {
     public boolean sos(Carta carta) {
         return (this == carta);
     }
+
+    public void comprar() {
+        // Recibe Monto y le manda a otra clase ese monto total y el precio de la carta
+    }
 }
