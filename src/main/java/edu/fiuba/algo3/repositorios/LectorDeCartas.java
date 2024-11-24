@@ -1,4 +1,4 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.repositorios;
 
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 
@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class LectorDeCartas {
@@ -27,5 +28,11 @@ public class LectorDeCartas {
             e.printStackTrace();
         }
         return cartas;
+    }
+
+    public ArrayList<Carta> leerCartaSinJson(JSONObject cartaJson){
+        String palo = (String) cartaJson.get("palo");
+        String numero = (String) cartaJson.get("numero");
+        return new ArrayList<>(List.of(new CartaInglesa(conversorNumero.convertirNumero(numero), conversorPalo.convertirPalo(palo))));
     }
 }

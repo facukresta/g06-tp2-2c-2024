@@ -1,6 +1,5 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.repositorios;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,3 +20,4 @@ public class AbridorDeJson {
         return (JSONObject) parser.parse(new InputStreamReader(inputStream));
     }
 }
+

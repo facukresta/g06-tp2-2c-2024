@@ -1,10 +1,10 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.repositorios;
 
 import java.util.HashMap;
 
 public class ConversorNumero {
     HashMap<String, Integer> mapaDeNumeros = new HashMap<>();
-    public ConversorNumero (){
+    public ConversorNumero(){
         mapaDeNumeros.put("As", 1);
         mapaDeNumeros.put("Rey", 13);
         mapaDeNumeros.put("Reina", 12);

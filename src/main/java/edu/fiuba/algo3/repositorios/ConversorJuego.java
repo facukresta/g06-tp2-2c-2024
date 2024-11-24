@@ -1,4 +1,4 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.repositorios;
 
 import edu.fiuba.algo3.modelo.juego.*;
 
@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class ConversorJuego {
     HashMap<String, Juego> mapaDeJuegos = new HashMap<>();
-    public ConversorJuego (){
+    public ConversorJuego(){
         mapaDeJuegos.put("carta alta", new CartaAlta());
         mapaDeJuegos.put("par", new Par());
         mapaDeJuegos.put("doble par", new DoblePar());

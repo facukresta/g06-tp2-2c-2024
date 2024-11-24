@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.entrega_2;
 
 
-import edu.fiuba.algo3.LectorComodines;
-import edu.fiuba.algo3.LectorDeCartas;
-import edu.fiuba.algo3.LectorDeTarots;
 import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.aleatorio.Ejecucion;
 import edu.fiuba.algo3.modelo.comodin.*;
@@ -14,6 +11,9 @@ import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
+import edu.fiuba.algo3.repositorios.LectorComodines;
+import edu.fiuba.algo3.repositorios.LectorDeCartas;
+import edu.fiuba.algo3.repositorios.LectorDeTarots;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

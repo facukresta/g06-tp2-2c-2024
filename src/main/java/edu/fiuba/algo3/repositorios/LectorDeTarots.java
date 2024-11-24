@@ -1,6 +1,5 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.repositorios;
 
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.tarot.CambiadorDeMultiplicador;
 import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
 import edu.fiuba.algo3.modelo.tarot.Sumador;
@@ -37,6 +36,28 @@ public class LectorDeTarots {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return listaDeTarots;
+    }
+
+    public ArrayList<Tarot> leerTarotsSinJson(JSONArray tarots){
+        ArrayList<Tarot> listaDeTarots = new ArrayList<>();
+        for (Object obj : tarots) {
+            JSONObject cartaJson = (JSONObject) obj;
+            JSONObject efectosJson = (JSONObject) cartaJson.get("efecto");
+            int puntos = ((Long) efectosJson.get("puntos")).intValue();
+            double multiplicador = ((Number) efectosJson.get("multiplicador")).doubleValue();
+            String sobre = (String) cartaJson.get("sobre");
+            String juego = (String)cartaJson.get("ejemplar");
+            if (sobre.equals("carta")) {
+                if (puntos == 1) {
+                    listaDeTarots.add(new CambiadorDeMultiplicador(multiplicador));
+                } else {
+                    listaDeTarots.add(new CambiadorDePuntos(puntos));
+                }
+            } else if (sobre.equals("mano")) {
+                listaDeTarots.add(new Sumador(puntos, multiplicador, conversorJuego.convertirJuego(juego)));
+            }
         }
         return listaDeTarots;
     }

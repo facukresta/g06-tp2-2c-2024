@@ -1,4 +1,4 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.repositorios;
 
 import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.comodin.*;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class LectorComodines {
     private final ConversorJuego conversorJuego = new ConversorJuego();
     private final AbridorDeJson abridorDeJson = new AbridorDeJson();
+
     private ArrayList<Modificador> leerComodin(JSONArray comodines) {
         ArrayList<Modificador> listaDeComodines = new ArrayList<>();
         for (Object obj : comodines) {
@@ -73,4 +74,5 @@ public class LectorComodines {
         }
         return listaDeComodines;
     }
+    
 }
