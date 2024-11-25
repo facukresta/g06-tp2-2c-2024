@@ -150,9 +150,11 @@ public class casosDeUsoEntrega2Test {
         Comodinera comodinera = new Comodinera();
         //Act
         Puntaje puntajeObtenido1 = mano.jugarMano(cartas, juego, comodinera);
-        mano.agregarCartas(cartas);
+        ArrayList<Carta> cartas2 = new ArrayList<>(List.of(carta1, carta2));
+        Juego juego2 = Juego.chequearJuego(cartas2);
+        mano.agregarCartas(cartas2);
         comodinera.agregarComodin(comodin);
-        Puntaje puntajeObtenido2 = mano.jugarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido2 = mano.jugarMano(cartas2, juego2, comodinera);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));
         assertTrue(puntajeEsperado2.tenesMismoPuntaje(puntajeObtenido2));
