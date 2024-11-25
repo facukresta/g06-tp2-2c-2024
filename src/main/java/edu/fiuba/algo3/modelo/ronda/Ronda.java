@@ -68,6 +68,10 @@ public class Ronda {
         }
     }
 
+    public ArrayList<Carta> obtenerCartas() {
+        return mano.obtenerCartas();
+    }
+
     public void comprar (Modificador comodin) {
         tienda.comprar(comodin);
     }
@@ -92,15 +96,3 @@ public class Ronda {
 //        mano.modificarJuego(tarot);
 //    }
 //
-//    public void elegirCarta(Carta carta) {
-//        Carta cartaAElegir = this.obtenerCarta(carta);
-//        if (cartasSeleccionadas.contains(cartaAElegir)) {
-//            this.cartasSeleccionadas.remove(cartaAElegir);
-//        } else {
-//            if (this.cartasSeleccionadas.size() == this.maxCartasSeleccionadas) {
-//                throw new MaximoCartasSeleccionadasException();
-//            }
-//            this.cartasSeleccionadas.add(cartaAElegir);
-//        }
-//        this.juego = Juego.chequearJuego(this.cartasSeleccionadas);
-//    }

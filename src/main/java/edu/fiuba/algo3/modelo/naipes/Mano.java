@@ -28,4 +28,6 @@ public interface Mano {
     void modificarCarta(Carta carta, Tarot tarot);
 
     void modificarJuego(Tarot tarot);
+
+    ArrayList<Carta> obtenerCartas();
 }

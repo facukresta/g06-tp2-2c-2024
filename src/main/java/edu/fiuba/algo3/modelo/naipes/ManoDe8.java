@@ -83,6 +83,10 @@ public class ManoDe8 implements Mano {
         throw new CartaNoEnManoException();
     }
 
+    public ArrayList<Carta> obtenerCartas() {
+        return cartas;
+    }
+
     public void modificarCarta(Carta carta, Tarot tarot){
         Carta cartaAModificar = this.obtenerCarta(carta);
         cartaAModificar.aplicarModificador(tarot);

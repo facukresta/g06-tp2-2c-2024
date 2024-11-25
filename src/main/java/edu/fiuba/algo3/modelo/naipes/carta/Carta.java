@@ -14,4 +14,6 @@ public interface Carta extends Comprable {
     int obtenerNumero();
 
     boolean sos(Carta carta);
+
+    public String obtenerNombre();
 }

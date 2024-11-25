@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vistas;
 
+import edu.fiuba.algo3.controllers.CartaApretarEventHandler;
+import edu.fiuba.algo3.controllers.IniciarJuegoEventHandler;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
@@ -59,6 +61,7 @@ public class BalatroGame extends Application {
     private ArrayList<Carta> seleccionadas = new ArrayList<>();
     private ArrayList<Ronda> rondas = new ArrayList<>();
     private ArrayList<Tarot> tarots = new ArrayList<>();
+    private Ronda rondaActual;
 
     @Override
     public void start(Stage stage) {
@@ -137,11 +140,7 @@ public class BalatroGame extends Application {
         logo.fitWidthProperty().bind(root.widthProperty().multiply(0.5)); // Escalar al 30% del ancho de la ventana
         logo.fitHeightProperty().bind(root.heightProperty().multiply(0.3));
 
-       Button playButton = this.crearBoton("Jugar", Color.DARKRED, (e -> {
-            // handler iniciarJuegoEnentHandler
-           Scene gameScene = createGameScene();
-           switchScene(gameScene);
-       }), root, 0.2, 0.1);
+        Button playButton = this.crearBoton("Jugar", Color.DARKRED, (new IniciarJuegoEventHandler(this.rondas, this.mazo,this.rondaActual ,() -> switchScene(createGameScene()))), root, 0.2, 0.1);
         medio.getChildren().add(logo);
         medio.getChildren().add(playButton);
         medio.setAlignment(Pos.CENTER);
@@ -192,6 +191,20 @@ public class BalatroGame extends Application {
             Platform.exit();
         }), root, 0.2, 0.1);
 
+        // CREAR Y REPARTIR LAS CARTAS
+        HBox cartasDisplay = new HBox();
+
+        System.out.println(rondas);
+        this.rondaActual = rondas.get(0);
+        ArrayList<Carta> cartas = this.rondaActual.obtenerCartas();
+        for (Carta carta : cartas) {
+            Button cartaBoton = this.crearBoton(carta.obtenerNombre(), Color.DARKBLUE, (new CartaApretarEventHandler(this.seleccionadas,carta)), root, 0.04, 0.1);
+            cartasDisplay.getChildren().add(cartaBoton);
+        }
+
+        cartasDisplay.setAlignment(Pos.BOTTOM_CENTER);
+        cartasDisplay.setSpacing(20);
+
 
 
 //        // Escalar el botón dinámicamente
@@ -228,6 +241,7 @@ public class BalatroGame extends Application {
 
         BorderPane pane = new BorderPane();
         pane.setBottom(layout);
+        pane.setCenter(cartasDisplay);
 
 
         root.getChildren().add(pane);

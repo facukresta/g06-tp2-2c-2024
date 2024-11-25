@@ -13,11 +13,15 @@ import javafx.event.EventHandler;
 import java.util.ArrayList;
 
 public class IniciarJuegoEventHandler implements EventHandler<ActionEvent>  {
-    private Mazo mazo = new Mazo();
-    private ArrayList<Ronda> rondas = new ArrayList<>();
-    public IniciarJuegoEventHandler (ArrayList<Ronda> rondas, Mazo mazo) {
+    private Mazo mazo;
+    private ArrayList<Ronda> rondas;
+    private Runnable action;
+    private Ronda rondaActual;
+    public IniciarJuegoEventHandler (ArrayList<Ronda> rondas, Mazo mazo, Ronda rondaActual, Runnable action) {
         this.mazo = mazo;
         this.rondas = rondas;
+        this.action = action;
+        this.rondaActual = rondaActual;
     }
     @Override
     public void handle(ActionEvent actionEvent) {
@@ -26,7 +30,10 @@ public class IniciarJuegoEventHandler implements EventHandler<ActionEvent>  {
         this.mazo.agregarCartas(cartas);
 
         LectorDeBalatro lectorDeBalatro = new LectorDeBalatro();
-        ArrayList<Ronda> rondas = lectorDeBalatro.leerBalatro(this.mazo);
-        this.rondas = rondas;
+        ArrayList<Ronda> rondas2 = lectorDeBalatro.leerBalatro(this.mazo);
+
+        rondas.addAll(rondas2);
+        this.rondaActual = this.rondas.get(0);
+        action.run();
     }
 }

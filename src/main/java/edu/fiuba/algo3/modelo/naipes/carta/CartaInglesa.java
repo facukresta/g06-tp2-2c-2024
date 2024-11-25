@@ -24,6 +24,10 @@ public class CartaInglesa implements Carta {
         this.modificador = new SinTarot();
     }
 
+    public String obtenerNombre() {
+        return this.palo.getClass().getSimpleName()+numero;
+    }
+
     public void aplicarModificador(Tarot tarot) {
         this.modificador = tarot;
     }
