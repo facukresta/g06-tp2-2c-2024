@@ -25,7 +25,7 @@ public class Puntaje {
         return multiplicador;
     }
 
-    private double calcularPuntaje() {
+    public double calcularPuntaje() {
         return puntos * multiplicador;
     }
 

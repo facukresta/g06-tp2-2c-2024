@@ -83,6 +83,26 @@ public class Ronda {
     public void comprar (Tarot tarot) {
         tienda.comprar(tarot);
     }
+
+    public double obtenerPuntajeASuperar() {
+        return this.puntajeASuperar.calcularPuntaje();
+    }
+
+    public double obtenerPuntajesObtenidos() {
+        double puntajesObtenidos = 0;
+        for (Puntaje puntaje: this.puntajesObtenidos){
+            puntajesObtenidos += puntaje.calcularPuntaje();
+        }
+        return puntajesObtenidos;
+    }
+
+    public int obtenerJugadasRestantes() {
+        return this.manos;
+    }
+
+    public int obtenerDescartesRestantes() {
+        return this.descartes;
+    }
 }
 
 

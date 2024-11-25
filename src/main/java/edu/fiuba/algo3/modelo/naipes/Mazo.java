@@ -39,4 +39,9 @@ public class Mazo {
         this.cartas.addAll(this.cartasDescartadas);
         this.cartasDescartadas.clear();
     }
+
+    public void vaciarMazo() {
+        this.cartas.clear();
+        this.cartasDescartadas.clear();
+    }
 }

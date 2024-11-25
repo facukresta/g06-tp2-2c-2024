@@ -67,6 +67,7 @@ public class ManoDe8 implements Mano {
         Puntaje puntaje = juego.puntuarMano();
         comodinera.aplicarComodines(puntaje, juego);
         this.quitarCartas(cartasSeleccionadas);
+        cartasSeleccionadas.clear();
         return puntaje;
     }
 

@@ -14,33 +14,33 @@ import java.util.ArrayList;
 public class JugarManoEventHandler implements EventHandler<ActionEvent> {
 
     private ArrayList<Carta> seleccionadas;
-    private Juego juego;
     private Comodinera comodinera;
     private Ronda ronda;
+    private Runnable action1;
+    private Runnable action2;
 
 
-    public JugarManoEventHandler(ArrayList<Carta> seleccionadas, Juego juego, Comodinera comodinera, Ronda ronda) {
+    public JugarManoEventHandler(ArrayList<Carta> seleccionadas, Comodinera comodinera, Ronda ronda, Runnable action1, Runnable action2) {
         this.seleccionadas = seleccionadas;
-        this.juego = juego;
         this.comodinera = comodinera;
         this.ronda = ronda;
+        this.action1 = action1;
+        this.action2 = action2;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
         if (!seleccionadas.isEmpty()) {
-            ArrayList<Carta> seleccionadasAntes = this.seleccionadas;
             try {
-                ronda.jugarMano(seleccionadas, juego, comodinera);
+                ronda.jugarMano(seleccionadas, Juego.chequearJuego(seleccionadas), comodinera);
             } catch (PasoLaRondaException e) {
                 // cambio de scena o layout
             } catch (PerdioLaRondaException e2) {
-                // cambio de scena o layout a escena final
+                this.action2.run();
+                return;
             }
-            for (Carta carta : seleccionadasAntes) {
-                // carta.handlerRemove.fireEvent()
-            }
+            // volver a hacer la escena
+            action1.run();
         }
-
     }
 }

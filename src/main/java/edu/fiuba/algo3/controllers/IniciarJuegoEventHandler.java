@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.modelo.comodin.Comodinera;
-import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
@@ -16,24 +14,21 @@ public class IniciarJuegoEventHandler implements EventHandler<ActionEvent>  {
     private Mazo mazo;
     private ArrayList<Ronda> rondas;
     private Runnable action;
-    private Ronda rondaActual;
-    public IniciarJuegoEventHandler (ArrayList<Ronda> rondas, Mazo mazo, Ronda rondaActual, Runnable action) {
+    public IniciarJuegoEventHandler (ArrayList<Ronda> rondas, Mazo mazo, Runnable action) {
         this.mazo = mazo;
         this.rondas = rondas;
         this.action = action;
-        this.rondaActual = rondaActual;
     }
     @Override
     public void handle(ActionEvent actionEvent) {
         LectorDeCartas lectorDeCartas = new LectorDeCartas();
         ArrayList<Carta> cartas = lectorDeCartas.leerCartas();
+        this.mazo.vaciarMazo();
         this.mazo.agregarCartas(cartas);
 
         LectorDeBalatro lectorDeBalatro = new LectorDeBalatro();
-        ArrayList<Ronda> rondas2 = lectorDeBalatro.leerBalatro(this.mazo);
-
-        rondas.addAll(rondas2);
-        this.rondaActual = this.rondas.get(0);
+        rondas.clear();
+        rondas.addAll(lectorDeBalatro.leerBalatro(this.mazo));
         action.run();
     }
 }
