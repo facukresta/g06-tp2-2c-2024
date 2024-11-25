@@ -3,63 +3,72 @@ skinparam classAttributeIconSize 0
 
 abstract Juego {
 #modificador: Tarot
+#cartas : List<Carta>
 -{static}juegos: List<Juego>
 +{static}ChequearJuego(List<Carta>): Juego
-+{abstract}puntuarMano(List<Carta>): Puntaje
++{abstract}puntuarMano(): Puntaje
 +{abstract}sosJuego(List<Carta>): bool
-#puntuarCartas(ArrayList<Carta> c, Puntaje puntajeBase): Puntaje
++sosElMismoJuego(List<Carta>): bool
+#puntuarJuego(Puntaje puntajeBase) : Puntaje
+#puntuarCartas(Puntaje puntajeBase): Puntaje
+#colocarCartas(ArrayList<Carta> cartas)
+#Juego obtenerMayor(Juego juegoSeleccionado)
 -aplicarTarotALaIntancia(Tarot t)
 +aplicarTarot(Tarot t)
 }
 
-
 class CartaAlta {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Par {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class DoblePar {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Trio {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Escalera {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Color {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class FullHouse {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class Poker {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class EscaleraDeColor {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
 class EscaleraReal  {
-+puntuarMano(List<Carta>): Puntaje
++puntuarMano(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class SinJuego  {
++puntuarMano(): Puntaje
 +sosJuego(List<Carta>): bool
 }
 
@@ -67,7 +76,8 @@ CartaAlta -up-|> Juego
 Par -up-|> Juego
 DoblePar -up-|> Juego
 Trio -up-|> Juego
-Escalera -left-|> Juego::aplicarTarot
+Escalera -left-|> Juego
+SinJuego --|> Juego
 Color -right-|> Juego
 FullHouse -down-|> Juego
 Poker -down-|> Juego

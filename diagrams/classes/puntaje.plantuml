@@ -30,10 +30,16 @@ class Carta {
 
 abstract Juego {
 #modificador: Tarot
+#cartas : List<Carta>
 -{static}juegos: List<Juego>
 +{static}ChequearJuego(List<Carta>): Juego
-+{abstract}puntuarMano(List<Carta>): Puntaje
++{abstract}puntuarMano(): Puntaje
 +{abstract}sosJuego(List<Carta>): bool
++sosElMismoJuego(List<Carta>): bool
+#puntuarJuego(Puntaje puntajeBase) : Puntaje
+#puntuarCartas(Puntaje puntajeBase): Puntaje
+#colocarCartas(ArrayList<Carta> cartas)
+#Juego obtenerMayor(Juego juegoSeleccionado)
 -aplicarTarotALaIntancia(Tarot t)
 +aplicarTarot(Tarot t)
 }
@@ -53,7 +59,7 @@ Carta *-- Tarot :tiene
 
 Tarot .up.> Puntaje: "usa"
 Modificador .down.> Puntaje: "usa"
-Juego .up.> Puntaje: "usa"
+Juego -up-> Puntaje
 Puntaje <.left. Carta: "crea"
 
 @enduml

@@ -15,5 +15,7 @@ public interface Carta extends Comprable {
 
     boolean sos(Carta carta);
 
-    public String obtenerNombre();
+    String obtenerNombre();
+
+    void comprar();
 }

@@ -1,65 +1,83 @@
 @startuml Comodin
 skinparam classAttributeIconSize 0
 
+class Comodinera{
+    +agregarComodin(Modificador comodin)
+    +cambiarOrden(Modificador comodin1, Modificador comodin2)
+    +quitaComodin(Modificador comodin)
+    +aplicarComodines(Puntaje puntajeBase, Juego juego)
+}
+
 interface Modificador{
 +{abstract} aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
+abstract class Comodin{
+#valor : double
+#juego : Juego
++{method} Comodin(double valor, Ejecucion probabilidad, Juego juego)
++{abstract} {method} aplicarModificador(Puntaje puntaje, Juego juego)
++comprar()
+}
+
+interface Ejecucion{
+    +ejecuta(Runnable accion)
+}
+
 class Aleatorio{
+#valor : double
+#juego : Juego
 - probabilidad : int
 +{method} Aleatorio(int probabilidad)
-+{method} sucede() : bool
-}
-
-class Comodin{
-#cantidad : double
-#juego : Juego
-+{method} Comodin(double cantidad, Aleatorio probabilidad, Juego juego)
-+{abstract} {method} aplicarModificador(Puntaje puntaje, Juego juego)
-#{method} puedeAplicarse() : bool
-}
-
-class ComodinCombinacion{
-+{method}ComodinCombinacion(List<Comodin> comodines)
-+{method} aplicarModificador(Puntaje puntaje, Juego juego)
++ejecuta(Runnable accion)
 }
 
 class SumaMultiplicador{
-+SumaMultiplicador(double cantidad, Juego juego, Aleatorio probabilidad)
-+SumaMultiplicador(double cantidad, Aleatorio probabilidad)
++SumaMultiplicador(double cantidad, Juego juego, Ejecucion probabilidad)
++SumaMultiplicador(double cantidad, Ejecucion probabilidad)
 +SumaMultiplicador(double cantidad, Juego juego)
 +SumaMultiplicador(double cantidad)
 +aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
-
 class SumaMultiplicadorDescarte{
-+SumaMultiplicadorDescarte(double cantidad, Aleatorio probabilidad)
++SumaMultiplicadorDescarte(double cantidad, Ejecucion probabilidad)
 +SumaMultiplicadorDescarte(double cantidad)
 +aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
-
 class SumaPuntos{
-+SumaPuntos(double cantidad, Juego juego, Aleatorio probabilidad)
-+SumaPuntos(double cantidad, Aleatorio probabilidad)
++SumaPuntos(double cantidad, Juego juego, Ejecucion probabilidad)
++SumaPuntos(double cantidad, Ejecucion probabilidad)
 +SumaPuntos(double cantidad, Juego juego)
 +SumaPuntos(double cantidad)
 +aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
 class SumaPuntosDescarte{
-+SumaPuntosDescarte(int cantidad, Aleatorio probabilidad)
++SumaPuntosDescarte(int cantidad, Ejecucion probabilidad)
 +SumaPuntosDescarte(int cantidad)
 +aplicarModificador(Puntaje puntaje, Juego juego)
 }
-SumaPuntos -right-|> Comodin
-Comodin *-up- Aleatorio
 
-Comodin .right.|> Modificador
-ComodinCombinacion "1" -left-> "*" Comodin
-ComodinCombinacion .up.|> Modificador
-Comodin <|-up- SumaMultiplicador
+class MultiComodin{
+    +componerComodin(Modificador comodin)
+    +aplicarModificador(Puntaje puntaje, Juego juego)
+    +comprar()
+}
+
+SumaPuntos -right-|> Comodin
 SumaMultiplicadorDescarte -up-|> Comodin
 SumaPuntosDescarte -down-|> Comodin
+SumaMultiplicador -up-|> Comodin
+
+Comodin *-right- Ejecucion
+Aleatorio .up.|> Ejecucion
+
+Comodin .up.|> Modificador
+MultiComodin .right.|> Modificador
+
+Comodinera "1" o-- "*" Modificador
+MultiComodin "1" o-- "*" Comodin
+
 @enduml

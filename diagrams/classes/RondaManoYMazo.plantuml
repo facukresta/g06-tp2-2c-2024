@@ -6,15 +6,20 @@ class Ronda{
 -puntajesObtenidos : List<Puntaje>
 -descartes : int
 - manos : int
-+Ronda(Puntaje puntajeASuperar, int manos, int descartes, Mazo mazo)
+- tienda : Tienda
++Ronda(Puntaje puntajeASuperar, int manos, int descartes, Mazo mazo, Tienda tienda)
 +agregarComodin(Modificador comodin)
-+descartarMano()
++descartarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera)
 +elegirCarta(Carta c)
-+jugarMano()
++jugarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera)
 +modificarCarta(Carta c, Tarot t)
 +modificarJuego(Tarot t)
 -pasoLaRonda() : bool
 -puedeSeguirJugando() : bool
++obtenerCartas() : List <Carta>
++comprar (Modificador comodin)
++comprar (Carta carta)
++comprar (Tarot tarot)
 }
 
 class Mazo {
@@ -26,14 +31,14 @@ class Mazo {
 +mezclar()
 }
 
-class Mano {
+class ManoDe8 {
 -maxCartas: int
 -maxCartasSeleccionadas: int
 -cartas: List<Carta>
 -cartasSelecionadas: List<Carta>
 -juego: Juego
 -comodines: List<Modificador>
-+Mano(int cantidadDeCartas)
++ManoDe8(int cantidadDeCartas)
 +agregarCarta(Carta c)
 +agregarCartas(List<Carta> c)
 +agregarComodin(Modificador comodin)
@@ -46,8 +51,24 @@ class Mano {
 +obtenerCarta(Carta c): Carta
 +quitarCarta(Carta c)
 +quitarCartas(List<Carta> c)
++obtenerCartas() : List <Carta>
 }
 
+interface Mano{
++agregarCarta(Carta carta)
++agregarCartas(ArrayList<Carta> cartas)
++quitarCarta(Carta carta)
++quitarCartas(ArrayList<Carta> cartas)
++descartarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera) : Puntaje
++jugarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera) : Puntaje
++obtenerCantidadDeCartas() : int
++obtenerCarta(Carta cartaBuscada) : Carta
++modificarCarta(Carta carta, Tarot tarot)
++modificarJuego(Tarot tarot)
++obtenerCartas() : List <Carta>
+}
+
+ManoDe8 ..|> Mano
 Ronda o-- Mano : tiene
 Ronda --> Mazo : tiene
 @enduml

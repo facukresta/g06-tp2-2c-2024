@@ -1,15 +1,25 @@
 @startuml Carta
 skinparam classAttributeIconSize 0
-class Carta {
+
+interface Carta {
+    +aplicarModificador(Tarot tarot)
+    +obtenerPuntaje() : Puntaje
+    +esDelMismoPalo(Carta carta) : bool
+    +obtenerNumero() : int
+    +sos(Carta carta) : bool
+}
+
+class CartaInglesa {
 -valor: int
 -numero: int
-+Carta(int numero, Palo palo)
++CartaInglesa(int numero, Palo palo)
 +aplicarModificador(Tarot t)
 +esDelMismoPalo(Carta carta) : bool
 +obtenerNumero() : int
 -obtenerPalo() : Palo
 +obtenerPuntaje(): Puntaje
-+sos(Carta c): boolean
++sos(CartaInglesa c): bool
++comprar()
 }
 
 abstract class Tarot{
@@ -18,13 +28,13 @@ abstract class Tarot{
 +sosParaEsteJuego(Juego juego): bool
 }
 
-Carta *-- Tarot :tiene
+CartaInglesa *-- Tarot :tiene
 
 interface Palo {
 +{abstract}esDeEstePalo(Palo p): bool
 }
 
-Carta *-- Palo :tiene
+CartaInglesa *-- Palo :tiene
 
 class Trebol {
 +esDeEstePalo(Palo p): bool
@@ -46,5 +56,6 @@ Trebol .up.|> Palo
 Corazon .up.|> Palo
 Diamante .down.|> Palo
 Pica .down.|> Palo
+CartaInglesa .left.|> Carta
 
 @enduml
