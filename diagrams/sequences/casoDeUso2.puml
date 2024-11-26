@@ -43,7 +43,7 @@ TestCase <- juego : juegoMayorPuntaje = new Escalera()
 deactivate juego
 
 
-TestCase -> "comodinera:Comodinera" as comodinera : new()
+TestCase -> "comodinera:Comodinera" as comodinera **: new()
 activate comodinera
 TestCase -> comodinera : agregarComodin(c)
 deactivate comodinera
@@ -56,13 +56,13 @@ mano -> "juegoMayorPuntaje:Escalera" as mejor:  puntuarMano()
 activate mejor
 mano <-- mejor : resultado:Puntaje
 deactivate mejor
-mano -> comodinera : aplicarComodines(p, juegoMayorPuntaje)
-activate comodinera
+mano -> comodinera : aplicarComodines(resultado, juegoMayorPuntaje)
 loop para cada comodin
-comodinera -> "Comodin" : aplicarModificador(p, juegoMayorPuntaje)
-deactivate comodinera
+comodinera -> "Comodin" : aplicarModificador(resultado, juegoMayorPuntaje)
+end
 TestCase <-- mano : resultado:Puntaje
 deactivate mano
+
 
 TestCase -> esperado : tenesMismoPuntaje(resultado)
 activate esperado

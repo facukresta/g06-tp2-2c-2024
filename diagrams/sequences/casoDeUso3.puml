@@ -1,6 +1,5 @@
 @startuml casoDeUso3
 title "test03 El Jugador Si Posee Un Comodin Que Suma 10 Puntos Por Descarte Al Descartar Sume La Cantidad Correcta"
-!pragma teoz true
 
 participant "TestCase" as TestCase
 
@@ -18,105 +17,56 @@ comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(1)
 activate aleatorio
 comodin <-- aleatorio
 deactivate aleatorio
-comodin -> "sinJuego:SinJuego" as sinJuego ** : new SinJuego()
-activate sinJuego
-comodin <-- sinJuego
-deactivate sinJuego
+comodin -> "escalera:Escalera" as escalera ** : new Escalera()
+activate escalera
+comodin <-- escalera
+deactivate escalera
 TestCase <-- comodin : c
 deactivate comodin
 
 TestCase -> "mano:Mano" as mano **: new Mano(8)
 activate mano
 TestCase <-- mano : mano
+note right of TestCase: creamos 5 cartas que forman una escalera
+TestCase -> mano : agregarCartas(cartas)
 deactivate mano
 
-loop para 5 cartas
-TestCase -> "carta[i]:Carta" as carta1 **: new Carta([i], new Trebol())
-activate carta1
-carta1 -> "__:Trebol__" as trebol **: new Trebol()
-activate trebol
-carta1 <-- trebol : Trebol
-deactivate trebol
-carta1 -> "__:SinTarot__" as sinTarot **: new SinTarot()
-activate sinTarot
-carta1 <-- sinTarot : SinTarot
-deactivate sinTarot
-TestCase <-- carta1 : carta[i]
-deactivate carta1
-end
-
-TestCase -> mano : agregarCartas(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5))
-activate mano
-deactivate mano
-
-loop por carta1 y carta2
-TestCase -> mano : elegirCarta(carta)
-activate mano
-mano -> mano : obtenerCarta(carta)
-activate mano
-loop por cada carta en mano hasta encontrar la carta buscada
-mano -> "__:Carta__" as instanciaCarta : sos(carta)
-activate instanciaCarta
-instanciaCarta --> mano : true
-deactivate instanciaCarta
-end
-mano <-- mano : carta
-deactivate mano
-mano -> "__:Juego__" as juego **: chequearJuego(cartasSeleccionadas)
+TestCase -> "Juego" as juego : chequearJuego(cartas)
 activate juego
-loop por cada juego de cartas posible dentro de Balastro
-juego -> "juegos:List<Juego>" as juegos : sosJuego(cartasSeleccionadas)
-activate juegos
-juegos --> juego : true
-juego -> juegos : puntuarMano(cartasSeleccionadas)
-juego <-- juegos : puntajeJuegoSeleccionado
-deactivate juegos
-juego -> juego : esMayor(puntajeJuegoSeleccionado)
 
-activate juego
+loop para cada juego en juegos
+juego -> "juegos:List" as juegos : colocarCartas(cartas)
+juego -> juegos: obtenerMayor()
+end
+
+TestCase <- juego : juegoMayorPuntaje = new Escalera()
 deactivate juego
-end
-mano <-- juego : juegoSelecconado
-deactivate instanciaCarta
-deactivate juego
-deactivate mano
-end
 
-TestCase -> mano : agregarComodin(c)
+TestCase -> "comodinera:Comodinera" as comodinera **: new()
+activate comodinera
+TestCase -> comodinera : agregarComodin(c)
+deactivate comodinera
+
+
+TestCase -> mano : descartarMano(cartas, juegoMayorPuntaje, comodinera)
 activate mano
+mano -> "juegoMayorPuntaje:Escalera" as mejor : puntuarMano()
+activate mejor
+mano <-- mejor : resultado:Puntaje
+deactivate mejor
+
+mano -> comodinera : aplicarComodines(resultado, juegoMayorPuntaje)
+loop para cada comodin
+comodinera -> "Comodin" : aplicarModificador(resultado, juegoMayorPuntaje)
+end
+TestCase <-- mano : resultado:Puntaje
 deactivate mano
 
 
-TestCase -> "obtenido:Puntaje" as obtenido **: <<crear>>
-activate obtenido
-deactivate obtenido
-
-TestCase -> mano : descartarMano()
-activate mano
-loop para cada carta seleccionada
-mano -> instanciaCarta : elegirCarta()
-mano -> mano : quitarCarta(carta)
-end
-loop para todos los comodines
-mano -> comodin : aplicarModificador(puntaje, juego)
-mano <-- comodin : puntajeModificado
-end
-mano --> obtenido: puntaje del Descarta
-deactivate mano
-activate obtenido
-
-obtenido <- TestCase : tenesMismoPuntaje(esperado)
-activate obtenido 
-obtenido -> obtenido : calcularPuntaje()
- & obtenido -> esperado : calcularPuntaje()
+TestCase -> esperado : tenesMismoPuntaje(resultado)
 activate esperado
-esperado --> obtenido : puntos * multiplicador
-deactivate obtenido
+TestCase <-- esperado : true
 deactivate esperado
-obtenido --> TestCase: true
-deactivate obtenido
-deactivate obtenido
 
 deactivate TestCase
-
 @enduml

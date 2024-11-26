@@ -1,132 +1,95 @@
 @startuml casoDeUso5
 title "test05 Un Comodin Con Combinacion De Efectos Bonus"
-!pragma teoz true
 
 participant "TestCase" as TestCase
 
 activate TestCase
 
-TestCase -> "c:Comodin" as comodin **: new SumaPuntos(13, new Par(), new Aleatorio(5))
+TestCase -> "c:Comodin" as comodin **: new SumaPuntos(13, new Par(), probabilidad)
 
 activate comodin
+comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(probabilidad)
+activate aleatorio
+comodin <-- aleatorio
+deactivate aleatorio
+comodin -> "par:Par" as par ** : new Par()
+activate par
+comodin <-- par
+deactivate par
 TestCase <-- comodin : c
 deactivate comodin
+
+TestCase -> "esperado1:Puntaje" as esperado1 **: new Puntaje(24,2)
+activate esperado1
+TestCase <-- esperado1 : esperado1
+deactivate esperado1
+
+
+TestCase -> "esperado2:Puntaje" as esperado2 **: new Puntaje(37,2)
+activate esperado2
+TestCase <-- esperado2 : esperado2
+deactivate esperado2
 
 TestCase -> "mano:Mano" as mano **: new Mano(8)
 activate mano
 TestCase <-- mano : mano
+note right of TestCase: creamos 2 cartas que forman un par
+TestCase -> mano : agregarCartas(cartas)
 deactivate mano
 
-carta1 -[hidden]-> "__:Carta__" as instanciaCarta **: blank
-& TestCase -> "carta1:Carta" as carta1 **: new Carta(7, new Trebol())
-activate carta1
-carta1 -> "__:Trebol__" as trebol **: new Trebol()
-activate trebol
-carta1 <-- trebol : Trebol
-deactivate trebol
-carta1 -> "__:SinTarot__" as sinTarot **: new SinTarot()
-activate sinTarot
-carta1 <-- sinTarot : SinTarot
-deactivate sinTarot
-TestCase <-- carta1 : carta1
-deactivate carta1
-
-TestCase -> "carta2:Carta" as carta2 **: new Carta(7, new Corazon())
-activate carta2
-carta2 -> "__:Corazon__" as corazon **: new Coranzon()
-activate corazon
-carta2 <-- corazon: Corazon
-deactivate corazon
-carta2 -> sinTarot : new SinTarot()
-activate sinTarot
-carta2 <-- sinTarot : SinTarot
-deactivate sinTarot
-TestCase <-- carta2 : carta2
-deactivate carta2
-
-TestCase -> mano : agregarCarta(carta1)
-activate mano
-deactivate mano
-
-TestCase -> mano : agregarCarta(carta2)
-activate mano
-deactivate mano
+TestCase -> "comodinera:Comodinera" as comodinera **: new()
+activate comodinera
+TestCase -> comodinera : agregarComodin(c)
+deactivate comodinera
 
 
-loop por carta1 y carta2
-TestCase -> mano : elegirCarta(carta)
-activate mano
-mano -> mano : obtenerCarta(carta)
-activate mano
-loop por cada carta en mano hasta encontrar la carta buscada
-mano -> "__:Carta__" as instanciaCarta : sos(carta)
-activate instanciaCarta
-instanciaCarta --> mano : true
-deactivate instanciaCarta
-end
-mano <-- mano : carta
-deactivate mano
-mano -> "__:Juego__" as juego **: chequearJuego(cartasSeleccionadas)
+TestCase -> "Juego" as juego : chequearJuego(cartas)
 activate juego
-loop por cada juego de cartas posible dentro de Balastro
-juego -> "juegos:List<Juego>" as juegos : sosJuego(cartasSeleccionadas)
-activate juegos
-juegos --> juego : true
-juego -> juegos : puntuarMano(cartasSeleccionadas)
-juego <-- juegos : puntajeJuegoSeleccionado
-deactivate juegos
-juego -> juego : esMayor(puntajeJuegoSeleccionado)
-
-activate juego
-deactivate juego
+loop para cada juego en juegos
+juego -> "juegos:List" as juegos : colocarCartas(cartas)
+juego -> juegos: obtenerMayor()
 end
-mano <-- juego : juegoSelecconado
-deactivate instanciaCarta
+TestCase <- juego : juego = new Par()
 deactivate juego
-deactivate mano
-end
 
-TestCase -> mano : agregarComodin(c)
+
+TestCase -> mano : jugarMano(cartas, juego, comodinera)
 activate mano
-deactivate mano
+mano -> "juego:Par" as mejor:  puntuarMano()
 
-TestCase -> "esperado:Puntaje" as esperado **: new Puntaje(37, 2)
-activate esperado
-TestCase <-- esperado : esperado
-deactivate esperado
-
-TestCase -> "obtenido:Puntaje" as obtenido **: <<crear>>
-
-TestCase -> mano : jugarMano()
-activate mano
-mano -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-loop para cada carta
-juego -> instanciaCarta : obtenerPuntaje()
-juego <--instanciaCarta : puntajeDeLaCarta
+activate mejor
+mano <-- mejor : obtenido1:Puntaje
+deactivate mejor
+mano -> comodinera : aplicarComodines(obtenido1, juego)
+loop para cada comodin
+comodinera -> "Comodin" : aplicarModificador(obtenido1, juego)
 end
-mano <-- juego : puntajeTotal
-deactivate juego
-mano -> comodin : aplicarModificador(puntaje, juego)
-activate comodin
-comodin --> mano : puntajeModificado
-deactivate comodin
-mano -> mano : descartarMano()
-obtenido <-- mano : puntaje
-activate obtenido
-deactivate obtenido
+TestCase <-- mano : obtenido1:Puntaje
 deactivate mano
 
+TestCase -> mano : jugarMano(cartas, juego, comodinera)
+activate mano
+mano -> "juego:Par" as mejor:  puntuarMano()
 
-obtenido <- TestCase : tenesMismoPuntaje(esperado)
-activate obtenido
-obtenido -> obtenido : calcularPuntaje()
- & obtenido -> esperado : calcularPuntaje()
-activate esperado
-esperado --> obtenido : puntos * multiplicador
-deactivate esperado
-obtenido --> TestCase: true
-deactivate obtenido
+activate mejor
+mano <-- mejor : obtenido2:Puntaje
+deactivate mejor
+mano -> comodinera : aplicarComodines(obtenido2, juego)
+loop para cada comodin
+comodinera -> "Comodin" : aplicarModificador(obtenido2, juego)
+end
+TestCase <-- mano : obtenido2:Puntaje
+deactivate mano
+
+TestCase -> esperado1 : tenesMismoPuntaje(obtenido1)
+activate esperado1
+TestCase <-- esperado1 : true
+deactivate esperado1
+
+TestCase -> esperado2 : tenesMismoPuntaje(obtenido2)
+activate esperado2
+TestCase <-- esperado2 : true
+deactivate esperado2
 
 deactivate TestCase
 
