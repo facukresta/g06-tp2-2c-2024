@@ -1,6 +1,6 @@
 @startuml casoDeUso2
 title "test02 El Jugador Recibe Un Aumento Si Tiene El Comodin Que Aumenta El Multiplicador Por 3 Por Si Juego Una Escalera"
-!pragma teoz true
+
 
 participant "TestCase" as TestCase
 
@@ -28,111 +28,46 @@ deactivate comodin
 TestCase -> "mano:Mano" as mano **: new Mano(8)
 activate mano
 TestCase <-- mano : mano
+note right of TestCase: creamos 5 cartas que forman una escalera
+TestCase -> mano : agregarCartas(cartas)
 deactivate mano
 
-loop para 4 cartas
-TestCase -> "carta[i]:Carta" as carta1 **: new Carta([i], new Trebol())
-activate carta1
-carta1 -> "__:Trebol__" as trebol **: new Trebol()
-activate trebol
-carta1 <-- trebol : Trebol
-deactivate trebol
-carta1 -> "__:SinTarot__" as sinTarot **: new SinTarot()
-activate sinTarot
-carta1 <-- sinTarot : SinTarot
-deactivate sinTarot
-TestCase <-- carta1 : carta[i]
-deactivate carta1
-end
-
-TestCase -> "carta5:Carta" as carta5 **: new Carta(5, new Corazon())
-activate carta5
-carta5 -> "__:Corazon__" as corazon **: new Corazon()
-activate corazon
-carta5 <-- corazon : Corazon
-deactivate corazon
-carta5 -> sinTarot : new SinTarot()
-activate sinTarot
-carta5 <-- sinTarot : SinTarot
-deactivate sinTarot
-TestCase <-- carta5 : carta5
-deactivate carta5
-
-TestCase -> mano : agregarCartas(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5))
-activate mano
-deactivate mano
-
-loop por cada carta agregada a mano
-TestCase -> mano : elegirCarta(carta)
-activate mano
-mano -> mano : obtenerCarta(carta)
-activate mano
-loop por cada carta en mano hasta encontrar la carta buscada
-mano -> "__:Carta__" as instanciaCarta : sos(carta)
-activate instanciaCarta
-instanciaCarta --> mano : true
-deactivate instanciaCarta
-end
-mano <-- mano : carta
-deactivate mano
-mano -> "__:Juego__" as juego **: chequearJuego(cartasSeleccionadas)
+TestCase -> "Juego" as juego : chequearJuego(cartas)
 activate juego
-loop por cada juego de cartas posible dentro de Balastro
-juego -> "juegos:List<Juego>" as juegos : sosJuego(cartasSeleccionadas)
-activate juegos
-juegos --> juego : true
-juego -> juegos : puntuarMano(cartasSeleccionadas)
-juego <-- juegos : puntajeJuegoSeleccionado
-deactivate juegos
-juego -> juego : esMayor(puntajeJuegoSeleccionado)
-
-activate juego
-deactivate juego
-end
-mano <-- juego : juegoSelecconado
-deactivate instanciaCarta
-deactivate juego
-deactivate mano
+loop para cada juego en juegos
+juego -> "juegos:List" as juegos : colocarCartas(cartas)
+juego -> juegos: obtenerMayor()
 end
 
-TestCase -> mano : agregarComodin(c)
+TestCase <- juego : juegoMayorPuntaje = new Escalera()
+deactivate juego
+
+
+TestCase -> "comodinera:Comodinera" as comodinera : new()
+activate comodinera
+TestCase -> comodinera : agregarComodin(c)
+deactivate comodinera
+
+
+TestCase -> mano : jugarMano(cartas, escalera, comodinera)
 activate mano
+mano -> "juegoMayorPuntaje:Escalera" as mejor:  puntuarMano()
+
+activate mejor
+mano <-- mejor : resultado:Puntaje
+deactivate mejor
+mano -> comodinera : aplicarComodines(p, juegoMayorPuntaje)
+activate comodinera
+loop para cada comodin
+comodinera -> "Comodin" : aplicarModificador(p, juegoMayorPuntaje)
+deactivate comodinera
+TestCase <-- mano : resultado:Puntaje
 deactivate mano
 
-
-TestCase -> "obtenido:Puntaje" as obtenido **: <<crear>>
-activate obtenido
-deactivate obtenido
-
-TestCase -> mano : jugarMano()
-activate mano 
-mano -> juego : puntuarMano(cartasSeleccionadas)
-activate juego
-loop para cada carta
-juego -> instanciaCarta : obtenerPuntaje()
-juego <--instanciaCarta : puntajeDeLaCarta
-end
-mano <-- juego : puntajeTotal
-deactivate juego
-mano -> comodin : aplicarModificador(puntaje, juego)
-activate comodin
-comodin --> mano : puntajeModificado
-deactivate comodin 
-mano -> mano : descartarMano()
-obtenido <-- mano : puntaje
-activate obtenido
-deactivate obtenido
-deactivate mano 
-
-obtenido <- TestCase : tenesMismoPuntaje(esperado)
-activate obtenido
-obtenido -> obtenido : calcularPuntaje()
- & obtenido -> esperado : calcularPuntaje()
+TestCase -> esperado : tenesMismoPuntaje(resultado)
 activate esperado
-esperado --> obtenido : puntos * multiplicador
+TestCase <-- esperado : true
 deactivate esperado
-obtenido --> TestCase: true
-deactivate obtenido
 
 deactivate TestCase
 

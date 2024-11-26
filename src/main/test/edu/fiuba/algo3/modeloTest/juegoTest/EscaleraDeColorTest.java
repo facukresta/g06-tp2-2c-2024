@@ -208,4 +208,18 @@ public class EscaleraDeColorTest {
         Juego.aplicarTarot(tarot2);
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
+
+    @Test
+    public void test13UnaInstanciaDeEscaleraDeColorSiUnaListaDeCartasConCincoCartasEsEscaleraSiendo10JQKAS() {
+        // Arrange
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(11, new Trebol()), new CartaInglesa(12, new Trebol()),
+                new CartaInglesa(13, new Trebol()), new CartaInglesa(10, new Trebol())));
+        Juego juego = Juego.chequearJuego(cartas);
+        Puntaje esperado = new Puntaje(150, 8);
+        // Act
+        Puntaje obtenido = juego.puntuarMano();
+        // Assert
+        assertTrue(esperado.tenesMismoPuntaje(obtenido));
+    }
 }

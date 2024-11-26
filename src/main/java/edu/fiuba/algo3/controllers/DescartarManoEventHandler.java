@@ -11,38 +11,36 @@ import javafx.event.EventHandler;
 
 import java.util.ArrayList;
 
-public class JugarManoEventHandler implements EventHandler<ActionEvent> {
+public class  DescartarManoEventHandler implements EventHandler<ActionEvent> {
 
     private ArrayList<Carta> seleccionadas;
     private Comodinera comodinera;
     private Ronda ronda;
+    private int descartes;
     private Runnable pasarDeRonda;
     private Runnable seguirJugando;
-    private Runnable perder;
 
 
-    public JugarManoEventHandler(ArrayList<Carta> seleccionadas, Comodinera comodinera, Ronda ronda, Runnable pasarDeRonda, Runnable seguirJugando, Runnable perder) {
+    public  DescartarManoEventHandler(ArrayList<Carta> seleccionadas, Comodinera comodinera, Ronda ronda, int descartes, Runnable pasarDeRonda, Runnable seguirJugando ) {
         this.seleccionadas = seleccionadas;
         this.comodinera = comodinera;
         this.ronda = ronda;
+        this.descartes = descartes;
         this.pasarDeRonda = pasarDeRonda;
         this.seguirJugando = seguirJugando;
-        this.perder = perder;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        if (!seleccionadas.isEmpty()) {
+        if (!seleccionadas.isEmpty() && this.descartes > 0) {
             try {
-                ronda.jugarMano(seleccionadas, Juego.chequearJuego(seleccionadas), comodinera);
+                ronda.descartarMano(seleccionadas, Juego.chequearJuego(seleccionadas), comodinera);
             } catch (PasoLaRondaException e) {
-                pasarDeRonda.run();
-                return;
-            } catch (PerdioLaRondaException e2) {
-                this.perder.run();
+                this.pasarDeRonda.run();
                 return;
             }
             this.seguirJugando.run();
         }
     }
 }
+

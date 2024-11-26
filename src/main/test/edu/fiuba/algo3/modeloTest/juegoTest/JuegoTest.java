@@ -191,19 +191,6 @@ public class JuegoTest {
     }
 
     @Test
-    public void test15UnJuegoDeUnaListaConCincoCartasYEscaleraRealSinOtroJuegoPosibleSeraEscaleraReal() {
-        // Arrange
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()),
-                new CartaInglesa(11, new Pica()), new CartaInglesa(12, new Pica()),
-                new CartaInglesa(13, new Pica()), new CartaInglesa(10, new Pica())));
-        // Act
-        Juego juego = Juego.chequearJuego(cartas);
-        boolean resulatado = juego.getClass() == EscaleraReal.class;
-        // Assert
-        assertTrue(resulatado);
-    }
-
-    @Test
     public void test16UnJuegoDeUnaListaConCuatroCartasDevolveraElValorMaximoDeJuego() {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(100, 7);

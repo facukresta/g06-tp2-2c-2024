@@ -86,6 +86,7 @@ public class RondaTest {
         mazo.agregarCartas(cartas);
         Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 3, mazo, mock(Tienda.class));
         // Act /  Assert
+        ronda.obtenerCartas();
         assertThrows(PasoLaRondaException.class, () -> {
             ronda.jugarMano(cartasSeleccionadas, juego, comodinera);
         });
@@ -105,6 +106,7 @@ public class RondaTest {
         mazo.agregarCartas(cartas);
         Ronda ronda = new Ronda(new Puntaje(1000, 1), 1, 3, mazo, mock(Tienda.class));
         // Act /  Assert
+        ronda.obtenerCartas();
         assertThrows(PerdioLaRondaException.class, () -> {
             ronda.jugarMano(cartasSeleccionadas, juego, comodinera);
         });
@@ -124,6 +126,7 @@ public class RondaTest {
         mazo.agregarCartas(cartas);
         Ronda ronda = new Ronda(new Puntaje(1, 1), 1, 3, mazo, mock(Tienda.class));
         // Act /  Assert
+        ronda.obtenerCartas();
         assertThrows(PasoLaRondaException.class, () -> {
             ronda.jugarMano(cartasSeleccionadas, juego, comodinera);
         });
@@ -143,6 +146,7 @@ public class RondaTest {
         mazo.agregarCartas(cartasSeleccionadas);
         Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, mock(Tienda.class));
         // Act
+        ronda.obtenerCartas();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         ronda.descartarMano(cartasSeleccionadas, juego, comodinera);
         // Assert

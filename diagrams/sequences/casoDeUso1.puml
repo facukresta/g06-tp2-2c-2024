@@ -33,14 +33,10 @@ TestCase <-- aModificar :aModificar
 deactivate aModificar
 
 TestCase -> comodin : aplicarModificador(aModificar, cartaAlta)
-comodin -> aleatorio : ejecuta()
+TestCase -> aleatorio : ejecuta(sumar(new Puntaje(0,8))
 activate aleatorio
-comodin <-- aleatorio : true
+aleatorio -> aModificar : sumar(new Puntaje(0,8))
 deactivate aleatorio
-
-comodin -> aModificar : sumar(new Puntaje(0,8))
-deactivate comodin
-
 
 TestCase -> esperado: tenesMismoPuntaje(aModificar)
 activate esperado

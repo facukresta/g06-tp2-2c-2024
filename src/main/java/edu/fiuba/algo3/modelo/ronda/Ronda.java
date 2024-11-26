@@ -34,8 +34,6 @@ public class Ronda {
         this.manos = manos;
         this.descartes = descartes;
         this.mazo = mazo;
-        this.mazo.mezclar();
-        this.mano.agregarCartas(this.mazo.repartirCartas(8));
         this.tienda = tienda;
     }
 
@@ -69,6 +67,9 @@ public class Ronda {
     }
 
     public ArrayList<Carta> obtenerCartas() {
+        if (this.mano.obtenerCantidadDeCartas() == 0) {
+            this.mano.agregarCartas(this.mazo.repartirCartas(8));
+        }
         return mano.obtenerCartas();
     }
 

@@ -171,4 +171,18 @@ public class EscaleraTest {
         Juego.aplicarTarot(tarot2);
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
+
+    @Test
+    public void test13UnaInstanciaDeEscaleraSiUnaListaDeCartasConCincoCartasEsEscaleraSiendo10JQKAS() {
+        // Arrange
+        ArrayList<Carta> cartas = new ArrayList<>(List.of( new CartaInglesa(1, new Trebol()),
+                new CartaInglesa(11, new Trebol()), new CartaInglesa(12, new Trebol()),
+                new CartaInglesa(13, new Trebol()), new CartaInglesa(10, new Pica())));
+        Juego juego = Juego.chequearJuego(cartas);
+        Puntaje esperado = new Puntaje(80, 4);
+        // Act
+        Puntaje obtenido = juego.puntuarMano();
+        // Assert
+        assertTrue(esperado.tenesMismoPuntaje(obtenido));
+    }
 }
