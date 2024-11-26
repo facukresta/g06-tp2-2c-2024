@@ -1,0 +1,43 @@
+@startuml TiendaYComprable
+skinparam classAttributeIconSize 0
+
+class TiendaBalatro{
+- comprado : bool
++TiendaBalatro(ArrayList<Comprable> productos)
++comprar(Comprable compra)
+}
+
+interface Tienda {
++comprar(Comprable compra);
+}
+
+interface Comprable {
++comprar()
+}
+
+class Tarot {
+#juego: Juego
++{abstract}obtenerPuntaje(Puntaje p): Puntaje
++sosParaEsteJuego(Juego juego): bool
+}
+
+class Modificador {
++{abstract} aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+class Carta {
++aplicarModificador(Tarot tarot)
++obtenerPuntaje() : Puntaje
++esDelMismoPalo(Carta carta) : bool
++obtenerNumero() : int
++sos(Carta carta) : bool
+}
+
+Carta .up.|> Comprable
+Modificador .up.|> Comprable
+Tarot .up.|> Comprable
+TiendaBalatro "1" o-- "*" Comprable
+TiendaBalatro .right.|> Tienda
+
+
+@enduml
