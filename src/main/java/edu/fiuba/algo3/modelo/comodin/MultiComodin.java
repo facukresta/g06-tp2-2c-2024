@@ -7,6 +7,11 @@ import java.util.ArrayList;
 
 public class MultiComodin implements Modificador {
     private final ArrayList<Modificador> comodines = new ArrayList<>();
+    private final String nombre;
+
+    public MultiComodin(String nombre) {
+        this.nombre = nombre;
+    }
 
     public void componerComodin(Modificador comodin) {
         comodines.add(comodin);
@@ -17,6 +22,10 @@ public class MultiComodin implements Modificador {
         for (Modificador comodin : comodines) {
             comodin.aplicarModificador(puntaje, juego);
         }
+    }
+
+    public String obtenerNombre() {
+        return nombre;
     }
 
     public void comprar() {

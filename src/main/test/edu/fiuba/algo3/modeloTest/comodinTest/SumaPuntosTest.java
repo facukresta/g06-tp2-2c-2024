@@ -16,7 +16,7 @@ public class SumaPuntosTest {
     @Test
     public void test01AlAplicarUnComodinDeSumaPuntosEsteSumaLosPuntos(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5);
+        Comodin comodin = new SumaPuntos(5, "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -27,8 +27,8 @@ public class SumaPuntosTest {
     @Test
     public void test02AlAplicarDosComodinesDeSumaPuntosEstosSumanLosPuntos(){
         // Arrange
-        Comodin comodin1 = new SumaPuntos(5);
-        Comodin comodin2 = new SumaPuntos(10);
+        Comodin comodin1 = new SumaPuntos(5, "");
+        Comodin comodin2 = new SumaPuntos(10, "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(25, 2);
         // Act
@@ -40,7 +40,7 @@ public class SumaPuntosTest {
     @Test
     public void test03AlAplicarUnComodinDeSumaPuntosAUnJuegoEspecificoEsteSumaLosPuntosYaQueEsElJuego(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5,new CartaAlta());
+        Comodin comodin = new SumaPuntos(5,new CartaAlta(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -51,7 +51,7 @@ public class SumaPuntosTest {
     @Test
     public void test04AlAplicarUnComodinDeSumaPuntosAUnJuegoEspecificoEsteNoSumaLosPuntosYaQueNoEsElJuego(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5,new CartaAlta());
+        Comodin comodin = new SumaPuntos(5,new CartaAlta(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
         // Act
@@ -68,7 +68,7 @@ public class SumaPuntosTest {
             accion.run();
             return null;
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
-        Comodin comodin = new SumaPuntos(5, aleatorioMock);
+        Comodin comodin = new SumaPuntos(5, aleatorioMock, "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -85,7 +85,7 @@ public class SumaPuntosTest {
             Runnable accion = invocation.getArgument(0);
             return null;
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
-        Comodin comodin = new SumaPuntos(5, aleatorioMock);
+        Comodin comodin = new SumaPuntos(5, aleatorioMock, "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
         // Act
@@ -103,7 +103,7 @@ public class SumaPuntosTest {
             accion.run();
             return null;
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
-        Comodin comodin = new SumaPuntos(6, new Par(), aleatorioMock);
+        Comodin comodin = new SumaPuntos(6, new Par(), aleatorioMock, "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(16, 2);
         // Act
@@ -121,7 +121,7 @@ public class SumaPuntosTest {
             accion.run();
             return null;
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
-        Comodin comodin = new SumaPuntos(6, new CartaAlta(), aleatorioMock);
+        Comodin comodin = new SumaPuntos(6, new CartaAlta(), aleatorioMock, "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
         // Act
@@ -138,7 +138,7 @@ public class SumaPuntosTest {
             Runnable accion = invocation.getArgument(0);
             return null;
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
-        Comodin comodin = new SumaPuntos(6, new Par(), aleatorioMock);
+        Comodin comodin = new SumaPuntos(6, new Par(), aleatorioMock, "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
         // Act
@@ -155,7 +155,7 @@ public class SumaPuntosTest {
             Runnable accion = invocation.getArgument(0);
             return null;
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
-        Comodin comodin = new SumaPuntos(6, new CartaAlta(), aleatorioMock);
+        Comodin comodin = new SumaPuntos(6, new CartaAlta(), aleatorioMock, "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
         // Act
@@ -167,7 +167,7 @@ public class SumaPuntosTest {
     @Test
     public void test11AlAplicarUnComodinDeSumaPuntosConJuegoCartaAltaEsteSumaElMultplicadorSiElJuegoEsCartaAlta(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new CartaAlta());
+        Comodin comodin = new SumaPuntos(5, new CartaAlta(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -178,7 +178,7 @@ public class SumaPuntosTest {
     @Test
     public void test12AlAplicarUnComodinDeSumaPuntosConJuegoParEsteSumaElMultplicadorSiElJuegoEsPar(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new Par());
+        Comodin comodin = new SumaPuntos(5, new Par(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -189,7 +189,7 @@ public class SumaPuntosTest {
     @Test
     public void test13AlAplicarUnComodinDeSumaPuntosConJuegoDobleParEsteSumaElMultplicadorSiElJuegoEsDoblePar(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new DoblePar());
+        Comodin comodin = new SumaPuntos(5, new DoblePar(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -200,7 +200,7 @@ public class SumaPuntosTest {
     @Test
     public void test14AlAplicarUnComodinDeSumaPuntosConJuegoTrioEsteSumaElMultplicadorSiElJuegoEsTrio(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new Trio());
+        Comodin comodin = new SumaPuntos(5, new Trio(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -211,7 +211,7 @@ public class SumaPuntosTest {
     @Test
     public void test15AlAplicarUnComodinDeSumaPuntosConJuegoEscaleraEsteSumaElMultplicadorSiElJuegoEsEscalera(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new Escalera());
+        Comodin comodin = new SumaPuntos(5, new Escalera(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -223,7 +223,7 @@ public class SumaPuntosTest {
     @Test
     public void test16AlAplicarUnComodinDeSumaPuntosConJuegoColorEsteSumaElMultplicadorSiElJuegoEsColor(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new Color());
+        Comodin comodin = new SumaPuntos(5, new Color(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
         // Act
@@ -234,7 +234,7 @@ public class SumaPuntosTest {
     @Test
     public void test17AlAplicarUnComodinDeSumaPuntosConJuegoEscaleraDeColorEsteSumaElMultplicadorSiElJuegoEsEscaleraDeColor(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new EscaleraDeColor());
+        Comodin comodin = new SumaPuntos(5, new EscaleraDeColor(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
 
@@ -246,7 +246,7 @@ public class SumaPuntosTest {
     @Test
     public void test18AlAplicarUnComodinDeSumaPuntosConJuegoEscaleraRealEsteSumaElMultplicadorSiElJuegoEsEscaleraReal(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new EscaleraReal());
+        Comodin comodin = new SumaPuntos(5, new EscaleraReal(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
 
@@ -258,7 +258,7 @@ public class SumaPuntosTest {
     @Test
     public void test19AlAplicarUnComodinDeSumaPuntosConJuegoFullHouseEsteSumaElMultplicadorSiElJuegoEsFullHouse(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new FullHouse());
+        Comodin comodin = new SumaPuntos(5, new FullHouse(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
 
@@ -270,7 +270,7 @@ public class SumaPuntosTest {
     @Test
     public void test20AlAplicarUnComodinDeSumaPuntosConJuegoPokerEsteSumaElMultplicadorSiElJuegoEsPoker(){
         // Arrange
-        Comodin comodin = new SumaPuntos(5, new Poker());
+        Comodin comodin = new SumaPuntos(5, new Poker(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 2);
 
@@ -282,8 +282,8 @@ public class SumaPuntosTest {
     @Test
     public void test21AlAplicarDosComodinesDeSumaPuntosDeDistintosJuegosSeSumanCorrectamente(){
         // Arrange
-        Comodin comodin1 = new SumaPuntos(5, new CartaAlta());
-        Comodin comodin2 = new SumaPuntos(6, new DoblePar());
+        Comodin comodin1 = new SumaPuntos(5, new CartaAlta(), "");
+        Comodin comodin2 = new SumaPuntos(6, new DoblePar(), "");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(21, 2);
 

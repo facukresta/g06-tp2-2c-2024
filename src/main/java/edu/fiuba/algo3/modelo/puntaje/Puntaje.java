@@ -61,4 +61,12 @@ public class Puntaje {
             }
         return valor > this.calcularPuntaje();
     }
+
+    private void multiplicarMultiplicador(double multiplicador) {
+        this.multiplicador *= multiplicador;
+    }
+
+    public void multiplicar(double multiplicador) {
+        this.multiplicarMultiplicador(multiplicador);
+    }
 }

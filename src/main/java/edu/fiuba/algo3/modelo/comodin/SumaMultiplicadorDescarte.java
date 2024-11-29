@@ -7,12 +7,12 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 public class SumaMultiplicadorDescarte extends Comodin {
 
-    public SumaMultiplicadorDescarte(double cantidad, Ejecucion probabilidad) {
-        super(cantidad, probabilidad, new SinJuego());
+    public SumaMultiplicadorDescarte(double cantidad, Ejecucion probabilidad, String nombre) {
+        super(cantidad, probabilidad, new SinJuego(), nombre);
     }
 
-    public SumaMultiplicadorDescarte(double cantidad) {
-        super(cantidad, new Aleatorio(1), new SinJuego());
+    public SumaMultiplicadorDescarte(double cantidad, String nombre) {
+        super(cantidad, new Aleatorio(1), new SinJuego(), nombre);
     }
 
     @Override

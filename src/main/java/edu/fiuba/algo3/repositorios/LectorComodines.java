@@ -13,6 +13,7 @@ public class LectorComodines {
 
     private Modificador leerComodin(JSONObject comodin) {
         String activador = comodin.get("activacion").toString();
+        String nombre = comodin.get("nombre").toString();
         int probabilidad = 1;
         String juego = "sin juego";
         if (activador.equals("1 en")) {
@@ -28,15 +29,15 @@ public class LectorComodines {
         double multiplicador = ((Number) efectosJson.get("multiplicador")).doubleValue();
         if (activador.equals("descarte")) {
             if (puntos == 1) {
-                return (new SumaMultiplicadorDescarte(multiplicador, new Aleatorio(probabilidad)));
+                return (new SumaMultiplicadorDescarte(multiplicador, new Aleatorio(probabilidad), nombre));
             } else {
-                return (new SumaPuntosDescarte(puntos, new Aleatorio(probabilidad)));
+                return (new SumaPuntosDescarte(puntos, new Aleatorio(probabilidad), nombre));
             }
         } else {
             if (puntos == 1) {
-                return (new SumaMultiplicador(multiplicador, conversorJuego.convertirJuego(juego), new Aleatorio(probabilidad)));
+                return (new SumaMultiplicador(multiplicador, conversorJuego.convertirJuego(juego), new Aleatorio(probabilidad), nombre));
             } else {
-                return (new SumaPuntos(puntos, conversorJuego.convertirJuego(juego), new Aleatorio(probabilidad)));
+                return (new SumaPuntos(puntos, conversorJuego.convertirJuego(juego), new Aleatorio(probabilidad), nombre));
             }
         }
     }
@@ -66,8 +67,9 @@ public class LectorComodines {
             for (Object obj : comodinesCombinacion) {
                 JSONObject comodin = (JSONObject) obj;
                 JSONArray comodinesDentro = (JSONArray) comodin.get("comodines");
+                String nombre = comodin.get("nombre").toString();
                 ArrayList<Modificador> comodinesPequenios = leerComodinArr(comodinesDentro);
-                MultiComodin multiComodin = new MultiComodin();
+                MultiComodin multiComodin = new MultiComodin(nombre);
                 for (Modificador modificador : comodinesPequenios) {
                     multiComodin.componerComodin((Comodin) modificador);
                 }
@@ -82,11 +84,12 @@ public class LectorComodines {
         ArrayList<Modificador> listaDeComodines = new ArrayList<>();
         for (Object obj : comodines) {
             JSONObject comodin = (JSONObject) obj;
+            String nombre = comodin.get("nombre").toString();
             Object comodinesObj = comodin.get("comodines");
             if (comodinesObj instanceof JSONArray) {
                 JSONArray comodinesDentro = (JSONArray) comodinesObj;
                 ArrayList<Modificador> comodinesPequenios = leerComodinArr(comodinesDentro);
-                MultiComodin multiComodin = new MultiComodin();
+                MultiComodin multiComodin = new MultiComodin(nombre);
                 for (Modificador modificador : comodinesPequenios) {
                     multiComodin.componerComodin((Comodin) modificador);
                 }

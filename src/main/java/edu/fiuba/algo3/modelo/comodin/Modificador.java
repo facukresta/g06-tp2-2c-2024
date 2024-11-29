@@ -6,4 +6,6 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 public interface Modificador extends Comprable {
     void aplicarModificador(Puntaje puntaje, Juego juego);
+
+    String obtenerNombre();
 }

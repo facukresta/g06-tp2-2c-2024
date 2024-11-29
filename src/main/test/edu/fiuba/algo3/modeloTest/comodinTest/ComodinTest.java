@@ -10,11 +10,11 @@ public class ComodinTest {
     @Test
     public void test01NoSePuedeInstanciarUnComodinConCantidadNegativa(){
         // Arrange / Act / Assert
-        assertThrows(CantidadComodinInvalida.class, () -> new SumaMultiplicador(-1));
+        assertThrows(CantidadComodinInvalida.class, () -> new SumaMultiplicador(-1, ""));
     }
     @Test
     public void test02NoSePuedeInstanciarUnComodinConCantidadIgualA0(){
         // Arrange / Act / Assert
-        assertThrows(CantidadComodinInvalida.class, () -> new SumaMultiplicadorDescarte(0));
+        assertThrows(CantidadComodinInvalida.class, () -> new SumaMultiplicadorDescarte(0, ""));
     }
 }

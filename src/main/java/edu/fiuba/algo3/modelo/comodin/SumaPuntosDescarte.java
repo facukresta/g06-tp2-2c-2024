@@ -6,12 +6,12 @@ import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 public class SumaPuntosDescarte extends Comodin {
-    public SumaPuntosDescarte(int cantidad, Ejecucion probabilidad) {
-        super(cantidad, probabilidad, new SinJuego());
+    public SumaPuntosDescarte(int cantidad, Ejecucion probabilidad, String nombre) {
+        super(cantidad, probabilidad, new SinJuego(), nombre);
     }
 
-    public SumaPuntosDescarte(int cantidad) {
-        super(cantidad, new Aleatorio(1), new SinJuego());
+    public SumaPuntosDescarte(int cantidad, String nombre) {
+        super(cantidad, new Aleatorio(1), new SinJuego(), nombre);
     }
 
     @Override

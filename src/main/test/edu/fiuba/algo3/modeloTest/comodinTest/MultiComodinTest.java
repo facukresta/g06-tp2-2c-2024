@@ -12,8 +12,8 @@ public class MultiComodinTest {
     @Test
     public void test01AlTenerUnComodinSimpleSeAplicaCorrectamente(){
         // Arrange
-        MultiComodin multiComodin = new MultiComodin();
-        multiComodin.componerComodin(new SumaMultiplicador(5));
+        MultiComodin multiComodin = new MultiComodin("");
+        multiComodin.componerComodin(new SumaMultiplicador(5, ""));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 7);
         // Act
@@ -25,9 +25,9 @@ public class MultiComodinTest {
     @Test
     public void test02AlTenerUnComodinDobleSeAplicaCorrectamente(){
         // Arrange
-        MultiComodin multiComodin = new MultiComodin();
-        multiComodin.componerComodin(new SumaMultiplicador(5));
-        multiComodin.componerComodin(new SumaPuntos(5));
+        MultiComodin multiComodin = new MultiComodin("");
+        multiComodin.componerComodin(new SumaMultiplicador(5, ""));
+        multiComodin.componerComodin(new SumaPuntos(5, ""));
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(15, 7);
         // Act
@@ -39,7 +39,7 @@ public class MultiComodinTest {
     @Test
     public void test03AlTenerUnComodinVacioNoModificaElPuntaje(){
         // Arrange
-        MultiComodin multiComodin = new MultiComodin();
+        MultiComodin multiComodin = new MultiComodin("");
         Puntaje puntajeAModificar = new Puntaje(10, 2);
         Puntaje puntajeEsperado = new Puntaje(10, 2);
         // Act

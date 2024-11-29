@@ -196,7 +196,7 @@ public class ManoTest {
     public void test14AlJugarUnaManoConDosCartasYUnComodinDeSumaMultiplicadorDevuelveElValorDelPuntajeDeLaManoMasEseMultiplicador() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin = new SumaMultiplicador(4, new Aleatorio(1));
+        Comodin comodin = new SumaMultiplicador(4, new Aleatorio(1), "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(17,4);
@@ -212,8 +212,8 @@ public class ManoTest {
     public void test15AlJugarUnaManoConTresCartasYDosComodinDeSumaMultiplicadorDevuelveElValorDelPuntajeDeLaManoMasEsosMultiplicador() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin1 = new SumaMultiplicador(4, new Aleatorio(1));
-        Comodin comodin2 = new SumaMultiplicador(12, new Aleatorio(1));
+        Comodin comodin1 = new SumaMultiplicador(4, new Aleatorio(1), "");
+        Comodin comodin2 = new SumaMultiplicador(12, new Aleatorio(1), "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(36,19);
@@ -231,8 +231,8 @@ public class ManoTest {
     public void test16AlJugarUnaManoConTresCartasYUnComodinDeSumaMultiplicadorYOtroDeSumaMultiplicadorJuegoDevuelveElValorDelPuntajeDeLaManoMasEsosMultiplicador() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin1 = new SumaMultiplicador(4, new Aleatorio(1));
-        Comodin comodin2 = new SumaMultiplicador(12, new Trio(), new Aleatorio(1));
+        Comodin comodin1 = new SumaMultiplicador(4, new Aleatorio(1), "");
+        Comodin comodin2 = new SumaMultiplicador(12, new Trio(), new Aleatorio(1), "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(36,19);
@@ -250,7 +250,7 @@ public class ManoTest {
     public void test17AlDescartaUnaManoConTresCartasYUnComodinDeSumaPuntosDescarteDevuelveElValorDelPuntajeDelMultiplicador() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin = new SumaPuntosDescarte(4, new Aleatorio(1));
+        Comodin comodin = new SumaPuntosDescarte(4, new Aleatorio(1), "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(4,1);
@@ -267,8 +267,8 @@ public class ManoTest {
     public void test18AlJugarUnaManoConCuatroCartasYDosComodinesDeSumaPuntosDescarteDevuelveElValorDelPuntajeDeEseMultiplicador() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin1 = new SumaPuntosDescarte(4, new Aleatorio(1));
-        Comodin comodin2 = new SumaPuntosDescarte(12, new Aleatorio(1));
+        Comodin comodin1 = new SumaPuntosDescarte(4, new Aleatorio(1), "");
+        Comodin comodin2 = new SumaPuntosDescarte(12, new Aleatorio(1), "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(16,1);
@@ -286,7 +286,7 @@ public class ManoTest {
     public void test19AlJugarUnaManoConCuatroCartasYUnComodinDeSumaPuntosNoSumaPuntosCuandoSeDescarta() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin = new SumaPuntos(4);
+        Comodin comodin = new SumaPuntos(4, "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(0,1);
@@ -303,7 +303,7 @@ public class ManoTest {
     public void test20AlJugarUnaManoConCuatroCartasYUnComodinDeSumaPuntosDescarteNoSumaCuandoSeJuegaLaMano() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin = new SumaPuntosDescarte(100);
+        Comodin comodin = new SumaPuntosDescarte(100, "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(36,3);
@@ -355,8 +355,8 @@ public class ManoTest {
     public void test22AlModificarUnJuegoConTarotSumadorDeDescarteYOtroDeNoDescarteAlJugarLaManoSoloDevuleveELPuntajeModificadoPorNoDescarte() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin1 = new SumaPuntos(40);
-        Comodin comodin2 = new SumaPuntosDescarte(50);
+        Comodin comodin1 = new SumaPuntos(40, "");
+        Comodin comodin2 = new SumaPuntosDescarte(50, "");
         Puntaje puntajeEsperado = new Puntaje(76,3);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
                 new CartaInglesa(2, new Corazon())));
@@ -374,8 +374,8 @@ public class ManoTest {
     public void test23AlModificarUnJuegoConTarotSumadorDeDescarteYOtroDeNoDescarteAlDescartarLaManoSoloDevuleveELPuntajeModificadoPorDescarte() {
         // Arrange
         Mano mano = new ManoDe8();
-        Comodin comodin1 = new SumaPuntos(40);
-        Comodin comodin2 = new SumaPuntosDescarte(50);
+        Comodin comodin1 = new SumaPuntos(40, "");
+        Comodin comodin2 = new SumaPuntosDescarte(50, "");
         Puntaje puntajeEsperado = new Puntaje(50,1);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
                 new CartaInglesa(2, new Corazon())));

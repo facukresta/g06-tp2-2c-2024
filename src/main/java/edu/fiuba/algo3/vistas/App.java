@@ -1,13 +1,11 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.controllers.CartaApretarEventHandler;
-import edu.fiuba.algo3.controllers.DescartarManoEventHandler;
-import edu.fiuba.algo3.controllers.IniciarJuegoEventHandler;
-import edu.fiuba.algo3.controllers.JugarManoEventHandler;
-import edu.fiuba.algo3.modelo.comodin.Comodinera;
+import edu.fiuba.algo3.controllers.*;
+import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
+import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import javafx.animation.ScaleTransition;
 import javafx.application.Application;
@@ -174,24 +172,34 @@ public class App extends Application {
         contenedorDeCartas.setAlignment(Pos.BOTTOM_CENTER);
         contenedorDeCartas.setSpacing(20);
 
-        VBox comodines = new VBox();
+        VBox comodinesLetrero = new VBox();
+
 
         ImageView comodinLogo = new ImageView(new Image("/comodines.png"));
         comodinLogo.setPreserveRatio(true);
         comodinLogo.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.07));
         comodinLogo.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.04));
         VBox.setMargin(comodinLogo, new Insets(10,0,0,10));
-        comodines.getChildren().add(comodinLogo);
+        comodinesLetrero.getChildren().add(comodinLogo);
 
-        for (int i = 1; i <= 5; i ++) {
-            Button comodinBoton = this.crearBoton("comodinVacio", Color.DARKBLUE, (null), contenedorPrincipal, 0.04, 0.1);
-//            comodinBoton.setOnAction(new CartaApretarEventHandler(this.seleccionadas, carta, comodinBoton));
+        VBox comodines = new VBox();
 
+//        comodinera.agregarComodin(new Multiplicador(5, "Bananas"));
+//        comodinera.agregarComodin(new SumaMultiplicador(2, "Talisman De Descarte"));
+
+        CambiadorDeComodines cambiadorDeComodines = new CambiadorDeComodines(this.comodinera, comodines, contenedorPrincipal);
+        ArrayList<Modificador> modificadores = this.comodinera.obtenerComodines();
+        for (Modificador comodin : modificadores) {
+            Button comodinBoton = this.crearBoton(comodin.obtenerNombre(), Color.DARKBLUE, (null), contenedorPrincipal, 0.05, 0.13);
+            comodinBoton.setOnAction(new ComodinApretarEventHandler(comodin, comodinBoton, cambiadorDeComodines));
             comodines.getChildren().add(comodinBoton);
             VBox.setMargin(comodinBoton, new Insets(10,0,0,20));
         }
-        comodines.setAlignment(Pos.TOP_LEFT);
-        comodines.setSpacing(10);
+
+        VBox comodinesYLetrero = new VBox(comodinesLetrero, comodines);
+
+        comodinesYLetrero.setAlignment(Pos.TOP_LEFT);
+        comodinesYLetrero.setSpacing(10);
 
         VBox tarots = new VBox();
 
@@ -203,8 +211,8 @@ public class App extends Application {
         tarots.getChildren().add(tarotLogo);
 
         for (int i = 1; i <= 2; i ++) {
-            Button tarotBoton = this.crearBoton("comodinVacio", Color.DARKBLUE, (null), contenedorPrincipal, 0.04, 0.1);
-//            tarotBoton.setOnAction(new CartaApretarEventHandler(this.seleccionadas, carta, tarotBoton));
+            Button tarotBoton = this.crearBoton("El Ahorcado", Color.DARKBLUE, (null), contenedorPrincipal, 0.05, 0.13);
+            tarotBoton.setOnAction(new TarotApretarEventHandler(this.seleccionadas, new CambiadorDePuntos(12), tarotBoton, tarots, contenedorPrincipal));
 
             tarots.getChildren().add(tarotBoton);
             VBox.setMargin(tarotBoton, new Insets(10,0,0,20));
@@ -212,7 +220,7 @@ public class App extends Application {
         tarots.setAlignment(Pos.TOP_LEFT);
         tarots.setSpacing(10);
 
-        HBox comodinesYTarots = new HBox(comodines, tarots);
+        HBox comodinesYTarots = new HBox(comodinesYLetrero, tarots);
 
 
         HBox rendirse = new HBox();
@@ -422,7 +430,7 @@ public class App extends Application {
     }
 
 
-//    private void swapView(StackPane centerArea) {
+//    private void swapView(VBox nuevosComodines) {
 //        VBox newView = new VBox(10);
 //        newView.setAlignment(Pos.CENTER);
 //

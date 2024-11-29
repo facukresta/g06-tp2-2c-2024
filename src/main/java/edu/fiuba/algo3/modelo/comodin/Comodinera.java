@@ -8,8 +8,19 @@ import java.util.ArrayList;
 public class Comodinera {
     private ArrayList<Modificador> comodines = new ArrayList<>();
 
+    public Comodinera() {
+        for (int i = 1; i <= 5; i++) {
+            this.comodines.add(new SinComodin());
+        }
+    }
+
     public void agregarComodin(Modificador comodin) {
-        this.comodines.add(comodin);
+        for (Modificador modificador: comodines) {
+            if (modificador.obtenerNombre().equals("comodinVacio")) {
+                this.comodines.set(this.comodines.indexOf(modificador), comodin);
+                return;
+            }
+        }
     }
 
     public void cambiarOrden(Modificador comodin1, Modificador comodin2) {
@@ -29,6 +40,14 @@ public class Comodinera {
         for (Modificador comodin : comodines) {
             comodin.aplicarModificador(puntajeBase, juego);
         }
+    }
+
+    public int cantidadDeComodines(){
+        return this.comodines.size();
+    }
+
+    public ArrayList<Modificador> obtenerComodines() {
+        return this.comodines;
     }
 
 }
