@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.ronda;
 
+import edu.fiuba.algo3.modelo.Comprable;
 import edu.fiuba.algo3.modelo.comodin.Comodin;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
@@ -103,6 +104,10 @@ public class Ronda {
 
     public int obtenerDescartesRestantes() {
         return this.descartes;
+    }
+
+    public ArrayList<Comprable> mostrarProductos() {
+        return this.tienda.mostrarProductos();
     }
 }
 

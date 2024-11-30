@@ -19,19 +19,20 @@ public class LectorDeTarots {
             JSONArray tarots = (JSONArray) jsonObject.get("tarots");
             for (Object obj : tarots) {
                 JSONObject cartaJson = (JSONObject) obj;
+                String nombre = (String) cartaJson.get("nombre");
                 JSONObject efectosJson = (JSONObject) cartaJson.get("efecto");
                 int puntos = ((Long) efectosJson.get("puntos")).intValue();
                 double multiplicador = ((Number) efectosJson.get("multiplicador")).doubleValue();
                 String sobre = (String) cartaJson.get("sobre");
-                String juego = (String)cartaJson.get("ejemplar");
+                String juego = (String) cartaJson.get("ejemplar");
                 if (sobre.equals("carta")) {
                     if (puntos == 1) {
-                        listaDeTarots.add(new CambiadorDeMultiplicador(multiplicador));
+                        listaDeTarots.add(new CambiadorDeMultiplicador(multiplicador, nombre));
                     } else {
-                        listaDeTarots.add(new CambiadorDePuntos(puntos));
+                        listaDeTarots.add(new CambiadorDePuntos(puntos, nombre));
                     }
                 } else if (sobre.equals("mano")) {
-                    listaDeTarots.add(new Sumador(puntos, multiplicador, conversorJuego.convertirJuego(juego)));
+                    listaDeTarots.add(new Sumador(puntos, multiplicador, conversorJuego.convertirJuego(juego), nombre));
                 }
             }
         } catch (Exception e) {
@@ -47,16 +48,17 @@ public class LectorDeTarots {
             JSONObject efectosJson = (JSONObject) cartaJson.get("efecto");
             int puntos = ((Long) efectosJson.get("puntos")).intValue();
             double multiplicador = ((Number) efectosJson.get("multiplicador")).doubleValue();
+            String nombre = (String) cartaJson.get("nombre");
             String sobre = (String) cartaJson.get("sobre");
             String juego = (String)cartaJson.get("ejemplar");
             if (sobre.equals("carta")) {
                 if (puntos == 1) {
-                    listaDeTarots.add(new CambiadorDeMultiplicador(multiplicador));
+                    listaDeTarots.add(new CambiadorDeMultiplicador(multiplicador, nombre));
                 } else {
-                    listaDeTarots.add(new CambiadorDePuntos(puntos));
+                    listaDeTarots.add(new CambiadorDePuntos(puntos, nombre));
                 }
             } else if (sobre.equals("mano")) {
-                listaDeTarots.add(new Sumador(puntos, multiplicador, conversorJuego.convertirJuego(juego)));
+                listaDeTarots.add(new Sumador(puntos, multiplicador, conversorJuego.convertirJuego(juego), nombre));
             }
         }
         return listaDeTarots;

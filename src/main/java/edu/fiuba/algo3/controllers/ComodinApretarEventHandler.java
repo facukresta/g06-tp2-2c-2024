@@ -1,16 +1,10 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
-import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
 import edu.fiuba.algo3.vistas.CambiadorDeComodines;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-
-import java.util.ArrayList;
 
 public class ComodinApretarEventHandler implements EventHandler<ActionEvent> {
 

@@ -15,16 +15,16 @@ public class  DescartarManoEventHandler implements EventHandler<ActionEvent> {
 
     private ArrayList<Carta> seleccionadas;
     private Comodinera comodinera;
-    private Ronda ronda;
+    private ArrayList<Ronda> rondas;
     private int descartes;
     private Runnable pasarDeRonda;
     private Runnable seguirJugando;
 
 
-    public  DescartarManoEventHandler(ArrayList<Carta> seleccionadas, Comodinera comodinera, Ronda ronda, int descartes, Runnable pasarDeRonda, Runnable seguirJugando ) {
+    public  DescartarManoEventHandler(ArrayList<Carta> seleccionadas, Comodinera comodinera, ArrayList<Ronda> rondas, int descartes, Runnable pasarDeRonda, Runnable seguirJugando ) {
         this.seleccionadas = seleccionadas;
         this.comodinera = comodinera;
-        this.ronda = ronda;
+        this.rondas = rondas;
         this.descartes = descartes;
         this.pasarDeRonda = pasarDeRonda;
         this.seguirJugando = seguirJugando;
@@ -34,7 +34,7 @@ public class  DescartarManoEventHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         if (!seleccionadas.isEmpty() && this.descartes > 0) {
             try {
-                ronda.descartarMano(seleccionadas, Juego.chequearJuego(seleccionadas), comodinera);
+                this.rondas.get(0).descartarMano(seleccionadas, Juego.chequearJuego(seleccionadas), comodinera);
             } catch (PasoLaRondaException e) {
                 this.pasarDeRonda.run();
                 return;

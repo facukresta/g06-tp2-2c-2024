@@ -14,26 +14,27 @@ public class LectorComodines {
     private Modificador leerComodin(JSONObject comodin) {
         String activador = comodin.get("activacion").toString();
         String nombre = comodin.get("nombre").toString();
-        int probabilidad = 1;
-        String juego = "sin juego";
-        if (activador.equals("1 en")) {
-            JSONObject activacion = (JSONObject) comodin.get("activacion");
-            probabilidad = ((Long) activacion.get("1 en")).intValue();
-        }
-        if (activador.equals("Mano Jugada")) {
-            JSONObject activacion = (JSONObject) comodin.get("activacion");
-            juego = (String) activacion.get("Mano Jugada");
-        }
         JSONObject efectosJson = (JSONObject) comodin.get("efecto");
         int puntos = ((Long) efectosJson.get("puntos")).intValue();
         double multiplicador = ((Number) efectosJson.get("multiplicador")).doubleValue();
-        if (activador.equals("descarte")) {
+        int probabilidad = 1;
+        if (activador.equals("Descarte")) {
             if (puntos == 1) {
                 return (new SumaMultiplicadorDescarte(multiplicador, new Aleatorio(probabilidad), nombre));
             } else {
                 return (new SumaPuntosDescarte(puntos, new Aleatorio(probabilidad), nombre));
             }
         } else {
+            String juego = "sin juego";
+            Object activacionObj = comodin.get("activacion");
+            if (activacionObj instanceof JSONObject) {
+                JSONObject activacion = (JSONObject) activacionObj;
+                if (activacion.get("1 en") == null) {
+                    juego = (String) activacion.get("Mano Jugada");
+                } else {
+                    probabilidad = ((Long) activacion.get("1 en")).intValue();
+                }
+            }
             if (puntos == 1) {
                 return (new SumaMultiplicador(multiplicador, conversorJuego.convertirJuego(juego), new Aleatorio(probabilidad), nombre));
             } else {

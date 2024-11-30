@@ -23,4 +23,8 @@ public class TiendaBalatro implements Tienda {
         this.comprado = true;
         this.productos.clear();
     }
+
+    public ArrayList<Comprable> mostrarProductos() {
+        return this.productos;
+    }
 }

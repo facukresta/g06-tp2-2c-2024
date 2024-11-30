@@ -8,4 +8,5 @@ public interface Modificador extends Comprable {
     void aplicarModificador(Puntaje puntaje, Juego juego);
 
     String obtenerNombre();
+
 }

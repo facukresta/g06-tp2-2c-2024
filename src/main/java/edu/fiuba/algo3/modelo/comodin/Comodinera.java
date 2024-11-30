@@ -33,7 +33,7 @@ public class Comodinera {
     public void quitaComodin(Modificador comodin) {
         if (!this.comodines.contains(comodin))
             throw new ComodinNoEnComodineraException();
-        this.comodines.remove(comodin);
+        this.comodines.set(this.comodines.indexOf(comodin), new SinComodin());
     }
 
     public void aplicarComodines(Puntaje puntajeBase, Juego juego) {
@@ -43,7 +43,13 @@ public class Comodinera {
     }
 
     public int cantidadDeComodines(){
-        return this.comodines.size();
+        int cantidad = 0;
+        for (Modificador comodin : comodines) {
+            if (!comodin.obtenerNombre().equals("comodinVacio")) {
+                cantidad++;
+            }
+        }
+        return cantidad;
     }
 
     public ArrayList<Modificador> obtenerComodines() {

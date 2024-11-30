@@ -15,26 +15,27 @@ public class JugarManoEventHandler implements EventHandler<ActionEvent> {
 
     private ArrayList<Carta> seleccionadas;
     private Comodinera comodinera;
-    private Ronda ronda;
+    private ArrayList<Ronda> rondas;
     private Runnable pasarDeRonda;
     private Runnable seguirJugando;
     private Runnable perder;
 
 
-    public JugarManoEventHandler(ArrayList<Carta> seleccionadas, Comodinera comodinera, Ronda ronda, Runnable pasarDeRonda, Runnable seguirJugando, Runnable perder) {
+    public JugarManoEventHandler(ArrayList<Carta> seleccionadas, Comodinera comodinera, ArrayList<Ronda> rondas, Runnable pasarDeRonda, Runnable seguirJugando, Runnable perder) {
         this.seleccionadas = seleccionadas;
         this.comodinera = comodinera;
-        this.ronda = ronda;
+        this.rondas = rondas;
         this.pasarDeRonda = pasarDeRonda;
         this.seguirJugando = seguirJugando;
         this.perder = perder;
+
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
         if (!seleccionadas.isEmpty()) {
             try {
-                ronda.jugarMano(seleccionadas, Juego.chequearJuego(seleccionadas), comodinera);
+                this.rondas.get(0).jugarMano(seleccionadas, Juego.chequearJuego(seleccionadas), comodinera);
             } catch (PasoLaRondaException e) {
                 pasarDeRonda.run();
                 return;

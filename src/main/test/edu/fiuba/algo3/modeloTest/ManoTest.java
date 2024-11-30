@@ -320,7 +320,7 @@ public class ManoTest {
     public void test21AlModificarUnJuegoConTarotSumadorEsteDevulveElValorCorrepondiente() {
         // Arrange
         Mano mano = new ManoDe8();
-        Tarot tarot = new Sumador(40, 15,new Par());
+        Tarot tarot = new Sumador(40, 15,new Par(), "");
         Puntaje puntajeEsperado = new Puntaje(54,17);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante())));
         Juego juego = Juego.chequearJuego(cartas);
@@ -337,7 +337,7 @@ public class ManoTest {
     public void test21AlModificarUnJuegoConTarotSumadorYNoJugarEsteJuegoEsteNoDevulveElValorModificado() {
         // Arrange
         Mano mano = new ManoDe8();
-        Tarot tarot = new Sumador(40, 15,new Par());
+        Tarot tarot = new Sumador(40, 15,new Par(), "");
         Puntaje puntajeEsperado = new Puntaje(36,3);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
                 new CartaInglesa(2, new Corazon())));

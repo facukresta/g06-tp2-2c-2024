@@ -129,7 +129,7 @@ public class PokerTest {
     @Test
     public void test07AUnJuegoPokerSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Poker());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Poker(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(76,8);
         // Act
@@ -146,7 +146,7 @@ public class PokerTest {
     @Test
     public void test08AUnJuegoPokerSeLeAplicaUnTarotCambiadorDeMultiplicadorPokeraPokerNoLoModifica() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(76,7);
         // Act
@@ -162,7 +162,7 @@ public class PokerTest {
     @Test
     public void test09AUnJuegoPokerSeLeAplicaUnTarotCambiadorDePuntosDePokerDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new Poker());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new Poker(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(28,7);
         // Act
@@ -179,7 +179,7 @@ public class PokerTest {
     @Test
     public void test10AUnJuegoPokerSeLeAplicaUnTarotCambiadorDePuntosDeDoblePokerDeOchoPuntosNoDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new DoblePar());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new DoblePar(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(76,7);
         // Act
@@ -196,7 +196,7 @@ public class PokerTest {
     @Test
     public void test11AUnJuegoPokerSeLeAplicaUnTarotSumadorDePokerDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(2,2, new Poker());
+        Tarot tarotSumador = new Sumador(2,2, new Poker(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(78,9);
         // Act
@@ -213,7 +213,7 @@ public class PokerTest {
     @Test
     public void test12AUnJuegoPokerSeLeAplicaUnTarotSumadorDePokerDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8,2, new Escalera());
+        Tarot tarotSumador = new Sumador(8,2, new Escalera(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(76,7);
         // Act

@@ -96,7 +96,7 @@ public class EscaleraRealTest {
     @Test
     public void test07AUnJuegoEscaleraRealSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(9, new EscaleraReal());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(9, new EscaleraReal(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(150,9);
         // Act
@@ -114,7 +114,7 @@ public class EscaleraRealTest {
     @Test
     public void test08AUnJuegoEscaleraRealSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(5, new Escalera());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(5, new Escalera(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(150,8);
         // Act
@@ -131,7 +131,7 @@ public class EscaleraRealTest {
     @Test
     public void test09AUnJuegoEscaleraRealSeLeAplicaUnTarotCambiadorDePuntosDeEscaleraRealDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(110, new EscaleraReal());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(110, new EscaleraReal(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(160,8);
         // Act
@@ -149,7 +149,7 @@ public class EscaleraRealTest {
     @Test
     public void test10AUnJuegoEscaleraRealSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(150,8);
         // Act
@@ -167,7 +167,7 @@ public class EscaleraRealTest {
     @Test
     public void test11AUnJuegoEscaleraRealSeLeAplicaUnTarotSumadorDeEscaleraRealDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8,2, new EscaleraReal());
+        Tarot tarotSumador = new Sumador(8,2, new EscaleraReal(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(158,10);
         // Act
@@ -185,7 +185,7 @@ public class EscaleraRealTest {
     @Test
     public void test12AUnJuegoEscaleraRealSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8,2, new Escalera());
+        Tarot tarotSumador = new Sumador(8,2, new Escalera(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(150,8);
         // Act

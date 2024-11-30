@@ -117,7 +117,7 @@ public class ParTest {
     @Test
     public void test07AUnJuegoParSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Par());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Par(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(18,8);
         // Act
@@ -134,7 +134,7 @@ public class ParTest {
     @Test
     public void test08AUnJuegoParSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(18,2);
         // Act
@@ -150,7 +150,7 @@ public class ParTest {
     @Test
     public void test09AUnJuegoParSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new Par());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new Par(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(20,2);
         // Act
@@ -166,7 +166,7 @@ public class ParTest {
     @Test
     public void test10AUnJuegoParSeLeAplicaUnTarotCambiadorDePuntosDeDobleParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new DoblePar());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new DoblePar(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(18,2);
         // Act
@@ -182,7 +182,7 @@ public class ParTest {
     @Test
     public void test11AUnJuegoParSeLeAplicaUnTarotSumadorDeParDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(2,2, new Par());
+        Tarot tarotSumador = new Sumador(2,2, new Par(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(20,4);
         // Act
@@ -198,7 +198,7 @@ public class ParTest {
     @Test
     public void test12AUnJuegoParSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8,2, new Escalera());
+        Tarot tarotSumador = new Sumador(8,2, new Escalera(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(18,2);
         // Act

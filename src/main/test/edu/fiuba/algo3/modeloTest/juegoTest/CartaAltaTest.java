@@ -117,7 +117,7 @@ public class CartaAltaTest {
     @Test
     public void test09AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new CartaAlta());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new CartaAlta(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(10,8);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
@@ -132,7 +132,7 @@ public class CartaAltaTest {
     @Test
     public void test10AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Par());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Par(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(10,1);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
@@ -147,7 +147,7 @@ public class CartaAltaTest {
     @Test
     public void test11AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDePuntosDeCartaAltaDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new CartaAlta());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new CartaAlta(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(13,1);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
@@ -163,7 +163,7 @@ public class CartaAltaTest {
     @Test
     public void test12AUnJuegoCartaAltaSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(10,1);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
@@ -179,7 +179,7 @@ public class CartaAltaTest {
     @Test
     public void test13AUnJuegoCartaAltaSeLeAplicaUnTarotSumadorDeCartaAltaDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8,2, new CartaAlta());
+        Tarot tarotSumador = new Sumador(8,2, new CartaAlta(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(18,2);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
@@ -195,7 +195,7 @@ public class CartaAltaTest {
     @Test
     public void test14AUnJuegoCartaAltaSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8,2, new Par());
+        Tarot tarotSumador = new Sumador(8,2, new Par(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(10,1);
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));

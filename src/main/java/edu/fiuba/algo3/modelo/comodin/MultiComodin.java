@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.comodin;
 
+import edu.fiuba.algo3.modelo.juego.EscaleraReal;
 import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.juego.SinJuego;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 import java.util.ArrayList;

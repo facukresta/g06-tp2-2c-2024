@@ -103,7 +103,7 @@ public class CartaTest {
         // Arrange
         Carta carta = new CartaInglesa(3, new Corazon());
         Puntaje puntajeEsperado = new Puntaje(7,1);
-        Tarot tarot = new CambiadorDePuntos(7);
+        Tarot tarot = new CambiadorDePuntos(7, "");
         // Act
         carta.aplicarModificador(tarot);
         Puntaje puntajeObtenido = carta.obtenerPuntaje();

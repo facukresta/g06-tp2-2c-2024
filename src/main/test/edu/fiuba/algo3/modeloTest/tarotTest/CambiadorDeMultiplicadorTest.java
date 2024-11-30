@@ -16,7 +16,7 @@ public class CambiadorDeMultiplicadorTest {
     @Test
     public void test01UnTarotCambiadorDeMultiplicadorParaUnaCartaDeOchoMultiplicadorConUnPuntajeBaseDeDosMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8);
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, "");
         Puntaje puntajeEsperado = new Puntaje(3,8);
         // Act
         Puntaje puntajeBase = new Puntaje(3, 2);
@@ -27,7 +27,7 @@ public class CambiadorDeMultiplicadorTest {
     @Test
     public void test02UnTarotCambiadorDeMultiplicadorParaUnaCartaDeTresMultiplicadorConUnPuntajeBaseDeTresMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(3);
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(3, "");
         Puntaje puntajeEsperado = new Puntaje(4,3);
         // Act
         Puntaje puntajeBase = new Puntaje(4, 3);
@@ -38,7 +38,7 @@ public class CambiadorDeMultiplicadorTest {
     @Test
     public void test03UnTarotCambiadorDeMultiplicadorParaUnaCartaDeSieteMultiplicadorConUnPuntajeBaseDeCuatroMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(4);
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(4, "");
         Puntaje puntajeEsperado = new Puntaje(2,4);
         // Act
         Puntaje puntajeBase = new Puntaje(2, 7);
@@ -50,18 +50,18 @@ public class CambiadorDeMultiplicadorTest {
     @Test
     public void test04UnTarotCambiadorDeMultiplicadorParaUnaCartaNoPuedeSerInstanciadoConMultiplicadorNegativos() {
         // Arrange / Act / Assert
-        assertThrows(MultiplicadorInvalidoTarotException.class, () -> new CambiadorDeMultiplicador(-1));
+        assertThrows(MultiplicadorInvalidoTarotException.class, () -> new CambiadorDeMultiplicador(-1, ""));
     }
     @Test
     public void test05UnTarotCambiadorDeMultiplicadorParaUnaCartaNoPuedeSerInstanciadoIgualA0() {
         // Arrange / Act / Assert
-        assertThrows(MultiplicadorInvalidoTarotException.class, () -> new CambiadorDeMultiplicador(0));
+        assertThrows(MultiplicadorInvalidoTarotException.class, () -> new CambiadorDeMultiplicador(0, ""));
     }
 
     @Test
     public void test06UnTarotCambiadorDeMultiplicadorSabeReconocerSiEsParaUnJuegoEspecifico() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new CartaAlta());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new CartaAlta(), "");
         // Act
         boolean resultadoComparacion = tarotCambiadorDeMultiplicador.sosParaEsteJuego(new CartaAlta());
         // Assert
@@ -71,7 +71,7 @@ public class CambiadorDeMultiplicadorTest {
     @Test
     public void test07UnTarotCambiadorDeMultiplicadorSabeReconocerSiNoEsParaUnJuegoEspecifico() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera(), "");
         // Act
         boolean resultadoComparacion = tarotCambiadorDeMultiplicador.sosParaEsteJuego(new CartaAlta());
         // Assert
@@ -81,7 +81,7 @@ public class CambiadorDeMultiplicadorTest {
     @Test
     public void test08UnTarotCambiadorDeMultiplicadorParaUnJuegoDeOchoMultiplicadorConUnPuntajeBaseDeDosMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new CartaAlta());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new CartaAlta(), "");
         Puntaje puntajeEsperado = new Puntaje(3,8);
         // Act
         Puntaje puntajeBase = new Puntaje(3, 2);

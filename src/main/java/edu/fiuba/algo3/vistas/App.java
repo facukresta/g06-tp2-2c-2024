@@ -1,45 +1,28 @@
 package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.controllers.*;
+import edu.fiuba.algo3.modelo.Comprable;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
 import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
+import edu.fiuba.algo3.modelo.tarot.SinTarot;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
-import javafx.animation.ScaleTransition;
+import edu.fiuba.algo3.modelo.tarot.Tarotera;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
-import javafx.util.Duration;
 
 import java.util.ArrayList;
-
-/*
-        ///////////////////////
-        BOTONES
-        5 Comodines (arriba a la izquierda)
-        2 Tarots (arriba a la izquierda a la derecha de los comodines)
-        ///////////////////////
-        1 Abrir Tienda -> 6 comprables
-        LABELS
-        1 Ronda Actual ( /de Total)
-        1 Juego Actual
-        ///////////////////////
-         */
-// Botones escalables
 
 
 public class App extends Application {
@@ -48,12 +31,14 @@ public class App extends Application {
 
     private Mazo mazo = new Mazo();
     private Comodinera comodinera = new Comodinera();
+    private Tarotera tarotera = new Tarotera();
     private ArrayList<Carta> seleccionadas = new ArrayList<>();
     private ArrayList<Ronda> rondas = new ArrayList<>();
-    private ArrayList<Tarot> tarots = new ArrayList<>();
-    private int posRondaActual = 0;
     private int maxRondas;
     private Ronda rondaActual;
+    private CreadorDeBotones creadorDeBotones = new CreadorDeBotones();
+    private CreadorVisual creadorVisual = new CreadorVisual();
+    private CreadorDeEtiqueta creadorDeEtiqueta = new CreadorDeEtiqueta();
 
     @Override
     public void start(Stage stage) {
@@ -64,61 +49,23 @@ public class App extends Application {
         StagePrincipal.show();
     }
 
-    private Button crearBoton(String nombre, Color color, EventHandler<ActionEvent> handler, Pane contenedorPrincipal, double ancho, double altura) {
-        Button boton = new Button();
-        Image playImage = new Image("/"+nombre+".png");
-        ImageView imageView = new ImageView(playImage);
-        // Escalar el ImageView
-        imageView.setPreserveRatio(true);
-        imageView.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(ancho));
-        imageView.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(altura));
-
-        boton.setGraphic(imageView);
-        boton.setStyle("-fx-padding: 0; -fx-background-color: transparent;");
-        boton.setOnAction(handler);
-        boton.setOnMouseEntered(e -> {
-            ScaleTransition hoverScale = new ScaleTransition(Duration.millis(200), boton);
-            hoverScale.setToX(1.1);
-            hoverScale.setToY(1.1);
-            hoverScale.play();
-        });
-        boton.setOnMouseExited(e -> {
-            ScaleTransition hoverScale = new ScaleTransition(Duration.millis(200), boton);
-            hoverScale.setToX(1.0);
-            hoverScale.setToY(1.0);
-            hoverScale.play();
-        });
-        return boton;
-    }
-
     private Scene crearEscenaDelMenu() {
         BorderPane contenedorPrincipal = new BorderPane();
-
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new Image("/fondoMenus.png", true),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT
-        );
-        contenedorPrincipal.setBackground(new Background(backgroundImage));
-
+        contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondoMenus", contenedorPrincipal));
 
         VBox medio = new VBox();
 
-        ImageView logo = new ImageView(new Image("/logoBalatro.png"));
-        logo.setPreserveRatio(true);
-        logo.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.5));
-        logo.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.3));
+        ImageView logo = creadorVisual.crearImageView("logoBalatro",contenedorPrincipal, 0.5, 0.3);
 
-        Button playButton = this.crearBoton("Jugar", Color.DARKRED, (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
+        Button playButton = creadorDeBotones.crearBoton("Jugar",
+                (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
         medio.getChildren().add(logo);
         medio.getChildren().add(playButton);
         medio.setAlignment(Pos.CENTER);
 
         HBox abajo = new HBox();
 
-        Button exitButton = this.crearBoton("Salir", Color.DARKGREEN, (e -> {
+        Button exitButton = creadorDeBotones.crearBoton("Salir", (e -> {
             Platform.exit();
         }), contenedorPrincipal, 0.2, 0.1);
         abajo.getChildren().add(exitButton);
@@ -131,39 +78,104 @@ public class App extends Application {
         return new Scene(contenedorPrincipal, 1280, 720);
     }
 
-    private Scene crearEscenaDeJuego() {
-        BorderPane contenedorPrincipal = new BorderPane();
+    private void actualizarTablero(HBox contenedorDeCartas, Pane contenedorPrincipal, HBox puntajeASuperarBox, HBox puntajesObtenidosBox, HBox jugadasRestantesBox, HBox descartesRestantesBox, HBox rondaActualBox, VBox comodines, VBox tarots) {
+        this.actualizarCartas(contenedorDeCartas, contenedorPrincipal);
+        this.actualizarEstadisticas(puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox);
+        this.actualizarComodinera(contenedorPrincipal, comodines);
+        this.actualizarTarotera(contenedorPrincipal, tarots);
+    }
 
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new Image("/fondo2.png", true),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT
-        );
-        contenedorPrincipal.setBackground(new Background(backgroundImage));
-
-        Button rendirseBoton = this.crearBoton("rendirse", Color.DARKRED, (e -> {
-            Platform.exit();
-        }), contenedorPrincipal, 0.1, 0.75);
-
-
-        Button jugarManoBoton = this.crearBoton("jugarMano", Color.DARKRED,
-                (new JugarManoEventHandler(this.seleccionadas, this.comodinera, this.rondaActual,
-                        () -> pasarDeRonda(),
-                        () -> cambiarDeEscena(crearEscenaDeJuego()),
-                        () -> cambiarDeEscena(crearEscenaDePerdiste()))), contenedorPrincipal, 0.2, 0.1);
-
-        Button descartarManoBoton = this.crearBoton("descartar", Color.DARKRED, (
-                new DescartarManoEventHandler(this.seleccionadas, this.comodinera, this.rondaActual, this.rondaActual.obtenerDescartesRestantes(),
-                        () -> pasarDeRonda(),
-                        () -> cambiarDeEscena(crearEscenaDeJuego()))
-        ), contenedorPrincipal, 0.2, 0.1);
-
-        HBox contenedorDeCartas = new HBox();
+    private void actualizarCartas (HBox contenedorDeCartas, Pane contenedorPrincipal) {
+        contenedorDeCartas.getChildren().clear();
         ArrayList<Carta> cartas = this.rondaActual.obtenerCartas();
         for (Carta carta : cartas) {
-            Button cartaBoton = this.crearBoton(carta.obtenerNombre(), Color.DARKBLUE, (null), contenedorPrincipal, 0.08, 0.2);
+            Button cartaBoton = creadorDeBotones.crearBoton(carta.obtenerNombre(), (null), contenedorPrincipal, 0.08, 0.2);
+            cartaBoton.setOnAction(new CartaApretarEventHandler(this.seleccionadas, carta, cartaBoton));
+
+            contenedorDeCartas.getChildren().add(cartaBoton);
+            HBox.setMargin(cartaBoton, new Insets(0,0,30,0));
+        }
+    }
+
+    private void actualizarEstadisticas(HBox puntajeASuperarBox, HBox puntajesObtenidosBox, HBox jugadasRestantesBox, HBox descartesRestantesBox, HBox rondaActualBox) {
+        Label puntajeASuperarMostrado = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(this.rondaActual.obtenerPuntajeASuperar()), "-fx-font-size: 24px; -fx-text-fill: white;");
+        puntajeASuperarBox.getChildren().set(1, puntajeASuperarMostrado);
+        HBox.setMargin(puntajeASuperarMostrado, new Insets(5,5,0,0));
+
+        Label puntajesObtenidosMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(this.rondaActual.obtenerPuntajesObtenidos()), "-fx-font-size: 24px; -fx-text-fill: white;");
+        puntajesObtenidosBox.getChildren().set(1, puntajesObtenidosMostrados);
+        HBox.setMargin(puntajesObtenidosMostrados, new Insets(5,5,0,0));
+
+        Label jugadasRestantesMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(this.rondaActual.obtenerJugadasRestantes()), "-fx-font-size: 24px; -fx-text-fill: white;");
+        jugadasRestantesBox.getChildren().set(1, jugadasRestantesMostrados);
+        HBox.setMargin(jugadasRestantesMostrados, new Insets(5,5,0,0));
+
+        Label descartesRestantesMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(this.rondaActual.obtenerDescartesRestantes()), "-fx-font-size: 24px; -fx-text-fill: white;");
+        descartesRestantesBox.getChildren().set(1, descartesRestantesMostrados);
+        HBox.setMargin(descartesRestantesMostrados, new Insets(5,5,0,0));
+
+        Label rondaActualMostrada = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(9 - this.rondas.size()), "-fx-font-size: 24px; -fx-text-fill: white;");
+        rondaActualBox.getChildren().set(1, rondaActualMostrada);
+        HBox.setMargin(rondaActualMostrada, new Insets(5,5,0,0));
+
+    }
+
+    private void actualizarTarotera(Pane contenedorPrincipal, VBox tarots) {
+        tarots.getChildren().clear();
+        for (Tarot tarot : this.tarotera.obtenerTarots()) {
+            Button tarotBoton = creadorDeBotones.crearBoton(tarot.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
+            tarotBoton.setOnAction(new TarotApretarEventHandler(this.seleccionadas, tarot, tarotBoton, tarots, contenedorPrincipal, this.tarotera));
+            tarots.getChildren().add(tarotBoton);
+            VBox.setMargin(tarotBoton, new Insets(10,0,0,20));
+        }
+    }
+
+
+    private void actualizarComodinera(Pane contenedorPrincipal, VBox comodines) {
+        comodines.getChildren().clear();
+        CambiadorDeComodines cambiadorDeComodines = new CambiadorDeComodines(this.comodinera, comodines, contenedorPrincipal);
+        for (Modificador comodin : this.comodinera.obtenerComodines()) {
+            Button comodinBoton = creadorDeBotones.crearBoton(comodin.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
+            comodinBoton.setOnAction(new ComodinApretarEventHandler(comodin, comodinBoton, cambiadorDeComodines));
+            comodines.getChildren().add(comodinBoton);
+            VBox.setMargin(comodinBoton, new Insets(10,0,0,20));
+        }
+    }
+
+    private Scene crearEscenaDeJuego() {
+        BorderPane contenedorPrincipal = new BorderPane();
+        contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondo2", contenedorPrincipal));
+
+        HBox puntajeASuperarBox = new HBox();
+        HBox puntajesObtenidosBox = new HBox();
+        HBox jugadasRestantesBox = new HBox();
+        HBox descartesRestantesBox = new HBox();
+        HBox rondaActualBox = new HBox();
+
+        VBox comodines = new VBox();
+        VBox tarots = new VBox();
+
+
+        Button rendirseBoton = creadorDeBotones.crearBoton("rendirse", (e -> {
+            Platform.exit();
+        }), contenedorPrincipal, 0.1, 0.75);
+        HBox contenedorDeCartas = new HBox();
+
+        Button jugarManoBoton = creadorDeBotones.crearBoton("jugarMano",
+                (new JugarManoEventHandler(this.seleccionadas, this.comodinera, this.rondas,
+                        () -> pasarDeRonda(contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots),
+                        () -> actualizarTablero(contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots),
+                        () -> cambiarDeEscena(crearEscenaDePerdiste()))), contenedorPrincipal, 0.2, 0.1);
+
+        Button descartarManoBoton = creadorDeBotones.crearBoton("descartar", (
+                new DescartarManoEventHandler(this.seleccionadas, this.comodinera,  this.rondas, this.rondaActual.obtenerDescartesRestantes(),
+                        () -> pasarDeRonda(contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots),
+                        () -> actualizarTablero(contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots))
+        ), contenedorPrincipal, 0.2, 0.1);
+
+        ArrayList<Carta> cartas = this.rondaActual.obtenerCartas();
+        for (Carta carta : cartas) {
+            Button cartaBoton = creadorDeBotones.crearBoton(carta.obtenerNombre(), (null), contenedorPrincipal, 0.08, 0.2);
             cartaBoton.setOnAction(new CartaApretarEventHandler(this.seleccionadas, carta, cartaBoton));
 
             contenedorDeCartas.getChildren().add(cartaBoton);
@@ -174,23 +186,15 @@ public class App extends Application {
 
         VBox comodinesLetrero = new VBox();
 
+        ImageView comodinLogo = creadorVisual.crearImageView("comodines",contenedorPrincipal, 0.07, 0.04);
 
-        ImageView comodinLogo = new ImageView(new Image("/comodines.png"));
-        comodinLogo.setPreserveRatio(true);
-        comodinLogo.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.07));
-        comodinLogo.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.04));
         VBox.setMargin(comodinLogo, new Insets(10,0,0,10));
         comodinesLetrero.getChildren().add(comodinLogo);
-
-        VBox comodines = new VBox();
-
-//        comodinera.agregarComodin(new Multiplicador(5, "Bananas"));
-//        comodinera.agregarComodin(new SumaMultiplicador(2, "Talisman De Descarte"));
 
         CambiadorDeComodines cambiadorDeComodines = new CambiadorDeComodines(this.comodinera, comodines, contenedorPrincipal);
         ArrayList<Modificador> modificadores = this.comodinera.obtenerComodines();
         for (Modificador comodin : modificadores) {
-            Button comodinBoton = this.crearBoton(comodin.obtenerNombre(), Color.DARKBLUE, (null), contenedorPrincipal, 0.05, 0.13);
+            Button comodinBoton = creadorDeBotones.crearBoton(comodin.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
             comodinBoton.setOnAction(new ComodinApretarEventHandler(comodin, comodinBoton, cambiadorDeComodines));
             comodines.getChildren().add(comodinBoton);
             VBox.setMargin(comodinBoton, new Insets(10,0,0,20));
@@ -201,26 +205,27 @@ public class App extends Application {
         comodinesYLetrero.setAlignment(Pos.TOP_LEFT);
         comodinesYLetrero.setSpacing(10);
 
-        VBox tarots = new VBox();
+        VBox tarotsLetrero = new VBox();
 
-        ImageView tarotLogo = new ImageView(new Image("/tarots.png"));
-        tarotLogo.setPreserveRatio(true);
-        tarotLogo.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.065));
-        tarotLogo.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.035));
+        ImageView tarotLogo = creadorVisual.crearImageView("tarots",contenedorPrincipal, 0.065, 0.035);
+
         VBox.setMargin(tarotLogo, new Insets(10,0,0,10));
-        tarots.getChildren().add(tarotLogo);
+        tarotsLetrero.getChildren().add(tarotLogo);
 
-        for (int i = 1; i <= 2; i ++) {
-            Button tarotBoton = this.crearBoton("El Ahorcado", Color.DARKBLUE, (null), contenedorPrincipal, 0.05, 0.13);
-            tarotBoton.setOnAction(new TarotApretarEventHandler(this.seleccionadas, new CambiadorDePuntos(12), tarotBoton, tarots, contenedorPrincipal));
 
+        for (Tarot tarot : this.tarotera.obtenerTarots()) {
+            Button tarotBoton = creadorDeBotones.crearBoton(tarot.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
+            tarotBoton.setOnAction(new TarotApretarEventHandler(this.seleccionadas, tarot, tarotBoton, tarots, contenedorPrincipal, this.tarotera));
             tarots.getChildren().add(tarotBoton);
             VBox.setMargin(tarotBoton, new Insets(10,0,0,20));
         }
-        tarots.setAlignment(Pos.TOP_LEFT);
-        tarots.setSpacing(10);
 
-        HBox comodinesYTarots = new HBox(comodinesYLetrero, tarots);
+        VBox tarotsYLetrero = new VBox(tarotsLetrero, tarots);
+
+        tarotsYLetrero.setAlignment(Pos.TOP_LEFT);
+        tarotsYLetrero.setSpacing(10);
+
+        HBox comodinesYTarots = new HBox(comodinesYLetrero, tarotsYLetrero);
 
 
         HBox rendirse = new HBox();
@@ -242,79 +247,51 @@ public class App extends Application {
 
 
 
-        ImageView stringPuntajeASuperar = new ImageView(new Image("/puntajeASuperar.png"));
-        stringPuntajeASuperar.setPreserveRatio(true);
-        stringPuntajeASuperar.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.08));
-        stringPuntajeASuperar.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.04));
+        ImageView stringPuntajeASuperar = creadorVisual.crearImageView("puntajeASuperar",contenedorPrincipal, 0.08, 0.04);
+        Label puntajeASuperarMostrado = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(this.rondaActual.obtenerPuntajeASuperar()), "-fx-font-size: 24px; -fx-text-fill: white;");
 
-        Label puntajeASuperarMostrado = new Label();
-        puntajeASuperarMostrado.setText(String.valueOf(this.rondaActual.obtenerPuntajeASuperar()));
-        puntajeASuperarMostrado.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
-
-        HBox puntajeASuperarBox = new HBox(stringPuntajeASuperar, puntajeASuperarMostrado);
+        puntajeASuperarBox.setSpacing(5);
+        puntajeASuperarBox.getChildren().addAll(stringPuntajeASuperar, puntajeASuperarMostrado);
         HBox.setMargin(stringPuntajeASuperar, new Insets(5,5,0,0));
         HBox.setMargin(puntajeASuperarMostrado, new Insets(5,5,0,0));
-        puntajeASuperarBox.setSpacing(5);
 
 
-        ImageView stringpuntajeObtenidos = new ImageView(new Image("/puntajeObtenido.png"));
-        stringpuntajeObtenidos.setPreserveRatio(true);
-        stringpuntajeObtenidos.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.08));
-        stringpuntajeObtenidos.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.04));
+        ImageView stringpuntajeObtenidos = creadorVisual.crearImageView("puntajeObtenido",contenedorPrincipal, 0.08, 0.04);
+        Label puntajesObtenidosMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(this.rondaActual.obtenerPuntajesObtenidos()), "-fx-font-size: 24px; -fx-text-fill: white;");
 
-        Label puntajesObtenidosMostrados = new Label();
-        puntajesObtenidosMostrados.setText(String.valueOf(this.rondaActual.obtenerPuntajesObtenidos()));
-        puntajesObtenidosMostrados.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
-
-        HBox puntajesObtenidosBox = new HBox(stringpuntajeObtenidos, puntajesObtenidosMostrados);
+        puntajesObtenidosBox.setSpacing(5);
+        puntajesObtenidosBox.getChildren().addAll(stringpuntajeObtenidos, puntajesObtenidosMostrados);
         HBox.setMargin(stringpuntajeObtenidos, new Insets(5,5,0,0));
         HBox.setMargin(puntajesObtenidosMostrados, new Insets(5,5,0,0));
-        puntajesObtenidosBox.setSpacing(5);
 
 
-        ImageView stringJugadasRestantes = new ImageView(new Image("/jugadasRestantes.png"));
-        stringJugadasRestantes.setPreserveRatio(true);
-        stringJugadasRestantes.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.08));
-        stringJugadasRestantes.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.04));
+        ImageView stringJugadasRestantes = creadorVisual.crearImageView("jugadasRestantes",contenedorPrincipal, 0.08, 0.04);
+        Label jugadasRestantesMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(this.rondaActual.obtenerJugadasRestantes()), "-fx-font-size: 24px; -fx-text-fill: white;");
 
-        Label jugadasRestantesMostrados = new Label();
-        jugadasRestantesMostrados.setText(String.valueOf(this.rondaActual.obtenerJugadasRestantes()));
-        jugadasRestantesMostrados.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
-
-        HBox jugadasRestantesBox = new HBox(stringJugadasRestantes, jugadasRestantesMostrados);
+        jugadasRestantesBox.getChildren().addAll(stringJugadasRestantes, jugadasRestantesMostrados);
         HBox.setMargin(stringJugadasRestantes, new Insets(5,5,0,0));
-        HBox.setMargin(stringJugadasRestantes, new Insets(5,5,0,0));
+        HBox.setMargin(jugadasRestantesMostrados, new Insets(5,5,0,0));
         jugadasRestantesBox.setSpacing(5);
 
 
-        ImageView stringDescartesRestantes = new ImageView(new Image("/descartesRestantes.png"));
-        stringDescartesRestantes.setPreserveRatio(true);
-        stringDescartesRestantes.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.08));
-        stringDescartesRestantes.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.04));
+        ImageView stringDescartesRestantes = creadorVisual.crearImageView("descartesRestantes",contenedorPrincipal, 0.08, 0.04);
+        Label descartesRestantesMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(this.rondaActual.obtenerDescartesRestantes()), "-fx-font-size: 24px; -fx-text-fill: white;");
 
-        Label descartesRestantesMostrados = new Label();
-        descartesRestantesMostrados.setText(String.valueOf(this.rondaActual.obtenerDescartesRestantes()));
-        descartesRestantesMostrados.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
-
-        HBox descartesRestantesBox = new HBox(stringDescartesRestantes, descartesRestantesMostrados);
+        descartesRestantesBox.getChildren().addAll(stringDescartesRestantes, descartesRestantesMostrados);
         HBox.setMargin(stringDescartesRestantes, new Insets(5,5,0,0));
         HBox.setMargin(descartesRestantesMostrados, new Insets(5,5,0,0));
         descartesRestantesBox.setSpacing(5);
 
 
-        ImageView stringRondaActual = new ImageView(new Image("/rondaActual.png"));
-        stringRondaActual.setPreserveRatio(true);
-        stringRondaActual.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.08));
-        stringRondaActual.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.04));
+        ImageView stringRondaActual = creadorVisual.crearImageView("rondaActual",contenedorPrincipal, 0.08, 0.04);
+        Label rondaActualMostrada = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(9 - this.rondas.size()), "-fx-font-size: 24px; -fx-text-fill: white;");
 
-        Label rondaActualMostrada = new Label();
-        rondaActualMostrada.setText(String.valueOf(this.posRondaActual+1));
-        rondaActualMostrada.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
 
-        HBox rondaActualBox = new HBox(stringRondaActual, rondaActualMostrada);
+        rondaActualBox.getChildren().addAll(stringRondaActual, rondaActualMostrada);
         HBox.setMargin(stringRondaActual, new Insets(5,5,0,0));
         HBox.setMargin(rondaActualMostrada, new Insets(5,5,0,0));
         rondaActualBox.setSpacing(5);
+
 
 
         VBox datosRonda = new VBox(puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox);
@@ -324,58 +301,49 @@ public class App extends Application {
         contenedorPrincipal.setCenter(contenedorDeCartas);
         contenedorPrincipal.setLeft(comodinesYTarots);
         contenedorPrincipal.setRight(datosRonda);
-
+        this.crearTienda(contenedorPrincipal, contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots);
         return new Scene(contenedorPrincipal, 1280, 720);
     }
 
     private void iniciarJuego() {
         this.maxRondas = this.rondas.size();
-        this.posRondaActual = 0;
-        this.rondaActual = this.rondas.get(this.posRondaActual);
+        this.comodinera = new Comodinera();
+        this.tarotera = new Tarotera();
+        this.rondaActual = this.rondas.get(0);
         this.mazo.mezclar();
         cambiarDeEscena(crearEscenaDeJuego());
+//        this.crearTienda(contenedorPrincipal, contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines);
     }
 
-    private void pasarDeRonda() {
-        this.posRondaActual++;
-        if (posRondaActual >= maxRondas) {
+    private void pasarDeRonda(HBox contenedorDeCartas, Pane contenedorPrincipal, HBox puntajeASuperarBox, HBox puntajesObtenidosBox, HBox jugadasRestantesBox, HBox descartesRestantesBox, HBox rondaActualBox, VBox comodines, VBox tarots) {
+        if (rondas.isEmpty()) {
             cambiarDeEscena(crearEscenaDeGanaste());
             return;
         }
         this.seleccionadas.clear();
-        this.rondaActual = this.rondas.get(this.posRondaActual);
+        this.rondas.remove(0);
+        this.rondaActual = this.rondas.get(0);
+        this.crearTienda(contenedorPrincipal, contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots);
         this.mazo.mezclar();
-        cambiarDeEscena(crearEscenaDeJuego());
+        actualizarTablero(contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots);
     }
 
     private Scene crearEscenaDeGanaste() {
         BorderPane contenedorPrincipal = new BorderPane();
-
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new Image("/ganasteFondo.png", true),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(100, 100, true, true, false, false)
-        );
-
-        contenedorPrincipal.setBackground(new Background(backgroundImage));
+        contenedorPrincipal.setBackground(creadorVisual.crearBackground("ganasteFodno", contenedorPrincipal));
 
         VBox medio = new VBox();
 
-        ImageView logo = new ImageView(new Image("/ganasteNombre.png"));
-        logo.setPreserveRatio(true);
-        logo.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.5));
-        logo.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.3));
+        ImageView logo = creadorVisual.crearImageView("ganasteNombre",contenedorPrincipal, 0.5, 0.3);
 
-        Button playButton = this.crearBoton("jugar2", Color.DARKRED, (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
+        Button playButton = creadorDeBotones.crearBoton("jugar2", (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
         medio.getChildren().add(logo);
         medio.getChildren().add(playButton);
         medio.setAlignment(Pos.CENTER);
 
         HBox abajo = new HBox();
 
-        Button exitButton = this.crearBoton("salir2", Color.DARKGREEN, (e -> {
+        Button exitButton = creadorDeBotones.crearBoton("salir2", (e -> {
             Platform.exit();
         }), contenedorPrincipal, 0.2, 0.1);
         abajo.getChildren().add(exitButton);
@@ -391,31 +359,22 @@ public class App extends Application {
 
     private Scene crearEscenaDePerdiste() {
         BorderPane contenedorPrincipal = new BorderPane();
-
-        BackgroundImage backgroundImage = new BackgroundImage(
-                new Image("/perdiste.png", true),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT
-        );
-        contenedorPrincipal.setBackground(new Background(backgroundImage));
+        contenedorPrincipal.setBackground(creadorVisual.crearBackground("perdiste", contenedorPrincipal));
 
         VBox medio = new VBox();
 
-        ImageView logo = new ImageView(new Image("/perdisteNombre.png"));
-        logo.setPreserveRatio(true);
-        logo.fitWidthProperty().bind(contenedorPrincipal.widthProperty().multiply(0.5));
-        logo.fitHeightProperty().bind(contenedorPrincipal.heightProperty().multiply(0.3));
 
-        Button playButton = this.crearBoton("jugar2", Color.DARKRED, (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
+        ImageView logo = creadorVisual.crearImageView("perdisteNombre",contenedorPrincipal, 0.5, 0.3);
+
+        Button playButton = creadorDeBotones.crearBoton("jugar2",
+                (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
         medio.getChildren().add(logo);
         medio.getChildren().add(playButton);
         medio.setAlignment(Pos.CENTER);
 
         HBox abajo = new HBox();
 
-        Button exitButton = this.crearBoton("salir2", Color.DARKGREEN, (e -> {
+        Button exitButton = creadorDeBotones.crearBoton("salir2", (e -> {
             Platform.exit();
         }), contenedorPrincipal, 0.2, 0.1);
         abajo.getChildren().add(exitButton);
@@ -429,17 +388,40 @@ public class App extends Application {
         return new Scene(contenedorPrincipal, 1280, 720);
     }
 
+    private void salirTienda(VBox tienda, HBox contenedorDeCartas, Pane contenedorPrincipal, HBox puntajeASuperarBox, HBox puntajesObtenidosBox, HBox jugadasRestantesBox, HBox descartesRestantesBox, HBox rondaActualBox, VBox comodines, VBox tarots) {
+        tienda.getChildren().clear();
+        tienda.setStyle("");
+        actualizarTablero(contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots);
+    }
 
-//    private void swapView(VBox nuevosComodines) {
-//        VBox newView = new VBox(10);
-//        newView.setAlignment(Pos.CENTER);
-//
-//        Button backButton = new Button("Volver");
-//        backButton.setOnAction(e -> centerArea.getChildren().clear()); // Limpia el área al volver
-//
-//        newView.getChildren().addAll(backButton, new Button("Otra acción"));
-//        centerArea.getChildren().add(newView);
-//    }
+    private void crearTienda(Pane contenedorPricipal, HBox contenedorDeCartas, Pane contenedorPrincipal, HBox puntajeASuperarBox, HBox puntajesObtenidosBox, HBox jugadasRestantesBox, HBox descartesRestantesBox, HBox rondaActualBox, VBox comodines, VBox tarots) {
+        VBox tienda = new VBox();
+        tienda.setBackground(creadorVisual.crearBackground("fondoMenus", tienda));
+
+
+        ArrayList<Comprable> producto = new ArrayList<>();
+        ArrayList<Button> boton = new ArrayList<>();
+
+        HBox botonesTienda = new HBox();
+        Button cerrarTienda = this.creadorDeBotones.crearBoton("Salir", (e -> {
+            this.salirTienda(tienda, contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots);
+        }), contenedorPricipal, 0.5, 0.2);
+        Button comprarTienda = this.creadorDeBotones.crearBoton("Jugar",
+                new TiendaComprarEventHandler(this.comodinera, this.tarotera, this.mazo, producto, () -> salirTienda(tienda, contenedorDeCartas, contenedorPrincipal, puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, comodines, tarots)), contenedorPricipal, 0.5, 0.2);
+
+        botonesTienda.getChildren().addAll(cerrarTienda, comprarTienda);
+
+        HBox comprables = new HBox();
+        ArrayList<Comprable> productos = this.rondaActual.mostrarProductos();
+        for (Comprable productoAComprar : productos) {
+            Button comprable = this.creadorDeBotones.crearBoton(productoAComprar.obtenerNombre(),
+                    null, contenedorPricipal, 0.5, 0.2);
+            comprables.getChildren().add(comprable);
+            comprable.setOnAction(new ComprableApretarEventHandler(productoAComprar, producto, boton,comprable));
+        }
+        tienda.getChildren().addAll(botonesTienda, comprables);
+        contenedorPricipal.getChildren().add(tienda);
+    }
 
     private void cambiarDeEscena(Scene newScene) {
         StagePrincipal.setScene(newScene);

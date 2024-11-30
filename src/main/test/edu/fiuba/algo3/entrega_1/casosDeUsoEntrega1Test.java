@@ -103,7 +103,7 @@ public class casosDeUsoEntrega1Test {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
         Juego juego = Juego.chequearJuego(cartas);
-        Tarot tarot = new CambiadorDePuntos(10);
+        Tarot tarot = new CambiadorDePuntos(10, "");
         mano.modificarCarta(carta1, tarot);
         // Act
         Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, new Comodinera());
@@ -122,7 +122,7 @@ public class casosDeUsoEntrega1Test {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
         Juego juego = Juego.chequearJuego(cartas);
-        Tarot tarot = new CambiadorDeMultiplicador(6);
+        Tarot tarot = new CambiadorDeMultiplicador(6, "");
         mano.modificarCarta(carta3, tarot);
         // Act
         Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, new Comodinera());

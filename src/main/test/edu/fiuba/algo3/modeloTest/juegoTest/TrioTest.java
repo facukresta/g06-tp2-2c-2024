@@ -117,7 +117,7 @@ public class TrioTest {
     @Test
     public void test07AUnJuegoTrioSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Trio());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Trio(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(42,8);
         // Act
@@ -134,7 +134,7 @@ public class TrioTest {
     @Test
     public void test08AUnJuegoTrioSeLeAplicaUnTarotCambiadorDeMultiplicadorTrioaTrioNoLoModifica() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(42,3);
         // Act
@@ -150,7 +150,7 @@ public class TrioTest {
     @Test
     public void test09AUnJuegoTrioSeLeAplicaUnTarotCambiadorDePuntosDeTrioDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new Trio());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(12, new Trio(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(24,3);
         // Act
@@ -167,7 +167,7 @@ public class TrioTest {
     @Test
     public void test10AUnJuegoTrioSeLeAplicaUnTarotCambiadorDePuntosDeDobleTrioDeOchoPuntosNoDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new DoblePar());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new DoblePar(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(42,3);
         // Act
@@ -183,7 +183,7 @@ public class TrioTest {
     @Test
     public void test11AUnJuegoTrioSeLeAplicaUnTarotSumadorDeTrioDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(2,2, new Trio());
+        Tarot tarotSumador = new Sumador(2,2, new Trio(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(44,5);
         // Act
@@ -199,7 +199,7 @@ public class TrioTest {
     @Test
     public void test12AUnJuegoTrioSeLeAplicaUnTarotSumadorDeTrioDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8,2, new Escalera());
+        Tarot tarotSumador = new Sumador(8,2, new Escalera(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(42,3);
         // Act

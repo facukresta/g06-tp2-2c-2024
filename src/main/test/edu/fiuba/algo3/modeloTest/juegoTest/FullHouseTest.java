@@ -109,7 +109,7 @@ public class FullHouseTest {
     @Test
     public void test07AUnJuegoFullHouseSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new FullHouse());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new FullHouse(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(78, 8);
         // Act
@@ -126,7 +126,7 @@ public class FullHouseTest {
     @Test
     public void test08AUnJuegoFullHouseSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Escalera(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(78, 4);
         // Act
@@ -144,7 +144,7 @@ public class FullHouseTest {
     @Test
     public void test09AUnJuegoFullHouseSeLeAplicaUnTarotCambiadorDePuntosDeFullHouseDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(100, new FullHouse());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(100, new FullHouse(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(138, 4);
         // Act
@@ -162,7 +162,7 @@ public class FullHouseTest {
     @Test
     public void test10AUnJuegoFullHouseSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(78, 4);
         // Act
@@ -179,7 +179,7 @@ public class FullHouseTest {
     @Test
     public void test11AUnJuegoFullHouseSeLeAplicaUnTarotSumadorDeFullHouseDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8, 2, new FullHouse());
+        Tarot tarotSumador = new Sumador(8, 2, new FullHouse(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(86, 6);
         // Act
@@ -196,7 +196,7 @@ public class FullHouseTest {
     @Test
     public void test12AUnJuegoFullHouseSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8, 2, new Escalera());
+        Tarot tarotSumador = new Sumador(8, 2, new Escalera(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(78, 4);
         // Act

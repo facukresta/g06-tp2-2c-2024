@@ -97,7 +97,7 @@ public class ColorTest {
     @Test
     public void test07AUnJuegoColorSeLeAplicaUnTarotCambiadorDeMultiplicadorDeOchoMultiplicadorDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Color());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Color(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(72, 8);
         // Act
@@ -113,7 +113,7 @@ public class ColorTest {
     @Test
     public void test08AUnJuegoColorSeLeAplicaUnTarotCambiadorDeMultiplicadorParaParNoLoModifica() {
         // Arrange
-        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Par());
+        Tarot tarotCambiadorDeMultiplicador = new CambiadorDeMultiplicador(8, new Par(), "");
         Juego.aplicarTarot(tarotCambiadorDeMultiplicador);
         Puntaje puntajeEsperado = new Puntaje(72, 4);
         // Act
@@ -129,7 +129,7 @@ public class ColorTest {
     @Test
     public void test09AUnJuegoColorSeLeAplicaUnTarotCambiadorDePuntosDeColorDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Color());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Color(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(45, 4);
         // Act
@@ -145,7 +145,7 @@ public class ColorTest {
     @Test
     public void test10AUnJuegoColorSeLeAplicaUnTarotCambiadorDePuntosDeParDeOchoPuntosNoDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par());
+        Tarot tarotCambiadorDePuntos = new CambiadorDePuntos(8, new Par(), "");
         Juego.aplicarTarot(tarotCambiadorDePuntos);
         Puntaje puntajeEsperado = new Puntaje(72, 4);
         // Act
@@ -161,7 +161,7 @@ public class ColorTest {
     @Test
     public void test11AUnJuegoColorSeLeAplicaUnTarotSumadorDeColorDeOchoPuntosDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8, 2, new Color());
+        Tarot tarotSumador = new Sumador(8, 2, new Color(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(80, 6);
         // Act
@@ -177,7 +177,7 @@ public class ColorTest {
     @Test
     public void test12AUnJuegoColorSeLeAplicaUnTarotSumadorDeParDeOchoPuntosNoSeDevuelveEsePuntajeModificado() {
         // Arrange
-        Tarot tarotSumador = new Sumador(8, 2, new Par());
+        Tarot tarotSumador = new Sumador(8, 2, new Par(), "");
         Juego.aplicarTarot(tarotSumador);
         Puntaje puntajeEsperado = new Puntaje(72, 4);
         // Act

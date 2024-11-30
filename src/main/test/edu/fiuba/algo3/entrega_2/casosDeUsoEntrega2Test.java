@@ -284,12 +284,12 @@ public class casosDeUsoEntrega2Test {
                 String ejemplar = (String)cartaJson.get("ejemplar");
                 if (sobre.equals("carta")) {
                     if (puntos == 1) {
-                        listaDeTarots.add(new CambiadorDeMultiplicador(multiplicador));
+                        listaDeTarots.add(new CambiadorDeMultiplicador(multiplicador,""));
                     } else {
-                        listaDeTarots.add(new CambiadorDePuntos(puntos));
+                        listaDeTarots.add(new CambiadorDePuntos(puntos, ""));
                     }
                 } else if (sobre.equals("mano")) {
-                    listaDeTarots.add(new Sumador(puntos, multiplicador, mapaDeManos.get(ejemplar)));
+                    listaDeTarots.add(new Sumador(puntos, multiplicador, mapaDeManos.get(ejemplar), ""));
                 }
             }
         } catch (Exception e) {
@@ -304,11 +304,11 @@ public class casosDeUsoEntrega2Test {
         boolean resultadoComparacion = true;
 
         ArrayList<Tarot> tarotsQueDeberianEstar = new ArrayList<>(List.of(
-            new Sumador(10, 2, new CartaAlta()),new Sumador(15, 2, new Par()),new Sumador(20, 2, new DoblePar()),
-                new CambiadorDeMultiplicador(4) ,new Sumador(20, 2, new Trio()), new CambiadorDePuntos(40),
-                new Sumador(30, 3, new Escalera()), new CambiadorDeMultiplicador(1.5), new CambiadorDeMultiplicador(2),
-                new Sumador(15,2, new Color()), new Sumador(25,2, new FullHouse()), new Sumador(30 ,3,new Poker()),
-                new Sumador(40, 4, new EscaleraDeColor()), new Sumador(50,5, new EscaleraReal()), new CambiadorDePuntos(50)
+            new Sumador(10, 2, new CartaAlta(), ""),new Sumador(15, 2, new Par(), ""),new Sumador(20, 2, new DoblePar(), ""),
+                new CambiadorDeMultiplicador(4, "") ,new Sumador(20, 2, new Trio(), ""), new CambiadorDePuntos(40, ""),
+                new Sumador(30, 3, new Escalera(), ""), new CambiadorDeMultiplicador(1.5, ""), new CambiadorDeMultiplicador(2, ""),
+                new Sumador(15,2, new Color(), ""), new Sumador(25,2, new FullHouse(), ""), new Sumador(30 ,3,new Poker(), ""),
+                new Sumador(40, 4, new EscaleraDeColor(), ""), new Sumador(50,5, new EscaleraReal(), ""), new CambiadorDePuntos(50, "")
         ));
 
         if(tarots.size() != tarotsQueDeberianEstar.size()){

@@ -293,4 +293,17 @@ public class SumaPuntosTest {
         // Assert
         assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
     }
+
+    @Test
+    public void test22AlAplicarUnComodinDeSumaPuntosConJuegoPokerEsteNoSumaSiElJuegoNoEsPoker(){
+        // Arrange
+        Comodin comodin = new SumaPuntos(5, new Poker(), "");
+        Puntaje puntajeAModificar = new Puntaje(10, 2);
+        Puntaje puntajeEsperado = new Puntaje(10, 2);
+
+        // Act
+        comodin.aplicarModificador(puntajeAModificar, new CartaAlta());
+        // Assert
+        assertTrue(puntajeAModificar.tenesMismoPuntaje(puntajeEsperado));
+    }
 }

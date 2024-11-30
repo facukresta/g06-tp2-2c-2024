@@ -17,7 +17,7 @@ public class CambiadorDeComodines {
     private Comodinera comodinera;
     private VBox vbox;
     private Pane contenedorPrincipal;
-    private CreadorDeBotonesComodines creador = new CreadorDeBotonesComodines();
+    private CreadorDeBotones creador = new CreadorDeBotones();
 
     public CambiadorDeComodines(Comodinera comodinera, VBox vbox, Pane contenedorPrincipal) {
         this.comodinera = comodinera;
