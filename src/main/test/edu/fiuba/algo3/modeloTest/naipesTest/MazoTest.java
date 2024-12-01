@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modeloTest;
+package edu.fiuba.algo3.modeloTest.naipesTest;
 
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.naipes.*;

@@ -1,7 +1,6 @@
-package edu.fiuba.algo3.modeloTest;
+package edu.fiuba.algo3.modeloTest.tiendaTest;
 
 import edu.fiuba.algo3.modelo.comodin.Modificador;
-import edu.fiuba.algo3.modelo.comodin.SumaPuntos;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.tienda.ProductoNoEnTiendaException;
@@ -15,7 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-public class TiendaTest {
+public class TiendaBalatroTest {
     @Test
     public void test01UnaTiendaSinNingunObjetoNoSeLePuedeComprarNada() {
         // Arrange

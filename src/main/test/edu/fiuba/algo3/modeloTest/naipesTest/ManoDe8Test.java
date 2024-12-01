@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modeloTest;
+package edu.fiuba.algo3.modeloTest.naipesTest;
 
 import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.comodin.*;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.*;
 
-public class ManoTest {
+public class ManoDe8Test {
     @Test
     public void test01AlCrearUnaManoEstaDebeEstarVacia(){
         // Arrange

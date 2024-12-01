@@ -1,6 +1,5 @@
-package edu.fiuba.algo3.modeloTest;
+package edu.fiuba.algo3.modeloTest.puntajeTest;
 
-import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.puntaje.*;
 import org.junit.jupiter.api.Test;
 

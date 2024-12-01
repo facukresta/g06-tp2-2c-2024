@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modeloTest.cartaTest;
+package edu.fiuba.algo3.modeloTest.naipesTest.cartaTest;
 
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 
-public class CartaTest {
+public class CartaInglesaTest {
     @Test
     public void test01UnaCartaCreadaConNumero10YPaloCorazonTienePuntaje10(){
         // Arrange

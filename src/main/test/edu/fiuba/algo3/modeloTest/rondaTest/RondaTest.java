@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modeloTest;
+package edu.fiuba.algo3.modeloTest.rondaTest;
 
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
