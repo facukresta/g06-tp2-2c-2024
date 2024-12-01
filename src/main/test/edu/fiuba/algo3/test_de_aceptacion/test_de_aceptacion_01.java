@@ -27,7 +27,10 @@ public class test_de_aceptacion_01 {
 
         Mazo mazo = new Mazo();
 
-        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(new CartaInglesa(2, new Corazon()), new CartaInglesa(2, new Pica())));
+        Carta carta1 = new CartaInglesa(2, new Corazon());
+        Carta carta2 = new CartaInglesa(2, new Pica());
+
+        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta1, carta2));
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Trebol()),
                 new CartaInglesa(9, new Corazon()), new CartaInglesa(5, new Trebol()), new CartaInglesa(10, new Pica()),
                 new CartaInglesa(13, new Diamante()), new CartaInglesa(12, new Diamante())));
@@ -39,27 +42,30 @@ public class test_de_aceptacion_01 {
 
         ronda.obtenerCartas();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class))));
+        ronda.seleccionarCarta(carta1);
+        ronda.seleccionarCarta(carta2);
 
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(new SumaPuntos(100, new Par(), ""));
         comodinera.agregarComodin(new SumaPuntosDescarte(50, "" ));
 
-        Juego juego = Juego.chequearJuego(cartasSeleccionadas);
-
         assertEquals(ronda.obtenerPuntajesObtenidos(), 0);
 
-        ronda.jugarMano(cartasSeleccionadas, juego, comodinera);
+        ronda.jugarMano(comodinera);
 
         assertEquals(ronda.obtenerPuntajesObtenidos(), 228);
     }
-
 
     @Test
     public void test02(){
 
         Mazo mazo = new Mazo();
 
-        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(new CartaInglesa(2, new Corazon())));
+        Carta carta1 = new CartaInglesa(2, new Corazon());
+        Carta carta2 = new CartaInglesa(2, new Pica());
+
+        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta1, carta2));
+
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Trebol()),
                 new CartaInglesa(9, new Corazon()), new CartaInglesa(5, new Trebol()), new CartaInglesa(10, new Pica()),
                 new CartaInglesa(13, new Diamante()), new CartaInglesa(12, new Diamante()), new CartaInglesa(2, new Pica())));
@@ -71,16 +77,16 @@ public class test_de_aceptacion_01 {
 
         ronda.obtenerCartas();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class))));
+        ronda.seleccionarCarta(carta1);
 
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(new SumaPuntos(100, new Par(), ""));
         comodinera.agregarComodin(new SumaPuntosDescarte(50, "" ));
 
-        Juego juego = Juego.chequearJuego(cartasSeleccionadas);
 
         assertEquals(ronda.obtenerPuntajesObtenidos(), 0);
 
-        ronda.jugarMano(cartasSeleccionadas, juego, comodinera);
+        ronda.jugarMano(comodinera);
 
         assertEquals(ronda.obtenerPuntajesObtenidos(), 7);
     }
@@ -90,7 +96,11 @@ public class test_de_aceptacion_01 {
 
         Mazo mazo = new Mazo();
 
-        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(new CartaInglesa(2, new Corazon())));
+        Carta carta1 = new CartaInglesa(2, new Corazon());
+        Carta carta2 = new CartaInglesa(2, new Pica());
+
+        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta1, carta2));
+
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Trebol()),
                 new CartaInglesa(9, new Corazon()), new CartaInglesa(5, new Trebol()), new CartaInglesa(10, new Pica()),
                 new CartaInglesa(13, new Diamante()), new CartaInglesa(12, new Diamante()), new CartaInglesa(2, new Pica())));
@@ -102,6 +112,8 @@ public class test_de_aceptacion_01 {
 
         ronda.obtenerCartas();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class))));
+        ronda.seleccionarCarta(carta1);
+        ronda.seleccionarCarta(carta2);
 
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(new SumaPuntos(100, new Par(), ""));
@@ -110,9 +122,7 @@ public class test_de_aceptacion_01 {
         Juego juego = Juego.chequearJuego(cartasSeleccionadas);
 
         assertEquals(ronda.obtenerPuntajesObtenidos(), 0);
-
-        ronda.descartarMano(cartasSeleccionadas, juego, comodinera);
-
+        ronda.descartarMano(comodinera);
         assertEquals(ronda.obtenerPuntajesObtenidos(), 50);
     }
 }

@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.naipes;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
+import edu.fiuba.algo3.modelo.comodin.Modificador;
 import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.juego.SinJuego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
@@ -10,10 +12,16 @@ import java.util.ArrayList;
 public class ManoDe8 implements Mano {
     private ArrayList<Carta> cartas;
     private final int maxCartas;
+    private ArrayList<Carta> cartasSeleccionadas;
+    private int maxCartasSeleccionadas;
+    private Juego juego;
 
     public ManoDe8() {
         this.cartas = new ArrayList<>();
         this.maxCartas = 8;
+        this.cartasSeleccionadas = new ArrayList<>();
+        this.maxCartasSeleccionadas = 5;
+        this.juego = new SinJuego();
     }
 
     public void agregarCarta(Carta carta) {
@@ -42,7 +50,7 @@ public class ManoDe8 implements Mano {
         }
     }
 
-    public Puntaje descartarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera) {
+    public Puntaje descartarMano(Comodinera comodinera) {
         if (cartasSeleccionadas.isEmpty()) {
             throw new SinCartasSeleccionadasException();
         }
@@ -54,7 +62,7 @@ public class ManoDe8 implements Mano {
         return puntaje;
     }
 
-    public Puntaje jugarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera){
+    public Puntaje jugarMano(Comodinera comodinera){
         if (cartasSeleccionadas.isEmpty()) {
             throw new SinCartasSeleccionadasException();
         }
@@ -95,6 +103,20 @@ public class ManoDe8 implements Mano {
 
     public void modificarJuego(Tarot tarot){
         Juego.aplicarTarot(tarot);
+    }
+
+    public void seleccionarCarta(Carta carta) {
+        if (!this.cartas.contains(carta)) {
+            throw new CartaNoEnManoException();
+        }
+        if (this.cartasSeleccionadas.contains(carta)) {
+            this.cartasSeleccionadas.remove(carta);
+        } else {
+            if (this.cartasSeleccionadas.size() != 5) {
+                this.cartasSeleccionadas.add(carta);
+            }
+        }
+        this.juego = Juego.chequearJuego(cartasSeleccionadas);
     }
 }
 

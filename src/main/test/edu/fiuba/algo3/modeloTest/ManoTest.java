@@ -136,31 +136,41 @@ public class ManoTest {
     }
 
     @Test
-    public void test10AlElegirSeisCartasLaManoDeberiaLanzarError(){
+    public void test10AlElegir6CartasYJugarLaManoSoloSeJueganLasCincoPrimeras() {
         // Arrange
         Mano mano = new ManoDe8();
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2,new Corazon()), new CartaInglesa(3,new Corazon()),
-                new CartaInglesa(4,new Corazon()), new CartaInglesa(6,new Corazon()), new CartaInglesa(8,new Corazon()),
-                new CartaInglesa(11,new Corazon())));
+        Puntaje puntajeEsperado = new Puntaje(39,1);
+        Carta carta1 = new CartaInglesa(5, new Trebol());
+        Carta carta2 = new CartaInglesa(7, new Diamante());
+        Carta carta3 = new CartaInglesa(3, new Corazon());
+        Carta carta4 = new CartaInglesa(1, new Pica());
+        Carta carta5 = new CartaInglesa(9, new Trebol());
+        Carta carta6 = new CartaInglesa(10, new Trebol());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5, carta6));
         mano.agregarCartas(cartas);
-        Juego juego = Juego.chequearJuego(cartas);
-        // Act / Assert
-        assertThrows(MaximoCartasSeleccionadasException.class, () -> {
-            mano.jugarMano(cartas, juego, new Comodinera());
-        });
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
+        mano.seleccionarCarta(carta4);
+        mano.seleccionarCarta(carta5);
+        mano.seleccionarCarta(carta6);
+        // Act
+        Puntaje puntajeObtenido = mano.jugarMano(new Comodinera());
+        // Assert
+        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
 
     @Test
-    public void test11LanzaErrorSiSeJugarUnaCartaQueNoEstaEnLaMano(){
+    public void test11LanzaErrorSiSeAgregaUnaCartaQueNoEstaEnLaMano(){
         // Arrange
         Mano mano = new ManoDe8();
         Carta cartaEnLaMano = mock(Carta.class);
-        ArrayList<Carta> cartaNoEstaEnLaManoDe5 = new ArrayList<>(List.of(new CartaInglesa(7, new Trebol())));
+        Carta cartaNoEstaEnLaMano = new CartaInglesa(7, new Trebol());
         mano.agregarCarta(cartaEnLaMano);
-        Juego juego = Juego.chequearJuego(cartaNoEstaEnLaManoDe5);
+
         // Act / Assert
         assertThrows(CartaNoEnManoException.class, () -> {
-            mano.jugarMano(cartaNoEstaEnLaManoDe5, juego, new Comodinera());
+            mano.seleccionarCarta(cartaNoEstaEnLaMano);
         });
     }
 
@@ -169,11 +179,11 @@ public class ManoTest {
         // Arrange
         Mano mano = new ManoDe8();
         Puntaje puntajeEsperado = new Puntaje(10,1);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Trebol())));
-        mano.agregarCartas(cartas);
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(5, new Trebol());
+        mano.agregarCartas(new ArrayList<Carta>(List.of(carta1)));
+        mano.seleccionarCarta(carta1);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, new Comodinera());
+        Puntaje puntajeObtenido = mano.jugarMano(new Comodinera());
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -183,15 +193,24 @@ public class ManoTest {
         // Arrange
         Mano mano = new ManoDe8();
         Puntaje puntajeEsperado = new Puntaje(39,1);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Trebol()), new CartaInglesa(7, new Diamante())
-        , new CartaInglesa(3, new Corazon()), new CartaInglesa(1, new Pica()), new CartaInglesa(9, new Trebol())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(5, new Trebol());
+        Carta carta2 = new CartaInglesa(7, new Diamante());
+        Carta carta3 = new CartaInglesa(3, new Corazon());
+        Carta carta4 = new CartaInglesa(1, new Pica());
+        Carta carta5 = new CartaInglesa(9, new Trebol());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
+        mano.seleccionarCarta(carta4);
+        mano.seleccionarCarta(carta5);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, new Comodinera());
+        Puntaje puntajeObtenido = mano.jugarMano(new Comodinera());
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
+
     @Test
     public void test14AlJugarUnaManoConDosCartasYUnComodinDeSumaMultiplicadorDevuelveElValorDelPuntajeDeLaManoMasEseMultiplicador() {
         // Arrange
@@ -200,11 +219,14 @@ public class ManoTest {
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(17,4);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Trebol()), new CartaInglesa(7, new Diamante())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(5, new Trebol());
+        Carta carta2 = new CartaInglesa(7, new Diamante());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido = mano.jugarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -217,13 +239,17 @@ public class ManoTest {
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(36,19);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         comodinera.agregarComodin(comodin2);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido = mano.jugarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -236,13 +262,17 @@ public class ManoTest {
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(36,19);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         comodinera.agregarComodin(comodin2);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego,comodinera);
+        Puntaje puntajeObtenido = mano.jugarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -254,12 +284,16 @@ public class ManoTest {
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(4,1);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         // Act
-        Puntaje puntajeObtenido = mano.descartarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido = mano.descartarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -272,13 +306,17 @@ public class ManoTest {
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
         Puntaje puntajeEsperado = new Puntaje(16,1);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         comodinera.agregarComodin(comodin2);
         // Act
-        Puntaje puntajeObtenido = mano.descartarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido = mano.descartarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -290,12 +328,16 @@ public class ManoTest {
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(0,1);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         // Act
-        Puntaje puntajeObtenido = mano.descartarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido = mano.descartarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -307,12 +349,16 @@ public class ManoTest {
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         Puntaje puntajeEsperado = new Puntaje(36,3);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido = mano.jugarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -322,30 +368,38 @@ public class ManoTest {
         Mano mano = new ManoDe8();
         Tarot tarot = new Sumador(40, 15,new Par(), "");
         Puntaje puntajeEsperado = new Puntaje(54,17);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
         mano.agregarCartas(cartas);
         mano.modificarJuego(tarot);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, new Comodinera());
+        Puntaje puntajeObtenido = mano.jugarMano(new Comodinera());
         // Assert
         Tarot tarot1 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot1);
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
+
     @Test
     public void test21AlModificarUnJuegoConTarotSumadorYNoJugarEsteJuegoEsteNoDevulveElValorModificado() {
         // Arrange
         Mano mano = new ManoDe8();
         Tarot tarot = new Sumador(40, 15,new Par(), "");
         Puntaje puntajeEsperado = new Puntaje(36,3);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         mano.modificarJuego(tarot);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, new Comodinera());
+        Puntaje puntajeObtenido = mano.jugarMano(new Comodinera());
         // Assert
         Tarot tarot1 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot1);
@@ -358,15 +412,19 @@ public class ManoTest {
         Comodin comodin1 = new SumaPuntos(40, "");
         Comodin comodin2 = new SumaPuntosDescarte(50, "");
         Puntaje puntajeEsperado = new Puntaje(76,3);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
         comodinera.agregarComodin(comodin2);
         // Act
-        Puntaje puntajeObtenido = mano.jugarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido = mano.jugarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -377,17 +435,20 @@ public class ManoTest {
         Comodin comodin1 = new SumaPuntos(40, "");
         Comodin comodin2 = new SumaPuntosDescarte(50, "");
         Puntaje puntajeEsperado = new Puntaje(50,1);
-        ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(2, new Trebol()), new CartaInglesa(2, new Diamante()),
-                new CartaInglesa(2, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartas);
+        Carta carta1 = new CartaInglesa(2, new Trebol());
+        Carta carta2 = new CartaInglesa(2, new Diamante());
+        Carta carta3 = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3));
         mano.agregarCartas(cartas);
+        mano.seleccionarCarta(carta1);
+        mano.seleccionarCarta(carta2);
+        mano.seleccionarCarta(carta3);
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
         comodinera.agregarComodin(comodin2);
         // Act
-        Puntaje puntajeObtenido = mano.descartarMano(cartas, juego, comodinera);
+        Puntaje puntajeObtenido = mano.descartarMano(comodinera);
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
-
 }

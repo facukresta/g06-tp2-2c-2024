@@ -46,8 +46,8 @@ public class Ronda {
         return (!pasoLaRonda() && manos > 0);
     }
 
-    public void jugarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera) {
-        puntajesObtenidos.add(mano.jugarMano(cartasSeleccionadas, juego, comodinera));
+    public void jugarMano(Comodinera comodinera) {
+        puntajesObtenidos.add(mano.jugarMano(comodinera));
         this.manos--;
         if (pasoLaRonda()) {
             throw new PasoLaRondaException();
@@ -56,9 +56,9 @@ public class Ronda {
         }
         mano.agregarCartas(mazo.repartirCartas(8-mano.obtenerCantidadDeCartas()));
     }
-    public void descartarMano(ArrayList<Carta> cartasSeleccionadas, Juego juego, Comodinera comodinera) {
+    public void descartarMano(Comodinera comodinera) {
         if (this.descartes != 0) {
-            puntajesObtenidos.add(mano.descartarMano(cartasSeleccionadas, juego, comodinera));
+            puntajesObtenidos.add(mano.descartarMano(comodinera));
             this.descartes--;
             if (pasoLaRonda()) {
                 throw new PasoLaRondaException();
@@ -108,6 +108,10 @@ public class Ronda {
 
     public ArrayList<Comprable> mostrarProductos() {
         return this.tienda.mostrarProductos();
+    }
+
+    public void seleccionarCarta(Carta carta) {
+        this.mano.seleccionarCarta(carta);
     }
 }
 

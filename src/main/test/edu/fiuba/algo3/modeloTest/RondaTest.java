@@ -4,10 +4,7 @@ import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
-import edu.fiuba.algo3.modelo.naipes.carta.CartaInglesa;
-import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
-import edu.fiuba.algo3.modelo.naipes.carta.Trebol;
+import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.ronda.*;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
@@ -75,10 +72,10 @@ public class RondaTest {
     public void test08SiUnaRondaSeCreaConUnPuntajeBaseDe1AlJugarUnaManoDeCualquierCartaDebePasarLaRonda() {
         // Arrange
         Mazo mazo = new Mazo();
-        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(new CartaInglesa(2, new Corazon()),
+        Carta carta = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta,
                 new CartaInglesa(3, new Corazon()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(5, new Corazon()), new CartaInglesa(6, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartasSeleccionadas);
         Comodinera comodinera = new Comodinera();
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Trebol()),
                 new CartaInglesa(3, new Trebol()), new CartaInglesa(5, new Trebol())));
@@ -87,18 +84,20 @@ public class RondaTest {
         Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 3, mazo, mock(Tienda.class));
         // Act /  Assert
         ronda.obtenerCartas();
+        ronda.seleccionarCarta(carta);
         assertThrows(PasoLaRondaException.class, () -> {
-            ronda.jugarMano(cartasSeleccionadas, juego, comodinera);
+            ronda.jugarMano(comodinera);
         });
+
     }
     @Test
     public void test09SiUnaRondaSeQuedaSinManosYNoPasoElPuntajeDebePerderLaRonda() {
         // Arrange
         Mazo mazo = new Mazo();
-        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(new CartaInglesa(2, new Corazon()),
+        Carta carta = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta,
                 new CartaInglesa(3, new Corazon()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(5, new Corazon()), new CartaInglesa(6, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartasSeleccionadas);
         Comodinera comodinera = new Comodinera();
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Trebol()),
                 new CartaInglesa(3, new Trebol()), new CartaInglesa(5, new Trebol())));
@@ -107,18 +106,19 @@ public class RondaTest {
         Ronda ronda = new Ronda(new Puntaje(1000, 1), 1, 3, mazo, mock(Tienda.class));
         // Act /  Assert
         ronda.obtenerCartas();
+        ronda.seleccionarCarta(carta);
         assertThrows(PerdioLaRondaException.class, () -> {
-            ronda.jugarMano(cartasSeleccionadas, juego, comodinera);
+            ronda.jugarMano(comodinera);
         });
     }
     @Test
     public void test10SiUnaRondaSeQuedaSinManoPeroPasoElPuntajeDebePasarLaRonda() {
         // Arrange
         Mazo mazo = new Mazo();
-        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(new CartaInglesa(2, new Corazon()),
+        Carta carta = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta,
                 new CartaInglesa(3, new Corazon()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(5, new Corazon()), new CartaInglesa(6, new Corazon())));
-        Juego juego = Juego.chequearJuego(cartasSeleccionadas);
         Comodinera comodinera = new Comodinera();
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Trebol()),
                 new CartaInglesa(3, new Trebol()), new CartaInglesa(5, new Trebol())));
@@ -127,15 +127,17 @@ public class RondaTest {
         Ronda ronda = new Ronda(new Puntaje(1, 1), 1, 3, mazo, mock(Tienda.class));
         // Act /  Assert
         ronda.obtenerCartas();
+        ronda.seleccionarCarta(carta);
         assertThrows(PasoLaRondaException.class, () -> {
-            ronda.jugarMano(cartasSeleccionadas, juego, comodinera);
+            ronda.jugarMano(comodinera);
         });
     }
     @Test
     public void test11SiUnaRondaSeQuedaSinDescartesNoPuedeDescartarMasPorLoPeroNoPierdeLaRonda() {
         // Arrange
         Mazo mazo = new Mazo();
-        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(new CartaInglesa(2, new Corazon()),
+        Carta carta = new CartaInglesa(2, new Corazon());
+        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta,
                 new CartaInglesa(3, new Corazon()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(5, new Corazon()), new CartaInglesa(6, new Corazon())));
         Juego juego = Juego.chequearJuego(cartasSeleccionadas);
@@ -147,13 +149,12 @@ public class RondaTest {
         Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, mock(Tienda.class));
         // Act
         ronda.obtenerCartas();
+        ronda.seleccionarCarta(carta);
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
-        ronda.descartarMano(cartasSeleccionadas, juego, comodinera);
+        ronda.descartarMano(comodinera);
         // Assert
-        juego = Juego.chequearJuego(cartas);
-        Juego finalJuego = juego;
         assertDoesNotThrow(() -> {
-            ronda.descartarMano(cartas, finalJuego, comodinera);
+            ronda.descartarMano(comodinera);
         });
     }
     @Test
