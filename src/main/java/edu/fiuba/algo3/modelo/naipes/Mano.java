@@ -17,9 +17,9 @@ public interface Mano {
 
     void quitarCartas(ArrayList<Carta> cartas);
 
-    Puntaje descartarMano(Comodinera comodinera);
+    Puntaje descartarMano(Seleccionadas cartasSeleccionadas, Comodinera comodinera);
 
-    Puntaje jugarMano(Comodinera comodinera);
+    Puntaje jugarMano(Seleccionadas cartasSeleccionadas, Comodinera comodinera);
 
     int obtenerCantidadDeCartas();
 
@@ -30,6 +30,4 @@ public interface Mano {
     void modificarJuego(Tarot tarot);
 
     ArrayList<Carta> obtenerCartas();
-
-    public void seleccionarCarta(Carta carta);
 }

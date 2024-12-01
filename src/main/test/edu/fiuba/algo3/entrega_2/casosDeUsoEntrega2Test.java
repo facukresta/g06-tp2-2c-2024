@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.Mano;
 import edu.fiuba.algo3.modelo.naipes.ManoDe8;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
+import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
@@ -53,23 +54,23 @@ public class casosDeUsoEntrega2Test {
         Puntaje puntajeEsperado = new Puntaje(54,7);
         Comodin comodin = new SumaMultiplicador(3, new Escalera(), "");
         Mano mano = new ManoDe8();
+        Seleccionadas seleccionadas = new Seleccionadas();
         Carta carta1 = new CartaInglesa(1, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Trebol());
         Carta carta3 = new CartaInglesa(3, new Pica());
         Carta carta4 = new CartaInglesa(4, new Corazon());
         Carta carta5 = new CartaInglesa(5, new Trebol());
-        mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
-
-        mano.seleccionarCarta(carta1);
-        mano.seleccionarCarta(carta2);
-        mano.seleccionarCarta(carta3);
-        mano.seleccionarCarta(carta4);
-        mano.seleccionarCarta(carta5);
-
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
+        mano.agregarCartas(cartas);
+        seleccionadas.seleccionarCarta(carta1);
+        seleccionadas.seleccionarCarta(carta2);
+        seleccionadas.seleccionarCarta(carta3);
+        seleccionadas.seleccionarCarta(carta4);
+        seleccionadas.seleccionarCarta(carta5);
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
         //Act
-        Puntaje puntajeObtenido = mano.jugarMano(comodinera);
+        Puntaje puntajeObtenido = mano.jugarMano(seleccionadas, comodinera);
         //Assert
         assertEquals(puntajeObtenido.calcularPuntaje(), puntajeEsperado.calcularPuntaje());
 //        assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
@@ -81,21 +82,23 @@ public class casosDeUsoEntrega2Test {
         Puntaje puntajeEsperado = new Puntaje(10,1);
         Comodin comodin = new SumaPuntosDescarte(10, "");
         Mano mano = new ManoDe8();
+        Seleccionadas seleccionadas = new Seleccionadas();
         Carta carta1 = new CartaInglesa(1, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Trebol());
         Carta carta3 = new CartaInglesa(3, new Pica());
         Carta carta4 = new CartaInglesa(4, new Corazon());
         Carta carta5 = new CartaInglesa(5, new Trebol());
-        mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5)));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2, carta3, carta4, carta5));
+        mano.agregarCartas(cartas);
+        seleccionadas.seleccionarCarta(carta1);
+        seleccionadas.seleccionarCarta(carta2);
+        seleccionadas.seleccionarCarta(carta3);
+        seleccionadas.seleccionarCarta(carta4);
+        seleccionadas.seleccionarCarta(carta5);
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
-        mano.seleccionarCarta(carta1);
-        mano.seleccionarCarta(carta2);
-        mano.seleccionarCarta(carta3);
-        mano.seleccionarCarta(carta4);
-        mano.seleccionarCarta(carta5);
         //Act
-        Puntaje puntajeObtenido = mano.descartarMano(comodinera);
+        Puntaje puntajeObtenido = mano.descartarMano(seleccionadas, comodinera);
         //Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -104,10 +107,12 @@ public class casosDeUsoEntrega2Test {
     public void test04ElJugadorConUnComodinConChancesDeAplicarUnModificadorDe1Sobre1000ConEfectoDeSumaDeMultiplicadorAplicaEseEfectoCuandoLasProbabilidadesEstanDadas(){
         //Arrange
         Mano mano = new ManoDe8();
+        Seleccionadas seleccionadas = new Seleccionadas();
         Carta carta1 = new CartaInglesa(7, new Trebol());
         Carta carta2 = new CartaInglesa(7, new Corazon());
-        mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2)));
-        mano.seleccionarCarta(carta1);
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
+        mano.agregarCartas(cartas);
+        seleccionadas.seleccionarCarta(carta1);
         Ejecucion aleatorioMock = mock(Aleatorio.class);
         doAnswer(invocation -> {
             return null;
@@ -118,9 +123,8 @@ public class casosDeUsoEntrega2Test {
         //Act
         Puntaje puntajeEsperado1 = new Puntaje(12,1);
         Puntaje puntajeEsperado2 = new Puntaje(12,13);
-
         // Act
-        Puntaje puntajeObtenido1 = mano.jugarMano(comodinera);
+        Puntaje puntajeObtenido1 = mano.jugarMano(seleccionadas, comodinera);
         aleatorioMock = mock(Aleatorio.class);
         doAnswer(invocation -> {
             Runnable accion = invocation.getArgument(0);
@@ -129,17 +133,19 @@ public class casosDeUsoEntrega2Test {
         }).when(aleatorioMock).ejecuta(any(Runnable.class));
         comodin = new SumaMultiplicador(13, aleatorioMock, "");
         comodinera.agregarComodin(comodin);
-        mano.seleccionarCarta(carta2);
-        Puntaje puntajeObtenido2 = mano.jugarMano(comodinera);
+        seleccionadas.vaciarCartas();
+        seleccionadas.seleccionarCarta(carta2);
+        Puntaje puntajeObtenido2 = mano.jugarMano(seleccionadas, comodinera);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));
         assertTrue(puntajeEsperado2.tenesMismoPuntaje(puntajeObtenido2));
     }
-//     El jugador activa un comodín con una combinación de efectos  bonus de mano jugada + puntaje aumentado + activación aleatoria
+    //     El jugador activa un comodín con una combinación de efectos  bonus de mano jugada + puntaje aumentado + activación aleatoria
     @Test
     public void test05UnComodinConCombinacionDeEfectosBonus(){
         //Arrange
         Mano mano = new ManoDe8();
+        Seleccionadas seleccionadas = new Seleccionadas();
         Ejecucion aleatorioMock = mock(Aleatorio.class);
         doAnswer(invocation -> {
             Runnable accion = invocation.getArgument(0);
@@ -151,17 +157,20 @@ public class casosDeUsoEntrega2Test {
         Comodin comodin = new SumaPuntos(13, new Par(), aleatorioMock, "");
         Carta carta1 = new CartaInglesa(7, new Trebol());
         Carta carta2 = new CartaInglesa(7, new Corazon());
-        mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2)));
+        ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
+        mano.agregarCartas(cartas);
+        seleccionadas.seleccionarCarta(carta1);
+        seleccionadas.seleccionarCarta(carta2);
         Comodinera comodinera = new Comodinera();
-        mano.seleccionarCarta(carta1);
-        mano.seleccionarCarta(carta2);
         //Act
-        Puntaje puntajeObtenido1 = mano.jugarMano(comodinera);
-        mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2)));
-        mano.seleccionarCarta(carta1);
-        mano.seleccionarCarta(carta2);
+        Puntaje puntajeObtenido1 = mano.jugarMano(seleccionadas, comodinera);
+        ArrayList<Carta> cartas2 = new ArrayList<>(List.of(carta1, carta2));
+        mano.agregarCartas(cartas2);
         comodinera.agregarComodin(comodin);
-        Puntaje puntajeObtenido2 = mano.jugarMano(comodinera);
+        seleccionadas.vaciarCartas();
+        seleccionadas.seleccionarCarta(carta1);
+        seleccionadas.seleccionarCarta(carta2);
+        Puntaje puntajeObtenido2 = mano.jugarMano(seleccionadas, comodinera);
         // Assert
         assertTrue(puntajeEsperado1.tenesMismoPuntaje(puntajeObtenido1));
         assertTrue(puntajeEsperado2.tenesMismoPuntaje(puntajeObtenido2));
@@ -310,7 +319,7 @@ public class casosDeUsoEntrega2Test {
         boolean resultadoComparacion = true;
 
         ArrayList<Tarot> tarotsQueDeberianEstar = new ArrayList<>(List.of(
-            new Sumador(10, 2, new CartaAlta(), ""),new Sumador(15, 2, new Par(), ""),new Sumador(20, 2, new DoblePar(), ""),
+                new Sumador(10, 2, new CartaAlta(), ""),new Sumador(15, 2, new Par(), ""),new Sumador(20, 2, new DoblePar(), ""),
                 new CambiadorDeMultiplicador(4, "") ,new Sumador(20, 2, new Trio(), ""), new CambiadorDePuntos(40, ""),
                 new Sumador(30, 3, new Escalera(), ""), new CambiadorDeMultiplicador(1.5, ""), new CambiadorDeMultiplicador(2, ""),
                 new Sumador(15,2, new Color(), ""), new Sumador(25,2, new FullHouse(), ""), new Sumador(30 ,3,new Poker(), ""),

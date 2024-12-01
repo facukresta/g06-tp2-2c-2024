@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controllers;
 
+import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,11 +12,11 @@ import java.util.ArrayList;
 
 public class CartaApretarEventHandler implements EventHandler<ActionEvent> {
 
-    private ArrayList<Carta> seleccionadas;
+    private Seleccionadas seleccionadas;
     private Carta carta;
     private Button boton;
 
-    public CartaApretarEventHandler(ArrayList<Carta> seleccionadas, Carta carta, Button cartaBoton) {
+    public CartaApretarEventHandler(Seleccionadas seleccionadas, Carta carta, Button cartaBoton) {
         this.seleccionadas = seleccionadas;
         this.carta = carta;
         this.boton = cartaBoton;
@@ -23,14 +24,10 @@ public class CartaApretarEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        if (this.seleccionadas.contains(this.carta)) {
-            this.seleccionadas.remove(this.carta);
-            this.boton.setTranslateY(0);
+        if (this.seleccionadas.seleccionarCarta(this.carta)) {
+            this.boton.setTranslateY(-30);
         } else {
-            if (this.seleccionadas.size() != 5) {
-                this.seleccionadas.add(this.carta);
-                this.boton.setTranslateY(-30);
-            }
+            this.boton.setTranslateY(0);
         }
     }
 }

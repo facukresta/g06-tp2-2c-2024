@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.naipes;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
-import edu.fiuba.algo3.modelo.comodin.Modificador;
 import edu.fiuba.algo3.modelo.juego.Juego;
-import edu.fiuba.algo3.modelo.juego.SinJuego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
@@ -12,16 +10,10 @@ import java.util.ArrayList;
 public class ManoDe8 implements Mano {
     private ArrayList<Carta> cartas;
     private final int maxCartas;
-    private ArrayList<Carta> cartasSeleccionadas;
-    private int maxCartasSeleccionadas;
-    private Juego juego;
 
     public ManoDe8() {
         this.cartas = new ArrayList<>();
         this.maxCartas = 8;
-        this.cartasSeleccionadas = new ArrayList<>();
-        this.maxCartasSeleccionadas = 5;
-        this.juego = new SinJuego();
     }
 
     public void agregarCarta(Carta carta) {
@@ -50,32 +42,34 @@ public class ManoDe8 implements Mano {
         }
     }
 
-    public Puntaje descartarMano(Comodinera comodinera) {
-        if (cartasSeleccionadas.isEmpty()) {
+    public Puntaje descartarMano(Seleccionadas cartasSeleccionadas, Comodinera comodinera) {
+        if (cartasSeleccionadas.estaVacio()) {
             throw new SinCartasSeleccionadasException();
         }
-        quitarCartas(cartasSeleccionadas);
-        cartasSeleccionadas.clear();
-        juego = Juego.chequearJuego(cartasSeleccionadas);
+
+        this.quitarCartas(cartasSeleccionadas.obtenerCartasSeleccionadas());
+        cartasSeleccionadas.vaciarCartas();
+        Juego juego = cartasSeleccionadas.obtenerJuego();
         Puntaje puntaje = juego.puntuarMano();
         comodinera.aplicarComodines(puntaje, juego);
         return puntaje;
     }
 
-    public Puntaje jugarMano(Comodinera comodinera){
-        if (cartasSeleccionadas.isEmpty()) {
+    public Puntaje jugarMano(Seleccionadas cartasSeleccionadas, Comodinera comodinera){
+        if (cartasSeleccionadas.estaVacio()) {
             throw new SinCartasSeleccionadasException();
         }
-        if (cartasSeleccionadas.size() > 5) {
+        if (cartasSeleccionadas.obtenerCartasSeleccionadas().size() > 5) {
             throw new MaximoCartasSeleccionadasException();
         }
-        for (Carta carta : cartasSeleccionadas) {
+        for (Carta carta : cartasSeleccionadas.obtenerCartasSeleccionadas()) {
             this.obtenerCarta(carta);
         }
+        Juego juego = cartasSeleccionadas.obtenerJuego();
         Puntaje puntaje = juego.puntuarMano();
         comodinera.aplicarComodines(puntaje, juego);
-        this.quitarCartas(cartasSeleccionadas);
-        cartasSeleccionadas.clear();
+        this.quitarCartas(cartasSeleccionadas.obtenerCartasSeleccionadas());
+        cartasSeleccionadas.vaciarCartas();
         return puntaje;
     }
 
@@ -104,19 +98,4 @@ public class ManoDe8 implements Mano {
     public void modificarJuego(Tarot tarot){
         Juego.aplicarTarot(tarot);
     }
-
-    public void seleccionarCarta(Carta carta) {
-        if (!this.cartas.contains(carta)) {
-            throw new CartaNoEnManoException();
-        }
-        if (this.cartasSeleccionadas.contains(carta)) {
-            this.cartasSeleccionadas.remove(carta);
-        } else {
-            if (this.cartasSeleccionadas.size() != 5) {
-                this.cartasSeleccionadas.add(carta);
-            }
-        }
-        this.juego = Juego.chequearJuego(cartasSeleccionadas);
-    }
 }
-

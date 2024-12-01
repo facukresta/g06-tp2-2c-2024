@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.controllers;
 
+import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
 import edu.fiuba.algo3.modelo.tarot.SinTarot;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 
 public class TarotApretarEventHandler implements EventHandler<ActionEvent> {
 
-    private ArrayList<Carta> seleccionadas;
+    private Seleccionadas seleccionadas;
     private Tarot tarot;
     private Button boton;
     private VBox tarots;
@@ -31,7 +32,7 @@ public class TarotApretarEventHandler implements EventHandler<ActionEvent> {
     private CreadorDeBotones creadorDeBotones = new CreadorDeBotones();
     private Tarotera tarotera;
 
-    public TarotApretarEventHandler(ArrayList<Carta> seleccionadas, Tarot tarot, Button tarotBoton, VBox tarots, Pane contenedorPrincipal, Tarotera tarotera) {
+    public TarotApretarEventHandler(Seleccionadas seleccionadas, Tarot tarot, Button tarotBoton, VBox tarots, Pane contenedorPrincipal, Tarotera tarotera) {
         this.seleccionadas = seleccionadas;
         this.tarot = tarot;
         this.boton = tarotBoton;
@@ -42,12 +43,12 @@ public class TarotApretarEventHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        if (this.seleccionadas.size() == 1) {
-            Carta cartaAModificar = this.seleccionadas.get(0);
+        ArrayList<Carta> cartas = this.seleccionadas.obtenerCartasSeleccionadas();
+        if (cartas.size() == 1) {
+            Carta cartaAModificar = cartas.get(0);
             cartaAModificar.aplicarModificador(this.tarot);
             Button tarotBoton = this.creadorDeBotones.crearBoton("comodinVacio", (null), this.contenedor, 0.05, 0.13);
             tarotBoton.setOnAction(new TarotApretarEventHandler(this.seleccionadas, new SinTarot(), tarotBoton, this.tarots, this.contenedor, this.tarotera));
-//            tarots.getChildren().remove(this.boton);
             this.tarots.getChildren().set(this.tarots.getChildren().indexOf(this.boton),tarotBoton);
             VBox.setMargin(tarotBoton, new Insets(10,0,0,20));
             this.tarotera.quitarTarot(this.tarot);
