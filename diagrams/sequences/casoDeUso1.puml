@@ -2,7 +2,7 @@
 title "test01 Al Tener Un Comodin Que Suma 8 Al Multiplicador Este Se Aplica Correctamente"
 
 activate TestCase
-TestCase -> "c:Comodin" as comodin **: new SumaMultiplicador(8)
+TestCase -> "c:Comodin" as comodin **: new SumaMultiplicador(8,"")
 
 activate comodin
 

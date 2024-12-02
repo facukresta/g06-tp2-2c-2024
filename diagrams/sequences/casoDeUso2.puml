@@ -11,7 +11,7 @@ activate esperado
 TestCase <-- esperado : esperado
 deactivate esperado
 
-TestCase -> "c:Comodin" as comodin **: new SumaMultiplicador(3, new Escalera())
+TestCase -> "c:Comodin" as comodin **: new SumaMultiplicador(3, new Escalera(),"")
 
 activate comodin
 comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(1)
@@ -25,23 +25,17 @@ deactivate escalera
 TestCase <-- comodin : c
 deactivate comodin
 
-TestCase -> "mano:Mano" as mano **: new Mano(8)
+TestCase -> "mano:ManoDe8" as mano **: new ManoDe8()
 activate mano
 TestCase <-- mano : mano
 note right of TestCase: creamos 5 cartas que forman una escalera
 TestCase -> mano : agregarCartas(cartas)
 deactivate mano
 
-TestCase -> "Juego" as juego : chequearJuego(cartas)
-activate juego
-loop para cada juego en juegos
-juego -> "juegos:List" as juegos : colocarCartas(cartas)
-juego -> juegos: obtenerMayor()
+TestCase -> "sel:Saleccionadas" as sel ** : new SeleccionadasBalatro()
+loop para cada carta
+TestCase -> sel : seleccionarCarta(carta)
 end
-
-TestCase <- juego : juegoMayorPuntaje = new Escalera()
-deactivate juego
-
 
 TestCase -> "comodinera:Comodinera" as comodinera **: new()
 activate comodinera
@@ -49,18 +43,41 @@ TestCase -> comodinera : agregarComodin(c)
 deactivate comodinera
 
 
-TestCase -> mano : jugarMano(cartas, escalera, comodinera)
+TestCase -> mano : jugarMano(seleccionadas, comodinera)
 activate mano
-mano -> "juegoMayorPuntaje:Escalera" as mejor:  puntuarMano()
+mano -> sel : obtenerJuego()
+activate sel
+sel -> "Juego" : chequearJuego(sel)
+activate Juego
 
-activate mejor
-mano <-- mejor : resultado:Puntaje
-deactivate mejor
+loop para cada juego
+Juego -> juegoActual : colocarCartas(sel)
+activate juegoActual
+Juego -> juegoActual : obtenerMayor()
+Juego <-- juegoActual : JuegoMayorPuntaje
+deactivate juegoActual
+end
+
+sel <-- Juego : JuegoMayorPuntaje
+deactivate Juego
+
+mano <-- sel : JuegoMayorPuntaje
+deactivate sel
+
+mano -> Juego : obtenerPuntaje()
+activate Juego
+mano <-- Juego : resultado:Puntaje
+deactivate Juego
+
 mano -> comodinera : aplicarComodines(resultado, juegoMayorPuntaje)
 loop para cada comodin
 comodinera -> "Comodin" : aplicarModificador(resultado, juegoMayorPuntaje)
 end
+
+mano -> sel: vaciarCartas()
+
 TestCase <-- mano : resultado:Puntaje
+
 deactivate mano
 
 
