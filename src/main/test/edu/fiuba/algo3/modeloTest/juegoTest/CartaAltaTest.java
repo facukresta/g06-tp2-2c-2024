@@ -9,7 +9,6 @@ import edu.fiuba.algo3.modelo.tarot.SinTarot;
 import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
-import org.mockito.internal.util.JavaEightUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public class CartaAltaTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(15, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -36,7 +35,7 @@ public class CartaAltaTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseCartaAlta = new Puntaje(20, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueseCartaAlta.tenesMismoPuntaje(obtenido));
     }
@@ -47,7 +46,7 @@ public class CartaAltaTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(0, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -61,7 +60,7 @@ public class CartaAltaTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseCartaAlta = new Puntaje(33, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueseCartaAlta.tenesMismoPuntaje(obtenido));
     }
@@ -72,7 +71,7 @@ public class CartaAltaTest {
         Puntaje valorEsperado = new Puntaje(15, 1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje valorObtenido = juego.puntuarMano();
+        Puntaje valorObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(valorObtenido.tenesMismoPuntaje(valorEsperado));
     }
@@ -85,7 +84,7 @@ public class CartaAltaTest {
         Puntaje EsperadoSiFueseCartaAlta = new Puntaje(24, 1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje Obtenido = juego.puntuarMano();
+        Puntaje Obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(Obtenido.tenesMismoPuntaje(EsperadoSiFueseCartaAlta));
     }
@@ -96,7 +95,7 @@ public class CartaAltaTest {
         Puntaje valorEsperado = new Puntaje(0, 1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje valorObtenido = juego.puntuarMano();
+        Puntaje valorObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(valorObtenido.tenesMismoPuntaje(valorEsperado));
     }
@@ -110,7 +109,7 @@ public class CartaAltaTest {
         Puntaje EsperadoSiFueseCartaAlta = new Puntaje(42, 1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje Obtenido = juego.puntuarMano();
+        Puntaje Obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(Obtenido.tenesMismoPuntaje(EsperadoSiFueseCartaAlta));
     }
@@ -123,7 +122,7 @@ public class CartaAltaTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
         // Act
         Juego cartaAlta = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        Puntaje puntajeObtenido = cartaAlta.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new CartaAlta());
         Juego.aplicarTarot(tarot2);
@@ -138,7 +137,7 @@ public class CartaAltaTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
         // Act
         Juego cartaAlta = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        Puntaje puntajeObtenido = cartaAlta.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
@@ -153,7 +152,7 @@ public class CartaAltaTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
         // Act
         Juego cartaAlta = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        Puntaje puntajeObtenido = cartaAlta.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new CartaAlta());
         Juego.aplicarTarot(tarot2);
@@ -169,7 +168,7 @@ public class CartaAltaTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
         // Act
         Juego cartaAlta = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        Puntaje puntajeObtenido = cartaAlta.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
@@ -185,7 +184,7 @@ public class CartaAltaTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
         // Act
         Juego cartaAlta = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        Puntaje puntajeObtenido = cartaAlta.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new CartaAlta());
         Juego.aplicarTarot(tarot2);
@@ -201,7 +200,7 @@ public class CartaAltaTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(5, new Corazon())));
         // Act
         Juego cartaAlta = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = cartaAlta.puntuarMano();
+        Puntaje puntajeObtenido = cartaAlta.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);

@@ -3,8 +3,6 @@ package edu.fiuba.algo3.modeloTest.juegoTest;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
-import edu.fiuba.algo3.modelo.tarot.CambiadorDeMultiplicador;
-import edu.fiuba.algo3.modelo.tarot.Tarot;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -199,7 +197,7 @@ public class JuegoTest {
                 new CartaInglesa(13, new Trebol())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -213,7 +211,7 @@ public class JuegoTest {
                 new CartaInglesa(13, new Pica()), new CartaInglesa(10, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -226,7 +224,7 @@ public class JuegoTest {
                 new CartaInglesa(13, new Corazon()), new CartaInglesa(13, new Diamante())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -239,7 +237,7 @@ public class JuegoTest {
                 new CartaInglesa(13, new Corazon())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -251,7 +249,7 @@ public class JuegoTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(13, new Pica())));
         // Act
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }

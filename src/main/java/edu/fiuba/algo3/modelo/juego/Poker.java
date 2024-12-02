@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Poker extends Juego{
-    public Puntaje puntuarMano() {
+    public Puntaje obtenerPuntaje() {
         return this.puntuarJuego(new Puntaje(60, 7));
     }
 

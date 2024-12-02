@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class EscaleraReal extends Juego{
-    public Puntaje puntuarMano() {
+    public Puntaje obtenerPuntaje() {
         return this.puntuarJuego(new Puntaje(100, 8));
     }
 

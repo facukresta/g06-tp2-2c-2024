@@ -20,7 +20,7 @@ public class FullHouseTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(86, 4);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -34,7 +34,7 @@ public class FullHouseTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(76, 4);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -46,7 +46,7 @@ public class FullHouseTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(0, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -60,7 +60,7 @@ public class FullHouseTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraFullHouse = new Puntaje(62, 4);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraFullHouse.tenesMismoPuntaje(obtenido));
     }
@@ -74,7 +74,7 @@ public class FullHouseTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraFullHouse = new Puntaje(64, 4);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraFullHouse.tenesMismoPuntaje(obtenido));
     }
@@ -88,7 +88,7 @@ public class FullHouseTest {
         Puntaje puntajeEsperado = new Puntaje(78, 4);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -100,7 +100,7 @@ public class FullHouseTest {
         Puntaje puntajeEsperado = new Puntaje(0, 1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -116,7 +116,7 @@ public class FullHouseTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4,
                         new Corazon()), new CartaInglesa(12, new Pica()), new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = FullHouse.puntuarMano();
+        Puntaje puntajeObtenido = FullHouse.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new FullHouse());
         Juego.aplicarTarot(tarot2);
@@ -134,7 +134,7 @@ public class FullHouseTest {
                 new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
                 new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = FullHouse.puntuarMano();
+        Puntaje puntajeObtenido = FullHouse.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);
@@ -152,7 +152,7 @@ public class FullHouseTest {
                 new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
                 new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = FullHouse.puntuarMano();
+        Puntaje puntajeObtenido = FullHouse.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new FullHouse());
         Juego.aplicarTarot(tarot2);
@@ -169,7 +169,7 @@ public class FullHouseTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
                 new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = FullHouse.puntuarMano();
+        Puntaje puntajeObtenido = FullHouse.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
@@ -186,7 +186,7 @@ public class FullHouseTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
                 new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = FullHouse.puntuarMano();
+        Puntaje puntajeObtenido = FullHouse.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new FullHouse());
         Juego.aplicarTarot(tarot2);
@@ -203,7 +203,7 @@ public class FullHouseTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()),
                 new CartaInglesa(12, new Diamante()), new CartaInglesa(12, new Corazon())));
         Juego FullHouse = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = FullHouse.puntuarMano();
+        Puntaje puntajeObtenido = FullHouse.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);

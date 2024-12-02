@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 public class EscaleraDeColor extends Juego {
-    public Puntaje puntuarMano() {
+    public Puntaje obtenerPuntaje() {
         return this.puntuarJuego(new Puntaje(100, 8));
     }
 

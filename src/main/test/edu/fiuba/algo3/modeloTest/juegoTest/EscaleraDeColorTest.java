@@ -20,7 +20,7 @@ public class EscaleraDeColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(124, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -34,7 +34,7 @@ public class EscaleraDeColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraDeColor = new Puntaje(130, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraEscaleraDeColor.tenesMismoPuntaje(obtenido));
     }
@@ -47,7 +47,7 @@ public class EscaleraDeColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraDeColor = new Puntaje(124, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraEscaleraDeColor.tenesMismoPuntaje(obtenido));
     }
@@ -59,7 +59,7 @@ public class EscaleraDeColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(0, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -72,7 +72,7 @@ public class EscaleraDeColorTest {
         Puntaje puntajeEsperado = new Puntaje(149,8);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -83,7 +83,7 @@ public class EscaleraDeColorTest {
         Puntaje puntajeEsperado = new Puntaje(0,1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -97,7 +97,7 @@ public class EscaleraDeColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraDeColor = new Puntaje(148, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraEscaleraDeColor.tenesMismoPuntaje(obtenido));
     }
@@ -113,7 +113,7 @@ public class EscaleraDeColorTest {
                 new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
                 new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol()) ));
         Juego EscaleraDeColor = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraDeColor.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraDeColor.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new EscaleraDeColor());
         Juego.aplicarTarot(tarot2);
@@ -131,7 +131,7 @@ public class EscaleraDeColorTest {
                 new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
                 new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol()) ));
         Juego EscaleraDeColor = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraDeColor.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraDeColor.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);
@@ -148,7 +148,7 @@ public class EscaleraDeColorTest {
                 new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
                 new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol())));
         Juego EscaleraDeColor = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraDeColor.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraDeColor.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new EscaleraDeColor());
         Juego.aplicarTarot(tarot2);
@@ -166,7 +166,7 @@ public class EscaleraDeColorTest {
                 new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
                 new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol())));
         Juego EscaleraDeColor = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraDeColor.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraDeColor.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
@@ -184,7 +184,7 @@ public class EscaleraDeColorTest {
                 new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
                 new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol())));
         Juego EscaleraDeColor = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraDeColor.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraDeColor.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new EscaleraDeColor());
         Juego.aplicarTarot(tarot2);
@@ -202,7 +202,7 @@ public class EscaleraDeColorTest {
                 new CartaInglesa(2, new Trebol()), new CartaInglesa(3, new Trebol()),
                 new CartaInglesa(4, new Trebol()), new CartaInglesa(5, new Trebol())));
         Juego EscaleraDeColor = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraDeColor.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraDeColor.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);
@@ -218,7 +218,7 @@ public class EscaleraDeColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(150, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }

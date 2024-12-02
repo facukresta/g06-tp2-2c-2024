@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Par extends Juego {
 
-    public Puntaje puntuarMano() {
+    public Puntaje obtenerPuntaje() {
         return this.puntuarJuego(new Puntaje(10, 2));
     }
 

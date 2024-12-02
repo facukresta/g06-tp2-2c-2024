@@ -50,7 +50,7 @@ public class ManoDe8 implements Mano {
         this.quitarCartas(cartasSeleccionadas.obtenerCartasSeleccionadas());
         cartasSeleccionadas.vaciarCartas();
         Juego juego = cartasSeleccionadas.obtenerJuego();
-        Puntaje puntaje = juego.puntuarMano();
+        Puntaje puntaje = juego.obtenerPuntaje();
         comodinera.aplicarComodines(puntaje, juego);
         return puntaje;
     }
@@ -66,7 +66,7 @@ public class ManoDe8 implements Mano {
             this.obtenerCarta(carta);
         }
         Juego juego = cartasSeleccionadas.obtenerJuego();
-        Puntaje puntaje = juego.puntuarMano();
+        Puntaje puntaje = juego.obtenerPuntaje();
         comodinera.aplicarComodines(puntaje, juego);
         this.quitarCartas(cartasSeleccionadas.obtenerCartasSeleccionadas());
         cartasSeleccionadas.vaciarCartas();

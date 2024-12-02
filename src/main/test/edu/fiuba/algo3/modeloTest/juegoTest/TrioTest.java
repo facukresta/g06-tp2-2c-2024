@@ -20,7 +20,7 @@ public class TrioTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(60, 3);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -33,7 +33,7 @@ public class TrioTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(69, 3);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -43,7 +43,7 @@ public class TrioTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(0, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
 
@@ -58,7 +58,7 @@ public class TrioTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(93, 3);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -71,7 +71,7 @@ public class TrioTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(60, 3);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -84,7 +84,7 @@ public class TrioTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(45, 3);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -95,7 +95,7 @@ public class TrioTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(0, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -109,7 +109,7 @@ public class TrioTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(71, 3);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -124,7 +124,7 @@ public class TrioTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4,
                 new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Trio.puntuarMano();
+        Puntaje puntajeObtenido = Trio.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Trio());
         Juego.aplicarTarot(tarot2);
@@ -141,7 +141,7 @@ public class TrioTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()),
                 new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Trio.puntuarMano();
+        Puntaje puntajeObtenido = Trio.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);
@@ -157,7 +157,7 @@ public class TrioTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Trio.puntuarMano();
+        Puntaje puntajeObtenido = Trio.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Trio());
         Juego.aplicarTarot(tarot2);
@@ -173,7 +173,7 @@ public class TrioTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Trio.puntuarMano();
+        Puntaje puntajeObtenido = Trio.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new DoblePar());
         Juego.aplicarTarot(tarot2);
@@ -189,7 +189,7 @@ public class TrioTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Trio.puntuarMano();
+        Puntaje puntajeObtenido = Trio.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Trio());
         Juego.aplicarTarot(tarot2);
@@ -205,7 +205,7 @@ public class TrioTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Trebol())));
         Juego Trio = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Trio.puntuarMano();
+        Puntaje puntajeObtenido = Trio.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);

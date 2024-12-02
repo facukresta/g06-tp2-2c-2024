@@ -5,12 +5,7 @@ import edu.fiuba.algo3.modelo.Comprable;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
-import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
-import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
-import edu.fiuba.algo3.modelo.tarot.SinTarot;
-import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.tarot.Tarotera;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -21,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 
 
 import java.util.ArrayList;
@@ -35,11 +29,9 @@ public class App extends Application {
     private Tarotera tarotera = new Tarotera();
     private Seleccionadas seleccionadas = new Seleccionadas();
     private ArrayList<Ronda> rondas = new ArrayList<>();
-    private int maxRondas;
     private Ronda rondaActual;
     private CreadorDeBotones creadorDeBotones = new CreadorDeBotones();
     private CreadorVisual creadorVisual = new CreadorVisual();
-    private CreadorDeEtiqueta creadorDeEtiqueta = new CreadorDeEtiqueta();
 
     @Override
     public void start(Stage stage) {
@@ -79,8 +71,9 @@ public class App extends Application {
         return new Scene(contenedorPrincipal, 1280, 720);
     }
 
-    private Scene crearEscenaDeJuego() {
+    private void crearEscenaDeJuego() {
         BorderPane contenedorPrincipal = new BorderPane();
+        Scene escenaPrincipal = new Scene(contenedorPrincipal, 1280, 720);
         contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondo2", contenedorPrincipal));
 
         HBox puntajeASuperarBox = new HBox();
@@ -140,12 +133,12 @@ public class App extends Application {
 
         Button jugarManoBoton = creadorDeBotones.crearBoton("jugarMano",
                 (new JugarManoEventHandler(this.seleccionadas, this.comodinera, this.rondas,
-                        () -> pasarDeRonda(contenedorPrincipal),
+                        () -> pasarDeRonda(escenaPrincipal),
                         () -> cambiarDeEscena(crearEscenaDePerdiste()))), contenedorPrincipal, 0.2, 0.1);
 
         Button descartarManoBoton = creadorDeBotones.crearBoton("descartar", (
                 new DescartarManoEventHandler(this.seleccionadas, this.comodinera,  this.rondas, this.rondaActual.obtenerDescartesRestantes(),
-                        () -> pasarDeRonda(contenedorPrincipal))), contenedorPrincipal, 0.2, 0.1);
+                        () -> pasarDeRonda(escenaPrincipal))), contenedorPrincipal, 0.2, 0.1);
 
 
         VBox comodinesLetrero = new VBox();
@@ -199,21 +192,20 @@ public class App extends Application {
         contenedorPrincipal.setCenter(contenedorDeCartas);
         contenedorPrincipal.setLeft(comodinesYTarots);
         contenedorPrincipal.setRight(datosRonda);
-        this.crearTienda(contenedorPrincipal);
-        return new Scene(contenedorPrincipal, 1280, 720);
+        escenaPrincipal.setRoot(contenedorPrincipal);
+        this.crearTienda(escenaPrincipal);
     }
 
     private void iniciarJuego() {
-        this.maxRondas = this.rondas.size();
         this.comodinera = new Comodinera();
         this.tarotera = new Tarotera();
         this.rondaActual = this.rondas.get(0);
         this.mazo.mezclar();
         this.rondaActual.iniciarRonda();
-        cambiarDeEscena(crearEscenaDeJuego());
+        this.crearEscenaDeJuego();
     }
 
-    private void pasarDeRonda(Pane contenedorPrincipal) {
+    private void pasarDeRonda(Scene contenedorPrincipal) {
         this.rondas.remove(0);
         if (rondas.isEmpty()) {
             cambiarDeEscena(crearEscenaDeGanaste());
@@ -286,43 +278,53 @@ public class App extends Application {
         return new Scene(contenedorPrincipal, 1280, 720);
     }
 
-    private void salirTienda(VBox tienda) {
-        tienda.getChildren().clear();
-        tienda.setStyle("");
+    private void salirTienda(VBox tienda, Scene layoutAnterior) {
+        this.cambiarDeEscena(layoutAnterior);
     }
 
-    private void crearTienda(Pane contenedorPricipal) {
+    private void cambiarDeEscena(Scene newScene) {
+        StagePrincipal.setScene(newScene);
+    }
+
+    private void crearTienda(Scene layoutAnterior) {
+        BorderPane contenedorPrincipal = new BorderPane();
+        contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondoTienda",contenedorPrincipal));
+
         VBox tienda = new VBox();
-        tienda.setBackground(creadorVisual.crearBackground("fondoMenus", tienda));
 
         ArrayList<Comprable> producto = new ArrayList<>();
         ArrayList<Button> boton = new ArrayList<>();
 
         HBox botonesTienda = new HBox();
         Button cerrarTienda = this.creadorDeBotones.crearBoton("Salir", (e -> {
-            this.salirTienda(tienda);
-        }), contenedorPricipal, 0.5, 0.2);
+            this.salirTienda(tienda, layoutAnterior);
+        }), contenedorPrincipal, 0.37, 0.15);
         Button comprarTienda = this.creadorDeBotones.crearBoton("Jugar",
                 new TiendaComprarEventHandler(this.comodinera, this.tarotera, this.mazo, producto,
-                        () -> salirTienda(tienda)), contenedorPricipal, 0.5, 0.2);
-
+                        () -> salirTienda(tienda, layoutAnterior)), contenedorPrincipal, 0.37, 0.15);
+        botonesTienda.setSpacing(50);
+        botonesTienda.setAlignment(Pos.CENTER);
         botonesTienda.getChildren().addAll(cerrarTienda, comprarTienda);
 
         HBox comprables = new HBox();
         ArrayList<Comprable> productos = this.rondaActual.mostrarProductos();
         for (Comprable productoAComprar : productos) {
             Button comprable = this.creadorDeBotones.crearBoton(productoAComprar.obtenerNombre(),
-                    null, contenedorPricipal, 0.5, 0.2);
+                    null, contenedorPrincipal, 0.612, 0.28);
             comprables.getChildren().add(comprable);
             comprable.setOnAction(new ComprableApretarEventHandler(productoAComprar, producto, boton,comprable));
+            HBox.setMargin(comprable, new Insets(20,0,20,20));
         }
+        comprables.setSpacing(20);
+        comprables.setAlignment(Pos.CENTER);
         tienda.getChildren().addAll(botonesTienda, comprables);
-        contenedorPricipal.getChildren().add(tienda);
+        tienda.setAlignment(Pos.CENTER);
+
+        contenedorPrincipal.setCenter(tienda);
+
+        this.cambiarDeEscena(new Scene(contenedorPrincipal, 1280, 720));
     }
 
-    private void cambiarDeEscena(Scene newScene) {
-        StagePrincipal.setScene(newScene);
-    }
 
     public static void main(String[] args) {
         launch();

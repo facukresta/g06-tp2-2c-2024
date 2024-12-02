@@ -41,7 +41,7 @@ public abstract class Juego {
     }
 
     protected Juego obtenerMayor(Juego juegoSeleccionado) {
-        if (this.puntuarMano().esMayor(juegoSeleccionado.puntuarMano())) {
+        if (this.obtenerPuntaje().esMayor(juegoSeleccionado.obtenerPuntaje())) {
             return this;
         }
         return juegoSeleccionado;
@@ -61,7 +61,7 @@ public abstract class Juego {
         return new Puntaje(0, 1);
     }
 
-    abstract public Puntaje puntuarMano();
+    abstract public Puntaje obtenerPuntaje();
 
     public boolean sosElMismoJuego(Juego juego) {
         return this.getClass().equals(juego.getClass());

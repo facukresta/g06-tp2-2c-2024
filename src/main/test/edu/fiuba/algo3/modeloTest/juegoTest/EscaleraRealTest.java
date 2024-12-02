@@ -21,7 +21,7 @@ public class EscaleraRealTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(150, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -36,7 +36,7 @@ public class EscaleraRealTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraReal = new Puntaje(159, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraEscaleraReal.tenesMismoPuntaje(obtenido));
     }
@@ -50,7 +50,7 @@ public class EscaleraRealTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraReal = new Puntaje(150, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraEscaleraReal.tenesMismoPuntaje(obtenido));
     }
@@ -63,7 +63,7 @@ public class EscaleraRealTest {
         Puntaje puntajeEsperado = new Puntaje(150,8);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -74,7 +74,7 @@ public class EscaleraRealTest {
         Puntaje puntajeEsperado = new Puntaje(0,1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -88,7 +88,7 @@ public class EscaleraRealTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraEscaleraReal = new Puntaje(149, 8);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraEscaleraReal.tenesMismoPuntaje(obtenido));
     }
@@ -104,7 +104,7 @@ public class EscaleraRealTest {
                 new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
                 new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol()) ));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraReal.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new EscaleraReal());
         Juego.aplicarTarot(tarot2);
@@ -122,7 +122,7 @@ public class EscaleraRealTest {
                 new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
                 new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol()) ));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraReal.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);
@@ -139,7 +139,7 @@ public class EscaleraRealTest {
                 new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
                 new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraReal.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new EscaleraReal());
         Juego.aplicarTarot(tarot2);
@@ -157,7 +157,7 @@ public class EscaleraRealTest {
                 new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
                 new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraReal.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
@@ -175,7 +175,7 @@ public class EscaleraRealTest {
                 new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
                 new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraReal.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new EscaleraReal());
         Juego.aplicarTarot(tarot2);
@@ -193,7 +193,7 @@ public class EscaleraRealTest {
                 new CartaInglesa(10, new Trebol()), new CartaInglesa(11, new Trebol()),
                 new CartaInglesa(12, new Trebol()), new CartaInglesa(13, new Trebol())));
         Juego EscaleraReal = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = EscaleraReal.puntuarMano();
+        Puntaje puntajeObtenido = EscaleraReal.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);

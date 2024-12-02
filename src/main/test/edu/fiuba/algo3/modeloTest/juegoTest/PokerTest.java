@@ -21,7 +21,7 @@ public class PokerTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(100, 7);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -35,7 +35,7 @@ public class PokerTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(105, 7);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -51,7 +51,7 @@ public class PokerTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPoker = new Puntaje(108, 7);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraPoker.tenesMismoPuntaje(obtenido));
     }
@@ -66,7 +66,7 @@ public class PokerTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPoker = new Puntaje(123, 7);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperadoSiFueraPoker.tenesMismoPuntaje(obtenido));    }
     @Test
@@ -79,7 +79,7 @@ public class PokerTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPoker = new Puntaje(88, 7);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraPoker.tenesMismoPuntaje(obtenido));
     }
@@ -93,7 +93,7 @@ public class PokerTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPoker = new Puntaje(100, 7);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperadoSiFueraPoker.tenesMismoPuntaje(obtenido));    }
     @Test
@@ -106,7 +106,7 @@ public class PokerTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPoker = new Puntaje(73, 7);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperadoSiFueraPoker.tenesMismoPuntaje(obtenido));
     }
@@ -121,7 +121,7 @@ public class PokerTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraPoker = new Puntaje(99, 7);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperadoSiFueraPoker.tenesMismoPuntaje(obtenido));
     }
@@ -136,7 +136,7 @@ public class PokerTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4,
                 new Corazon()), new CartaInglesa(4, new Diamante()), new CartaInglesa(4, new Trebol())));
         Juego Poker = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Poker.puntuarMano();
+        Puntaje puntajeObtenido = Poker.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Poker());
         Juego.aplicarTarot(tarot2);
@@ -153,7 +153,7 @@ public class PokerTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()),
                 new CartaInglesa(4, new Corazon()), new CartaInglesa(4, new Diamante()), new CartaInglesa(4, new Trebol())));
         Juego Poker = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Poker.puntuarMano();
+        Puntaje puntajeObtenido = Poker.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);
@@ -169,7 +169,7 @@ public class PokerTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(4, new Diamante()), new CartaInglesa(4, new Trebol())));
         Juego Poker = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Poker.puntuarMano();
+        Puntaje puntajeObtenido = Poker.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Poker());
         Juego.aplicarTarot(tarot2);
@@ -186,7 +186,7 @@ public class PokerTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(4, new Diamante()), new CartaInglesa(4, new Trebol())));
         Juego Poker = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Poker.puntuarMano();
+        Puntaje puntajeObtenido = Poker.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new DoblePar());
         Juego.aplicarTarot(tarot2);
@@ -203,7 +203,7 @@ public class PokerTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(4, new Diamante()), new CartaInglesa(4, new Trebol())));
         Juego Poker = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Poker.puntuarMano();
+        Puntaje puntajeObtenido = Poker.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Poker());
         Juego.aplicarTarot(tarot2);
@@ -220,7 +220,7 @@ public class PokerTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(4, new Diamante()), new CartaInglesa(4, new Trebol())));
         Juego Poker = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Poker.puntuarMano();
+        Puntaje puntajeObtenido = Poker.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Trio extends Juego {
-    public Puntaje puntuarMano() {
+    public Puntaje obtenerPuntaje() {
         return this.puntuarJuego(new Puntaje(30, 3));
     }
 

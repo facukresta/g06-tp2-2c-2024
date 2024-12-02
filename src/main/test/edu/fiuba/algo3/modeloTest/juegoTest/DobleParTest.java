@@ -6,7 +6,6 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
 
-import javax.net.ssl.ExtendedSSLSession;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +20,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(60, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -34,7 +33,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(51, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -47,7 +46,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraDoblePar = new Puntaje(51, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraDoblePar.tenesMismoPuntaje(obtenido));
     }
@@ -60,7 +59,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraDoblePar = new Puntaje(51, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraDoblePar.tenesMismoPuntaje(obtenido));
     }
@@ -71,7 +70,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(0, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -84,7 +83,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseDoblePar = new Puntaje(55, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueseDoblePar.tenesMismoPuntaje(obtenido));
     }
@@ -95,7 +94,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseDoblePar = new Puntaje(29, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueseDoblePar.tenesMismoPuntaje(obtenido));
     }
@@ -108,7 +107,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraDoblePar = new Puntaje(60, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueraDoblePar.tenesMismoPuntaje(obtenido));
     }
@@ -122,7 +121,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueraDoblePar = new Puntaje(64, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperadoSiFueraDoblePar.tenesMismoPuntaje(obtenido));
     }
@@ -135,7 +134,7 @@ public class DobleParTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseDoblePar = new Puntaje(44, 2);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueseDoblePar.tenesMismoPuntaje(obtenido));
     }
@@ -148,7 +147,7 @@ public class DobleParTest {
         Puntaje puntajeEsperado = new Puntaje(60, 2);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenidoSiFueseDoblePar = juego.puntuarMano();
+        Puntaje puntajeObtenidoSiFueseDoblePar = juego.obtenerPuntaje();
         // Assert
         assertFalse(puntajeObtenidoSiFueseDoblePar.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -161,7 +160,7 @@ public class DobleParTest {
         Puntaje puntajeEsperado = new Puntaje(35, 2);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -172,7 +171,7 @@ public class DobleParTest {
         Puntaje puntajeEsperado = new Puntaje(0, 1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -186,7 +185,7 @@ public class DobleParTest {
         Puntaje puntajeEsperadoSiFueseDoblePar = new Puntaje(78, 2);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(puntajeObtenido.tenesMismoPuntaje(puntajeEsperadoSiFueseDoblePar));
     }
@@ -201,7 +200,7 @@ public class DobleParTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4,
                 new Corazon()), new CartaInglesa(12, new Pica()), new CartaInglesa(12, new Diamante())));
         Juego DoblePar = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = DoblePar.puntuarMano();
+        Puntaje puntajeObtenido = DoblePar.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new DoblePar());
         Juego.aplicarTarot(tarot2);
@@ -218,7 +217,7 @@ public class DobleParTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()),
                 new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()), new CartaInglesa(12, new Diamante())));
         Juego DoblePar = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = DoblePar.puntuarMano();
+        Puntaje puntajeObtenido = DoblePar.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);
@@ -234,7 +233,7 @@ public class DobleParTest {
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()),
                 new CartaInglesa(12, new Pica()), new CartaInglesa(12, new Diamante())));
         Juego DoblePar = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = DoblePar.puntuarMano();
+        Puntaje puntajeObtenido = DoblePar.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new DoblePar());
         Juego.aplicarTarot(tarot2);
@@ -250,7 +249,7 @@ public class DobleParTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()), new CartaInglesa(12, new Diamante())));
         Juego DoblePar = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = DoblePar.puntuarMano();
+        Puntaje puntajeObtenido = DoblePar.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
@@ -266,7 +265,7 @@ public class DobleParTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()), new CartaInglesa(12, new Diamante())));
         Juego DoblePar = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = DoblePar.puntuarMano();
+        Puntaje puntajeObtenido = DoblePar.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new DoblePar());
         Juego.aplicarTarot(tarot2);
@@ -282,7 +281,7 @@ public class DobleParTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Pica()), new CartaInglesa(4, new Corazon()), new CartaInglesa(12, new Pica()), new CartaInglesa(12, new Diamante())));
         Juego DoblePar = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = DoblePar.puntuarMano();
+        Puntaje puntajeObtenido = DoblePar.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Escalera());
         Juego.aplicarTarot(tarot2);

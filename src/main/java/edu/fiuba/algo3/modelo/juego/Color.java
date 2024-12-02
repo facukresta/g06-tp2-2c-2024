@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
 public class Color extends Juego{
-    public Puntaje puntuarMano() {
+    public Puntaje obtenerPuntaje() {
         return puntuarJuego(new Puntaje(35, 4));
     }
 

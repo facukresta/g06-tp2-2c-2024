@@ -22,6 +22,7 @@ public class CambiadorDeMultiplicador extends Tarot {
         this.juego = juego;
         this.nombre = nombre;
     }
+    @Override
     public Puntaje obtenerPuntaje(Puntaje puntajeBase) {
         return new Puntaje(puntajeBase.obtenerPuntos(), multiplicador);
     }

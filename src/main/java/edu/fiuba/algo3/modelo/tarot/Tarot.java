@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.SinJuego;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
+
 public abstract class Tarot implements Comprable {
     protected Juego juego;
     protected String nombre;

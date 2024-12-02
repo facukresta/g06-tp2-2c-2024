@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.naipes;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import java.util.ArrayList;
 import edu.fiuba.algo3.modelo.juego.*;
-import javafx.scene.layout.Pane;
 
 public class Seleccionadas {
     private ArrayList<Carta> cartasSeleccionadas;

@@ -6,7 +6,6 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +20,7 @@ public class ColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperado = new Puntaje(60, 4);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperado.tenesMismoPuntaje(obtenido));
     }
@@ -36,7 +35,7 @@ public class ColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseColor = new Puntaje(65, 4);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueseColor.tenesMismoPuntaje(obtenido));
     }
@@ -50,7 +49,7 @@ public class ColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseColor = new Puntaje(59, 4);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertFalse(esperadoSiFueseColor.tenesMismoPuntaje(obtenido));
     }
@@ -62,7 +61,7 @@ public class ColorTest {
         Juego juego = Juego.chequearJuego(cartas);
         Puntaje esperadoSiFueseColor = new Puntaje(0, 1);
         // Act
-        Puntaje obtenido = juego.puntuarMano();
+        Puntaje obtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(esperadoSiFueseColor.tenesMismoPuntaje(obtenido));
     }
@@ -77,7 +76,7 @@ public class ColorTest {
         Puntaje puntajeEsperado = new Puntaje(79, 4);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -89,7 +88,7 @@ public class ColorTest {
         Puntaje puntajeEsperado = new Puntaje(0, 1);
         Juego juego = Juego.chequearJuego(cartas);
         // Act
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         assertTrue(puntajeObtenido.tenesMismoPuntaje(puntajeEsperado));
     }
@@ -103,7 +102,7 @@ public class ColorTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego juego = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = juego.puntuarMano();
+        Puntaje puntajeObtenido = juego.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Color());
         Juego.aplicarTarot(tarot2);
@@ -119,7 +118,7 @@ public class ColorTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Color.puntuarMano();
+        Puntaje puntajeObtenido = Color.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
@@ -135,7 +134,7 @@ public class ColorTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Color.puntuarMano();
+        Puntaje puntajeObtenido = Color.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Color());
         Juego.aplicarTarot(tarot2);
@@ -151,7 +150,7 @@ public class ColorTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Color.puntuarMano();
+        Puntaje puntajeObtenido = Color.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
@@ -167,7 +166,7 @@ public class ColorTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Color.puntuarMano();
+        Puntaje puntajeObtenido = Color.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Color());
         Juego.aplicarTarot(tarot2);
@@ -183,7 +182,7 @@ public class ColorTest {
         // Act
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(1, new Pica()), new CartaInglesa(4, new Pica()), new CartaInglesa(5, new Pica()), new CartaInglesa(12, new Pica()), new CartaInglesa(8, new Pica())));
         Juego Color = Juego.chequearJuego(cartas);
-        Puntaje puntajeObtenido = Color.puntuarMano();
+        Puntaje puntajeObtenido = Color.obtenerPuntaje();
         // Assert
         Tarot tarot2 = new SinTarot(new Par());
         Juego.aplicarTarot(tarot2);
