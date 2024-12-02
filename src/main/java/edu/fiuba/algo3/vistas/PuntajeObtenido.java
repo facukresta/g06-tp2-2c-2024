@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class PuntajeObtenido implements Observador {
     private HBox contenedor;
@@ -17,21 +19,25 @@ public class PuntajeObtenido implements Observador {
         this.contenedor = contenedor;
         contenedor.setSpacing(5);
         if (contenedor.getChildren().size() == 0) {
-            ImageView stringPuntajeASuperar = creadorVisual.crearImageView("puntajeObtenido",contenedorPrincipal, 0.08, 0.04);
-            HBox.setMargin(stringPuntajeASuperar, new Insets(5,5,0,0));
-            contenedor.getChildren().add(stringPuntajeASuperar);
+            ImageView puntajesObtenidosMostrados = creadorVisual.crearImageView("puntajeObtenido",contenedorPrincipal, 0.08, 0.04);
+            HBox.setMargin(puntajesObtenidosMostrados, new Insets(5,5,0,0));
+            contenedor.getChildren().add(puntajesObtenidosMostrados);
         }
         if (contenedor.getChildren().size() == 1) {
-            Label puntajeASuperarMostrado = this.creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(0), "-fx-font-size: 24px; -fx-text-fill: white;");
-            HBox.setMargin(puntajeASuperarMostrado, new Insets(5,5,0,0));
-            contenedor.getChildren().add(puntajeASuperarMostrado);
+            Label puntajesObtenidosMostrados = this.creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(0));
+            puntajesObtenidosMostrados.setTextFill(Color.WHITE);
+            puntajesObtenidosMostrados.setFont(Font.font(22));
+            HBox.setMargin(puntajesObtenidosMostrados, new Insets(5,5,0,0));
+            contenedor.getChildren().add(puntajesObtenidosMostrados);
         }
     }
 
     @Override
     public void actualizar(Object notificador) {
         Ronda ronda = (Ronda) notificador;
-        Label puntajesObtenidosMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(ronda.obtenerPuntajesObtenidos()), "-fx-font-size: 24px; -fx-text-fill: white;");
+        Label puntajesObtenidosMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(ronda.obtenerPuntajesObtenidos()));
+        puntajesObtenidosMostrados.setTextFill(Color.WHITE);
+        puntajesObtenidosMostrados.setFont(Font.font(22));
         this.contenedor.getChildren().set(1, puntajesObtenidosMostrados);
         HBox.setMargin(puntajesObtenidosMostrados, new Insets(5,5,0,0));
     }

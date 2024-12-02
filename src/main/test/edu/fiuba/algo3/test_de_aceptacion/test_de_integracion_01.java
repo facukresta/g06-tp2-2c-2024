@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class test_de_integracion_01 {
-
     @Test
     public void test01AlTenerUnComodinParaParYJugarEfectivamenteUnParEsteSeAplica(){
         Mazo mazo = new MazoBalatro();
@@ -39,7 +38,7 @@ public class test_de_integracion_01 {
         mazo.agregarCartas(cartasSeleccionadas);
 
         Tienda tienda = new TiendaBalatro(new ArrayList<Comprable>());
-        Ronda ronda = new Ronda(new Puntaje(1000,1), 3, 3, mazo,  tienda);
+        Ronda ronda = new Ronda(new Puntaje(1000,1), 3, 3, mazo,  tienda, 1);
 
         ronda.iniciarRonda();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class))));
@@ -76,7 +75,7 @@ public class test_de_integracion_01 {
         mazo.agregarCartas(cartasSeleccionadas);
 
         Tienda tienda = new TiendaBalatro(new ArrayList<Comprable>());
-        Ronda ronda = new Ronda(new Puntaje(1000,1), 3, 3, mazo,  tienda);
+        Ronda ronda = new Ronda(new Puntaje(1000,1), 3, 3, mazo,  tienda, 1);
 
         ronda.iniciarRonda();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class))));
@@ -93,13 +92,14 @@ public class test_de_integracion_01 {
     }
 
     @Test
-    public void test03(){
+    public void test03AlAgregarDosComodinesUnoParaDescartarYOtroParaParAunqueSeDescarteUnParSoloAplicaElDeDescarte(){
 
         Mazo mazo = new MazoBalatro();
         Seleccionadas seleccionadas =new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
+        Carta carta2 = new CartaInglesa(2, new Trebol());
 
-        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta1));
+        ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta1, carta2));
         ArrayList<Carta> cartas = new ArrayList<>(List.of(new CartaInglesa(4, new Trebol()),
                 new CartaInglesa(9, new Corazon()), new CartaInglesa(5, new Trebol()), new CartaInglesa(10, new Pica()),
                 new CartaInglesa(13, new Diamante()), new CartaInglesa(12, new Diamante()), new CartaInglesa(2, new Pica())));
@@ -107,7 +107,7 @@ public class test_de_integracion_01 {
         mazo.agregarCartas(cartasSeleccionadas);
 
         Tienda tienda = new TiendaBalatro(new ArrayList<Comprable>());
-        Ronda ronda = new Ronda(new Puntaje(1000,1), 3, 3, mazo,  tienda);
+        Ronda ronda = new Ronda(new Puntaje(1000,1), 3, 3, mazo,  tienda, 1);
 
         ronda.iniciarRonda();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class))));

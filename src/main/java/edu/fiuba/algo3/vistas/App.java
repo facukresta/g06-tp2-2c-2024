@@ -7,9 +7,7 @@ import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.MazoBalatro;
 import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
 import edu.fiuba.algo3.modelo.naipes.SeleccionadasBalatro;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
-import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.tarot.Tarotera;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -24,8 +22,8 @@ import javafx.stage.Stage;
 import javafx.scene.media.*;
 
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 public class App extends Application {
 
@@ -51,31 +49,62 @@ public class App extends Application {
 
     private Scene crearEscenaDelMenu() {
         BorderPane contenedorPrincipal = new BorderPane();
+        Media media = new Media(getClass().getResource("/musica/musicaMenu.mp3").toExternalForm());
+        MediaPlayer musicaMenu = new MediaPlayer(media);
+        musicaMenu.setVolume(0.1);
+        musicaMenu.setCycleCount(MediaPlayer.INDEFINITE);
+        musicaMenu.play();
         contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondoMenus"));
+
+
 
         VBox medio = new VBox();
 
         ImageView logo = creadorVisual.crearImageView("logoBalatro",contenedorPrincipal, 0.5, 0.3);
 
-        Button playButton = creadorDeBotones.crearBoton("Jugar", (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
+        Button playButton = creadorDeBotones.crearBoton("Jugar", (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego(), () -> musicaMenu.stop())), contenedorPrincipal, 0.2, 0.1);
         medio.getChildren().addAll(logo, playButton);
         medio.setAlignment(Pos.CENTER);
 
-        HBox abajo = new HBox();
+        HBox botonesInferiores = new HBox();
 
+        HBox sectorMusica = new HBox();
+        Button botonDeMusica = creadorDeBotones.crearBoton("conVolumen", null, contenedorPrincipal, 0.05,0.05);
+        botonDeMusica.setOnAction(new CambiarVolumenSonidoEventHandler(musicaMenu, contenedorPrincipal, botonDeMusica, 0.1));
+        sectorMusica.setAlignment(Pos.BOTTOM_RIGHT);
+        sectorMusica.getChildren().add(botonDeMusica);
+        HBox.setMargin(botonDeMusica, new Insets(0,20,20,0));
+
+        HBox sectorRendirse = new HBox();
         Button exitButton = creadorDeBotones.crearBoton("Salir", (e -> {Platform.exit();}), contenedorPrincipal, 0.2, 0.1);
-        abajo.getChildren().add(exitButton);
-        abajo.setAlignment(Pos.BOTTOM_LEFT);
+        sectorRendirse.getChildren().add(exitButton);
+        sectorRendirse.setAlignment(Pos.BOTTOM_LEFT);
         HBox.setMargin(exitButton, new Insets(0,0,20,20));
 
+        botonesInferiores.getChildren().addAll(sectorRendirse, sectorMusica);
+
+        HBox.setHgrow(sectorRendirse, Priority.SOMETIMES);
+        HBox.setHgrow(sectorMusica, Priority.ALWAYS);
+
         contenedorPrincipal.setCenter(medio);
-        contenedorPrincipal.setBottom(abajo);
+        contenedorPrincipal.setBottom(botonesInferiores);
 
         return new Scene(contenedorPrincipal, 1280, 720);
     }
 
     private void crearEscenaDeJuego() {
         BorderPane contenedorPrincipal = new BorderPane();
+
+        Media media = new Media(getClass().getResource("/musica/musicaDeFondo.mp3").toExternalForm());
+        MediaPlayer musicaJuego = new MediaPlayer(media);
+        musicaJuego.setCycleCount(MediaPlayer.INDEFINITE);
+        musicaJuego.setVolume(0.05);
+        musicaJuego.play();
+
+        VBox datosRonda = new VBox();
+
+        Button botonDeMusica = creadorDeBotones.crearBoton("conVolumen", null, contenedorPrincipal, 0.05,0.05);
+        botonDeMusica.setOnAction(new CambiarVolumenSonidoEventHandler(musicaJuego, contenedorPrincipal, botonDeMusica, 0.05));
 
         Scene escenaPrincipal = new Scene(contenedorPrincipal, 1280, 720);
         contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondo2"));
@@ -111,12 +140,12 @@ public class App extends Application {
 
         Button jugarManoBoton = creadorDeBotones.crearBoton("jugarMano",
                 (new JugarManoEventHandler(this.seleccionadas, this.comodinera, this.rondas,
-                        () -> pasarDeRonda(escenaPrincipal),
-                        () -> cambiarDeEscena(crearEscenaDePerdiste()))), contenedorPrincipal, 0.2, 0.1);
+                        () -> pasarDeRonda(escenaPrincipal, () -> musicaJuego.stop()),
+                        () -> cambiarDeEscena(crearEscenaDePerdiste(() -> musicaJuego.stop())))), contenedorPrincipal, 0.2, 0.1);
 
         Button descartarManoBoton = creadorDeBotones.crearBoton("descartar", (
-                new DescartarManoEventHandler(this.seleccionadas, this.comodinera,  this.rondas, this.rondaActual.obtenerDescartesRestantes(),
-                        () -> pasarDeRonda(escenaPrincipal))), contenedorPrincipal, 0.2, 0.1);
+                new DescartarManoEventHandler(this.seleccionadas, this.comodinera,  this.rondas,
+                        () -> pasarDeRonda(escenaPrincipal, () -> musicaJuego.stop()))), contenedorPrincipal, 0.2, 0.1);
 
         VBox comodinesLetrero = new VBox();
         ImageView comodinLogo = creadorVisual.crearImageView("comodines",contenedorPrincipal, 0.07, 0.04);
@@ -158,7 +187,9 @@ public class App extends Application {
         HBox.setHgrow(rendirse, Priority.SOMETIMES);
         HBox.setHgrow(juegoYDescartar, Priority.ALWAYS);
 
-        VBox datosRonda = new VBox(puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox);
+
+        HBox botonSonido = new HBox(botonDeMusica);
+        datosRonda.getChildren().addAll(puntajeASuperarBox, puntajesObtenidosBox, jugadasRestantesBox, descartesRestantesBox, rondaActualBox, botonSonido);
         datosRonda.setSpacing(20);
 
         contenedorPrincipal.setBottom(botonesInferio);
@@ -178,20 +209,28 @@ public class App extends Application {
         this.crearEscenaDeJuego();
     }
 
-    private void pasarDeRonda(Scene contenedorPrincipal) {
+    private void pasarDeRonda(Scene contenedorPrincipal,Runnable pararMusica) {
         this.rondas.remove(0);
         if (rondas.isEmpty()) {
-            cambiarDeEscena(crearEscenaDeGanaste());
+            cambiarDeEscena(crearEscenaDeGanaste(pararMusica));
             return;
         }
         this.seleccionadas.vaciarCartas();
         this.rondaActual = this.rondas.get(0);
+        (new AudioClip(getClass().getResource("/sonido/pasarRonda.mp3").toExternalForm())).play();
         this.crearTienda(contenedorPrincipal);
         this.mazo.mezclar();
         this.rondaActual.iniciarRonda();
     }
 
-    private Scene crearEscenaDeGanaste() {
+    private Scene crearEscenaDeGanaste(Runnable pararMusica) {
+        pararMusica.run();
+
+        Media media = new Media(getClass().getResource("/musica/ganaste.mp3").toExternalForm());
+        MediaPlayer musicaGanaste = new MediaPlayer(media);
+        musicaGanaste.setVolume(0.3);
+        musicaGanaste.play();
+
         BorderPane contenedorPrincipal = new BorderPane();
         contenedorPrincipal.setBackground(creadorVisual.crearBackground("ganasteFondo"));
 
@@ -199,7 +238,7 @@ public class App extends Application {
 
         ImageView logo = creadorVisual.crearImageView("ganasteNombre",contenedorPrincipal, 0.5, 0.3);
 
-        Button playButton = creadorDeBotones.crearBoton("jugar2", (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
+        Button playButton = creadorDeBotones.crearBoton("jugar2", (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego(), () -> musicaGanaste.stop())), contenedorPrincipal, 0.2, 0.1);
         medio.getChildren().add(logo);
         medio.getChildren().add(playButton);
         medio.setAlignment(Pos.CENTER);
@@ -219,7 +258,13 @@ public class App extends Application {
         return new Scene(contenedorPrincipal, 1280, 720);
     }
 
-    private Scene crearEscenaDePerdiste() {
+    private Scene crearEscenaDePerdiste(Runnable musicaJuego) {
+        musicaJuego.run();
+        Media media = new Media(getClass().getResource("/sonido/perdiste.mp3").toExternalForm());
+        MediaPlayer musicaPerdiste = new MediaPlayer(media);
+        musicaPerdiste.setVolume(0.3);
+        musicaPerdiste.play();
+
         BorderPane contenedorPrincipal = new BorderPane();
         contenedorPrincipal.setBackground(creadorVisual.crearBackground("perdiste"));
 
@@ -228,7 +273,7 @@ public class App extends Application {
         ImageView logo = creadorVisual.crearImageView("perdisteNombre",contenedorPrincipal, 0.5, 0.3);
 
         Button playButton = creadorDeBotones.crearBoton("jugar2",
-                (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego())), contenedorPrincipal, 0.2, 0.1);
+                (new IniciarJuegoEventHandler(this.rondas, this.mazo ,() -> iniciarJuego(), () -> musicaPerdiste.stop())), contenedorPrincipal, 0.2, 0.1);
         medio.getChildren().add(logo);
         medio.getChildren().add(playButton);
         medio.setAlignment(Pos.CENTER);
