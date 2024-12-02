@@ -15,7 +15,7 @@ public class MazoTest {
     @Test
     public void test01UnMazoAlInstanciarseDebeEstarVacio(){
         //Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         //Act
         Mano manoMock = mock(Mano.class);
         doNothing().when(manoMock).agregarCarta(any());
@@ -27,7 +27,7 @@ public class MazoTest {
     @Test
     public void test02UnMazoAlPonerleCuatroCartasYPedirleCincoDebeLanzarError(){
         //Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         mazo.agregarCartas(new ArrayList<>(List.of( mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         //Act
@@ -42,7 +42,7 @@ public class MazoTest {
     @Test
     public void test03UnMazoAlPonerleCuarentaCartasYAlSacarleVeintiochoLeQuedanDoceCartas(){
         //Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         Mano manoMock = mock(Mano.class);
         doNothing().when(manoMock).agregarCarta(any());
         for (int i = 1; i <= 40; i++) {
@@ -61,7 +61,7 @@ public class MazoTest {
     @Test
     public void test04UnMazoAlPonerleCincuentaYDosCartasYSacarleTreintaYCuatroAlMezclarTieneCincuentaYDosCartasParaUsar(){
         //Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         Mano manoMock = mock(Mano.class);
         doNothing().when(manoMock).agregarCarta(any());
         for (int i = 1; i <= 52; i++) {

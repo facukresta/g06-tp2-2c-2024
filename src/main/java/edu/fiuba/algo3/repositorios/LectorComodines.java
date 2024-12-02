@@ -81,6 +81,7 @@ public class LectorComodines {
         }
         return listaDeComodines;
     }
+
     public ArrayList<Modificador> leerComodinesSinJson(JSONArray comodines){
         ArrayList<Modificador> listaDeComodines = new ArrayList<>();
         for (Object obj : comodines) {

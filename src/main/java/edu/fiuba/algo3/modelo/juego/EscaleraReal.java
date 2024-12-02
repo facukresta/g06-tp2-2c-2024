@@ -31,6 +31,4 @@ public class EscaleraReal extends Juego{
         }
         return true;
     }
-
-
 }

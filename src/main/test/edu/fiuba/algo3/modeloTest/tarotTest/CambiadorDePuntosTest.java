@@ -3,14 +3,12 @@ package edu.fiuba.algo3.modeloTest.tarotTest;
 import edu.fiuba.algo3.modelo.juego.CartaAlta;
 import edu.fiuba.algo3.modelo.juego.Escalera;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
-import edu.fiuba.algo3.modelo.tarot.CambiadorDeMultiplicador;
 import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
 import edu.fiuba.algo3.modelo.tarot.PuntosNegativosTarotException;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 public class CambiadorDePuntosTest {
     @Test

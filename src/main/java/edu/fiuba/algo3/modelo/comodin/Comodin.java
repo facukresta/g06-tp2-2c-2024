@@ -9,6 +9,7 @@ public abstract class Comodin  implements Modificador {
     protected final Ejecucion probabilidad;
     protected final Juego juego;
     private final String nombre;
+
     public Comodin(double valor, Ejecucion probabilidad, Juego juego, String nombre) {
         if (valor <= 0) {
             throw new CantidadComodinInvalida();
@@ -22,7 +23,7 @@ public abstract class Comodin  implements Modificador {
     public abstract void aplicarModificador(Puntaje puntaje, Juego juego);
 
     public void comprar() {
-        // Recibe Monto y le manda a otra clase ese monto total y el precio de la carta
+        // A implementar si se agrega dinero
     }
 
     public String obtenerNombre() {

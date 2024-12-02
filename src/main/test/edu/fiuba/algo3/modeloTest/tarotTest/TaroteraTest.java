@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modeloTest.tarotTest;
 
-import edu.fiuba.algo3.modelo.comodin.*;
+import edu.fiuba.algo3.modelo.juego.Par;
 import edu.fiuba.algo3.modelo.tarot.*;
 import org.junit.jupiter.api.Test;
 
@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
 
 public class TaroteraTest {
 
@@ -86,4 +85,27 @@ public class TaroteraTest {
         //Assert
         assertEquals(cantidadDeTarotsSinAniadirElTercero, cantidadDeTarotsAlAniadirElTercero);
     }
+
+    @Test
+    public void test06AlAplicarUnTarotAlJuegoEsteSeConsumePeroElQueNoEsDeJuegoNo(){
+        //Arrange
+        Tarotera tarotera = new Tarotera();
+        tarotera.agregarTarot(new CambiadorDePuntos(100, ""));
+        Tarot tarotDeJuego = new CambiadorDePuntos(100, new Par(), "");
+        tarotera.agregarTarot(tarotDeJuego);
+
+        //Act
+        tarotera.aplicarTarotsJuego();
+        ArrayList<Tarot> tarotsObtenidos = tarotera.obtenerTarots();
+
+        //Assert
+        assertTrue(tarotsObtenidos.get(0) instanceof CambiadorDePuntos);
+        assertTrue(tarotsObtenidos.get(1) instanceof SinTarot);
+
+        //Limpio el Juego para que no quede modificado
+        Tarot tarotLimpiador = new CambiadorDePuntos(10, new Par(), "");
+        tarotera.agregarTarot(tarotLimpiador);
+        tarotera.aplicarTarotsJuego();
+    }
+
 }

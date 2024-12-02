@@ -4,8 +4,12 @@ import edu.fiuba.algo3.controllers.*;
 import edu.fiuba.algo3.modelo.Comprable;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
+import edu.fiuba.algo3.modelo.naipes.MazoBalatro;
 import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
+import edu.fiuba.algo3.modelo.naipes.SeleccionadasBalatro;
+import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
+import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.tarot.Tarotera;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -24,10 +28,10 @@ public class App extends Application {
 
     private Stage StagePrincipal;
 
-    private Mazo mazo = new Mazo();
+    private Mazo mazo = new MazoBalatro();
     private Comodinera comodinera = new Comodinera();
     private Tarotera tarotera = new Tarotera();
-    private Seleccionadas seleccionadas = new Seleccionadas();
+    private Seleccionadas seleccionadas = new SeleccionadasBalatro();
     private ArrayList<Ronda> rondas = new ArrayList<>();
     private Ronda rondaActual;
     private CreadorDeBotones creadorDeBotones = new CreadorDeBotones();
@@ -288,7 +292,7 @@ public class App extends Application {
 
     private void crearTienda(Scene layoutAnterior) {
         BorderPane contenedorPrincipal = new BorderPane();
-        contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondoTienda",contenedorPrincipal));
+        contenedorPrincipal.setBackground(creadorVisual.crearBackground("tienda/fondoTienda",contenedorPrincipal));
 
         VBox tienda = new VBox();
 
@@ -296,10 +300,10 @@ public class App extends Application {
         ArrayList<Button> boton = new ArrayList<>();
 
         HBox botonesTienda = new HBox();
-        Button cerrarTienda = this.creadorDeBotones.crearBoton("Salir", (e -> {
+        Button cerrarTienda = this.creadorDeBotones.crearBoton("tienda/botonSalirTienda", (e -> {
             this.salirTienda(tienda, layoutAnterior);
         }), contenedorPrincipal, 0.37, 0.15);
-        Button comprarTienda = this.creadorDeBotones.crearBoton("Jugar",
+        Button comprarTienda = this.creadorDeBotones.crearBoton("tienda/botonComprar",
                 new TiendaComprarEventHandler(this.comodinera, this.tarotera, this.mazo, producto,
                         () -> salirTienda(tienda, layoutAnterior)), contenedorPrincipal, 0.37, 0.15);
         botonesTienda.setSpacing(50);
@@ -309,8 +313,17 @@ public class App extends Application {
         HBox comprables = new HBox();
         ArrayList<Comprable> productos = this.rondaActual.mostrarProductos();
         for (Comprable productoAComprar : productos) {
-            Button comprable = this.creadorDeBotones.crearBoton(productoAComprar.obtenerNombre(),
-                    null, contenedorPrincipal, 0.612, 0.28);
+            Button comprable;
+            if (productoAComprar instanceof Carta) {
+                comprable = this.creadorDeBotones.crearBoton("cartas/"+productoAComprar.obtenerNombre(),
+                        null, contenedorPrincipal, 0.612, 0.28);
+            } else if (productoAComprar instanceof Tarot) {
+                comprable = this.creadorDeBotones.crearBoton("tarots/"+productoAComprar.obtenerNombre(),
+                        null, contenedorPrincipal, 0.612, 0.28);
+            } else {
+                comprable = this.creadorDeBotones.crearBoton("comodines/"+productoAComprar.obtenerNombre(),
+                        null, contenedorPrincipal, 0.612, 0.28);
+            }
             comprables.getChildren().add(comprable);
             comprable.setOnAction(new ComprableApretarEventHandler(productoAComprar, producto, boton,comprable));
             HBox.setMargin(comprable, new Insets(20,0,20,20));

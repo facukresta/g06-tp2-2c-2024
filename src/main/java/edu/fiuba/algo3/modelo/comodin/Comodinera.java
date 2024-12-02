@@ -36,15 +36,12 @@ public class Comodinera implements Observado {
         this.notificarObservadores();
     }
 
-/*
     public void quitaComodin(Modificador comodin) {
         if (!this.comodines.contains(comodin))
             throw new ComodinNoEnComodineraException();
         this.comodines.set(this.comodines.indexOf(comodin), new SinComodin());
         this.notificarObservadores();
     }
-*/
-
 
     public void aplicarComodines(Puntaje puntajeBase, Juego juego) {
         for (Modificador comodin : comodines) {

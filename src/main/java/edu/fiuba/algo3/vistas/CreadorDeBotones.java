@@ -36,18 +36,4 @@ public class CreadorDeBotones {
         });
         return boton;
     }
-
-    public ArrayList<Button> crearBotonesComodines(Comodinera comodinera, Pane contenedorPrincipal, CambiadorDeComodines cambiadorDeComodines) {
-        ArrayList<Button> botones = new ArrayList<>();
-        ArrayList<Modificador> modificadores = comodinera.obtenerComodines();
-        for (Modificador comodin : modificadores) {
-            Button comodinBoton = this.crearBoton(comodin.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
-            comodinBoton.setOnAction(new ComodinApretarEventHandler(comodin, comodinBoton, cambiadorDeComodines));
-            VBox.setMargin(comodinBoton, new Insets(10,0,0,20));
-            botones.add(comodinBoton);
-        }
-        return botones;
-    }
-
-
 }

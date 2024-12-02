@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.aleatorio.Ejecucion;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.CartaAlta;
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;
 

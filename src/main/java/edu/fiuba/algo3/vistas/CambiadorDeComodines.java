@@ -40,13 +40,11 @@ public class CambiadorDeComodines {
 
     private void cambiar() {
         if (this.botones.size() == 2) {
-            comodinera.cambiarOrden(this.modificadores.get(0), this.modificadores.get(1));
             ArrayList<Button> aux = (ArrayList<Button>) botones.clone();
+            comodinera.cambiarOrden(this.modificadores.get(0), this.modificadores.get(1));
             for (Button boton : aux) {
                 boton.fire();
             }
-            ArrayList<Button> botonesNuevos = creador.crearBotonesComodines(this.comodinera, contenedorPrincipal, this);
-            this.vbox.getChildren().setAll(botonesNuevos);
         }
     }
 }

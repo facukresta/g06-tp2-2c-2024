@@ -5,10 +5,7 @@ import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.aleatorio.Ejecucion;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.naipes.Mano;
-import edu.fiuba.algo3.modelo.naipes.ManoDe8;
-import edu.fiuba.algo3.modelo.naipes.Mazo;
-import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
+import edu.fiuba.algo3.modelo.naipes.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
@@ -54,7 +51,7 @@ public class casosDeUsoEntrega2Test {
         Puntaje puntajeEsperado = new Puntaje(54,7);
         Comodin comodin = new SumaMultiplicador(3, new Escalera(), "");
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(1, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Trebol());
         Carta carta3 = new CartaInglesa(3, new Pica());
@@ -82,7 +79,7 @@ public class casosDeUsoEntrega2Test {
         Puntaje puntajeEsperado = new Puntaje(10,1);
         Comodin comodin = new SumaPuntosDescarte(10, "");
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(1, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Trebol());
         Carta carta3 = new CartaInglesa(3, new Pica());
@@ -107,7 +104,7 @@ public class casosDeUsoEntrega2Test {
     public void test04ElJugadorConUnComodinConChancesDeAplicarUnModificadorDe1Sobre1000ConEfectoDeSumaDeMultiplicadorAplicaEseEfectoCuandoLasProbabilidadesEstanDadas(){
         //Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(7, new Trebol());
         Carta carta2 = new CartaInglesa(7, new Corazon());
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
@@ -145,7 +142,7 @@ public class casosDeUsoEntrega2Test {
     public void test05UnComodinConCombinacionDeEfectosBonus(){
         //Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Ejecucion aleatorioMock = mock(Aleatorio.class);
         doAnswer(invocation -> {
             Runnable accion = invocation.getArgument(0);
@@ -198,7 +195,7 @@ public class casosDeUsoEntrega2Test {
         mapaDeNumeros.put("8", 8);
         mapaDeNumeros.put("9", 9);
         mapaDeNumeros.put("10", 10);
-        Mazo mazo1 = new Mazo();
+        Mazo mazo1 = new MazoBalatro();
         try {
             ClassLoader classLoader = this.getClass().getClassLoader();
             InputStream inputStream = classLoader.getResourceAsStream("mazo.json");
@@ -228,7 +225,7 @@ public class casosDeUsoEntrega2Test {
         ArrayList<Carta> cartas = lectorDeCartas.leerCartas();
         boolean resultadoComparacion = true;
 
-        //Mazo mazo = new Mazo();
+        //Mazo mazo = new MazoBalatro();
         //mazo.agregarCartas(cartas);
 
         ArrayList<Carta> cartasQueDeberianEstar = new ArrayList<>(List.of(

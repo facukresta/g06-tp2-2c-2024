@@ -1,12 +1,7 @@
 package edu.fiuba.algo3.entrega_1;
 
-//import edu.fiuba.algo3.modelo.Jugador;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
-import edu.fiuba.algo3.modelo.juego.Juego;
-import edu.fiuba.algo3.modelo.naipes.Mano;
-import edu.fiuba.algo3.modelo.naipes.ManoDe8;
-import edu.fiuba.algo3.modelo.naipes.Mazo;
-import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
+import edu.fiuba.algo3.modelo.naipes.*;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.*;
@@ -48,7 +43,7 @@ public class casosDeUsoEntrega1Test {
     public void test03SePuedeJugarUnaManoDeUnMazo(){
         //Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(1, new Pica());
         Carta carta2 = new CartaInglesa(2, new Pica());
         ArrayList<Carta> cartas = new ArrayList<>(List.of(carta1, carta2));
@@ -64,7 +59,7 @@ public class casosDeUsoEntrega1Test {
     public void test04AlJugarUnaManoSeLeAplicaSuValorCorrespondiente(){
         //Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(1, new Pica());
         Carta carta2 = new CartaInglesa(2, new Pica());
         Carta carta3 = new CartaInglesa(3, new Pica());
@@ -90,7 +85,7 @@ public class casosDeUsoEntrega1Test {
     public void test05AlJugarUnaManoTrioElValorDebeSerDistintoAPrimeroCalcularElValorDelTrioYLaSumaDeLasCartasYLuegoSumarAmbosValores(){
         //Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Corazon());
         Carta carta3 = new CartaInglesa(2, new Diamante());
@@ -113,7 +108,7 @@ public class casosDeUsoEntrega1Test {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(44, 3);
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Corazon());
         Carta carta3 = new CartaInglesa(2, new Diamante());
@@ -135,7 +130,7 @@ public class casosDeUsoEntrega1Test {
         // Arrange
         Puntaje puntajeEsperado = new Puntaje(36, 9);
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Trebol());

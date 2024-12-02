@@ -10,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
-
 public class CartasEnMano implements Observador {
     private HBox contenedor;
     private Pane contenedorPrincipal;
@@ -29,7 +27,7 @@ public class CartasEnMano implements Observador {
         Ronda ronda = (Ronda) notificador;
         this.contenedor.getChildren().clear();
         for (Carta carta : ronda.obtenerCartas()) {
-            Button cartaBoton = this.creadorDeBotones.crearBoton(carta.obtenerNombre(), (null), this.contenedorPrincipal, 0.08, 0.2);
+            Button cartaBoton = this.creadorDeBotones.crearBoton("cartas/"+carta.obtenerNombre(), (null), this.contenedorPrincipal, 0.08, 0.2);
             cartaBoton.setOnAction(new CartaApretarEventHandler(this.seleccionadas, carta, cartaBoton));
             this.contenedor.getChildren().add(cartaBoton);
             HBox.setMargin(cartaBoton, new Insets(0,0,30,0));

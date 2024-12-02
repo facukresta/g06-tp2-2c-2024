@@ -4,7 +4,6 @@ import edu.fiuba.algo3.controllers.ComodinApretarEventHandler;
 import edu.fiuba.algo3.modelo.Observador;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
-import edu.fiuba.algo3.modelo.ronda.Ronda;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -27,7 +26,7 @@ public class ComodinesEnMano implements Observador {
         contenedor.getChildren().clear();
         CambiadorDeComodines cambiadorDeComodines = new CambiadorDeComodines(comodinera, contenedor, contenedorPrincipal);
         for (Modificador comodin : comodinera.obtenerComodines()) {
-            Button comodinBoton = creadorDeBotones.crearBoton(comodin.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
+            Button comodinBoton = creadorDeBotones.crearBoton("comodines/"+comodin.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
             comodinBoton.setOnAction(new ComodinApretarEventHandler(comodin, comodinBoton, cambiadorDeComodines));
             contenedor.getChildren().add(comodinBoton);
             VBox.setMargin(comodinBoton, new Insets(10,0,0,20));

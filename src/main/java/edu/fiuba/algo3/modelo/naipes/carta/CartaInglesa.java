@@ -54,6 +54,6 @@ public class CartaInglesa implements Carta {
     }
 
     public void comprar() {
-        // Recibe Monto y le manda a otra clase ese monto total y el precio de la carta
+        // A implementar si se agrega dinero
     }
 }

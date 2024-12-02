@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class LectorDeTarots {
     private final ConversorJuego conversorJuego = new ConversorJuego();
     private final AbridorDeJson abridorDeJson = new AbridorDeJson();
+
     public ArrayList<Tarot> leerTarots(){
         ArrayList<Tarot> listaDeTarots = new ArrayList<>();
         try {

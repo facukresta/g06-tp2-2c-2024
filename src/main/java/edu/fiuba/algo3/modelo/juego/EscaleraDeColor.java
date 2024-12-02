@@ -35,7 +35,6 @@ public class EscaleraDeColor extends Juego {
             ArrayList<Integer> valores = new ArrayList<>();
             for (Carta carta : cartas) {
                 int valor = carta.obtenerNumero();
-                // Si el valor es 1 (As), considerar 14
                 if (valor == 1) {
                     valor = 14;
                 }

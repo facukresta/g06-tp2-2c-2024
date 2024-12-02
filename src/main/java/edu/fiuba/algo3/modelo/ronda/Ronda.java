@@ -99,6 +99,7 @@ public class Ronda implements Observado {
         mano.agregarCartas(mazo.repartirCartas(8-mano.obtenerCantidadDeCartas()));
         this.notificarObservadores();
     }
+
     public void descartarMano(Seleccionadas seleccionadas, Comodinera comodinera) {
         if (this.descartes != 0) {
             puntajesObtenidos.add(mano.descartarMano(seleccionadas, comodinera));

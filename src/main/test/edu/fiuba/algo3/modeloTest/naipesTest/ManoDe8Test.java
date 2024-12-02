@@ -142,7 +142,7 @@ public class ManoDe8Test {
     public void test10AlElegirSeisCartasLaManoDeberiaLanzarError(){
         // Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
         Carta carta2 = new CartaInglesa(3, new Corazon());
         Carta carta3 = new CartaInglesa(4, new Corazon());
@@ -171,7 +171,7 @@ public class ManoDe8Test {
     public void test11LanzaErrorSiSeJugarUnaCartaQueNoEstaEnLaMano(){
         // Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         mano.agregarCarta(mock(Carta.class));
 
         Carta cartaNoEstaEnLaMano = new CartaInglesa(7, new Trebol());
@@ -186,7 +186,7 @@ public class ManoDe8Test {
     public void test12AlJugarUnaManoConUnaCartaDevuelveElValorDelPuntajeDeLaCarta() {
         // Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Puntaje puntajeEsperado = new Puntaje(10,1);
         Carta carta1 = new CartaInglesa(5, new Trebol());
         mano.agregarCartas(new ArrayList<>(List.of(carta1)));
@@ -201,7 +201,7 @@ public class ManoDe8Test {
     public void test13AlJugarUnaManoConCincoCartasDevuelveElValorDelPuntajeDeLaMano() {
         // Arrange
         Mano mano = new ManoDe8();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(5, new Trebol());
         Carta carta2 = new CartaInglesa(7, new Diamante());
         Carta carta3 = new CartaInglesa(3, new Corazon());
@@ -225,7 +225,7 @@ public class ManoDe8Test {
         // Arrange
         Mano mano = new ManoDe8();
         Comodin comodin = new SumaMultiplicador(4, new Aleatorio(1), "");
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(5, new Trebol());
         Carta carta2 = new CartaInglesa(7, new Diamante());
         mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2)));
@@ -246,7 +246,7 @@ public class ManoDe8Test {
         Mano mano = new ManoDe8();
         Comodin comodin1 = new SumaMultiplicador(4, new Aleatorio(1), "");
         Comodin comodin2 = new SumaMultiplicador(12, new Aleatorio(1), "");
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());
@@ -270,7 +270,7 @@ public class ManoDe8Test {
         Mano mano = new ManoDe8();
         Comodin comodin1 = new SumaMultiplicador(4, new Aleatorio(1), "");
         Comodin comodin2 = new SumaMultiplicador(12, new Trio(), new Aleatorio(1), "");
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());
@@ -295,7 +295,7 @@ public class ManoDe8Test {
         Comodin comodin = new SumaPuntosDescarte(4, new Aleatorio(1), "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());
@@ -319,7 +319,7 @@ public class ManoDe8Test {
         Comodin comodin2 = new SumaPuntosDescarte(12, new Aleatorio(1), "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin1);
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());
@@ -342,7 +342,7 @@ public class ManoDe8Test {
         Comodin comodin = new SumaPuntos(4, "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());
@@ -364,7 +364,7 @@ public class ManoDe8Test {
         Comodin comodin = new SumaPuntosDescarte(100, "");
         Comodinera comodinera = new Comodinera();
         comodinera.agregarComodin(comodin);
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());
@@ -386,7 +386,7 @@ public class ManoDe8Test {
         Mano mano = new ManoDe8();
         Tarot tarot = new Sumador(40, 15,new Par(), "");
         Puntaje puntajeEsperado = new Puntaje(54,17);
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         mano.agregarCartas(new ArrayList<>(List.of(carta1, carta2)));
@@ -407,7 +407,7 @@ public class ManoDe8Test {
         Mano mano = new ManoDe8();
         Tarot tarot = new Sumador(40, 15,new EscaleraReal(), "");
         Puntaje puntajeEsperado = new Puntaje(36,3);
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());
@@ -431,7 +431,7 @@ public class ManoDe8Test {
         Comodin comodin1 = new SumaPuntos(40, "");
         Comodin comodin2 = new SumaPuntosDescarte(50, "");
         Puntaje puntajeEsperado = new Puntaje(76,3);
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());
@@ -454,7 +454,7 @@ public class ManoDe8Test {
         Comodin comodin1 = new SumaPuntos(40, "");
         Comodin comodin2 = new SumaPuntosDescarte(50, "");
         Puntaje puntajeEsperado = new Puntaje(50,1);
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Trebol());
         Carta carta2 = new CartaInglesa(2, new Diamante());
         Carta carta3 = new CartaInglesa(2, new Corazon());

@@ -2,9 +2,10 @@ package edu.fiuba.algo3.modeloTest.rondaTest;
 
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
-import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
+import edu.fiuba.algo3.modelo.naipes.MazoBalatro;
 import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
+import edu.fiuba.algo3.modelo.naipes.SeleccionadasBalatro;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.naipes.carta.CartaInglesa;
 import edu.fiuba.algo3.modelo.naipes.carta.Corazon;
@@ -26,34 +27,34 @@ public class RondaTest {
     public void test01UnaRondaNoSePuedeInstanciarConManosMenoresACero() {
         // Arrange / Act /  Assert
         assertThrows(CantidadDeManosInvalidaException.class, () -> {
-            new Ronda(new Puntaje(1000, 1), -1, 3, new Mazo(), mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), -1, 3, mock(Mazo.class), mock(Tienda.class));;
         });
     }
     @Test
     public void test02UnaRondaNoSePuedeInstanciarConManosIgualesACero() {
         // Arrange / Act /  Assert
         assertThrows(CantidadDeManosInvalidaException.class, () -> {
-            new Ronda(new Puntaje(1000, 1), 0, 3, new Mazo(), mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), 0, 3, mock(Mazo.class), mock(Tienda.class));;
         });
     }
     @Test
     public void test03UnaRondaNoSePuedeInstanciarConDescartesMenoresACero() {
         // Arrange / Act /  Assert
         assertThrows(CantidadDeDescartesInvalidaException.class, () -> {
-            new Ronda(new Puntaje(1000, 1), 3, -1, new Mazo(), mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), 3, -1, mock(Mazo.class), mock(Tienda.class));;
         });
     }
     @Test
     public void test04UnaRondaNoSePuedeInstanciarConDescartesIgualesACero() {
         // Arrange / Act /  Assert
         assertThrows(CantidadDeDescartesInvalidaException.class, () -> {
-            new Ronda(new Puntaje(1000, 1), 3, 0, new Mazo(), mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), 3, 0, mock(Mazo.class), mock(Tienda.class));;
         });
     }
     @Test
     public void test05UnaRondaRecienInstanciadaNoSePasa() {
         // Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         mazo.agregarCartas(new ArrayList<Carta>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         // Act /  Assert
@@ -64,7 +65,7 @@ public class RondaTest {
     @Test
     public void test07UnaRondaRecienInstanciadaNoSePierde() {
         // Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         mazo.agregarCartas(new ArrayList<Carta>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         // Act /  Assert
@@ -75,8 +76,8 @@ public class RondaTest {
     @Test
     public void test08SiUnaRondaSeCreaConUnPuntajeBaseDe1AlJugarUnaManoDeCualquierCartaDebePasarLaRonda() {
         // Arrange
-        Mazo mazo = new Mazo();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Mazo mazo = new MazoBalatro();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
         Carta carta2 = new CartaInglesa(3, new Corazon());
         Carta carta3 = new CartaInglesa(4, new Corazon());
@@ -99,8 +100,8 @@ public class RondaTest {
     @Test
     public void test09SiUnaRondaSeQuedaSinManosYNoPasoElPuntajeDebePerderLaRonda() {
         // Arrange
-        Mazo mazo = new Mazo();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Mazo mazo = new MazoBalatro();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
         Carta carta2 = new CartaInglesa(3, new Corazon());
         Carta carta3 = new CartaInglesa(4, new Corazon());
@@ -123,8 +124,8 @@ public class RondaTest {
     @Test
     public void test10SiUnaRondaSeQuedaSinManoPeroPasoElPuntajeDebePasarLaRonda() {
         // Arrange
-        Mazo mazo = new Mazo();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Mazo mazo = new MazoBalatro();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
         Carta carta2 = new CartaInglesa(3, new Corazon());
         Carta carta3 = new CartaInglesa(4, new Corazon());
@@ -147,8 +148,8 @@ public class RondaTest {
     @Test
     public void test11SiUnaRondaSeQuedaSinDescartesNoPuedeDescartarMasPorLoPeroNoPierdeLaRonda() {
         // Arrange
-        Mazo mazo = new Mazo();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Mazo mazo = new MazoBalatro();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
         Carta carta2 = new CartaInglesa(3, new Corazon());
         Carta carta3 = new CartaInglesa(4, new Corazon());
@@ -175,7 +176,7 @@ public class RondaTest {
     @Test
     public void test12UnaRondaPuedeComprarUnaCartaDeSuTienda() {
         // Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         Tienda tiendaMock = mock(Tienda.class);
@@ -190,7 +191,7 @@ public class RondaTest {
     @Test
     public void test13UnaRondaPuedeComprarUnComodinDeSuTienda() {
         // Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         Tienda tiendaMock = mock(Tienda.class);
@@ -205,7 +206,7 @@ public class RondaTest {
     @Test
     public void test14UnaRondaPuedeComprarUnTarotDeSuTienda() {
         // Arrange
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class),
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         Tienda tiendaMock = mock(Tienda.class);

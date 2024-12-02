@@ -7,7 +7,9 @@ import edu.fiuba.algo3.modelo.comodin.SumaPuntosDescarte;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Par;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
+import edu.fiuba.algo3.modelo.naipes.MazoBalatro;
 import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
+import edu.fiuba.algo3.modelo.naipes.SeleccionadasBalatro;
 import edu.fiuba.algo3.modelo.naipes.carta.*;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
@@ -25,8 +27,8 @@ public class test_de_aceptacion_01 {
 
     @Test
     public void test01(){
-        Mazo mazo = new Mazo();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Mazo mazo = new MazoBalatro();
+        Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
         Carta carta2 = new CartaInglesa(2, new Pica());
 
@@ -62,9 +64,9 @@ public class test_de_aceptacion_01 {
     @Test
     public void test02(){
 
-        Mazo mazo = new Mazo();
+        Mazo mazo = new MazoBalatro();
 
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Seleccionadas seleccionadas =new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
 
         ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta1));
@@ -94,8 +96,8 @@ public class test_de_aceptacion_01 {
     @Test
     public void test03(){
 
-        Mazo mazo = new Mazo();
-        Seleccionadas seleccionadas = new Seleccionadas();
+        Mazo mazo = new MazoBalatro();
+        Seleccionadas seleccionadas =new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
 
         ArrayList<Carta> cartasSeleccionadas = new ArrayList<>(List.of(carta1));

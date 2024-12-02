@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.vistas;
 
-import edu.fiuba.algo3.controllers.ComodinApretarEventHandler;
 import edu.fiuba.algo3.controllers.TarotApretarEventHandler;
 import edu.fiuba.algo3.modelo.Observador;
-import edu.fiuba.algo3.modelo.comodin.Comodinera;
-import edu.fiuba.algo3.modelo.comodin.Modificador;
 import edu.fiuba.algo3.modelo.naipes.Seleccionadas;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.tarot.Tarotera;
@@ -31,7 +28,7 @@ public class TarotsEnMano implements Observador {
         Tarotera tarotera = (Tarotera) notificador;
         contenedor.getChildren().clear();
         for (Tarot tarot : tarotera.obtenerTarots()) {
-            Button tarotBoton = creadorDeBotones.crearBoton(tarot.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
+            Button tarotBoton = creadorDeBotones.crearBoton("tarots/"+tarot.obtenerNombre(), (null), contenedorPrincipal, 0.05, 0.13);
             tarotBoton.setOnAction(new TarotApretarEventHandler(this.seleccionadas, tarot, tarotBoton, contenedor, contenedorPrincipal, tarotera));
             contenedor.getChildren().add(tarotBoton);
             VBox.setMargin(tarotBoton, new Insets(10,0,0,20));

@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.aleatorio.Aleatorio;
 import edu.fiuba.algo3.modelo.aleatorio.Ejecucion;
 import edu.fiuba.algo3.modelo.comodin.Comodin;
 import edu.fiuba.algo3.modelo.comodin.*;
-import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.SinJuego;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import org.junit.jupiter.api.Test;

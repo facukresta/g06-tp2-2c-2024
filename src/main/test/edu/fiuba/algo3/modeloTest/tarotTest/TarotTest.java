@@ -1,14 +1,9 @@
 package edu.fiuba.algo3.modeloTest.tarotTest;
 
-import edu.fiuba.algo3.modelo.comodin.CantidadComodinInvalida;
-import edu.fiuba.algo3.modelo.comodin.SumaMultiplicador;
-import edu.fiuba.algo3.modelo.comodin.SumaMultiplicadorDescarte;
-import edu.fiuba.algo3.modelo.comodin.SumaPuntos;
+
 import edu.fiuba.algo3.modelo.juego.CartaAlta;
 import edu.fiuba.algo3.modelo.juego.Par;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.tarot.CambiadorDePuntos;
-import edu.fiuba.algo3.modelo.tarot.SinTarot;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import org.junit.jupiter.api.Test;
 

@@ -4,9 +4,9 @@ import edu.fiuba.algo3.modelo.Comprable;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.SinJuego;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
+import edu.fiuba.algo3.modelo.puntaje.Puntuador;
 
-
-public abstract class Tarot implements Comprable {
+public abstract class Tarot implements Comprable, Puntuador {
     protected Juego juego;
     protected String nombre;
 
@@ -17,7 +17,7 @@ public abstract class Tarot implements Comprable {
     }
 
     public void comprar() {
-        // Recibe Monto y le manda a otra clase ese monto total y el precio de la carta
+        // A implementar si se agrega dinero
     }
 
     public String obtenerNombre() {

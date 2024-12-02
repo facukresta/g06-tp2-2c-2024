@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class ConversorJuego {
     HashMap<String, Juego> mapaDeJuegos = new HashMap<>();
+
     public ConversorJuego(){
         mapaDeJuegos.put("carta alta", new CartaAlta());
         mapaDeJuegos.put("par", new Par());
@@ -19,6 +20,7 @@ public class ConversorJuego {
         mapaDeJuegos.put("escalera real", new EscaleraReal());
         mapaDeJuegos.put("sin juego", new SinJuego());
     }
+
     public Juego convertirJuego(String juego) {
         return this.mapaDeJuegos.get(juego);
     }

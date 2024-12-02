@@ -47,8 +47,9 @@ public class TarotApretarEventHandler implements EventHandler<ActionEvent> {
         if (cartas.size() == 1) {
             Carta cartaAModificar = cartas.get(0);
             cartaAModificar.aplicarModificador(this.tarot);
-            Button tarotBoton = this.creadorDeBotones.crearBoton("comodinVacio", (null), this.contenedor, 0.05, 0.13);
-            tarotBoton.setOnAction(new TarotApretarEventHandler(this.seleccionadas, new SinTarot(), tarotBoton, this.tarots, this.contenedor, this.tarotera));
+            Tarot nuevoTarot = new SinTarot();
+            Button tarotBoton = this.creadorDeBotones.crearBoton("tarots/"+nuevoTarot.obtenerNombre(), (null), this.contenedor, 0.05, 0.13);
+            tarotBoton.setOnAction(new TarotApretarEventHandler(this.seleccionadas, nuevoTarot, tarotBoton, this.tarots, this.contenedor, this.tarotera));
             this.tarots.getChildren().set(this.tarots.getChildren().indexOf(this.boton),tarotBoton);
             VBox.setMargin(tarotBoton, new Insets(10,0,0,20));
             this.tarotera.quitarTarot(this.tarot);

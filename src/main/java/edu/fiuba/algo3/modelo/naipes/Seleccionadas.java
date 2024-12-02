@@ -1,39 +1,18 @@
 package edu.fiuba.algo3.modelo.naipes;
 
+import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
+
 import java.util.ArrayList;
-import edu.fiuba.algo3.modelo.juego.*;
 
-public class Seleccionadas {
-    private ArrayList<Carta> cartasSeleccionadas;
+public interface Seleccionadas {
+    boolean seleccionarCarta(Carta carta);
 
-    public Seleccionadas() {
-        this.cartasSeleccionadas = new ArrayList<>();
-    }
+    Juego obtenerJuego();
 
-    public boolean seleccionarCarta(Carta carta) {
-        if (!this.cartasSeleccionadas.remove(carta)) {
-            if (this.cartasSeleccionadas.size() < 5) {
-                this.cartasSeleccionadas.add(carta);
-                return true;
-            }
-        }
-        return false;
-    }
+    ArrayList<Carta> obtenerCartasSeleccionadas();
 
-    public Juego obtenerJuego(){
-        return Juego.chequearJuego(cartasSeleccionadas);
-    }
+    boolean estaVacio();
 
-    public ArrayList<Carta> obtenerCartasSeleccionadas(){
-        return this.cartasSeleccionadas;
-    }
-
-    public boolean estaVacio(){
-        return this.cartasSeleccionadas.isEmpty();
-    }
-
-    public void vaciarCartas(){
-        this.cartasSeleccionadas = new ArrayList<>();
-    }
+    void vaciarCartas();
 }

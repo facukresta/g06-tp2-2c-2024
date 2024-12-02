@@ -13,6 +13,7 @@ public class LectorDeCartas {
     private final ConversorPalo conversorPalo = new ConversorPalo();
     private final ConversorNumero conversorNumero = new ConversorNumero();
     private final AbridorDeJson abridorDeJson = new AbridorDeJson();
+
     public ArrayList<Carta> leerCartas(){
         ArrayList<Carta> cartas = new ArrayList<>();
         try {

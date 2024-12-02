@@ -19,7 +19,7 @@ public class Tarotera implements Observado {
 
     public void agregarTarot(Tarot tarotAAgregar) {
         for (Tarot tarot: this.tarots) {
-            if (tarot.obtenerNombre().equals("comodinVacio")) {
+            if (tarot.obtenerNombre().equals("tarotVacio")) {
                 this.tarots.set(this.tarots.indexOf(tarot), tarotAAgregar);
                 this.notificarObservadores();
                 return;
@@ -36,11 +36,9 @@ public class Tarotera implements Observado {
 
     public void aplicarTarotsJuego() {
         for (Tarot tarot: this.tarots) {
-            if (!tarot.obtenerNombre().equals("comodinVacio")) {
-                if (tarot.sosTarotDeJuego()) {
-                    Juego.aplicarTarot(tarot);
-                    this.quitarTarot(tarot);
-                }
+            if (!tarot.obtenerNombre().equals("tarotVacio") && tarot.sosTarotDeJuego()) {
+                Juego.aplicarTarot(tarot);
+                this.quitarTarot(tarot);
             }
         }
     }
@@ -52,7 +50,7 @@ public class Tarotera implements Observado {
     public int cantidadDeTarots() {
         int cantidad = 0;
         for (Tarot tarot : this.tarots) {
-            if (!tarot.obtenerNombre().equals("comodinVacio")) {
+            if (!tarot.obtenerNombre().equals("tarotVacio")) {
                 cantidad++;
             }
         }

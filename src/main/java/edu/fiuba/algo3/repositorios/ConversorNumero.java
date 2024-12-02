@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class ConversorNumero {
     HashMap<String, Integer> mapaDeNumeros = new HashMap<>();
+
     public ConversorNumero(){
         mapaDeNumeros.put("As", 1);
         mapaDeNumeros.put("Rey", 13);
@@ -19,6 +20,7 @@ public class ConversorNumero {
         mapaDeNumeros.put("9", 9);
         mapaDeNumeros.put("10", 10);
     }
+
     public int convertirNumero(String numero) {
         return this.mapaDeNumeros.get(numero);
     }

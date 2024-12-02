@@ -7,7 +7,6 @@ import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
-import edu.fiuba.algo3.modelo.tienda.Tienda;
 import edu.fiuba.algo3.modelo.tienda.TiendaBalatro;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,6 +18,7 @@ public class LectorDeBalatro {
     private final LectorComodines lectorComodines = new LectorComodines();
     private final LectorDeCartas lectorDeCartas = new LectorDeCartas();
     private final LectorDeTarots lectorDeTarots = new LectorDeTarots();
+
     public ArrayList<Ronda> leerBalatro(Mazo mazo) {
         ArrayList<Ronda> listaDeRondas = new ArrayList<>();
         try {

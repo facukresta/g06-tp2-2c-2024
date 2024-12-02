@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 public class Sumador extends Tarot {
     private final int puntos;
     private final double multiplicador;
+
     public Sumador(int puntos, double multiplicador, Juego juego, String nombre) {
         if (puntos < 0) {
             throw new PuntosNegativosTarotException();
