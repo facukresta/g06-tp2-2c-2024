@@ -17,7 +17,7 @@ public class CreadorVisual {
         return imageView;
     }
 
-    public Background crearBackground(String ruta, Pane contenedorPrincipal) {
+    public Background crearBackground(String ruta) {
         InputStream inputStream = getClass().getResourceAsStream("/"+ruta+".png");
         Image imagen = new Image(inputStream);
         BackgroundImage backgroundImage = new BackgroundImage(

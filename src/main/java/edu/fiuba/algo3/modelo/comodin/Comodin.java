@@ -29,4 +29,8 @@ public abstract class Comodin  implements Modificador {
     public String obtenerNombre() {
         return nombre;
     }
+
+    public String obtenerRutaBase() {
+        return "comodines/";
+    }
 }

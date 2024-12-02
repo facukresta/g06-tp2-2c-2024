@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.Comprable;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.SumaPuntos;
 import edu.fiuba.algo3.modelo.comodin.SumaPuntosDescarte;
-import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Par;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.MazoBalatro;
@@ -23,10 +22,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-public class test_de_aceptacion_01 {
+public class test_de_integracion_01 {
 
     @Test
-    public void test01(){
+    public void test01AlTenerUnComodinParaParYJugarEfectivamenteUnParEsteSeAplica(){
         Mazo mazo = new MazoBalatro();
         Seleccionadas seleccionadas = new SeleccionadasBalatro();
         Carta carta1 = new CartaInglesa(2, new Corazon());
@@ -62,7 +61,7 @@ public class test_de_aceptacion_01 {
 
 
     @Test
-    public void test02(){
+    public void test02AlTenerUnComodinParaParYNoJugarUnParEsteNoSeAplica(){
 
         Mazo mazo = new MazoBalatro();
 

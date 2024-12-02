@@ -14,6 +14,7 @@ public class IniciarJuegoEventHandler implements EventHandler<ActionEvent>  {
     private Mazo mazo;
     private ArrayList<Ronda> rondas;
     private Runnable action;
+    private LectorDeBalatro lectorDeBalatro = new LectorDeBalatro();
     public IniciarJuegoEventHandler (ArrayList<Ronda> rondas, Mazo mazo, Runnable action) {
         this.mazo = mazo;
         this.rondas = rondas;
@@ -26,9 +27,8 @@ public class IniciarJuegoEventHandler implements EventHandler<ActionEvent>  {
         this.mazo.vaciarMazo();
         this.mazo.agregarCartas(cartas);
 
-        LectorDeBalatro lectorDeBalatro = new LectorDeBalatro();
         rondas.clear();
-        rondas.addAll(lectorDeBalatro.leerBalatro(this.mazo));
+        rondas.addAll(this.lectorDeBalatro.leerBalatro(this.mazo));
         action.run();
     }
 }

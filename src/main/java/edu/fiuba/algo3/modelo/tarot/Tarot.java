@@ -24,6 +24,10 @@ public abstract class Tarot implements Comprable, Puntuador {
         return this.nombre;
     }
 
+    public String obtenerRutaBase() {
+        return "tarots/";
+    }
+
     public boolean sosTarotDeJuego() {
         return !this.juego.getClass().equals(SinJuego.class);
     }

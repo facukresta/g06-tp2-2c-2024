@@ -30,6 +30,10 @@ public class MultiComodin implements Modificador {
         return nombre;
     }
 
+    public String obtenerRutaBase() {
+        return "comodines/";
+    }
+
     public void comprar() {
         // A implementar si se agrega dinero
     }

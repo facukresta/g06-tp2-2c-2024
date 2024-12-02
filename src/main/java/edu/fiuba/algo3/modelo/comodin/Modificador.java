@@ -9,4 +9,5 @@ public interface Modificador extends Comprable {
 
     String obtenerNombre();
 
+    String obtenerRutaBase();
 }

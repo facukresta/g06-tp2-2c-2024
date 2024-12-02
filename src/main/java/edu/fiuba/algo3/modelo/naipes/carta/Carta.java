@@ -18,5 +18,7 @@ public interface Carta extends Comprable, Puntuable {
 
     String obtenerNombre();
 
+    String obtenerRutaBase();
+
     void comprar();
 }

@@ -56,4 +56,8 @@ public class CartaInglesa implements Carta {
     public void comprar() {
         // A implementar si se agrega dinero
     }
+
+    public String obtenerRutaBase() {
+        return "cartas/";
+    }
 }
