@@ -231,7 +231,7 @@ public class App extends Application {
         musicaGanaste.play();
 
         BorderPane contenedorPrincipal = new BorderPane();
-        contenedorPrincipal.setBackground(creadorVisual.crearBackground("ganasteFondo"));
+        contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondoGanaste"));
 
         VBox medio = new VBox();
 
