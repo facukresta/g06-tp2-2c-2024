@@ -50,7 +50,7 @@ public class App extends Application {
         BorderPane contenedorPrincipal = new BorderPane();
         Media media = new Media(getClass().getResource("/musica/musicaMenu.mp3").toExternalForm());
         MediaPlayer musicaMenu = new MediaPlayer(media);
-        musicaMenu.setVolume(0.1);
+        musicaMenu.setVolume(0.2);
         musicaMenu.setCycleCount(MediaPlayer.INDEFINITE);
         musicaMenu.play();
         contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondoMenus"));
@@ -69,7 +69,7 @@ public class App extends Application {
 
         HBox sectorMusica = new HBox();
         Button botonDeMusica = creadorDeBotones.crearBoton("conVolumen", null, contenedorPrincipal, 0.05,0.05);
-        botonDeMusica.setOnAction(new CambiarVolumenSonidoEventHandler(musicaMenu, contenedorPrincipal, botonDeMusica, 0.1));
+        botonDeMusica.setOnAction(new CambiarVolumenSonidoEventHandler(musicaMenu, contenedorPrincipal, botonDeMusica, 0.2));
         sectorMusica.setAlignment(Pos.BOTTOM_RIGHT);
         sectorMusica.getChildren().add(botonDeMusica);
         HBox.setMargin(botonDeMusica, new Insets(0,20,20,0));
@@ -88,7 +88,7 @@ public class App extends Application {
         contenedorPrincipal.setCenter(medio);
         contenedorPrincipal.setBottom(botonesInferiores);
 
-        return new Scene(contenedorPrincipal, 1280, 720);
+        return new Scene(contenedorPrincipal, 1280, 630);
     }
 
     private void crearEscenaDeJuego() {
@@ -97,15 +97,15 @@ public class App extends Application {
         Media media = new Media(getClass().getResource("/musica/musicaDeFondo.mp3").toExternalForm());
         MediaPlayer musicaJuego = new MediaPlayer(media);
         musicaJuego.setCycleCount(MediaPlayer.INDEFINITE);
-        musicaJuego.setVolume(0.05);
+        musicaJuego.setVolume(0.1);
         musicaJuego.play();
 
         VBox datosRonda = new VBox();
 
         Button botonDeMusica = creadorDeBotones.crearBoton("conVolumen", null, contenedorPrincipal, 0.05,0.05);
-        botonDeMusica.setOnAction(new CambiarVolumenSonidoEventHandler(musicaJuego, contenedorPrincipal, botonDeMusica, 0.05));
+        botonDeMusica.setOnAction(new CambiarVolumenSonidoEventHandler(musicaJuego, contenedorPrincipal, botonDeMusica, 0.1));
 
-        Scene escenaPrincipal = new Scene(contenedorPrincipal, 1280, 720);
+        Scene escenaPrincipal = new Scene(contenedorPrincipal, 1280, 630);
         contenedorPrincipal.setBackground(creadorVisual.crearBackground("fondo2"));
 
         HBox puntajeASuperarBox = new HBox();
@@ -254,7 +254,7 @@ public class App extends Application {
         contenedorPrincipal.setCenter(medio);
         contenedorPrincipal.setBottom(abajo);
 
-        return new Scene(contenedorPrincipal, 1280, 720);
+        return new Scene(contenedorPrincipal, 1280, 630);
     }
 
     private Scene crearEscenaDePerdiste(Runnable musicaJuego) {
@@ -289,7 +289,7 @@ public class App extends Application {
         contenedorPrincipal.setCenter(medio);
         contenedorPrincipal.setBottom(abajo);
 
-        return new Scene(contenedorPrincipal, 1280, 720);
+        return new Scene(contenedorPrincipal, 1280, 630);
     }
 
     private void salirTienda(Scene layoutAnterior) {
@@ -336,7 +336,7 @@ public class App extends Application {
 
         contenedorPrincipal.setCenter(tienda);
 
-        this.cambiarDeEscena(new Scene(contenedorPrincipal, 1280, 720));
+        this.cambiarDeEscena(new Scene(contenedorPrincipal, 1280, 630));
     }
 
     public static void main(String[] args) {
