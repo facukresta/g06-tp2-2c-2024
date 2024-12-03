@@ -27,9 +27,8 @@ public class Ronda implements Observado {
     private Tienda tienda;
     private ArrayList<Observador> observadores = new ArrayList<>();
     private int numeroRonda;
-    private static int contadorRondas = 1;
 
-    public Ronda(Puntaje puntajeASuperar, int manos, int descartes, Mazo mazo, Tienda tienda ) {
+    public Ronda(Puntaje puntajeASuperar, int manos, int descartes, Mazo mazo, Tienda tienda, int numeroRonda) {
         if (manos <= 0) {
             throw new CantidadDeManosInvalidaException();
         }
@@ -41,7 +40,7 @@ public class Ronda implements Observado {
         this.descartes = descartes;
         this.mazo = mazo;
         this.tienda = tienda;
-        this.numeroRonda = contadorRondas++;
+        this.numeroRonda = numeroRonda;
     }
 
     public int obtenerNumeroRonda() {
@@ -93,7 +92,6 @@ public class Ronda implements Observado {
             throw new PasoLaRondaException();
         } else if (!puedeSeguirJugando()) {
             this.notificarObservadores();
-            contadorRondas = 1;
             throw new PerdioLaRondaException();
         }
         mano.agregarCartas(mazo.repartirCartas(8-mano.obtenerCantidadDeCartas()));

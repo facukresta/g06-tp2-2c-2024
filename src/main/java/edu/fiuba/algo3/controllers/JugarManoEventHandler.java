@@ -9,6 +9,7 @@ import edu.fiuba.algo3.modelo.ronda.PerdioLaRondaException;
 import edu.fiuba.algo3.modelo.ronda.Ronda;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.media.AudioClip;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class JugarManoEventHandler implements EventHandler<ActionEvent> {
     private ArrayList<Ronda> rondas;
     private Runnable pasarDeRonda;
     private Runnable perder;
+    private AudioClip sonidoError = new AudioClip(getClass().getResource("/sonido/error.mp3").toExternalForm());
 
 
     public JugarManoEventHandler(Seleccionadas seleccionadas, Comodinera comodinera, ArrayList<Ronda> rondas, Runnable pasarDeRonda, Runnable perder) {
@@ -42,6 +44,8 @@ public class JugarManoEventHandler implements EventHandler<ActionEvent> {
                 this.perder.run();
                 return;
             }
+        } else {
+            sonidoError.play();
         }
     }
 }

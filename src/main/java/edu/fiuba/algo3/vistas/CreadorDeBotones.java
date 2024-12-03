@@ -19,6 +19,7 @@ public class CreadorDeBotones {
 
     public Button crearBoton(String nombre, EventHandler<ActionEvent> handler, Pane contenedorPrincipal, double ancho, double altura) {
         Button boton = new Button();
+        boton.getStyleClass().clear();
         boton.setGraphic(this.creadorVisual.crearImageView(nombre, contenedorPrincipal, ancho, altura));
         boton.setStyle("-fx-padding: 0; -fx-background-color: transparent;");
         boton.setOnAction(handler);

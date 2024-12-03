@@ -24,6 +24,7 @@ public class LectorDeBalatro {
         try {
             JSONObject jsonObject = abridorDeJson.abrirJson("balatro");
             JSONArray rondas = (JSONArray) jsonObject.get("rondas");
+            int numeroRonda = 1;
             for (Object obj : rondas) {
                 JSONObject rondaJson = (JSONObject) obj;
                 int manos = ((Long) rondaJson.get("manos")).intValue();
@@ -37,7 +38,7 @@ public class LectorDeBalatro {
                 productos.addAll(tarots);
                 productos.addAll(cartas);
                 productos.addAll(comodines);
-                listaDeRondas.add(new Ronda(new Puntaje(puntajeABatir, 1), manos, descartes, mazo, new TiendaBalatro(productos)));
+                listaDeRondas.add(new Ronda(new Puntaje(puntajeABatir, 1), manos, descartes, mazo, new TiendaBalatro(productos), numeroRonda++));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,28 +27,28 @@ public class RondaTest {
     public void test01UnaRondaNoSePuedeInstanciarConManosMenoresACero() {
         // Arrange / Act /  Assert
         assertThrows(CantidadDeManosInvalidaException.class, () -> {
-            new Ronda(new Puntaje(1000, 1), -1, 3, mock(Mazo.class), mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), -1, 3, mock(Mazo.class), mock(Tienda.class), 1);;
         });
     }
     @Test
     public void test02UnaRondaNoSePuedeInstanciarConManosIgualesACero() {
         // Arrange / Act /  Assert
         assertThrows(CantidadDeManosInvalidaException.class, () -> {
-            new Ronda(new Puntaje(1000, 1), 0, 3, mock(Mazo.class), mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), 0, 3, mock(Mazo.class), mock(Tienda.class), 1);;
         });
     }
     @Test
     public void test03UnaRondaNoSePuedeInstanciarConDescartesMenoresACero() {
         // Arrange / Act /  Assert
         assertThrows(CantidadDeDescartesInvalidaException.class, () -> {
-            new Ronda(new Puntaje(1000, 1), 3, -1, mock(Mazo.class), mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), 3, -1, mock(Mazo.class), mock(Tienda.class), 1);;
         });
     }
     @Test
     public void test04UnaRondaNoSePuedeInstanciarConDescartesIgualesACero() {
         // Arrange / Act /  Assert
         assertThrows(CantidadDeDescartesInvalidaException.class, () -> {
-            new Ronda(new Puntaje(1000, 1), 3, 0, mock(Mazo.class), mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), 3, 0, mock(Mazo.class), mock(Tienda.class), 1);;
         });
     }
     @Test
@@ -59,7 +59,7 @@ public class RondaTest {
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         // Act /  Assert
         assertDoesNotThrow(() -> {
-            new Ronda(new Puntaje(1000, 1), 3, 3, mazo, mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), 3, 3, mazo, mock(Tienda.class), 1);;
         });
     }
     @Test
@@ -70,7 +70,7 @@ public class RondaTest {
                 mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
         // Act /  Assert
         assertDoesNotThrow(() -> {
-            new Ronda(new Puntaje(1000, 1), 3, 3, mazo, mock(Tienda.class));;
+            new Ronda(new Puntaje(1000, 1), 3, 3, mazo, mock(Tienda.class), 1);;
         });
     }
     @Test
@@ -89,7 +89,7 @@ public class RondaTest {
                 new CartaInglesa(3, new Trebol()), new CartaInglesa(5, new Trebol())));
         cartas.addAll(cartasSeleccionadas);
         mazo.agregarCartas(cartas);
-        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 3, mazo, mock(Tienda.class));
+        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 3, mazo, mock(Tienda.class), 1);
         // Act /  Assert
         ronda.iniciarRonda();
         seleccionadas.seleccionarCarta(carta1);
@@ -113,7 +113,7 @@ public class RondaTest {
                 new CartaInglesa(3, new Trebol()), new CartaInglesa(5, new Trebol())));
         cartas.addAll(cartasSeleccionadas);
         mazo.agregarCartas(cartas);
-        Ronda ronda = new Ronda(new Puntaje(1000, 1), 1, 3, mazo, mock(Tienda.class));
+        Ronda ronda = new Ronda(new Puntaje(1000, 1), 1, 3, mazo, mock(Tienda.class), 1);
         // Act /  Assert
         ronda.iniciarRonda();
         seleccionadas.seleccionarCarta(carta1);
@@ -137,7 +137,7 @@ public class RondaTest {
                 new CartaInglesa(3, new Trebol()), new CartaInglesa(5, new Trebol())));
         cartas.addAll(cartasSeleccionadas);
         mazo.agregarCartas(cartas);
-        Ronda ronda = new Ronda(new Puntaje(1, 1), 1, 3, mazo, mock(Tienda.class));
+        Ronda ronda = new Ronda(new Puntaje(1, 1), 1, 3, mazo, mock(Tienda.class), 1);
         // Act /  Assert
         ronda.iniciarRonda();
         seleccionadas.seleccionarCarta(carta1);
@@ -161,7 +161,7 @@ public class RondaTest {
                 new CartaInglesa(3, new Trebol()), new CartaInglesa(5, new Trebol())));
         mazo.agregarCartas(cartas);
         mazo.agregarCartas(cartasSeleccionadas);
-        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, mock(Tienda.class));
+        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, mock(Tienda.class), 1);
         // Act
         ronda.iniciarRonda();
         mazo.agregarCartas(new ArrayList<>(List.of(mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class), mock(Carta.class))));
@@ -182,7 +182,7 @@ public class RondaTest {
         Tienda tiendaMock = mock(Tienda.class);
         doNothing().when(tiendaMock).comprar(any());
         // Act
-        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock);
+        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock, 1);
         // Act / Assert
         assertDoesNotThrow(() -> {
             ronda.comprar((Carta) any());
@@ -197,7 +197,7 @@ public class RondaTest {
         Tienda tiendaMock = mock(Tienda.class);
         doNothing().when(tiendaMock).comprar(any());
         // Act
-        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock);
+        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock, 1);
         // Act / Assert
         assertDoesNotThrow(() -> {
             ronda.comprar((Modificador) any());
@@ -212,7 +212,7 @@ public class RondaTest {
         Tienda tiendaMock = mock(Tienda.class);
         doNothing().when(tiendaMock).comprar(any());
         // Act
-        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock);
+        Ronda ronda = new Ronda(new Puntaje(1, 1), 3, 1, mazo, tiendaMock, 1);
         // Act / Assert
         assertDoesNotThrow(() -> {
             ronda.comprar((Tarot) any());
