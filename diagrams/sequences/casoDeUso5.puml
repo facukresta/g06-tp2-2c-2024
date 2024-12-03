@@ -5,88 +5,135 @@ participant "TestCase" as TestCase
 
 activate TestCase
 
-TestCase -> "c:Comodin" as comodin **: new SumaPuntos(13, new Par(), probabilidad)
+TestCase -> "c:Comodin" as comodin **: new SumaPuntos(13, new Par(),probabilidad, "")
 
 activate comodin
 comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(probabilidad)
 activate aleatorio
 comodin <-- aleatorio
 deactivate aleatorio
-comodin -> "par:Par" as par ** : new Par()
-activate par
-comodin <-- par
-deactivate par
+comodin -> "Par:Par" as Par ** : new Par()
+activate Par
+comodin <-- Par
+deactivate Par
 TestCase <-- comodin : c
 deactivate comodin
 
-TestCase -> "esperado1:Puntaje" as esperado1 **: new Puntaje(24,2)
-activate esperado1
-TestCase <-- esperado1 : esperado1
-deactivate esperado1
 
-
-TestCase -> "esperado2:Puntaje" as esperado2 **: new Puntaje(37,2)
-activate esperado2
-TestCase <-- esperado2 : esperado2
-deactivate esperado2
-
-TestCase -> "mano:Mano" as mano **: new Mano(8)
+TestCase -> "mano:ManoDe8" as mano **: new ManoDe8()
 activate mano
 TestCase <-- mano : mano
-note right of TestCase: creamos 2 cartas que forman un par
+note right of TestCase: creamos 2 cartas y las guardamos la lista "cartas"
 TestCase -> mano : agregarCartas(cartas)
 deactivate mano
+
+TestCase -> "sel:Saleccionadas" as sel ** : new SeleccionadasBalatro()
+activate sel
+TestCase -> sel : seleccionarCarta(carta1)
+TestCase -> sel : seleccionarCarta(carta1)
+deactivate sel
 
 TestCase -> "comodinera:Comodinera" as comodinera **: new()
 activate comodinera
 TestCase -> comodinera : agregarComodin(c)
 deactivate comodinera
 
+TestCase -> "esperado1:Puntaje" as esperado1 **: new Puntaje(24,2)
+activate esperado1
+TestCase <-- esperado1 : esperado1
+deactivate esperado1
 
-TestCase -> "Juego" as juego : chequearJuego(cartas)
-activate juego
-loop para cada juego en juegos
-juego -> "juegos:List" as juegos : colocarCartas(cartas)
-juego -> juegos: obtenerMayor()
-end
-TestCase <- juego : juego = new Par()
-deactivate juego
+TestCase -> "esperado2:Puntaje" as esperado2 **: new Puntaje(37,2)
+activate esperado2
+TestCase <-- esperado2 : esperado2
+deactivate esperado2
 
-
-TestCase -> mano : jugarMano(cartas, juego, comodinera)
+note right of TestCase: Este primer caso prueba que la probabilidad se cumple
+TestCase -> mano : jugarMano(sel, comodinera)
 activate mano
-mano -> "juego:Par" as mejor:  puntuarMano()
+mano -> sel : obtenerJuego()
+activate sel
+sel -> "Juego" : chequearJuego(sel)
+activate Juego
 
-activate mejor
-mano <-- mejor : obtenido1:Puntaje
-deactivate mejor
-mano -> comodinera : aplicarComodines(obtenido1, juego)
-loop para cada comodin
-comodinera -> "Comodin" : aplicarModificador(obtenido1, juego)
+loop para cada juego
+Juego -> juegoActual : colocarCartas(sel)
+activate juegoActual
+Juego -> juegoActual : obtenerMayor()
+Juego <-- juegoActual : JuegoMayorPuntaje
+deactivate juegoActual
 end
-TestCase <-- mano : obtenido1:Puntaje
+
+sel <-- Juego : JuegoMayorPuntaje
+deactivate Juego
+
+mano <-- sel : JuegoMayorPuntaje
+deactivate sel
+
+mano -> Juego : obtenerPuntaje()
+activate Juego
+mano <-- Juego : resultado1:Puntaje
+deactivate Juego
+
+mano -> comodinera : aplicarComodines(resultado1, juegoMayorPuntaje)
+loop para cada comodin
+comodinera -> "Comodin" : aplicarModificador(resultado1, juegoMayorPuntaje)
+end
+
+mano -> sel: vaciarCartas()
+
+TestCase <-- mano : resultado1:Puntaje
 deactivate mano
 
-TestCase -> mano : jugarMano(cartas, juego, comodinera)
-activate mano
-mano -> "juego:Par" as mejor:  puntuarMano()
+TestCase -> sel : vaciarCartas
+activate sel
+TestCase -> sel : seleccionarCartas(carta1)
+TestCase -> sel : seleccionarCartas(carta2)
+deactivate sel
 
-activate mejor
-mano <-- mejor : obtenido2:Puntaje
-deactivate mejor
-mano -> comodinera : aplicarComodines(obtenido2, juego)
-loop para cada comodin
-comodinera -> "Comodin" : aplicarModificador(obtenido2, juego)
+note right of TestCase: Este caso prueba que la probabilidad no se cumple
+TestCase -> mano : jugarMano(sel, comodinera)
+activate mano
+mano -> sel : obtenerJuego()
+activate sel
+sel -> "Juego" : chequearJuego(sel)
+activate Juego
+
+loop para cada juego
+Juego -> juegoActual : colocarCartas(sel)
+activate juegoActual
+Juego -> juegoActual : obtenerMayor()
+Juego <-- juegoActual : JuegoMayorPuntaje
+deactivate juegoActual
 end
-TestCase <-- mano : obtenido2:Puntaje
+
+sel <-- Juego : JuegoMayorPuntaje
+deactivate Juego
+
+mano <-- sel : JuegoMayorPuntaje
+deactivate sel
+
+mano -> Juego : obtenerPuntaje()
+activate Juego
+mano <-- Juego : resultado2:Puntaje
+deactivate Juego
+
+mano -> comodinera : aplicarComodines(resultado2, juegoMayorPuntaje)
+loop para cada comodin
+comodinera -> "Comodin" : aplicarModificador(resultado2, juegoMayorPuntaje)
+end
+
+mano -> sel: vaciarCartas()
+
+TestCase <-- mano : resultado2:Puntaje
 deactivate mano
 
-TestCase -> esperado1 : tenesMismoPuntaje(obtenido1)
+TestCase -> esperado1 : tenesMismoPuntaje(resultado1)
 activate esperado1
 TestCase <-- esperado1 : true
 deactivate esperado1
 
-TestCase -> esperado2 : tenesMismoPuntaje(obtenido2)
+TestCase -> esperado2 : tenesMismoPuntaje(resultado2)
 activate esperado2
 TestCase <-- esperado2 : true
 deactivate esperado2
