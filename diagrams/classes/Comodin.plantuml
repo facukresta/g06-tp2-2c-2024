@@ -1,0 +1,95 @@
+@startuml Comodin
+skinparam classAttributeIconSize 0
+
+interface Modificador{
++aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+interface Comprable {
+    +comprar()
+    +obtenerNombre(): String
+    +obtenerRutaBase(): String
+}
+
+abstract class Comodin{
+#valor: double
+#juego: Juego
+-nombre: String
++Comodin(double v, Ejecucion p, Juego j, String n)
++{abstract}aplicarModificador(Puntaje p, Juego j)
+}
+
+interface Ejecucion{
+    +ejecuta(Runnable accion)
+}
+
+class Aleatorio{
+probabildiad: int
++Aleatorio(int p)
++ejecuta(Runnable accion)
+}
+
+class SumaMultiplicador{
++SumaMultiplicador(double c, Juego j, Ejecucion p, String n)
++SumaMultiplicador(double c, Ejecucion p, String n)
++SumaMultiplicador(double c, Juego j, String n)
++SumaMultiplicador(double c, String n)
++aplicarModificador(Puntaje p, Juego j)
+}
+
+class SumaMultiplicadorDescarte{
++SumaMultiplicadorDescarte(double c, Ejecucion p, String n)
++SumaMultiplicadorDescarte(double c, String n)
++aplicarModificador(Puntaje p, Juego j)
+}
+
+class SumaPuntos{
++SumaPuntos(double c, Juego jo, Ejecucion p, String n)
++SumaPuntos(double c, Ejecucion p, String n)
++SumaPuntos(double c, Juego j, String n)
++SumaPuntos(double c, String n)
++aplicarModificador(Puntaje p, Juego j)
+}
+
+class SumaPuntosDescarte{
++SumaPuntosDescarte(int c, Ejecucion p, String n)
++SumaPuntosDescarte(int c, String n)
++aplicarModificador(Puntaje p, Juego j
+}
+
+class Multiplicador {
++Multiplicador(double c, Juego jo, Ejecucion p, String n)
++Multiplicador(double c, Ejecucion p, String n)
++Multiplicador(double c, Juego j, String n)
++Multiplicador(double c, String n)
++aplicarModificador(Puntaje p, Juego j)
+}
+
+class SinComodin {
++aplicarModificador(Puntaje p, Juego j
+}
+
+class MultiComodin{
+-nombre: String
++componerComodin(Modificador c)
+}
+
+Modificador .up.|> Comprable
+
+SumaPuntos -right-|> Comodin
+SumaMultiplicadorDescarte -up-|> Comodin
+SumaPuntosDescarte -down-|> Comodin
+SumaMultiplicador -up-|> Comodin
+Multiplicador -down-|> Comodin
+SinComodin -up-|> Comodin
+
+Comodin *-right- Ejecucion
+Aleatorio .up.|> Ejecucion
+
+Comodin .up.|> Modificador
+MultiComodin .right.|> Modificador
+
+
+MultiComodin "1" o-up- "*" Modificador
+
+@enduml

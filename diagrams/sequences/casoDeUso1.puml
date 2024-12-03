@@ -1,0 +1,48 @@
+@startuml casoDeUso1
+title "test01 Al Tener Un Comodin Que Suma 8 Al Multiplicador Este Se Aplica Correctamente"
+
+activate TestCase
+TestCase -> "c:SumaMultiplicador" as comodin **: new SumaMultiplicador(8,"")
+
+activate comodin
+
+comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(1)
+activate aleatorio
+comodin <-- aleatorio
+deactivate aleatorio
+comodin -> "sinJuego:SinJuego" as sinJuego ** : new SinJuego()
+activate sinJuego
+comodin <-- sinJuego
+deactivate sinJuego
+TestCase <-- comodin : c
+deactivate comodin
+
+TestCase -> "esperado:Puntaje" as esperado **: new Puntaje(10,8)
+activate esperado
+TestCase <-- esperado :esperado
+deactivate esperado
+TestCase -> "aModificar:Puntaje" as aModificar **: new Puntaje(10,1)
+activate aModificar
+TestCase <-- aModificar :aModificar
+deactivate aModificar
+
+TestCase -> comodin : aplicarModificador(aModificar, new cartaAlta())
+activate comodin
+comodin -> aleatorio : ejecuta(sumar(new Puntaje(0,8))
+deactivate comodin
+activate aleatorio
+aleatorio -> aModificar : sumar(new Puntaje(0,8))
+
+deactivate aleatorio
+
+TestCase -> esperado: tenesMismoPuntaje(aModificar)
+activate esperado
+esperado -> aModificar: tenesMismoPuntaje()
+activate aModificar
+esperado <-- aModificar : true
+deactivate aModificar
+TestCase <-- esperado :true
+deactivate esperado
+deactivate TestCase
+
+@enduml

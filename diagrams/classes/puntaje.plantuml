@@ -1,0 +1,38 @@
+@startuml Puntaje
+skinparam classAttributeIconSize 0
+
+class Puntaje {
+-puntos: int
+-multiplicador: double
++Puntaje(int puntos, double multiplicador)
++esMayor(Puntaje p): bool
++esMenorAPuntajes(List<Puntaje> p): bool
++obtenerPuntos(): int
++obtenerMultiplicador(): double
++calcularPuntaje(): double
++sumar(Puntaje p)
+-multiplicar(double m)
++tenesMismoPuntaje(Puntaje p): bool
+-sumarPuntos(Puntaje p)
+-sumarMultiplicador(Puntaje p)
+-multiplicarMultiplicador(double m)
+}
+
+interface Puntuador {
+    +obtenerPuntaje(Puntaje puntajeBase): Puntaje
+}
+
+interface Puntuable {
+    +obtenerPuntaje(): Puntaje
+}
+
+interface Modificador{
++aplicarModificador(Puntaje puntaje, Juego juego)
+}
+
+Modificador .down.> Puntaje: "usa"
+Puntuador .down.> Puntaje: "usa"
+Puntuable .left.> Puntaje: "crea"
+
+
+@enduml

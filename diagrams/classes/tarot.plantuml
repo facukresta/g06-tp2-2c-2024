@@ -1,0 +1,56 @@
+@startuml Tarot
+skinparam classAttributeIconSize 0
+
+abstract class Tarot{
+#juego: Juego
+-nombre: String
++sosParaEsteJuego(Juego juego): bool
++sosTarotDeJuego(): bool
+}
+
+interface Comprable {
+    +comprar()
+    +obtenerNombre(): String
+    +obtenerRutaBase(): String
+}
+
+interface Puntuador {
+    +obtenerPuntaje(Puntaje puntajeBase): Puntaje
+}
+
+class Sumador {
+-puntos: int
+-multiplicador: int
++Sumador(int puntos, double multiplicador, Juego juego, String nombre)
++Sumador(int puntos, double multiplicador, String nombre)
++obtenerPuntaje(Puntaje p): Puntaje
+}
+
+class SinTarot {
++SinTarot(Juego juego)
++obtenerPuntaje(Puntaje p): Puntaje
+}
+
+class CambiadorDePuntos {
+-puntos: int
++CambiadorDePuntos(int puntos, Juego juego, String nombre)
++CambiadorDePuntos(int puntos, String nombre)
++obtenerPuntaje(Puntaje p): Puntaje
+}
+
+class CambiadorDeMultiplicador {
+-multplicador: double
++CambiadorDeMultiplicador(double multplicador, Juego juego, String nombre)
++CambiadorDeMultiplicador(double multplicador, String nombre)
++obtenerPuntaje(Puntaje p): Puntaje
+}
+
+Sumador -right-|> Tarot
+SinTarot -left-|> Tarot
+CambiadorDePuntos -up-|> Tarot
+CambiadorDeMultiplicador -up-|> Tarot
+
+Tarot .up.|> Comprable
+Tarot .up.|> Puntuador
+
+@enduml

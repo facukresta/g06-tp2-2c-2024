@@ -1,0 +1,91 @@
+@startuml RondaManoYMazo
+skinparam classAttributeIconSize 0
+
+class Ronda{
+-puntajeASuperar: Puntaje
+-puntajesObtenidos: List<Puntaje>
+-descartes: int
+-manos: int
+-tienda: Tienda
+-mano: Mano
+-mazo: Mazo
+-numeroDeRonda: int
+-observadores: List<Observador>
+-pasoLaRonda(): bool
+-puedeSeguirJugando(): bool
++Ronda(Puntaje p, int m, int d, Mazo m, Tienda t, int ndr)
++descartarMano(Seleccionada s, Comodinera c)
++jugarMano(Seleccionada s, Comodinera c)
++obtenerCartas(): List <Carta>
++comprar (Modificador c)
++comprar (Carta c)
++comprar (Tarot t)
++obtenerPuntajeASuperar(): Puntaje
++obtenerPuntajesObtenidos(): Puntaje
++iniciarRonda()
++obtenerNumeroRonda(): int
+
+}
+
+interface Observado {
++agregarObservador(Observador o)
++agregarObservadores(List<Observador> os)
++quitarObservador(Observador o)
++quitarObservadores(List<Observador> os)
++notificarObservadores()
+}
+
+interface Mazo {
++agregarCarta(Carta c)
++agregarCartas(List<Carta> c)
++repartirCartas(int c): List<Carta>
++mezclar()
++vaciarMazo()
+}
+
+class MazoBalatro {
+-cartas: List<Carta>
+-cartasDescartadas: List<Carta>
+}
+
+class ManoDe8 {
+-maxCartas: int
+-cartas: List<Carta>
+}
+
+interface Mano{
++agregarCarta(Carta c)
++agregarCartas(List<Carta> cs)
++quitarCarta(Carta c)
++quitarCartas(List<Carta> cs)
++descartarMano(Seleccionada s, Comodinera c): Puntaje
++jugarMano(Seleccionada s, Comodinera c): Puntaje
++obtenerCantidadDeCartas(): int
++obtenerCarta(Carta c): Carta
++modificarCarta(Carta c, Tarot t)
++modificarJuego(Tarot t)
++obtenerCartas(): List<Carta>
+}
+
+interface Seleccionadas {
++seleccionarCarta(Carta c):boolean
++obtenerJuego(): Juego
++obtenerCartasSeleccionadas(): List<Carta>
++estaVacio(): boolean
++vaciarCartas()
+}
+
+class SeleccionadasBalatro {
+-cartasSeleccionadas: List<Carta>
+}
+
+Mano ..> Seleccionadas : " usa"
+
+Seleccionadas ..|> SeleccionadasBalatro
+
+MazoBalatro .right.|> Mazo
+ManoDe8 ..|> Mano
+Ronda o-left- Mano : tiene
+Ronda ..|>  Observado
+Ronda -up-> Mazo : tiene
+@enduml

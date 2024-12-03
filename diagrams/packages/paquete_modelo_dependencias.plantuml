@@ -1,17 +1,60 @@
 @startuml
 
-!include ../classes/herencia.plantuml!WITHOUTNOTES
 
-package JUnit {
-        class Test
+package aleatorio {
+    interface Ejecucion
 }
 
-package java.lang {
-        class String
+package comodin {
+    interface Modificador
 }
 
-Test --> Localize: "<<instantiate>>"
-Localize -> String: " # esContent"
-Localize -> String: " # usContent"
+
+package juego {
+    abstract class Juego
+}
+
+
+package naipes {
+    package carta {
+        interface Carta
+    }
+}
+
+package puntaje {
+    class Puntaje
+}
+
+package ronda {
+    class Ronda
+}
+
+package tarot {
+    interface Tarot
+}
+
+package tienda {
+    interface Tienda
+}
+
+ronda ..> puntaje
+ronda ..> naipes
+ronda ..> tienda
+
+tarot ..> puntaje
+tarot ..> juego
+
+comodin ..> aleatorio
+comodin ..> juego
+comodin ..> puntaje
+
+juego .up.> puntaje
+juego ..> carta
+
+tienda ..> comodin
+tienda ..> tarot
+tienda ..> carta
+
+
 
 @enduml

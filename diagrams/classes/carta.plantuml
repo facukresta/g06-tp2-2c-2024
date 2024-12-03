@@ -1,0 +1,75 @@
+@startuml Carta
+skinparam classAttributeIconSize 0
+
+interface Carta {
+    +aplicarModificador(Tarot tarot)
+    +esDelMismoPalo(Carta carta) : bool
+    +obtenerNumero() : int
+    +sos(Carta carta) : bool
+}
+
+interface Puntuable {
+    +obtenerPuntaje(): Puntaje
+}
+
+interface Comprable {
+    +comprar()
+    +obtenerNombre(): String
+    +obtenerRutaBase(): String
+}
+
+class CartaInglesa {
+-valor: int
+-numero: int
++CartaInglesa(int numero, Palo palo)
+-obtenerPalo() : Palo
+}
+
+abstract class Tarot{
+#juego: Juego
+-nombre: String
++{abstract}obtenerPuntaje(Puntaje p): Puntaje
++sosParaEsteJuego(Juego juego): bool
++sosTarotDeJuego(): bool
+}
+
+
+
+interface Palo {
++{abstract}esDeEstePalo(Palo p): bool
+}
+
+
+
+class Trebol {
++esDeEstePalo(Palo p): bool
+}
+
+class Corazon {
++esDeEstePalo(Palo p): bool
+}
+
+class Pica {
++esDeEstePalo(Palo p): bool
+}
+
+class Diamante {
++esDeEstePalo(Palo p): bool
+}
+
+Tarot .up.|> Comprable
+
+CartaInglesa o-up- Tarot :tiene
+
+Carta ..|> Puntuable
+Carta .up.|> Comprable
+
+Palo -left-* CartaInglesa :tiene
+
+Trebol .up.|> Palo
+Corazon .up.|> Palo
+Diamante .down.|> Palo
+Pica .down.|> Palo
+CartaInglesa .left.|> Carta
+
+@enduml

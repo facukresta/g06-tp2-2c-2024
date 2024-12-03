@@ -1,0 +1,32 @@
+@startuml inicializarCartas
+title "Inicializar una lista de cartas"
+
+activate TestCase
+
+TestCase -> "c1:CartaInglesa" as c1 **: new CartaInglesa(1, new Diamante())
+activate c1
+c1 -> ":SinTarot" : new SinTarot()
+deactivate c1
+
+TestCase -> "c2:CartaInglesa" as c2 **: new CartaInglesa(2, new Trebol())
+activate c2
+c2 -> ":SinTarot" : new SinTarot()
+deactivate c2
+
+TestCase -> "c3:CartaInglesa" as c3 **: new CartaInglesa(3, new Pica())
+activate c3
+c3 -> ":SinTarot" : new SinTarot()
+deactivate c3
+
+TestCase -> "c4:CartaInglesa" as c4 **: new CartaInglesa(4, new Corazon())
+activate c4
+c4 -> ":SinTarot" : new SinTarot()
+deactivate c4
+
+TestCase -> "cartas:ArrayList<Carta>" as cartas **: new (c1,c2,c3,c4)
+activate cartas
+TestCase <-- cartas : cartas
+deactivate cartas
+
+deactivate TestCase
+@enduml

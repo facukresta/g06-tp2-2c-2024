@@ -1,0 +1,88 @@
+@startuml Juego
+skinparam classAttributeIconSize 0
+
+abstract Juego {
+#modificador: Tarot
+#cartas: List<Carta>
+-{static}juegos: List<Juego>
++{static}ChequearJuego(List<Carta> cs): Juego
++{abstract}obtenerPuntaje(): Puntaje
++{abstract}sosJuego(List<Carta> cs): bool
++sosElMismoJuego(Juego j): bool
+#puntuarJuego(Puntaje p): Puntaje
+#puntuarCartas(Puntaje p): Puntaje
+#colocarCartas(ArrayList<Carta> cs)
+#obtenerMayor(Juego j): Juego
+-aplicarTarotALaIntancia(Tarot t)
++aplicarTarot(Tarot t)
+}
+
+class CartaAlta {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class Par {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class DoblePar {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class Trio {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class Escalera {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class Color {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class FullHouse {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class Poker {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class EscaleraDeColor {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class EscaleraReal  {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+class SinJuego  {
++obtenerPuntaje(): Puntaje
++sosJuego(List<Carta>): bool
+}
+
+CartaAlta -up-|> Juego
+Par -up-|> Juego
+DoblePar -up-|> Juego
+Trio -up-|> Juego
+Escalera -left-|> Juego
+SinJuego --|> Juego
+Color -right-|> Juego
+FullHouse -down-|> Juego
+Poker -down-|> Juego
+EscaleraDeColor -down-|> Juego
+EscaleraReal -down-|> Juego
+
+
+@enduml Clases
