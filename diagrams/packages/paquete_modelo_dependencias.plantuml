@@ -1,37 +1,60 @@
 @startuml
 
 
+package aleatorio {
+    interface Ejecucion
+}
+
+package comodin {
+    interface Modificador
+}
+
+
 package juego {
-        abstract class Juego
+    abstract class Juego
+}
+
+
+package naipes {
+    package carta {
+        interface Carta
+    }
 }
 
 package puntaje {
-        class Puntaje
+    class Puntaje
+}
+
+package ronda {
+    class Ronda
 }
 
 package tarot {
-        interface Tarot
+    interface Tarot
 }
 
-package naipes {
-        package carta {
-            class Carta
-        }
-        class Mano
-        class ManoDe5
-        class Mazo
+package tienda {
+    interface Tienda
 }
 
-Tarot ..> Puntaje
-ManoDe5 --> Juego
-ManoDe5 ..> Puntaje
-Juego --> Tarot
-Juego ..> Puntaje
-Juego ..> Carta
-Carta ..> Puntaje
-Carta -right-> Tarot
-Jugador -up-> Mano
-Jugador -up-> ManoDe5
-Jugador .up.> Carta
+ronda ..> puntaje
+ronda ..> naipes
+ronda ..> tienda
+
+tarot ..> puntaje
+tarot ..> juego
+
+comodin ..> aleatorio
+comodin ..> juego
+comodin ..> puntaje
+
+juego .up.> puntaje
+juego ..> carta
+
+tienda ..> comodin
+tienda ..> tarot
+tienda ..> carta
+
+
 
 @enduml

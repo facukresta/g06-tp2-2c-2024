@@ -35,7 +35,7 @@ public class PuntajeObtenido implements Observador {
     @Override
     public void actualizar(Object notificador) {
         Ronda ronda = (Ronda) notificador;
-        Label puntajesObtenidosMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(ronda.obtenerPuntajesObtenidos()));
+        Label puntajesObtenidosMostrados = creadorDeEtiqueta.crearEtiquetaConEstilo(String.valueOf(ronda.obtenerPuntajesObtenidos().calcularPuntaje()));
         puntajesObtenidosMostrados.setTextFill(Color.WHITE);
         puntajesObtenidosMostrados.setFont(Font.font(22));
         this.contenedor.getChildren().set(1, puntajesObtenidosMostrados);

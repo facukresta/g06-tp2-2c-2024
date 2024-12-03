@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo.tarot;
 
 import edu.fiuba.algo3.modelo.Observado;
 import edu.fiuba.algo3.modelo.Observador;
-import edu.fiuba.algo3.modelo.comodin.ComodinNoEnComodineraException;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
 import edu.fiuba.algo3.modelo.juego.Juego;
 
@@ -29,7 +28,7 @@ public class Tarotera implements Observado {
 
     public void quitarTarot(Tarot tarotAQuitar) {
         if (!this.tarots.contains(tarotAQuitar))
-            throw new ComodinNoEnComodineraException();
+            throw new TarotNoEnTaroteraExcepcion();
         this.tarots.set(this.tarots.indexOf(tarotAQuitar), new SinTarot());
         this.notificarObservadores();
     }

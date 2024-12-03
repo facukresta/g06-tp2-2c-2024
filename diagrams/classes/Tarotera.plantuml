@@ -1,0 +1,37 @@
+@startuml Tarotera
+skinparam classAttributeIconSize 0
+
+
+abstract class Tarot{
+#juego: Juego
+-nombre: String
++{abstract}obtenerPuntaje(Puntaje p): Puntaje
++sosParaEsteJuego(Juego juego): bool
++sosTarotDeJuego(): bool
+{abstract}+obtenerPuntaje(): Puntaje
++comprar()
++obtenerNombre(): String
++obtenerRutaBase(): String
+}
+
+class Tarotera {
+-observadores: List<Observador>
++agregarTarot(Tarot t)
++quitarTarot(Tarot t)
++aplicarTarotsJuego()
++obtenerTarots(): List<Tarot>
++cantidadDeTarots(): int
+}
+
+interface Observado {
++agregarObservador(Observador o)
++agregarObservadores(List<Observador> os)
++quitarObservador(Observador o)
++quitarObservadores(List<Observador> os)
++notificarObservadores()
+}
+
+Tarotera  .left.|>  Observado
+Tarotera "1 " o-- " * " Tarot
+
+@enduml

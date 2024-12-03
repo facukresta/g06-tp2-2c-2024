@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.modelo.tienda;
 
-import edu.fiuba.algo3.modelo.Comprable;
-import edu.fiuba.algo3.modelo.naipes.MaximoCartasSeleccionadasException;
-
 import java.util.ArrayList;
 
 public class TiendaBalatro implements Tienda {
@@ -18,7 +15,7 @@ public class TiendaBalatro implements Tienda {
             throw new ProductoNoEnTiendaException();
         }
         if (this.comprado) {
-            throw new MaximoCartasSeleccionadasException();
+            throw new MaximoProductosCompradosExcepction();
         }
         this.comprado = true;
         this.productos.clear();

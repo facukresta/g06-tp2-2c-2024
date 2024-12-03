@@ -3,11 +3,12 @@ package edu.fiuba.algo3.modelo.juego;
 import java.util.ArrayList;
 import java.util.List;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;
+import edu.fiuba.algo3.modelo.puntaje.Puntuable;
 import edu.fiuba.algo3.modelo.tarot.*;
 
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 
-public abstract class Juego {
+public abstract class Juego implements Puntuable {
     private static ArrayList<Juego> juegos = new ArrayList<>(List.of(new CartaAlta(),
             new Par(), new DoblePar(), new Trio(), new Escalera(), new Color(),
             new FullHouse(), new Poker(), new EscaleraDeColor(), new EscaleraReal()));
@@ -61,6 +62,7 @@ public abstract class Juego {
         return new Puntaje(0, 1);
     }
 
+    @Override
     abstract public Puntaje obtenerPuntaje();
 
     public boolean sosElMismoJuego(Juego juego) {

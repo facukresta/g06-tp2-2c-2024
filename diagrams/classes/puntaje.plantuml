@@ -5,61 +5,34 @@ class Puntaje {
 -puntos: int
 -multiplicador: double
 +Puntaje(int puntos, double multiplicador)
--calcularPuntaje(): double
 +esMayor(Puntaje p): bool
-+esMenorAPuntajes(List<Puntaje> puntajes) : bool
++esMenorAPuntajes(List<Puntaje> p): bool
 +obtenerPuntos(): int
 +obtenerMultiplicador(): double
-+sumar(Puntaje puntajeASumar):
--sumarPuntos(Puntaje puntaje):
--sumarMultiplicador(Puntaje puntaje):
-+tenesMismoPuntaje(Puntaje puntaje) : bool
++calcularPuntaje(): double
++sumar(Puntaje p)
+-multiplicar(double m)
++tenesMismoPuntaje(Puntaje p): bool
+-sumarPuntos(Puntaje p)
+-sumarMultiplicador(Puntaje p)
+-multiplicarMultiplicador(double m)
 }
 
-class Carta {
--valor: int
--numero: int
-+Carta(int numero, Palo palo)
-+aplicarModificador(Tarot t)
-+esDelMismoPalo(Carta carta) : bool
-+obtenerNumero() : int
--obtenerPalo() : Palo
-+obtenerPuntaje(): Puntaje
-+sos(Carta c): boolean
+interface Puntuador {
+    +obtenerPuntaje(Puntaje puntajeBase): Puntaje
 }
 
-abstract Juego {
-#modificador: Tarot
-#cartas : List<Carta>
--{static}juegos: List<Juego>
-+{static}ChequearJuego(List<Carta>): Juego
-+{abstract}puntuarMano(): Puntaje
-+{abstract}sosJuego(List<Carta>): bool
-+sosElMismoJuego(List<Carta>): bool
-#puntuarJuego(Puntaje puntajeBase) : Puntaje
-#puntuarCartas(Puntaje puntajeBase): Puntaje
-#colocarCartas(ArrayList<Carta> cartas)
-#Juego obtenerMayor(Juego juegoSeleccionado)
--aplicarTarotALaIntancia(Tarot t)
-+aplicarTarot(Tarot t)
+interface Puntuable {
+    +obtenerPuntaje(): Puntaje
 }
 
 interface Modificador{
-+{abstract} aplicarModificador(Puntaje puntaje, Juego juego)
++aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
-abstract class Tarot{
-#juego: Juego
-+{abstract}obtenerPuntaje(Puntaje p): Puntaje
-+sosParaEsteJuego(Juego juego): bool
-}
-
-Carta *-- Tarot :tiene
-
-
-Tarot .up.> Puntaje: "usa"
 Modificador .down.> Puntaje: "usa"
-Juego -up-> Puntaje
-Puntaje <.left. Carta: "crea"
+Puntuador .down.> Puntaje: "usa"
+Puntuable .left.> Puntaje: "crea"
+
 
 @enduml

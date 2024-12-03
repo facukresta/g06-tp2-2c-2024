@@ -1,6 +1,6 @@
-package edu.fiuba.algo3.test_de_aceptacion;
+package edu.fiuba.algo3.test_de_integracion;
 
-import edu.fiuba.algo3.modelo.Comprable;
+import edu.fiuba.algo3.modelo.tienda.Comprable;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
 import edu.fiuba.algo3.modelo.comodin.SumaPuntos;
 import edu.fiuba.algo3.modelo.comodin.SumaPuntosDescarte;
@@ -48,14 +48,14 @@ public class test_de_integracion_01 {
         comodinera.agregarComodin(new SumaPuntosDescarte(50, "" ));
 
 
-        assertEquals(ronda.obtenerPuntajesObtenidos(), 0);
+        assertEquals(ronda.obtenerPuntajesObtenidos().calcularPuntaje(), 0);
 
         seleccionadas.seleccionarCarta(carta1);
         seleccionadas.seleccionarCarta(carta2);
 
         ronda.jugarMano(seleccionadas, comodinera);
 
-        assertEquals(ronda.obtenerPuntajesObtenidos(), 228);
+        assertEquals(ronda.obtenerPuntajesObtenidos().calcularPuntaje(), 228);
     }
 
 
@@ -84,11 +84,11 @@ public class test_de_integracion_01 {
         comodinera.agregarComodin(new SumaPuntos(100, new Par(), ""));
         comodinera.agregarComodin(new SumaPuntosDescarte(50, "" ));
 
-        assertEquals(ronda.obtenerPuntajesObtenidos(), 0);
+        assertEquals(ronda.obtenerPuntajesObtenidos().calcularPuntaje(), 0);
         seleccionadas.seleccionarCarta(carta1);
         ronda.jugarMano(seleccionadas, comodinera);
 
-        assertEquals(ronda.obtenerPuntajesObtenidos(), 7);
+        assertEquals(ronda.obtenerPuntajesObtenidos().calcularPuntaje(), 7);
     }
 
     @Test
@@ -116,12 +116,12 @@ public class test_de_integracion_01 {
         comodinera.agregarComodin(new SumaPuntos(100, new Par(), ""));
         comodinera.agregarComodin(new SumaPuntosDescarte(50, "" ));
 
-        assertEquals(ronda.obtenerPuntajesObtenidos(), 0);
+        assertEquals(ronda.obtenerPuntajesObtenidos().calcularPuntaje(), 0);
 
         seleccionadas.seleccionarCarta(carta1);
 
         ronda.descartarMano(seleccionadas, comodinera);
 
-        assertEquals(ronda.obtenerPuntajesObtenidos(), 50);
+        assertEquals(ronda.obtenerPuntajesObtenidos().calcularPuntaje(), 50);
     }
 }

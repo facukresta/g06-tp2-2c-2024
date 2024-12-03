@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.repositorios;
 
-import edu.fiuba.algo3.modelo.Comprable;
+import edu.fiuba.algo3.modelo.tienda.Comprable;
 import edu.fiuba.algo3.modelo.comodin.Modificador;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.carta.Carta;

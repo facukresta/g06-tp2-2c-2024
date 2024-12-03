@@ -3,39 +3,42 @@ skinparam classAttributeIconSize 0
 
 class TiendaBalatro{
 - comprado : bool
-+TiendaBalatro(ArrayList<Comprable> productos)
-+comprar(Comprable compra)
++TiendaBalatro(List<Comprable> p)
 }
 
 interface Tienda {
 +comprar(Comprable compra);
++mostrarProductos(): List<Comprable>
 }
 
 interface Comprable {
-+comprar()
+    +comprar()
+    +obtenerNombre(): String
+    +obtenerRutaBase(): String
 }
-
-class Tarot {
+abstract class Tarot{
 #juego: Juego
-+{abstract}obtenerPuntaje(Puntaje p): Puntaje
+-nombre: String
 +sosParaEsteJuego(Juego juego): bool
++sosTarotDeJuego(): bool
++obtenerPuntaje(Puntaje puntajeBase): Puntaje
 }
 
-class Modificador {
-+{abstract} aplicarModificador(Puntaje puntaje, Juego juego)
+interface Modificador{
++aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
-class Carta {
-+aplicarModificador(Tarot tarot)
-+obtenerPuntaje() : Puntaje
-+esDelMismoPalo(Carta carta) : bool
-+obtenerNumero() : int
-+sos(Carta carta) : bool
+interface Carta {
+    +aplicarModificador(Tarot tarot)
+    +esDelMismoPalo(Carta carta) : bool
+    +obtenerNumero() : int
+    +sos(Carta carta) : bool
+     +obtenerPuntaje(): Puntaje
 }
 
-Carta .up.|> Comprable
+Carta .left.|> Comprable
 Modificador .up.|> Comprable
-Tarot .up.|> Comprable
+Tarot .right.|> Comprable
 TiendaBalatro "1" o-- "*" Comprable
 TiendaBalatro .right.|> Tienda
 

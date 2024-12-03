@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.naipes.carta;
 
-import edu.fiuba.algo3.modelo.Comprable;
+import edu.fiuba.algo3.modelo.tienda.Comprable;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.puntaje.Puntuable;
 import edu.fiuba.algo3.modelo.tarot.Tarot;

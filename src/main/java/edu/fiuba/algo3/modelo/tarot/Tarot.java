@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.tarot;
 
-import edu.fiuba.algo3.modelo.Comprable;
+import edu.fiuba.algo3.modelo.tienda.Comprable;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.SinJuego;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;

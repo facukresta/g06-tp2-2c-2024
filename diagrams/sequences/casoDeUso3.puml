@@ -10,7 +10,7 @@ activate esperado
 TestCase <-- esperado : esperado
 deactivate esperado
 
-TestCase -> "c:Comodin" as comodin **: new SumaPuntosDescarte(10,"")
+TestCase -> "c:SumaPuntosDescarte" as comodin **: new SumaPuntosDescarte(10,"")
 
 activate comodin
 comodin -> "a:Aleatorio" as aleatorio **: new Aleatorio(1)
@@ -27,19 +27,28 @@ deactivate comodin
 TestCase -> "mano:ManoDe8" as mano **: new ManoDe8()
 activate mano
 TestCase <-- mano : mano
+deactivate mano
 note right of TestCase: creamos 5 cartas que forman una escalera
 TestCase -> mano : agregarCartas(cartas)
 deactivate mano
 
 TestCase -> "sel:Saleccionadas" as sel ** : new SeleccionadasBalatro()
+activate sel
+TestCase <-- sel :sel
+deactivate sel
 loop para cada carta
 TestCase -> sel : seleccionarCarta(carta)
 end
 
-TestCase -> "comodinera:Comodinera" as comodinera **: new()
+TestCase -> "comodinera:Comodinera" as comodinera **: new Comodinera()
 activate comodinera
-TestCase -> comodinera : agregarComodin(c)
+
+loop para 5 comodines
+comodinera -> comodinera  :agregarComodin(new SinComodin())
+end
+TestCase <-- comodinera :comodinera
 deactivate comodinera
+TestCase -> comodinera : agregarComodin(c)
 
 
 TestCase -> mano : descartarMano(seleccionadas, comodinera)
@@ -65,14 +74,33 @@ deactivate Juego
 mano <-- sel : sinJuego
 deactivate sel
 
-mano -> Juego : obtenerPuntaje()
-activate Juego
-mano <-- Juego : Puntaje(0,1)
-deactivate Juego
+mano -> ":Juego" as escalera : obtenerPuntaje()
+activate escalera
+escalera -> ":Tarot" as tarot :obtenerPuntaje(puntajeDelJuego)
+activate tarot
+escalera <-- tarot :puntajeModificado
+deactivate tarot
+loop para cada carta en el juego
+escalera -> ":Carta" as carta :obtenerPuntaje()
+activate carta
+carta -> tarot :obtenerPuntaje(puntajeBaseDeLaCarta)
+activate tarot
+carta <-- tarot :puntajeDeLaCartaModificado
+deactivate
+escalera <-- carta: puntajeDeLaCarta
+deactivate carta
+end
+mano <-- escalera : Puntaje(0,1)
+deactivate escalera
 
-mano -> comodinera : aplicarComodines(resultado, sinJuego)
+mano -> comodinera : aplicarComodines(resultado, juegoMayorPuntaje)
+activate comodinera
 loop para cada comodin
-comodinera -> "Comodin" : aplicarModificador(resultado, sinJuego)
+comodinera -> ":Comodin" as comodin3 : aplicarModificador(resultado, juegoMayorPuntaje)
+deactivate comodinera
+activate comodin3
+comodin3 -> ":Aleatorio" as ejecucion : ejecuta(puntaje.sumar(new Puntaje(3, valor))
+deactivate comodin3
 end
 TestCase <-- mano : resultado:Puntaje
 deactivate mano

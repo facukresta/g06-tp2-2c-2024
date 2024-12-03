@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.ronda;
 
-import edu.fiuba.algo3.modelo.Comprable;
+import edu.fiuba.algo3.modelo.tienda.Comprable;
 import edu.fiuba.algo3.modelo.Observado;
 import edu.fiuba.algo3.modelo.Observador;
 import edu.fiuba.algo3.modelo.comodin.Comodinera;
@@ -13,7 +13,6 @@ import edu.fiuba.algo3.modelo.naipes.carta.Carta;
 import edu.fiuba.algo3.modelo.puntaje.Puntaje;
 import edu.fiuba.algo3.modelo.tarot.Tarot;
 import edu.fiuba.algo3.modelo.tienda.Tienda;
-import javafx.beans.binding.ObjectBinding;
 
 import java.util.ArrayList;
 
@@ -132,14 +131,14 @@ public class Ronda implements Observado {
         tienda.comprar(tarot);
     }
 
-    public double obtenerPuntajeASuperar() {
-        return this.puntajeASuperar.calcularPuntaje();
+    public Puntaje obtenerPuntajeASuperar() {
+        return this.puntajeASuperar;
     }
 
-    public double obtenerPuntajesObtenidos() {
-        double puntajesObtenidos = 0;
+    public Puntaje obtenerPuntajesObtenidos() {
+        Puntaje puntajesObtenidos = new Puntaje(0, 1);
         for (Puntaje puntaje: this.puntajesObtenidos){
-            puntajesObtenidos += puntaje.calcularPuntaje();
+            puntajesObtenidos.sumar(puntaje);
         }
         return puntajesObtenidos;
     }

@@ -1,11 +1,6 @@
 package edu.fiuba.algo3.controllers;
 
-import edu.fiuba.algo3.modelo.Comprable;
-import edu.fiuba.algo3.modelo.comodin.Comodinera;
-import edu.fiuba.algo3.modelo.comodin.Modificador;
-import edu.fiuba.algo3.modelo.naipes.Mazo;
-import edu.fiuba.algo3.modelo.naipes.carta.Carta;
-import edu.fiuba.algo3.modelo.tarot.Tarot;
+import edu.fiuba.algo3.modelo.tienda.Comprable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

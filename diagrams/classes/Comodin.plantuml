@@ -1,23 +1,22 @@
 @startuml Comodin
 skinparam classAttributeIconSize 0
 
-class Comodinera{
-    +agregarComodin(Modificador comodin)
-    +cambiarOrden(Modificador comodin1, Modificador comodin2)
-    +quitaComodin(Modificador comodin)
-    +aplicarComodines(Puntaje puntajeBase, Juego juego)
+interface Modificador{
++aplicarModificador(Puntaje puntaje, Juego juego)
 }
 
-interface Modificador{
-+{abstract} aplicarModificador(Puntaje puntaje, Juego juego)
+interface Comprable {
+    +comprar()
+    +obtenerNombre(): String
+    +obtenerRutaBase(): String
 }
 
 abstract class Comodin{
-#valor : double
-#juego : Juego
-+{method} Comodin(double valor, Ejecucion probabilidad, Juego juego)
-+{abstract} {method} aplicarModificador(Puntaje puntaje, Juego juego)
-+comprar()
+#valor: double
+#juego: Juego
+-nombre: String
++Comodin(double v, Ejecucion p, Juego j, String n)
++{abstract}aplicarModificador(Puntaje p, Juego j)
 }
 
 interface Ejecucion{
@@ -25,51 +24,64 @@ interface Ejecucion{
 }
 
 class Aleatorio{
-#valor : double
-#juego : Juego
-- probabilidad : int
-+{method} Aleatorio(int probabilidad)
+probabildiad: int
++Aleatorio(int p)
 +ejecuta(Runnable accion)
 }
 
 class SumaMultiplicador{
-+SumaMultiplicador(double cantidad, Juego juego, Ejecucion probabilidad)
-+SumaMultiplicador(double cantidad, Ejecucion probabilidad)
-+SumaMultiplicador(double cantidad, Juego juego)
-+SumaMultiplicador(double cantidad)
-+aplicarModificador(Puntaje puntaje, Juego juego)
++SumaMultiplicador(double c, Juego j, Ejecucion p, String n)
++SumaMultiplicador(double c, Ejecucion p, String n)
++SumaMultiplicador(double c, Juego j, String n)
++SumaMultiplicador(double c, String n)
++aplicarModificador(Puntaje p, Juego j)
 }
 
 class SumaMultiplicadorDescarte{
-+SumaMultiplicadorDescarte(double cantidad, Ejecucion probabilidad)
-+SumaMultiplicadorDescarte(double cantidad)
-+aplicarModificador(Puntaje puntaje, Juego juego)
++SumaMultiplicadorDescarte(double c, Ejecucion p, String n)
++SumaMultiplicadorDescarte(double c, String n)
++aplicarModificador(Puntaje p, Juego j)
 }
 
 class SumaPuntos{
-+SumaPuntos(double cantidad, Juego juego, Ejecucion probabilidad)
-+SumaPuntos(double cantidad, Ejecucion probabilidad)
-+SumaPuntos(double cantidad, Juego juego)
-+SumaPuntos(double cantidad)
-+aplicarModificador(Puntaje puntaje, Juego juego)
++SumaPuntos(double c, Juego jo, Ejecucion p, String n)
++SumaPuntos(double c, Ejecucion p, String n)
++SumaPuntos(double c, Juego j, String n)
++SumaPuntos(double c, String n)
++aplicarModificador(Puntaje p, Juego j)
 }
 
 class SumaPuntosDescarte{
-+SumaPuntosDescarte(int cantidad, Ejecucion probabilidad)
-+SumaPuntosDescarte(int cantidad)
-+aplicarModificador(Puntaje puntaje, Juego juego)
++SumaPuntosDescarte(int c, Ejecucion p, String n)
++SumaPuntosDescarte(int c, String n)
++aplicarModificador(Puntaje p, Juego j
+}
+
+class Multiplicador {
++Multiplicador(double c, Juego jo, Ejecucion p, String n)
++Multiplicador(double c, Ejecucion p, String n)
++Multiplicador(double c, Juego j, String n)
++Multiplicador(double c, String n)
++aplicarModificador(Puntaje p, Juego j)
+}
+
+class SinComodin {
++aplicarModificador(Puntaje p, Juego j
 }
 
 class MultiComodin{
-    +componerComodin(Modificador comodin)
-    +aplicarModificador(Puntaje puntaje, Juego juego)
-    +comprar()
+-nombre: String
++componerComodin(Modificador c)
 }
+
+Modificador .up.|> Comprable
 
 SumaPuntos -right-|> Comodin
 SumaMultiplicadorDescarte -up-|> Comodin
 SumaPuntosDescarte -down-|> Comodin
 SumaMultiplicador -up-|> Comodin
+Multiplicador -down-|> Comodin
+SinComodin -up-|> Comodin
 
 Comodin *-right- Ejecucion
 Aleatorio .up.|> Ejecucion
@@ -77,7 +89,7 @@ Aleatorio .up.|> Ejecucion
 Comodin .up.|> Modificador
 MultiComodin .right.|> Modificador
 
-Comodinera "1" o-- "*" Modificador
-MultiComodin "1" o-- "*" Comodin
+
+MultiComodin "1" o-up- "*" Modificador
 
 @enduml

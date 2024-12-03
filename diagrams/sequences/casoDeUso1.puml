@@ -2,7 +2,7 @@
 title "test01 Al Tener Un Comodin Que Suma 8 Al Multiplicador Este Se Aplica Correctamente"
 
 activate TestCase
-TestCase -> "c:Comodin" as comodin **: new SumaMultiplicador(8,"")
+TestCase -> "c:SumaMultiplicador" as comodin **: new SumaMultiplicador(8,"")
 
 activate comodin
 
@@ -16,12 +16,6 @@ comodin <-- sinJuego
 deactivate sinJuego
 TestCase <-- comodin : c
 deactivate comodin
-TestCase -> "cartaAlta:CartaAlta" as cartaAlta ** :new CartaAlta()
-activate cartaAlta
-TestCase <-- cartaAlta :cartaAlta
-deactivate cartaAlta
-
-
 
 TestCase -> "esperado:Puntaje" as esperado **: new Puntaje(10,8)
 activate esperado
@@ -32,10 +26,13 @@ activate aModificar
 TestCase <-- aModificar :aModificar
 deactivate aModificar
 
-TestCase -> comodin : aplicarModificador(aModificar, cartaAlta)
-TestCase -> aleatorio : ejecuta(sumar(new Puntaje(0,8))
+TestCase -> comodin : aplicarModificador(aModificar, new cartaAlta())
+activate comodin
+comodin -> aleatorio : ejecuta(sumar(new Puntaje(0,8))
+deactivate comodin
 activate aleatorio
 aleatorio -> aModificar : sumar(new Puntaje(0,8))
+
 deactivate aleatorio
 
 TestCase -> esperado: tenesMismoPuntaje(aModificar)

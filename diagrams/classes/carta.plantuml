@@ -3,38 +3,43 @@ skinparam classAttributeIconSize 0
 
 interface Carta {
     +aplicarModificador(Tarot tarot)
-    +obtenerPuntaje() : Puntaje
     +esDelMismoPalo(Carta carta) : bool
     +obtenerNumero() : int
     +sos(Carta carta) : bool
+}
+
+interface Puntuable {
+    +obtenerPuntaje(): Puntaje
+}
+
+interface Comprable {
+    +comprar()
+    +obtenerNombre(): String
+    +obtenerRutaBase(): String
 }
 
 class CartaInglesa {
 -valor: int
 -numero: int
 +CartaInglesa(int numero, Palo palo)
-+aplicarModificador(Tarot t)
-+esDelMismoPalo(Carta carta) : bool
-+obtenerNumero() : int
 -obtenerPalo() : Palo
-+obtenerPuntaje(): Puntaje
-+sos(CartaInglesa c): bool
-+comprar()
 }
 
 abstract class Tarot{
 #juego: Juego
+-nombre: String
 +{abstract}obtenerPuntaje(Puntaje p): Puntaje
 +sosParaEsteJuego(Juego juego): bool
++sosTarotDeJuego(): bool
 }
 
-CartaInglesa *-- Tarot :tiene
+
 
 interface Palo {
 +{abstract}esDeEstePalo(Palo p): bool
 }
 
-CartaInglesa *-- Palo :tiene
+
 
 class Trebol {
 +esDeEstePalo(Palo p): bool
@@ -51,6 +56,15 @@ class Pica {
 class Diamante {
 +esDeEstePalo(Palo p): bool
 }
+
+Tarot .up.|> Comprable
+
+CartaInglesa o-up- Tarot :tiene
+
+Carta ..|> Puntuable
+Carta .up.|> Comprable
+
+Palo -left-* CartaInglesa :tiene
 
 Trebol .up.|> Palo
 Corazon .up.|> Palo

@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.vistas;
 
 import edu.fiuba.algo3.controllers.*;
-import edu.fiuba.algo3.modelo.Comprable;
+import edu.fiuba.algo3.modelo.tienda.Comprable;
 import edu.fiuba.algo3.modelo.comodin.*;
 import edu.fiuba.algo3.modelo.naipes.Mazo;
 import edu.fiuba.algo3.modelo.naipes.MazoBalatro;
@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 import javafx.scene.media.*;
 
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class App extends Application {
